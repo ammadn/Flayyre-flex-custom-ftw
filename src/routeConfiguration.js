@@ -1,5 +1,6 @@
 import React from 'react';
 import {
+  ContactUs,
   AboutPage,
   AuthenticationPage,
   CheckoutPage,
@@ -51,6 +52,11 @@ const routeConfiguration = () => {
       path: '/',
       name: 'LandingPage',
       component: props => <LandingPage {...props} />,
+    },
+    {
+      path: '/contactUs',
+      name: 'contactUs',
+      component: props => <ContactUs {...props} />,
     },
     {
       path: '/about',

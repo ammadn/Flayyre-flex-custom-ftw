@@ -124,6 +124,14 @@ const TopbarDesktop = props => {
     </NamedLink>
   );
 
+
+  const contac = isAuthenticatedOrJustHydrated ? null : (
+    <NamedLink name="SignupPage" className={css.signupLink}>
+      <span className={css.signup}>
+        <FormattedMessage id="TopbarDesktop.signup" />
+      </span>
+    </NamedLink>
+  );
   const loginLink = isAuthenticatedOrJustHydrated ? null : (
     <NamedLink name="LoginPage" className={css.loginLink}>
       <span className={css.login}>
@@ -132,6 +140,20 @@ const TopbarDesktop = props => {
     </NamedLink>
   );
 
+  const aboutUs=(
+    <NamedLink name="AboutPage" className={css.loginLink}>
+      <span className={css.login}>
+        <FormattedMessage id="About us" />
+      </span>
+    </NamedLink>
+  );
+  const contactUs=(
+    <NamedLink name="contactUs" className={css.loginLink}>
+      <span className={css.login}>
+        <FormattedMessage id="Contact Us" />
+      </span>
+    </NamedLink>
+  );
   return (
     <nav className={classes}>
       <NamedLink className={css.logoLink} name="LandingPage">
@@ -142,15 +164,19 @@ const TopbarDesktop = props => {
         />
       </NamedLink>
       {search}
-      <NamedLink className={css.createListingLink} name="NewListingPage">
-        <span className={css.createListing}>
-          <FormattedMessage id="TopbarDesktop.createListing" />
-        </span>
-      </NamedLink>
+
+      {aboutUs}
+      {contactUs}
       {inboxLink}
-      {profileMenu}
+
       {signupLink}
       {loginLink}
+      <NamedLink className={css.createListingLink} name="NewListingPage">
+        <span className={css.createListing}>
+          <FormattedMessage id="Apply As An Influencer" />
+        </span>
+      </NamedLink>
+      {profileMenu}
     </nav>
   );
 };
