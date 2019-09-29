@@ -38,9 +38,15 @@ export const amenities = [
 ];
 
 export const categories = [
-  { key: 'smoke', label: 'Smoke' },
-  { key: 'electric', label: 'Electric' },
-  { key: 'wood', label: 'Wood' },
+  { key: 'Fashion', label: 'Fashion' },
+  { key: 'Fitness', label: 'Fitness' },
+  { key: 'Beauty', label: 'Beauty' },
+  { key: 'Gaming', label: 'Gaming' },
+  { key: 'Lifestyle', label: 'Lifestyle' },
+  { key: 'Business', label: 'Business' },
+  { key: 'Media', label: 'Media' },
+  { key: 'Food', label: 'Food' },
+  { key: 'Travel', label: 'Travel' },
   { key: 'other', label: 'Other' },
 ];
 
