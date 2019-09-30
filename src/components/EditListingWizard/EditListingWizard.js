@@ -34,7 +34,6 @@ export const TABS = [
   DESCRIPTION,
   FEATURES,
   POLICY,
-  LOCATION,
   PRICING,
   ...availabilityMaybe,
   PHOTOS,
@@ -51,8 +50,6 @@ const tabLabel = (intl, tab) => {
     key = 'EditListingWizard.tabLabelFeatures';
   } else if (tab === POLICY) {
     key = 'EditListingWizard.tabLabelPolicy';
-  } else if (tab === LOCATION) {
-    key = 'EditListingWizard.tabLabelLocation';
   } else if (tab === PRICING) {
     key = 'EditListingWizard.tabLabelPricing';
   } else if (tab === AVAILABILITY) {
@@ -76,7 +73,6 @@ const tabCompleted = (tab, listing) => {
   const {
     availabilityPlan,
     description,
-    geolocation,
     price,
     title,
     publicData,
@@ -90,8 +86,6 @@ const tabCompleted = (tab, listing) => {
       return !!(publicData && publicData.amenities);
     case POLICY:
       return !!(publicData && typeof publicData.rules !== 'undefined');
-    case LOCATION:
-      return !!(geolocation && publicData && publicData.location && publicData.location.address);
     case PRICING:
       return !!price;
     case AVAILABILITY:
@@ -322,7 +316,6 @@ EditListingWizard.propTypes = {
     attributes: shape({
       publicData: object,
       description: string,
-      geolocation: object,
       pricing: object,
       title: string,
     }),

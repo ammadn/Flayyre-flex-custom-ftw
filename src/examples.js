@@ -45,9 +45,9 @@ import * as IconSpinner from './components/IconSpinner/IconSpinner.example';
 import * as ImageCarousel from './components/ImageCarousel/ImageCarousel.example';
 import * as KeywordFilter from './components/KeywordFilter/KeywordFilter.example';
 import * as ListingCard from './components/ListingCard/ListingCard.example';
-import * as LocationAutocompleteInput from './components/LocationAutocompleteInput/LocationAutocompleteInput.example';
+
 import * as ManageListingCard from './components/ManageListingCard/ManageListingCard.example';
-import * as Map from './components/Map/Map.example';
+
 import * as Menu from './components/Menu/Menu.example';
 import * as Modal from './components/Modal/Modal.example';
 import * as ModalInMobile from './components/ModalInMobile/ModalInMobile.example';
@@ -75,7 +75,7 @@ import * as BookingDatesForm from './forms/BookingDatesForm/BookingDatesForm.exa
 import * as EditListingAvailabilityForm from './forms/EditListingAvailabilityForm/EditListingAvailabilityForm.example';
 import * as EditListingDescriptionForm from './forms/EditListingDescriptionForm/EditListingDescriptionForm.example';
 import * as EditListingFeaturesForm from './forms/EditListingFeaturesForm/EditListingFeaturesForm.example';
-import * as EditListingLocationForm from './forms/EditListingLocationForm/EditListingLocationForm.example';
+
 import * as EditListingPhotosForm from './forms/EditListingPhotosForm/EditListingPhotosForm.example';
 import * as EditListingPoliciesForm from './forms/EditListingPoliciesForm/EditListingPoliciesForm.example';
 import * as EditListingPricingForm from './forms/EditListingPricingForm/EditListingPricingForm.example';
@@ -109,7 +109,7 @@ export {
   EditListingAvailabilityForm,
   EditListingDescriptionForm,
   EditListingFeaturesForm,
-  EditListingLocationForm,
+
   EditListingPhotosForm,
   EditListingPoliciesForm,
   EditListingPricingForm,
@@ -154,10 +154,10 @@ export {
   ImageCarousel,
   KeywordFilter,
   ListingCard,
-  LocationAutocompleteInput,
+
   LoginForm,
   ManageListingCard,
-  Map,
+
   Menu,
   Modal,
   ModalInMobile,

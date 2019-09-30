@@ -98,7 +98,7 @@ export { default as FieldBoolean } from './FieldBoolean/FieldBoolean';
 export { default as FieldCheckboxGroup } from './FieldCheckboxGroup/FieldCheckboxGroup';
 export { default as FieldPhoneNumberInput } from './FieldPhoneNumberInput/FieldPhoneNumberInput';
 // Fields and inputs using old naming pattern
-export { default as LocationAutocompleteInput, LocationAutocompleteInputField } from './LocationAutocompleteInput/LocationAutocompleteInput';
+
 export { default as StripeBankAccountTokenInputField } from './StripeBankAccountTokenInputField/StripeBankAccountTokenInputField';
 
 // Tab navigation
@@ -124,7 +124,7 @@ export { default as FilterPopup } from './FilterPopup/FilterPopup';
 export { default as KeywordFilter } from './KeywordFilter/KeywordFilter';
 export { default as ListingCard } from './ListingCard/ListingCard';
 export { default as ManageListingCard } from './ManageListingCard/ManageListingCard';
-export { default as Map } from './Map/Map';
+
 export { default as OrderDiscussionPanel } from './OrderDiscussionPanel/OrderDiscussionPanel';
 export { default as Page } from './Page/Page';
 export { default as PriceFilter } from './PriceFilter/PriceFilter';
@@ -155,7 +155,7 @@ export { default as TermsOfService } from './TermsOfService/TermsOfService';
 export { default as EditListingAvailabilityPanel } from './EditListingAvailabilityPanel/EditListingAvailabilityPanel';
 export { default as EditListingDescriptionPanel } from './EditListingDescriptionPanel/EditListingDescriptionPanel';
 export { default as EditListingFeaturesPanel } from './EditListingFeaturesPanel/EditListingFeaturesPanel';
-export { default as EditListingLocationPanel } from './EditListingLocationPanel/EditListingLocationPanel';
+
 export { default as EditListingPhotosPanel } from './EditListingPhotosPanel/EditListingPhotosPanel';
 export { default as EditListingPoliciesPanel } from './EditListingPoliciesPanel/EditListingPoliciesPanel';
 export { default as EditListingPricingPanel } from './EditListingPricingPanel/EditListingPricingPanel';
