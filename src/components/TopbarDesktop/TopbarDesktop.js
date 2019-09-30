@@ -143,14 +143,14 @@ const TopbarDesktop = props => {
   const aboutUs=(
     <NamedLink name="AboutPage" className={css.loginLink}>
       <span className={css.login}>
-        <FormattedMessage id="About us" />
+        <FormattedMessage id="TopbarDesktop.aboutUs" />
       </span>
     </NamedLink>
   );
   const contactUs=(
     <NamedLink name="contactUs" className={css.loginLink}>
       <span className={css.login}>
-        <FormattedMessage id="Contact Us" />
+        <FormattedMessage id="TopbarDesktop.contactUs" />
       </span>
     </NamedLink>
   );
@@ -173,7 +173,7 @@ const TopbarDesktop = props => {
       {loginLink}
       <NamedLink className={css.createListingLink} name="NewListingPage">
         <span className={css.createListing}>
-          <FormattedMessage id="Apply As An Influencer" />
+          <FormattedMessage id="TopbarDesktop.applyInfluence" />
         </span>
       </NamedLink>
       {profileMenu}

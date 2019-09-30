@@ -83,12 +83,13 @@ const Footer = props => {
               <ul className={css.list}>
                 <li className={css.listItem}>
                   <NamedLink name="NewListingPage" className={css.link}>
-                    Apply As An Influencer
+                    <FormattedMessage id="Footer.applyInfluence" />
                   </NamedLink>
                 </li>
                 <li className={css.listItem}>
                   <NamedLink name="AboutPage" className={css.link}>
-                    Learn More
+                    <FormattedMessage id="Footer.learnMore" />
+
                   </NamedLink>
                 </li>
                 <li className={css.listItem}>
