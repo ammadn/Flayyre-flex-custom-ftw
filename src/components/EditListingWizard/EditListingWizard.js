@@ -10,18 +10,17 @@ import {
   LISTING_PAGE_PARAM_TYPE_NEW,
   LISTING_PAGE_PARAM_TYPES,
 } from '../../util/urlHelpers';
-import { ensureListing, ensureCurrentUser } from '../../util/data';
+import { ensureCurrentUser, ensureListing } from '../../util/data';
 import { PayoutDetailsForm } from '../../forms';
 import { Modal, NamedRedirect, Tabs } from '../../components';
 
 import EditListingWizardTab, {
   AVAILABILITY,
   DESCRIPTION,
-  FEATURES,
-  POLICY,
-  LOCATION,
-  PRICING,
+  FOLLOWERS,
   PHOTOS,
+  POLICY,
+  PRICING,
 } from './EditListingWizardTab';
 import css from './EditListingWizard.css';
 
@@ -32,7 +31,7 @@ const availabilityMaybe = config.enableAvailability ? [AVAILABILITY] : [];
 // All the other panels can be reordered.
 export const TABS = [
   DESCRIPTION,
-  FEATURES,
+  FOLLOWERS,
   POLICY,
   PRICING,
   ...availabilityMaybe,
@@ -46,8 +45,6 @@ const tabLabel = (intl, tab) => {
   let key = null;
   if (tab === DESCRIPTION) {
     key = 'EditListingWizard.tabLabelDescription';
-  } else if (tab === FEATURES) {
-    key = 'EditListingWizard.tabLabelFeatures';
   } else if (tab === POLICY) {
     key = 'EditListingWizard.tabLabelPolicy';
   } else if (tab === PRICING) {
@@ -56,6 +53,8 @@ const tabLabel = (intl, tab) => {
     key = 'EditListingWizard.tabLabelAvailability';
   } else if (tab === PHOTOS) {
     key = 'EditListingWizard.tabLabelPhotos';
+  } else if(tab === FOLLOWERS){
+    key='EditListingWizard.tabLabelFollowers';
   }
 
   return intl.formatMessage({ id: key });
@@ -76,18 +75,19 @@ const tabCompleted = (tab, listing) => {
     price,
     title,
     publicData,
+    folloers
   } = listing.attributes;
   const images = listing.images;
 
   switch (tab) {
     case DESCRIPTION:
       return !!(description && title);
-    case FEATURES:
-      return !!(publicData && publicData.amenities);
     case POLICY:
       return !!(publicData && typeof publicData.rules !== 'undefined');
     case PRICING:
       return !!price;
+    case FOLLOWERS:
+      return !!(publicData);
     case AVAILABILITY:
       return !!availabilityPlan;
     case PHOTOS:
@@ -136,6 +136,11 @@ class EditListingWizard extends Component {
     this.state = {
       draftId: null,
       showPayoutDetails: false,
+      followers:false,
+      IG:false,
+      Twitter:false,
+      Fb:false,
+      Other:false,
     };
     this.handleCreateFlowTabScrolling = this.handleCreateFlowTabScrolling.bind(this);
     this.handlePublishListing = this.handlePublishListing.bind(this);
@@ -178,6 +183,7 @@ class EditListingWizard extends Component {
       });
   }
 
+
   render() {
     const {
       id,
@@ -196,7 +202,7 @@ class EditListingWizard extends Component {
 
     const selectedTab = params.tab;
     const isNewListingFlow = [LISTING_PAGE_PARAM_TYPE_NEW, LISTING_PAGE_PARAM_TYPE_DRAFT].includes(
-      params.type
+      params.type,
     );
     const rootClasses = rootClassName || css.root;
     const classes = classNames(rootClasses, className);
@@ -210,7 +216,7 @@ class EditListingWizard extends Component {
         .reverse()
         .find(t => tabsStatus[t]);
 
-      return <NamedRedirect name="EditListingPage" params={{ ...params, tab: nearestActiveTab }} />;
+      return <NamedRedirect name="EditListingPage" params={{ ...params, tab: nearestActiveTab }}/>;
     }
 
     const { width } = viewport;
@@ -233,6 +239,23 @@ class EditListingWizard extends Component {
       return { name: 'EditListingPage', params: { ...params, tab } };
     };
 
+    const changeState=(state,type)=>{
+      console.log(state,type);
+      switch (type) {
+        case 'IG': {this.setState({ IG: !state })};
+          break;
+        case 'Twitter': this.setState({ Twitter: !state });
+          break;
+        case 'Other': this.setState({ Other: !state });
+          break;
+        case 'Fb': this.setState({ Fb: !state });
+          break;
+        case 'followers': this.setState({ followers: !this.state.followers });
+          break;
+      }
+
+    };
+
     return (
       <div className={classes}>
         <Tabs
@@ -243,6 +266,12 @@ class EditListingWizard extends Component {
           {TABS.map(tab => {
             return (
               <EditListingWizardTab
+                followers={this.state.followers}
+                IG={this.state.IG}
+                Fb={this.state.Fb}
+                Twitter={this.state.Twitter}
+                Other={this.state.Other}
+                changeState={changeState}
                 {...rest}
                 key={tab}
                 tabId={`${id}_${tab}`}
@@ -271,12 +300,12 @@ class EditListingWizard extends Component {
         >
           <div className={css.modalPayoutDetailsWrapper}>
             <h1 className={css.modalTitle}>
-              <FormattedMessage id="EditListingPhotosPanel.payoutModalTitleOneMoreThing" />
-              <br />
-              <FormattedMessage id="EditListingPhotosPanel.payoutModalTitlePayoutPreferences" />
+              <FormattedMessage id="EditListingPhotosPanel.payoutModalTitleOneMoreThing"/>
+              <br/>
+              <FormattedMessage id="EditListingPhotosPanel.payoutModalTitlePayoutPreferences"/>
             </h1>
             <p className={css.modalMessage}>
-              <FormattedMessage id="EditListingPhotosPanel.payoutModalInfo" />
+              <FormattedMessage id="EditListingPhotosPanel.payoutModalInfo"/>
             </p>
             <PayoutDetailsForm
               className={css.payoutDetails}
@@ -348,5 +377,5 @@ EditListingWizard.propTypes = {
 
 export default compose(
   withViewport,
-  injectIntl
+  injectIntl,
 )(EditListingWizard);

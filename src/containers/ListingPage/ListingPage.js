@@ -46,12 +46,13 @@ import SectionImages from './SectionImages';
 import SectionAvatar from './SectionAvatar';
 import SectionHeading from './SectionHeading';
 import SectionDescriptionMaybe from './SectionDescriptionMaybe';
-import SectionFeaturesMaybe from './SectionFeaturesMaybe';
+
 import SectionReviews from './SectionReviews';
 import SectionHostMaybe from './SectionHostMaybe';
 import SectionRulesMaybe from './SectionRulesMaybe';
 
 import css from './ListingPage.css';
+import SectionFollowers from './SectionFollowers';
 
 const MIN_LENGTH_FOR_LONG_WORDS_IN_TITLE = 16;
 
@@ -427,10 +428,13 @@ export class ListingPageComponent extends Component {
                     onContactUser={this.onContactUser}
                   />
                   <SectionDescriptionMaybe description={description} />
-                  <SectionFeaturesMaybe options={amenitiesConfig} publicData={publicData} />
+
                   <SectionRulesMaybe publicData={publicData} />
 
+                  <SectionFollowers publicData={publicData}  />
+
                   <SectionReviews reviews={reviews} fetchReviewsError={fetchReviewsError} />
+
                   <SectionHostMaybe
                     title={title}
                     listing={currentListing}
@@ -445,6 +449,7 @@ export class ListingPageComponent extends Component {
                     onManageDisableScrolling={onManageDisableScrolling}
                   />
                 </div>
+
                 <BookingPanel
                   className={css.bookingPanel}
                   listing={currentListing}
@@ -458,6 +463,7 @@ export class ListingPageComponent extends Component {
                   timeSlots={timeSlots}
                   fetchTimeSlotsError={fetchTimeSlotsError}
                 />
+
               </div>
             </div>
           </LayoutWrapperMain>
@@ -481,7 +487,8 @@ ListingPageComponent.defaultProps = {
   fetchTimeSlotsError: null,
   sendEnquiryError: null,
   categoriesConfig: config.custom.categories,
-  amenitiesConfig: config.custom.amenities,
+
+
 };
 
 ListingPageComponent.propTypes = {

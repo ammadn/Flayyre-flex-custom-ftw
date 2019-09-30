@@ -12,29 +12,27 @@ import { createResourceLocatorString } from '../../util/routes';
 import {
   EditListingAvailabilityPanel,
   EditListingDescriptionPanel,
-  EditListingFeaturesPanel,
-  EditListingLocationPanel,
   EditListingPhotosPanel,
   EditListingPoliciesPanel,
   EditListingPricingPanel,
 } from '../../components';
 
 import css from './EditListingWizard.css';
+import EditListingFollowersPanel from '../EditListingFollowersPanel/EditListingFollowersPanel';
 
 export const AVAILABILITY = 'availability';
 export const DESCRIPTION = 'description';
-export const FEATURES = 'features';
+
 export const POLICY = 'policy';
-export const LOCATION = 'location';
+export const FOLLOWERS = 'followers';
 export const PRICING = 'pricing';
 export const PHOTOS = 'photos';
 
 // EditListingWizardTab component supports these tabs
 export const SUPPORTED_TABS = [
   DESCRIPTION,
-  FEATURES,
   POLICY,
-  LOCATION,
+  FOLLOWERS,
   PRICING,
   AVAILABILITY,
   PHOTOS,
@@ -94,6 +92,12 @@ const EditListingWizardTab = props => {
     updatedTab,
     updateInProgress,
     intl,
+    changeState,
+    followers,
+    IG,
+    Fb,
+    Twitter,
+    Other,
   } = props;
 
   const { type } = params;
@@ -168,20 +172,7 @@ const EditListingWizardTab = props => {
         />
       );
     }
-    case FEATURES: {
-      const submitButtonTranslationKey = isNewListingFlow
-        ? 'EditListingWizard.saveNewFeatures'
-        : 'EditListingWizard.saveEditFeatures';
-      return (
-        <EditListingFeaturesPanel
-          {...panelProps(FEATURES)}
-          submitButtonText={intl.formatMessage({ id: submitButtonTranslationKey })}
-          onSubmit={values => {
-            onCompleteEditListingWizardTab(tab, values);
-          }}
-        />
-      );
-    }
+
     case POLICY: {
       const submitButtonTranslationKey = isNewListingFlow
         ? 'EditListingWizard.saveNewPolicies'
@@ -245,6 +236,27 @@ const EditListingWizardTab = props => {
             onCompleteEditListingWizardTab(tab, values);
           }}
           onUpdateImageOrder={onUpdateImageOrder}
+        />
+      );
+    }
+
+    case FOLLOWERS: {
+      const submitButtonTranslationKey = isNewListingFlow
+        ? 'EditListingWizard.saveNewCapacity'
+        : 'EditListingWizard.saveEditCapacity';
+      return (
+        <EditListingFollowersPanel
+          IG={IG}
+          Fb={Fb}
+          Twitter={Twitter}
+          Other={Other}
+          changeState={changeState}
+          followers={followers}
+          {...panelProps(FOLLOWERS)}
+          submitButtonText={intl.formatMessage({ id: submitButtonTranslationKey })}
+          onSubmit={values => {
+            onCompleteEditListingWizardTab(tab, values);
+          }}
         />
       );
     }

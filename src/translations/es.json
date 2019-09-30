@@ -204,6 +204,8 @@
   "EditListingPricingPanel.createListingTitle": "¿Cuánto cuesta?",
   "EditListingPricingPanel.listingPriceCurrencyInvalid": "La moneda del anuncio es distinta a la moneda del marketplace. No puedes editar el precio.",
   "EditListingPricingPanel.title": "Editar el precio de {listingTitle}",
+
+
   "EditListingWizard.saveEditDescription": "Guardar descripción",
   "EditListingWizard.saveEditFeatures": "Guardar servicios",
   "EditListingWizard.saveEditLocation": "Guardar ubicación",

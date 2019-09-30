@@ -138,6 +138,8 @@ export const UPDATE_IMAGE_ORDER = 'app/EditListingPage/UPDATE_IMAGE_ORDER';
 
 export const REMOVE_LISTING_IMAGE = 'app/EditListingPage/REMOVE_LISTING_IMAGE';
 
+export const CHANGE_FOLLOWERS='app/EditListingPage/CHANGE_FOLLOWERS';
+
 // ================ Reducer ================ //
 
 const initialState = {
@@ -167,6 +169,7 @@ const initialState = {
   listingDraft: null,
   updatedTab: null,
   updateInProgress: false,
+  followers:false,
 };
 
 export default function reducer(state = initialState, action = {}) {
@@ -176,6 +179,9 @@ export default function reducer(state = initialState, action = {}) {
       return { ...state, updatedTab: payload };
     case CLEAR_UPDATED_TAB:
       return { ...state, updatedTab: null, updateListingError: null };
+
+    case CHANGE_FOLLOWERS:
+      return {...state,followers:!this.followers};
 
     case CREATE_LISTING_DRAFT_REQUEST:
       return {
@@ -405,6 +411,10 @@ export const removeListingImage = imageId => ({
 // All the action creators that don't have the {Success, Error} suffix
 // take the params object that the corresponding SDK endpoint method
 // expects.
+
+
+export const changeFollowers= requestAction(CHANGE_FOLLOWERS);
+
 
 // SDK method: ownListings.create
 export const createListingDraft = requestAction(CREATE_LISTING_DRAFT_REQUEST);
