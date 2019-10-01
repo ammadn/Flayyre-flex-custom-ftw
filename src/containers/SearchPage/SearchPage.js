@@ -230,9 +230,9 @@ export class SearchPageComponent extends Component {
             primaryFilters={{
               categoryFilter: filters.categoryFilter,
               priceFilter: filters.priceFilter,
-              FollowersFilter: filters.followersFilter,
               dateRangeFilter: filters.dateRangeFilter,
               keywordFilter: filters.keywordFilter,
+
             }}
           />
 
@@ -273,8 +273,8 @@ SearchPageComponent.propTypes = {
   categories: array,
   amenities: array,
   followersFilterConfig: shape({
-    Fmin: number.isRequired,
-
+    min: number.isRequired,
+    max:number.isRequired,
   }),
   priceFilterConfig: shape({
     min: number.isRequired,

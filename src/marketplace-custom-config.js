@@ -25,6 +25,10 @@ export const priceFilterConfig = {
   step: 5,
 };
 
+export const followersFilterConfig={
+  min:0,
+  max:1000000000000000000000000,
+}
 // Activate booking dates filter on search page
 export const dateRangeFilterConfig = {
   active: true,

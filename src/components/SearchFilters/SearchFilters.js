@@ -18,6 +18,7 @@ import { parseDateFromISO8601, stringifyDateToISO8601 } from '../../util/dates';
 import { createResourceLocatorString } from '../../util/routes';
 import { propTypes } from '../../util/types';
 import css from './SearchFilters.css';
+import FollowersFilter from '../FollowersFilter/FollowersFilter';
 
 // Dropdown container can have a positional offset (in pixels)
 const FILTER_DROPDOWN_OFFSET = -14;
@@ -45,6 +46,7 @@ const initialPriceRangeValue = (queryParams, paramName) => {
     : null;
 };
 
+
 const initialDateRangeValue = (queryParams, paramName) => {
   const dates = queryParams[paramName];
   const rawValuesFromParams = !!dates ? dates.split(',') : [];
@@ -70,6 +72,7 @@ const SearchFiltersComponent = props => {
     categoryFilter,
     amenitiesFilter,
     priceFilter,
+    followersFilter,
     dateRangeFilter,
     keywordFilter,
     isSearchFiltersPanelOpen,
@@ -106,6 +109,11 @@ const SearchFiltersComponent = props => {
     ? initialPriceRangeValue(urlQueryParams, priceFilter.paramName)
     : null;
 
+  const initialFollowersRange = priceFilter
+    ? initialPriceRangeValue(urlQueryParams, 'pub_max')
+    : null;
+
+
   const initialDateRange = dateRangeFilter
     ? initialDateRangeValue(urlQueryParams, dateRangeFilter.paramName)
     : null;
@@ -134,12 +142,18 @@ const SearchFiltersComponent = props => {
   };
 
   const handlePrice = (urlParam, range) => {
+    console.log('url parram',urlParam);
+    console.log('renge',range);
+
+
     const { minPrice, maxPrice } = range || {};
     const queryParams =
       minPrice != null && maxPrice != null
         ? { ...urlQueryParams, [urlParam]: `${minPrice},${maxPrice}` }
         : omit(urlQueryParams, urlParam);
 
+    console.log('quary param',queryParams);
+    console.log(createResourceLocatorString('SearchPage', routeConfiguration(), {}, queryParams));
     history.push(createResourceLocatorString('SearchPage', routeConfiguration(), {}, queryParams));
   };
 
@@ -164,6 +178,27 @@ const SearchFiltersComponent = props => {
 
     history.push(createResourceLocatorString('SearchPage', routeConfiguration(), {}, queryParams));
   };
+
+
+
+  const handleFollowers = (urlParam, range) => {
+    const { minFollwers, maxFollowers } = range || {};
+    const queryParams =
+      minFollwers != null && maxFollowers != null
+        ? { ...urlQueryParams, [urlParam]: `${minFollwers},${maxFollowers}` }
+        : omit(urlQueryParams, urlParam);
+
+    history.push(createResourceLocatorString('SearchPage', routeConfiguration(), {}, queryParams));
+  };
+
+
+  // const followersFilterElement=(
+  //   <button
+  //   onSubmit={
+  //     handleFollowers('pub_max',{minFollwers:23,maxFollowers:100000})
+  //   }
+  //   />
+  // );
 
   const categoryFilterElement = categoryFilter ? (
     <SelectSingleFilter
@@ -202,6 +237,18 @@ const SearchFiltersComponent = props => {
       contentPlacementOffset={FILTER_DROPDOWN_OFFSET}
     />
   ) : null;
+
+  const followerFilterElement =  (
+    <FollowersFilter
+      id="SearchFilters.followersFilter"
+      urlParam={'pub_max'}
+      onSubmit={handlePrice}
+      showAsPopup
+      {...priceFilter.config}
+      initialValues={initialFollowersRange}
+      contentPlacementOffset={FILTER_DROPDOWN_OFFSET}
+    />
+  ) ;
 
   const dateRangeFilterElement =
     dateRangeFilter && dateRangeFilter.config.active ? (
@@ -255,6 +302,7 @@ const SearchFiltersComponent = props => {
         {dateRangeFilterElement}
         {keywordFilterElement}
         {toggleSearchFiltersPanelButton}
+        {followerFilterElement}
       </div>
 
       {listingsAreLoaded && resultsCount > 0 ? (
@@ -288,6 +336,7 @@ SearchFiltersComponent.defaultProps = {
   categoryFilter: null,
   amenitiesFilter: null,
   priceFilter: null,
+  followersFilter:null,
   dateRangeFilter: null,
   isSearchFiltersPanelOpen: false,
   toggleSearchFiltersPanel: null,
@@ -305,6 +354,7 @@ SearchFiltersComponent.propTypes = {
   categoriesFilter: propTypes.filterConfig,
   amenitiesFilter: propTypes.filterConfig,
   priceFilter: propTypes.filterConfig,
+  followersFilter: propTypes.filterConfig,
   dateRangeFilter: propTypes.filterConfig,
   isSearchFiltersPanelOpen: bool,
   toggleSearchFiltersPanel: func,

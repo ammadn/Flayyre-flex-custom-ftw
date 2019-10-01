@@ -654,6 +654,12 @@
   "PriceFilterForm.clear": "Clear",
   "PriceFilterForm.label": "Price range:",
   "PriceFilterForm.submit": "Apply",
+
+  "FollowersFilterForm.cancel": "Cancel",
+  "FollowersFilterForm.clear": "Clear",
+  "FollowersFilterForm.label": "Followers range:",
+  "FollowersFilterForm.submit": "Apply",
+
   "PrivacyPolicyPage.heading": "Saunatime Privacy Policy",
   "PrivacyPolicyPage.privacyTabTitle": "Privacy Policy",
   "PrivacyPolicyPage.schemaTitle": "Privacy Policy | {siteTitle}",
