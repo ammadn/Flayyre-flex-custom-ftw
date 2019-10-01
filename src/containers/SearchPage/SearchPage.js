@@ -55,6 +55,7 @@ export class SearchPageComponent extends Component {
     const {
       categories,
       amenities,
+      followersFilterConfig,
       priceFilterConfig,
       dateRangeFilterConfig,
       keywordFilterConfig,
@@ -70,13 +71,14 @@ export class SearchPageComponent extends Component {
         paramName: 'pub_category',
         options: categories,
       },
-      amenitiesFilter: {
-        paramName: 'pub_amenities',
-        options: amenities,
-      },
+
       priceFilter: {
         paramName: 'price',
         config: priceFilterConfig,
+      },
+      followersFilter: {
+        paramName: 'pub_max',
+        config: followersFilterConfig,
       },
       dateRangeFilter: {
         paramName: 'dates',
@@ -227,8 +229,8 @@ export class SearchPageComponent extends Component {
             showAsModalMaxWidth={MODAL_BREAKPOINT}
             primaryFilters={{
               categoryFilter: filters.categoryFilter,
-              amenitiesFilter: filters.amenitiesFilter,
               priceFilter: filters.priceFilter,
+              FollowersFilter: filters.followersFilter,
               dateRangeFilter: filters.dateRangeFilter,
               keywordFilter: filters.keywordFilter,
             }}
@@ -250,6 +252,7 @@ SearchPageComponent.defaultProps = {
   tab: 'listings',
   categories: config.custom.categories,
   priceFilterConfig: config.custom.priceFilterConfig,
+  followersFilterConfig: config.custom.followersFilterConfig,
   dateRangeFilterConfig: config.custom.dateRangeFilterConfig,
   keywordFilterConfig: config.custom.keywordFilterConfig,
   activeListingId: null,
@@ -269,6 +272,10 @@ SearchPageComponent.propTypes = {
   tab: oneOf(['filters', 'listings', 'map']).isRequired,
   categories: array,
   amenities: array,
+  followersFilterConfig: shape({
+    Fmin: number.isRequired,
+
+  }),
   priceFilterConfig: shape({
     min: number.isRequired,
     max: number.isRequired,
