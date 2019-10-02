@@ -431,7 +431,7 @@ export class ListingPageComponent extends Component {
 
                   <SectionRulesMaybe publicData={publicData} />
 
-                  <SectionFollowers publicData={publicData}  />
+                  <SectionFollowers publicData={publicData} />
 
                   <SectionReviews reviews={reviews} fetchReviewsError={fetchReviewsError} />
 

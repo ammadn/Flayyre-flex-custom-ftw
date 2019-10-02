@@ -17,14 +17,14 @@ const SectionFollowers = props => {
       </h2>
       <p className={css.capacity}>followers</p>
       <ul>
-        {publicData.Fb ?
+        {publicData ?
           <li>Fb    &#9; : {publicData.Fb}</li> : null
         }
-        {publicData.Twitter ?
+        {publicData?
           <li>Twitter &#9; : {publicData.Twitter}</li> : null}
-        {publicData.IG ?
+        {publicData ?
           <li>IG     &#9; : {publicData.IG}</li> : null}
-        {publicData.Other ?
+        {publicData ?
           <li>Other  &#9; : {publicData.Other}</li> : null}
       </ul>
     </div>
@@ -35,6 +35,11 @@ SectionFollowers.propTypes = {
   publicData: shape({
 
   }),
+}
+
+SectionFollowers.defaultProps = {
+  publicData: null,
+
 };
 
 export default SectionFollowers;
