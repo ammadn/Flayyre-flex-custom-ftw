@@ -229,6 +229,7 @@ export class ListingPageComponent extends Component {
       return <NamedRedirect name="ListingPage" params={params} search={location.search} />;
     }
 
+    console.log('current listing',currentListing.attributes);
     const {
       description = '',
 

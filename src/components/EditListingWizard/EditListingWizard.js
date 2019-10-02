@@ -12,17 +12,22 @@ import {
 } from '../../util/urlHelpers';
 import { ensureCurrentUser, ensureListing } from '../../util/data';
 import { PayoutDetailsForm } from '../../forms';
-import { Modal, NamedRedirect, Tabs } from '../../components';
+import { FieldCurrencyInput, Form, Modal, NamedRedirect, Tabs } from '../../components';
 
 import EditListingWizardTab, {
   AVAILABILITY,
   DESCRIPTION,
   FOLLOWERS,
+  NEW_PRICING,
   PHOTOS,
   POLICY,
   PRICING,
 } from './EditListingWizardTab';
 import css from './EditListingWizard.css';
+import * as validators from '../../util/validators';
+import { formatMoney } from '../../util/currency';
+import { types as sdkTypes } from '../../util/sdkLoader';
+import FieldTextInput from '../FieldTextInput/FieldTextInput';
 
 // Show availability calendar only if environment variable availabilityEnabled is true
 const availabilityMaybe = config.enableAvailability ? [AVAILABILITY] : [];
@@ -34,6 +39,7 @@ export const TABS = [
   FOLLOWERS,
   POLICY,
   PRICING,
+  NEW_PRICING,
   ...availabilityMaybe,
   PHOTOS,
 ];
@@ -53,8 +59,10 @@ const tabLabel = (intl, tab) => {
     key = 'EditListingWizard.tabLabelAvailability';
   } else if (tab === PHOTOS) {
     key = 'EditListingWizard.tabLabelPhotos';
-  } else if(tab === FOLLOWERS){
-    key='EditListingWizard.tabLabelFollowers';
+  } else if (tab === FOLLOWERS) {
+    key = 'EditListingWizard.tabLabelFollowers';
+  } else if (tab === NEW_PRICING) {
+    key = 'EditListingWizard.tabLabelFollowers';
   }
 
   return intl.formatMessage({ id: key });
@@ -75,7 +83,8 @@ const tabCompleted = (tab, listing) => {
     price,
     title,
     publicData,
-    folloers
+    folloers,
+
   } = listing.attributes;
   const images = listing.images;
 
@@ -87,6 +96,8 @@ const tabCompleted = (tab, listing) => {
     case PRICING:
       return !!price;
     case FOLLOWERS:
+      return !!(publicData);
+    case NEW_PRICING:
       return !!(publicData);
     case AVAILABILITY:
       return !!availabilityPlan;
@@ -136,11 +147,12 @@ class EditListingWizard extends Component {
     this.state = {
       draftId: null,
       showPayoutDetails: false,
-      followers:false,
-      IG:false,
-      Twitter:false,
-      Fb:false,
-      Other:false,
+      followers: false,
+      IG: false,
+      Twitter: false,
+      Fb: false,
+      Other: false,
+      directPriceInputArray: [],
     };
     this.handleCreateFlowTabScrolling = this.handleCreateFlowTabScrolling.bind(this);
     this.handlePublishListing = this.handlePublishListing.bind(this);
@@ -184,6 +196,7 @@ class EditListingWizard extends Component {
   }
 
 
+
   render() {
     const {
       id,
@@ -197,8 +210,33 @@ class EditListingWizard extends Component {
       fetchInProgress,
       onManageDisableScrolling,
       onPayoutDetailsFormChange,
+      fieldRenderProps,
       ...rest
     } = this.props;
+
+    const { Money } = sdkTypes;
+
+    const priceRequired = validators.required(
+      intl.formatMessage({
+        id: 'EditListingPricingForm.priceRequired',
+      })
+    );
+    const priceValidators = config.listingMinimumPriceSubUnits
+      ? validators.composeValidators(priceRequired, minPriceRequired)
+      : priceRequired;
+    const minPrice = new Money(config.listingMinimumPriceSubUnits, config.currency);
+
+    const minPriceRequired = validators.moneySubUnitAmountAtLeast(
+      intl.formatMessage(
+        {
+          id: 'EditListingPricingForm.priceTooLow',
+        },
+        {
+          minPrice: formatMoney(intl, minPrice),
+        }
+      ),
+      config.listingMinimumPriceSubUnits
+    );
 
     const selectedTab = params.tab;
     const isNewListingFlow = [LISTING_PAGE_PARAM_TYPE_NEW, LISTING_PAGE_PARAM_TYPE_DRAFT].includes(
@@ -239,22 +277,69 @@ class EditListingWizard extends Component {
       return { name: 'EditListingPage', params: { ...params, tab } };
     };
 
-    const changeState=(state,type)=>{
-      console.log(state,type);
+    const changeState = (state, type) => {
+      console.log(state, type);
       switch (type) {
-        case 'IG': {this.setState({ IG: !state })};
+        case 'IG': {
+          this.setState({ IG: !state });
+        }
           break;
-        case 'Twitter': this.setState({ Twitter: !state });
+        case 'Twitter':
+          this.setState({ Twitter: !state });
           break;
-        case 'Other': this.setState({ Other: !state });
+        case 'Other':
+          this.setState({ Other: !state });
           break;
-        case 'Fb': this.setState({ Fb: !state });
+        case 'Fb':
+          this.setState({ Fb: !state });
           break;
-        case 'followers': this.setState({ followers: !this.state.followers });
+        case 'followers':
+          this.setState({ followers: !this.state.followers });
           break;
       }
 
     };
+
+    const add = () => {
+      console.log('addd');
+      let str="price";
+      str=str.concat(this.state.directPriceInputArray.length.toString());
+      console.log(str);
+      const element = (
+
+        <div>
+          <FieldTextInput
+            type="new"
+          id={str}
+          name={str}
+          className={css.priceInput}
+
+          placeholder='enter price'
+          currencyConfig={config.currencyConfig}
+          validate={priceValidators}
+        />
+        </div>
+      );
+
+      this.setState({
+        directPriceInputArray: [...this.state.directPriceInputArray, element],
+      });
+
+
+    };
+
+if(fieldRenderProps){
+  console.log(fieldRenderProps.values)
+}
+
+
+
+
+    const remove=()=>{
+      const directPriceInput = this.state.directPriceInputArray.filter(item => item !== this.state.directPriceInputArray[this.state.directPriceInputArray.length-1]);
+      this.setState({ directPriceInputArray: directPriceInput });
+
+    }
 
     return (
       <div className={classes}>
@@ -288,6 +373,9 @@ class EditListingWizard extends Component {
                 handleCreateFlowTabScrolling={this.handleCreateFlowTabScrolling}
                 handlePublishListing={this.handlePublishListing}
                 fetchInProgress={fetchInProgress}
+                add={add}
+                remove={remove}
+                directPriceInputArray={this.state.directPriceInputArray}
               />
             );
           })}
@@ -327,6 +415,7 @@ EditListingWizard.defaultProps = {
   rootClassName: null,
   listing: null,
   updateInProgress: false,
+  fieldRenderProps:null,
 };
 
 EditListingWizard.propTypes = {

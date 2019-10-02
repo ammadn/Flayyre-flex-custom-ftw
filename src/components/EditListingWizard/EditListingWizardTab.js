@@ -19,6 +19,7 @@ import {
 
 import css from './EditListingWizard.css';
 import EditListingFollowersPanel from '../EditListingFollowersPanel/EditListingFollowersPanel';
+import EditListingNewPricingPanel from '../EditListingNewPricingPanel/EditListingNewPricingPanel';
 
 export const AVAILABILITY = 'availability';
 export const DESCRIPTION = 'description';
@@ -26,6 +27,7 @@ export const DESCRIPTION = 'description';
 export const POLICY = 'policy';
 export const FOLLOWERS = 'followers';
 export const PRICING = 'pricing';
+export const NEW_PRICING = 'newpricing';
 export const PHOTOS = 'photos';
 
 // EditListingWizardTab component supports these tabs
@@ -34,6 +36,7 @@ export const SUPPORTED_TABS = [
   POLICY,
   FOLLOWERS,
   PRICING,
+  NEW_PRICING,
   AVAILABILITY,
   PHOTOS,
 ];
@@ -98,6 +101,9 @@ const EditListingWizardTab = props => {
     Fb,
     Twitter,
     Other,
+    add,
+    remove,
+    directPriceInputArray
   } = props;
 
   const { type } = params;
@@ -202,6 +208,26 @@ const EditListingWizardTab = props => {
         />
       );
     }
+
+    case NEW_PRICING: {
+      const submitButtonTranslationKey = isNewListingFlow
+        ? 'EditListingWizard.saveNewPricing'
+        : 'EditListingWizard.saveEditPricing';
+      return (
+        <EditListingNewPricingPanel
+          {...panelProps(PRICING)}
+          submitButtonText={intl.formatMessage({ id: submitButtonTranslationKey })}
+          add={add}
+          remove={remove}
+          directPriceInputArray={directPriceInputArray}
+          onSubmit={values => {
+            onCompleteEditListingWizardTab(tab, values);
+          }}
+        />
+      );
+
+    }
+
     case AVAILABILITY: {
       const submitButtonTranslationKey = isNewListingFlow
         ? 'EditListingWizard.saveNewAvailability'

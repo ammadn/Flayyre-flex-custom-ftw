@@ -9,6 +9,7 @@ const SectionFollowers = props => {
 
 
   console.log('capacity', publicData);
+
   return (
 
     <div className={css.sectionCapacity}>

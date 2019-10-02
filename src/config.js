@@ -34,6 +34,9 @@ const sortSearchByDistance = false;
 // this particular web application is able to handle.
 const bookingProcessAlias = 'sca-preauth-nightly-booking/release-1';
 
+const bookingProcessAlias2 = 'sca-negotiated-nightly-booking/release-1';
+
+
 // The transaction line item code for the main unit type in bookings.
 //
 // Possible values: ['line-item/night', 'line-item/day', 'line-item/units';]
