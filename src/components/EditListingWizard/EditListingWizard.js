@@ -28,6 +28,7 @@ import * as validators from '../../util/validators';
 import { formatMoney } from '../../util/currency';
 import { types as sdkTypes } from '../../util/sdkLoader';
 import FieldTextInput from '../FieldTextInput/FieldTextInput';
+import FieldPhoneNumberInput from '../FieldPhoneNumberInput/FieldPhoneNumberInput';
 
 // Show availability calendar only if environment variable availabilityEnabled is true
 const availabilityMaybe = config.enableAvailability ? [AVAILABILITY] : [];
@@ -301,14 +302,23 @@ class EditListingWizard extends Component {
     };
 
     const add = () => {
-      console.log('addd');
       let str="price";
+      let promotionType="pro_price";
       str=str.concat(this.state.directPriceInputArray.length.toString());
-      console.log(str);
+      promotionType=promotionType.concat(this.state.directPriceInputArray.length.toString());
       const element = (
 
         <div>
           <FieldTextInput
+            type="new"
+            id={promotionType}
+            name={promotionType}
+            className={css.priceInput}
+
+            placeholder='enter promotion type'
+
+          />
+          <FieldPhoneNumberInput
             type="new"
           id={str}
           name={str}

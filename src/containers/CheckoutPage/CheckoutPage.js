@@ -56,6 +56,12 @@ import {
 import { storeData, storedData, clearData } from './CheckoutPageSessionHelpers';
 import css from './CheckoutPage.css';
 
+import { nightsBetween, daysBetween } from '../../util/dates';
+import { types as sdkTypes } from '../../util/sdkLoader';
+
+const { Money } = sdkTypes;
+
+
 const STORAGE_KEY = 'CheckoutPage';
 
 // Stripe PaymentIntent statuses, where user actions are already completed
@@ -116,6 +122,42 @@ export class CheckoutPageComponent extends Component {
     }
   }
 
+
+
+  customPricingParams(params) {
+
+
+    const { bookingStart, bookingEnd, listing, ...rest } = params;
+    const { amount, currency } = listing.attributes.price;
+
+    console.log("listinf at",listing.attributes);
+    const unitType = config.bookingUnitType;
+    const isNightly = unitType === LINE_ITEM_NIGHT;
+
+    const quantity = isNightly
+      ? nightsBetween(bookingStart, bookingEnd)
+      : daysBetween(bookingStart, bookingEnd);
+
+    return {
+      listingId: listing.id,
+      bookingStart,
+      bookingEnd,
+      lineItems: [
+        {
+          code: unitType,
+          unitPrice: new Money(amount, currency),
+          quantity,
+        },
+        {
+          code: unitType,
+          unitPrice: new Money(50000, currency),
+          quantity,
+        },
+      ],
+      ...rest,
+    };
+  }
+
   /**
    * Load initial data for the page
    *
@@ -141,6 +183,7 @@ export class CheckoutPageComponent extends Component {
       fetchSpeculatedTransaction,
       fetchStripeCustomer,
       history,
+
     } = this.props;
 
     // Fetch currentUser with stripeCustomer entity
@@ -191,11 +234,13 @@ export class CheckoutPageComponent extends Component {
       // Fetch speculated transaction for showing price in booking breakdown
       // NOTE: if unit type is line-item/units, quantity needs to be added.
       // The way to pass it to checkout page is through pageData.bookingData
-      fetchSpeculatedTransaction({
-        listingId,
-        bookingStart: bookingStartForAPI,
-        bookingEnd: bookingEndForAPI,
-      });
+      fetchSpeculatedTransaction(
+        this.customPricingParams({
+          listing,
+          bookingStart: bookingStartForAPI,
+          bookingEnd: bookingEndForAPI,
+        })
+      );
     }
 
     this.setState({ pageData: pageData || {}, dataLoaded: true });
@@ -370,6 +415,13 @@ export class CheckoutPageComponent extends Component {
         ? { setupPaymentMethodForSaving: true }
         : {};
 
+    const requestParams = this.customPricingParams({
+      listing: this.state.pageData.listing,
+      bookingStart: speculatedTransaction.booking.attributes.start,
+      bookingEnd: speculatedTransaction.booking.attributes.end,
+      ...optionalPaymentParams,
+    });
+
     const orderParams = {
       listingId: pageData.listing.id,
       bookingStart: tx.booking.attributes.start,
@@ -377,7 +429,7 @@ export class CheckoutPageComponent extends Component {
       ...optionalPaymentParams,
     };
 
-    return handlePaymentIntentCreation(orderParams);
+    return handlePaymentIntentCreation(requestParams);
   }
 
   handleSubmit(values) {
@@ -422,11 +474,19 @@ export class CheckoutPageComponent extends Component {
       ...addressMaybe,
     };
 
+    const requestParams = this.customPricingParams({
+      listing: this.state.pageData.listing,
+      bookingStart: speculatedTransaction.booking.attributes.start,
+      bookingEnd: speculatedTransaction.booking.attributes.end,
+
+    });
+
     const requestPaymentParams = {
       pageData: this.state.pageData,
       speculatedTransaction,
       stripe: this.stripe,
       card,
+
       billingDetails,
       message,
       paymentIntent,

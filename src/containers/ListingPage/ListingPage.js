@@ -53,6 +53,8 @@ import SectionRulesMaybe from './SectionRulesMaybe';
 
 import css from './ListingPage.css';
 import SectionFollowers from './SectionFollowers';
+import SectionSelectPromotionType from './SectionSelectPromotionType';
+
 
 const MIN_LENGTH_FOR_LONG_WORDS_IN_TITLE = 16;
 
@@ -84,11 +86,17 @@ export class ListingPageComponent extends Component {
       pageClassNames: [],
       imageCarouselOpen: false,
       enquiryModalOpen: enquiryModalOpenForListingId === params.id,
+
+
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
     this.onContactUser = this.onContactUser.bind(this);
     this.onSubmitEnquiry = this.onSubmitEnquiry.bind(this);
+  }
+
+  componentWillUnmount() {
+
   }
 
   handleSubmit(values) {
@@ -99,6 +107,7 @@ export class ListingPageComponent extends Component {
       callSetInitialValues,
       onInitializeCardPaymentData,
     } = this.props;
+
     const listingId = new UUID(params.id);
     const listing = getListing(listingId);
 
@@ -150,6 +159,11 @@ export class ListingPageComponent extends Component {
     }
   }
 
+
+
+
+
+
   onSubmitEnquiry(values) {
     const { history, params, onSendEnquiry } = this.props;
     const routes = routeConfiguration();
@@ -169,6 +183,54 @@ export class ListingPageComponent extends Component {
         // Ignore, error handling in duck file
       });
   }
+
+  addToArray() {
+
+    const {
+      getListing,
+      getOwnListing,
+
+      params: rawParams,
+
+    } = this.props;
+    const listingId = new UUID(rawParams.id);
+    const isPendingApprovalVariant = rawParams.variant === LISTING_PAGE_PENDING_APPROVAL_VARIANT;
+    const isDraftVariant = rawParams.variant === LISTING_PAGE_DRAFT_VARIANT;
+    const currentListing =
+      isPendingApprovalVariant || isDraftVariant
+        ? ensureOwnListing(getOwnListing(listingId))
+        : ensureListing(getListing(listingId));
+    const {
+      publicData,
+    } = currentListing.attributes;
+console.log('publicc',publicData.values)
+    var arr = [];
+    if (publicData && publicData.values) {
+      console.log(publicData.values);
+
+      Object.keys(publicData.values).forEach(function(key) {
+        var matchingKey = key.indexOf('price') !== -1;
+
+        if (matchingKey) {
+          Object.keys(publicData.values).forEach(function(key2) {
+            if (key2.indexOf(key.substr(key.length - 4)) !== -1 && key!=key2){
+              console.log('this if',key,key2)
+              if(arr[key]==null&&arr[key2]==null) {
+                arr[key]=[publicData.values[key], publicData.values[key2]]
+
+              }
+            }
+          })
+        }
+      })
+      console.log('array',arr);
+      this.setState({priceArray:arr})
+    } else {
+
+    }
+  };
+
+
 
   render() {
     const {
@@ -229,7 +291,7 @@ export class ListingPageComponent extends Component {
       return <NamedRedirect name="ListingPage" params={params} search={location.search} />;
     }
 
-    console.log('current listing',currentListing.attributes);
+    // console.log('current listing',currentListing.attributes);
     const {
       description = '',
 
@@ -237,6 +299,7 @@ export class ListingPageComponent extends Component {
       title = '',
       publicData,
     } = currentListing.attributes;
+
 
     const richTitle = (
       <span>
@@ -246,6 +309,13 @@ export class ListingPageComponent extends Component {
         })}
       </span>
     );
+
+
+
+
+
+
+
 
     const bookingTitle = (
       <FormattedMessage id="ListingPage.bookingTitle" values={{ title: richTitle }} />
@@ -372,6 +442,12 @@ export class ListingPageComponent extends Component {
       </NamedLink>
     );
 
+
+    const handleSubmit = values => {
+      console.log('values')
+      console.log(values)
+    };
+
     const category =
       publicData && publicData.category ? (
         <span>
@@ -397,6 +473,7 @@ export class ListingPageComponent extends Component {
           image: schemaImages,
         }}
       >
+
         <LayoutSingleColumn className={css.pageRoot}>
           <LayoutWrapperTopbar>{topbar}</LayoutWrapperTopbar>
           <LayoutWrapperMain>
@@ -428,6 +505,8 @@ export class ListingPageComponent extends Component {
                     showContactUser={showContactUser}
                     onContactUser={this.onContactUser}
                   />
+                  <SectionSelectPromotionType onSubmit={handleSubmit} publicData={publicData}/>
+
                   <SectionDescriptionMaybe description={description} />
 
                   <SectionRulesMaybe publicData={publicData} />

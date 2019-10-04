@@ -5,12 +5,13 @@ import { FormattedMessage } from '../../util/reactIntl';
 import { LISTING_STATE_DRAFT } from '../../util/types';
 import { ListingLink } from '../../components';
 import { EditListingPricingForm } from '../../forms';
-import { ensureOwnListing } from '../../util/data';
+import { ensureListing, ensureOwnListing } from '../../util/data';
 import { types as sdkTypes } from '../../util/sdkLoader';
 import config from '../../config';
 
 import css from './EditListingPricingPanel.css';
 import EditListingNewPricingForm from '../../forms/EditListingNewPricingForm/EditListingNewPricingForm';
+import { LISTING_PAGE_DRAFT_VARIANT, LISTING_PAGE_PENDING_APPROVAL_VARIANT } from '../../util/urlHelpers';
 
 const { Money } = sdkTypes;
 
@@ -44,6 +45,43 @@ const EditListingNewPricingPanel = props => {
     <FormattedMessage id="EditListingPricingPanel.createListingTitle" />
   );
 
+
+const addToArray=(values)=> {
+
+    var arr = {};
+    if (values) {
+      console.log(values);
+
+      Object.keys(values).forEach(function(key) {
+        var matchingKey = key.indexOf('price') !== -1;
+
+        if (matchingKey) {
+          Object.keys(values).forEach(function(key2) {
+            if (key2.indexOf(key.substr(key.length - 4)) !== -1 && key!=key2){
+              console.log('this if',key,key2)
+              if(arr[key]==null&&arr[key2]==null) {
+                arr[key]=[values[key], values[key2]]
+
+              }
+            }
+          })
+        }
+      });
+      let updateValues = {}
+
+      updateValues.publicData={};
+      updateValues.publicData.values=arr;
+
+console.log('values',updateValues);
+     return updateValues;
+
+    } else {
+
+    }
+  };
+
+
+
   const priceCurrencyValid = price instanceof Money ? price.currency === config.currency : true;
   const form = priceCurrencyValid ? (
     <EditListingNewPricingForm
@@ -52,12 +90,13 @@ const EditListingNewPricingPanel = props => {
       initialValues={{ price }}
       onSubmit={values=>{
         delete values.price;
+
         const updateValues = {
           publicData: {
-           values
+            values
           },
         };
-        onSubmit(updateValues);
+        onSubmit(addToArray(values));
       }}
       onChange={onChange}
       saveActionMsg={submitButtonText}
