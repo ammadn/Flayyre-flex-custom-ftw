@@ -44,6 +44,7 @@ const bookingProcessAlias2 = 'sca-negotiated-nightly-booking/release-1';
 // Note: translations will use different translation keys for night, day or unit
 // depending on the value chosen.
 const bookingUnitType = 'line-item/night';
+const promotionType = 'line-item/promotions';
 
 // Should the application fetch available time slots (currently defined as
 // start and end dates) to be shown on listing page.
@@ -116,6 +117,7 @@ const config = {
   locale,
   bookingProcessAlias,
   bookingUnitType,
+  promotionType,
   enableAvailability,
   dayCountAvailableForBooking,
   i18n,

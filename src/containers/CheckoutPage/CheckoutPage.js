@@ -126,35 +126,48 @@ export class CheckoutPageComponent extends Component {
 
   customPricingParams(params) {
 
-    console.log(params)
+  const  {bookingData}=this.props;
+
+    console.log('bdataas',bookingData)
 
     const { bookingStart, bookingEnd, listing, ...rest } = params;
     const { amount, currency } = listing.attributes.price;
+    const {values}=listing.attributes.publicData;
 
     console.log("listinf at",params);
+
     const unitType = config.bookingUnitType;
+    const promotionType=config.promotionType;
     const isNightly = unitType === LINE_ITEM_NIGHT;
 
     const quantity = isNightly
       ? nightsBetween(bookingStart, bookingEnd)
       : daysBetween(bookingStart, bookingEnd);
 
+    let arr=[];
+
+    Object.keys(bookingData).map(function(key) {
+      if(bookingData[key].length != 0 ) {
+     arr.push({
+       code: 'line-item/'+key,
+       unitPrice: new Money(parseFloat(values[bookingData[key]][1]), currency),
+       quantity,
+     })
+
+      }
+    });
+
+    console.log('array',arr);
+    console.log( {
+      code: unitType,
+      unitPrice: new Money(amount, currency),
+      quantity,
+    })
     return {
       listingId: listing.id,
       bookingStart,
       bookingEnd,
-      lineItems: [
-        {
-          code: unitType,
-          unitPrice: new Money(amount, currency),
-          quantity,
-        },
-        {
-          code: unitType,
-          unitPrice: new Money(50000, currency),
-          quantity,
-        },
-      ],
+      lineItems: arr,
       ...rest,
     };
   }
