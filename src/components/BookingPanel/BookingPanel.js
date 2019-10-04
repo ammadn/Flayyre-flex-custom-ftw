@@ -65,6 +65,8 @@ const BookingPanel = props => {
     history,
     location,
     intl,
+    promotions,
+    publicData
   } = props;
 
   const price = listing.attributes.price;
@@ -114,8 +116,10 @@ const BookingPanel = props => {
           <h2 className={titleClasses}>{title}</h2>
           {subTitleText ? <div className={css.bookingHelp}>{subTitleText}</div> : null}
         </div>
+
         {showBookingDatesForm ? (
           <BookingDatesForm
+            promotions={promotions}
             className={css.bookingForm}
             formId="BookingPanel"
             submitButtonWrapperClassName={css.bookingDatesSubmitButtonWrapper}
@@ -125,6 +129,7 @@ const BookingPanel = props => {
             isOwnListing={isOwnListing}
             timeSlots={timeSlots}
             fetchTimeSlotsError={fetchTimeSlotsError}
+            publicData={publicData}
           />
         ) : null}
       </ModalInMobile>
@@ -137,6 +142,7 @@ const BookingPanel = props => {
             <FormattedMessage id={unitTranslationKey} />
           </div>
         </div>
+
 
         {showBookingDatesForm ? (
           <Button

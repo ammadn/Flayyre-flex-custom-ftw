@@ -11,8 +11,7 @@ import {
   Page,
 } from '../../components';
 import { Form as FinalForm } from 'react-final-form';
-import css from './ListingPage.css';
-import { FormattedMessage } from 'react-intl';
+import FieldCheckboxComponent from '../../components/FieldCheckbox/FieldCheckbox';
 
 const SectionSelectPromotionType = props => (
   <FinalForm
@@ -28,24 +27,25 @@ console.log(props.publicData);
 
 
 
+      let tifOptions =props.publicData? Object.keys(props.publicData.values).map(function(key) {
+        return <div> <FieldCheckboxComponent key={key} value={key} name={props.publicData.values[key][0]} id={props.publicData.values[key][0]}/>
+          {props.publicData.values[key][0]} promotion ${props.publicData.values[key][1]}
+        </div>
+      }):null
+
 
       return (
 
         <div>
 
           <Form onChange={value => {
-            handleSubmit(value);
+            handleSubmit();
           }}>
             {
-
+              tifOptions
             }
-            <FieldTextInput
-              id='tt'
-              name='tt'
-              value='tt'
 
-            />
-            <div>Section select promotion type</div>
+
 
           </Form>
         </div>

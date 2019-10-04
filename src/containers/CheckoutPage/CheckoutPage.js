@@ -126,11 +126,12 @@ export class CheckoutPageComponent extends Component {
 
   customPricingParams(params) {
 
+    console.log(params)
 
     const { bookingStart, bookingEnd, listing, ...rest } = params;
     const { amount, currency } = listing.attributes.price;
 
-    console.log("listinf at",listing.attributes);
+    console.log("listinf at",params);
     const unitType = config.bookingUnitType;
     const isNightly = unitType === LINE_ITEM_NIGHT;
 
@@ -231,6 +232,7 @@ export class CheckoutPageComponent extends Component {
       const bookingStartForAPI = dateFromLocalToAPI(bookingStart);
       const bookingEndForAPI = dateFromLocalToAPI(bookingEnd);
 
+      console.log('page data',pageData);
       // Fetch speculated transaction for showing price in booking breakdown
       // NOTE: if unit type is line-item/units, quantity needs to be added.
       // The way to pass it to checkout page is through pageData.bookingData

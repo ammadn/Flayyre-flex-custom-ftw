@@ -1,47 +1,42 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 import React, { Component } from 'react';
-import { array, arrayOf, bool, func, shape, string, oneOf } from 'prop-types';
-import { FormattedMessage, intlShape, injectIntl } from '../../util/reactIntl';
+import { array, arrayOf, bool, func, oneOf, shape, string } from 'prop-types';
+import { FormattedMessage, injectIntl, intlShape } from '../../util/reactIntl';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import config from '../../config';
 import routeConfiguration from '../../routeConfiguration';
-import { LISTING_STATE_PENDING_APPROVAL, LISTING_STATE_CLOSED, propTypes } from '../../util/types';
+import { LISTING_STATE_CLOSED, LISTING_STATE_PENDING_APPROVAL, propTypes } from '../../util/types';
 import { types as sdkTypes } from '../../util/sdkLoader';
 import {
+  createSlug,
   LISTING_PAGE_DRAFT_VARIANT,
-  LISTING_PAGE_PENDING_APPROVAL_VARIANT,
   LISTING_PAGE_PARAM_TYPE_DRAFT,
   LISTING_PAGE_PARAM_TYPE_EDIT,
-  createSlug,
+  LISTING_PAGE_PENDING_APPROVAL_VARIANT,
 } from '../../util/urlHelpers';
 import { formatMoney } from '../../util/currency';
 import { createResourceLocatorString, findRouteByRouteName } from '../../util/routes';
-import {
-  ensureListing,
-  ensureOwnListing,
-  ensureUser,
-  userDisplayNameAsString,
-} from '../../util/data';
+import { ensureListing, ensureOwnListing, ensureUser, userDisplayNameAsString } from '../../util/data';
 import { richText } from '../../util/richText';
 import { getMarketplaceEntities } from '../../ducks/marketplaceData.duck';
-import { manageDisableScrolling, isScrollingDisabled } from '../../ducks/UI.duck';
+import { isScrollingDisabled, manageDisableScrolling } from '../../ducks/UI.duck';
 import { initializeCardPaymentData } from '../../ducks/stripe.duck.js';
 import {
-  Page,
+  BookingPanel,
+  Footer,
+  LayoutSingleColumn,
+  LayoutWrapperFooter,
+  LayoutWrapperMain,
+  LayoutWrapperTopbar,
   NamedLink,
   NamedRedirect,
-  LayoutSingleColumn,
-  LayoutWrapperTopbar,
-  LayoutWrapperMain,
-  LayoutWrapperFooter,
-  Footer,
-  BookingPanel,
+  Page,
 } from '../../components';
-import { TopbarContainer, NotFoundPage } from '../../containers';
+import { NotFoundPage, TopbarContainer } from '../../containers';
 
-import { sendEnquiry, loadData, setInitialValues } from './ListingPage.duck';
+import { loadData, sendEnquiry, setInitialValues } from './ListingPage.duck';
 import SectionImages from './SectionImages';
 import SectionAvatar from './SectionAvatar';
 import SectionHeading from './SectionHeading';
@@ -86,7 +81,7 @@ export class ListingPageComponent extends Component {
       pageClassNames: [],
       imageCarouselOpen: false,
       enquiryModalOpen: enquiryModalOpenForListingId === params.id,
-
+      bookingData: null,
 
     };
 
@@ -111,7 +106,8 @@ export class ListingPageComponent extends Component {
     const listingId = new UUID(params.id);
     const listing = getListing(listingId);
 
-    const { bookingDates, ...bookingData } = values;
+    const { bookingDates, ...tt } = values;
+    const bookingData = this.state.bookingData;
 
     const initialValues = {
       listing,
@@ -137,8 +133,8 @@ export class ListingPageComponent extends Component {
         'CheckoutPage',
         routes,
         { id: listing.id.uuid, slug: createSlug(listing.attributes.title) },
-        {}
-      )
+        {},
+      ),
     );
   }
 
@@ -160,10 +156,6 @@ export class ListingPageComponent extends Component {
   }
 
 
-
-
-
-
   onSubmitEnquiry(values) {
     const { history, params, onSendEnquiry } = this.props;
     const routes = routeConfiguration();
@@ -176,60 +168,13 @@ export class ListingPageComponent extends Component {
 
         // Redirect to OrderDetailsPage
         history.push(
-          createResourceLocatorString('OrderDetailsPage', routes, { id: txId.uuid }, {})
+          createResourceLocatorString('OrderDetailsPage', routes, { id: txId.uuid }, {}),
         );
       })
       .catch(() => {
         // Ignore, error handling in duck file
       });
   }
-
-  addToArray() {
-
-    const {
-      getListing,
-      getOwnListing,
-
-      params: rawParams,
-
-    } = this.props;
-    const listingId = new UUID(rawParams.id);
-    const isPendingApprovalVariant = rawParams.variant === LISTING_PAGE_PENDING_APPROVAL_VARIANT;
-    const isDraftVariant = rawParams.variant === LISTING_PAGE_DRAFT_VARIANT;
-    const currentListing =
-      isPendingApprovalVariant || isDraftVariant
-        ? ensureOwnListing(getOwnListing(listingId))
-        : ensureListing(getListing(listingId));
-    const {
-      publicData,
-    } = currentListing.attributes;
-console.log('publicc',publicData.values)
-    var arr = [];
-    if (publicData && publicData.values) {
-      console.log(publicData.values);
-
-      Object.keys(publicData.values).forEach(function(key) {
-        var matchingKey = key.indexOf('price') !== -1;
-
-        if (matchingKey) {
-          Object.keys(publicData.values).forEach(function(key2) {
-            if (key2.indexOf(key.substr(key.length - 4)) !== -1 && key!=key2){
-              console.log('this if',key,key2)
-              if(arr[key]==null&&arr[key2]==null) {
-                arr[key]=[publicData.values[key], publicData.values[key2]]
-
-              }
-            }
-          })
-        }
-      })
-      console.log('array',arr);
-      this.setState({priceArray:arr})
-    } else {
-
-    }
-  };
-
 
 
   render() {
@@ -288,7 +233,7 @@ console.log('publicc',publicData.values)
     const shouldShowPublicListingPage = pendingIsApproved || pendingOtherUsersListing;
 
     if (shouldShowPublicListingPage) {
-      return <NamedRedirect name="ListingPage" params={params} search={location.search} />;
+      return <NamedRedirect name="ListingPage" params={params} search={location.search}/>;
     }
 
     // console.log('current listing',currentListing.attributes);
@@ -311,23 +256,17 @@ console.log('publicc',publicData.values)
     );
 
 
-
-
-
-
-
-
     const bookingTitle = (
-      <FormattedMessage id="ListingPage.bookingTitle" values={{ title: richTitle }} />
+      <FormattedMessage id="ListingPage.bookingTitle" values={{ title: richTitle }}/>
     );
     const bookingSubTitle = intl.formatMessage({ id: 'ListingPage.bookingSubTitle' });
 
-    const topbar = <TopbarContainer />;
+    const topbar = <TopbarContainer/>;
 
     if (showListingError && showListingError.status === 404) {
       // 404 listing not found
 
-      return <NotFoundPage />;
+      return <NotFoundPage/>;
     } else if (showListingError) {
       // Other error in fetching listing
 
@@ -341,11 +280,11 @@ console.log('publicc',publicData.values)
             <LayoutWrapperTopbar>{topbar}</LayoutWrapperTopbar>
             <LayoutWrapperMain>
               <p className={css.errorText}>
-                <FormattedMessage id="ListingPage.errorLoadingListingMessage" />
+                <FormattedMessage id="ListingPage.errorLoadingListingMessage"/>
               </p>
             </LayoutWrapperMain>
             <LayoutWrapperFooter>
-              <Footer />
+              <Footer/>
             </LayoutWrapperFooter>
           </LayoutSingleColumn>
         </Page>
@@ -363,11 +302,11 @@ console.log('publicc',publicData.values)
             <LayoutWrapperTopbar>{topbar}</LayoutWrapperTopbar>
             <LayoutWrapperMain>
               <p className={css.loadingText}>
-                <FormattedMessage id="ListingPage.loadingListingMessage" />
+                <FormattedMessage id="ListingPage.loadingListingMessage"/>
               </p>
             </LayoutWrapperMain>
             <LayoutWrapperFooter>
-              <Footer />
+              <Footer/>
             </LayoutWrapperFooter>
           </LayoutSingleColumn>
         </Page>
@@ -428,7 +367,7 @@ console.log('publicc',publicData.values)
     const siteTitle = config.siteTitle;
     const schemaTitle = intl.formatMessage(
       { id: 'ListingPage.schemaTitle' },
-      { title, price: formattedPrice, siteTitle }
+      { title, price: formattedPrice, siteTitle },
     );
 
     const hostLink = (
@@ -444,8 +383,8 @@ console.log('publicc',publicData.values)
 
 
     const handleSubmit = values => {
-      console.log('values')
-      console.log(values)
+      this.setState({bookingData:values});
+
     };
 
     const category =
@@ -494,7 +433,7 @@ console.log('publicc',publicData.values)
                 onManageDisableScrolling={onManageDisableScrolling}
               />
               <div className={css.contentContainer}>
-                <SectionAvatar user={currentAuthor} params={params} />
+                <SectionAvatar user={currentAuthor} params={params}/>
                 <div className={css.mainContent}>
                   <SectionHeading
                     priceTitle={priceTitle}
@@ -507,13 +446,13 @@ console.log('publicc',publicData.values)
                   />
                   <SectionSelectPromotionType onSubmit={handleSubmit} publicData={publicData}/>
 
-                  <SectionDescriptionMaybe description={description} />
+                  <SectionDescriptionMaybe description={description}/>
 
-                  <SectionRulesMaybe publicData={publicData} />
+                  {/*<SectionRulesMaybe publicData={publicData}/>*/}
 
-                  <SectionFollowers publicData={publicData} />
+                  <SectionFollowers publicData={publicData}/>
 
-                  <SectionReviews reviews={reviews} fetchReviewsError={fetchReviewsError} />
+                  <SectionReviews reviews={reviews} fetchReviewsError={fetchReviewsError}/>
 
                   <SectionHostMaybe
                     title={title}
@@ -531,6 +470,7 @@ console.log('publicc',publicData.values)
                 </div>
 
                 <BookingPanel
+                  promotions={this.state.bookingData}
                   className={css.bookingPanel}
                   listing={currentListing}
                   isOwnListing={isOwnListing}
@@ -542,13 +482,14 @@ console.log('publicc',publicData.values)
                   onManageDisableScrolling={onManageDisableScrolling}
                   timeSlots={timeSlots}
                   fetchTimeSlotsError={fetchTimeSlotsError}
+                  publicData={publicData}
                 />
 
               </div>
             </div>
           </LayoutWrapperMain>
           <LayoutWrapperFooter>
-            <Footer />
+            <Footer/>
           </LayoutWrapperFooter>
         </LayoutSingleColumn>
       </Page>
@@ -673,9 +614,9 @@ const ListingPage = compose(
   withRouter,
   connect(
     mapStateToProps,
-    mapDispatchToProps
+    mapDispatchToProps,
   ),
-  injectIntl
+  injectIntl,
 )(ListingPageComponent);
 
 ListingPage.setInitialValues = initialValues => setInitialValues(initialValues);
