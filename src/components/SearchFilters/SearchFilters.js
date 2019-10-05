@@ -250,17 +250,7 @@ const SearchFiltersComponent = props => {
     />
   ) ;
 
-  const dateRangeFilterElement =
-    dateRangeFilter && dateRangeFilter.config.active ? (
-      <BookingDateRangeFilter
-        id="SearchFilters.dateRangeFilter"
-        urlParam={dateRangeFilter.paramName}
-        onSubmit={handleDateRange}
-        showAsPopup
-        contentPlacementOffset={FILTER_DROPDOWN_OFFSET}
-        initialValues={initialDateRange}
-      />
-    ) : null;
+
 
   const keywordFilterElement =
     keywordFilter && keywordFilter.config.active ? (
@@ -299,7 +289,6 @@ const SearchFiltersComponent = props => {
         {categoryFilterElement}
         {amenitiesFilterElement}
         {priceFilterElement}
-        {dateRangeFilterElement}
         {keywordFilterElement}
         {toggleSearchFiltersPanelButton}
         {followerFilterElement}
