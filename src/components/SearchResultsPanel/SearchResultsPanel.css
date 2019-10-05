@@ -5,6 +5,12 @@
   flex-direction: column;
 }
 
+.ListingCard_root__2TocP SearchResultsPanel_listingCard__3Ekdf{
+@media (min-width: 1024px){
+  flex-basis: calc(20%) !important;
+  margin-right: 24px;
+}
+}
 .listingCards {
   padding: 0 24px 96px 24px;
 
@@ -12,6 +18,8 @@
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+    flex-basis: calc(20%) !important;
+    margin-right: 24px;
   }
 
   @media (--viewportLarge) {
@@ -38,8 +46,8 @@
 
     * flex-basis: calc((100%/columnCount) - (guttersBetweenColumns / columnCount))
     */
-    flex-basis: calc(50% - 12px);
-    margin-right: 24px;
+    flex-basis: calc(20%);
+
   }
 
   @media (--viewportXLarge) {
@@ -58,8 +66,8 @@
      * flex-basis: calc((100%/columnCount) - (guttersBetweenColumns / columnCount))
      */
 
-    flex-basis: calc(33.33% - 16px);
-    margin-right: 24px;
+    flex-basis: calc(20%);
+    /*margin-right: 24px;*/
   }
 }
 
