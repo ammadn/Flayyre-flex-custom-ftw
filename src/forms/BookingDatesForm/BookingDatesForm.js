@@ -38,8 +38,8 @@ export class BookingDatesFormComponent extends Component {
 
       this.props.onSubmit({
         "bookingDates": {
-          "startDate": "2019-10-07T06:30:00.000Z",
-          "endDate": "2019-10-08T06:30:00.000Z"
+          "startDate": "3019-10-07T06:30:00.000Z",
+          "endDate": "3019-10-08T06:30:00.000Z"
         }
       });
 
