@@ -39,7 +39,6 @@ export const TABS = [
   DESCRIPTION,
   FOLLOWERS,
   POLICY,
-  PRICING,
   NEW_PRICING,
   ...availabilityMaybe,
   PHOTOS,
@@ -54,8 +53,6 @@ const tabLabel = (intl, tab) => {
     key = 'EditListingWizard.tabLabelDescription';
   } else if (tab === POLICY) {
     key = 'EditListingWizard.tabLabelPolicy';
-  } else if (tab === PRICING) {
-    key = 'EditListingWizard.tabLabelPricing';
   } else if (tab === AVAILABILITY) {
     key = 'EditListingWizard.tabLabelAvailability';
   } else if (tab === PHOTOS) {
@@ -81,7 +78,6 @@ const tabCompleted = (tab, listing) => {
   const {
     availabilityPlan,
     description,
-    price,
     title,
     publicData,
     folloers,
@@ -94,8 +90,6 @@ const tabCompleted = (tab, listing) => {
       return !!(description && title);
     case POLICY:
       return !!(publicData && typeof publicData.rules !== 'undefined');
-    case PRICING:
-      return !!price;
     case FOLLOWERS:
       return !!(publicData);
     case NEW_PRICING:

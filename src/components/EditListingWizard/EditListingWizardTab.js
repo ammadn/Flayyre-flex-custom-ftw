@@ -35,7 +35,7 @@ export const SUPPORTED_TABS = [
   DESCRIPTION,
   POLICY,
   FOLLOWERS,
-  PRICING,
+
   NEW_PRICING,
   AVAILABILITY,
   PHOTOS,
@@ -188,27 +188,15 @@ const EditListingWizardTab = props => {
           {...panelProps(POLICY)}
           submitButtonText={intl.formatMessage({ id: submitButtonTranslationKey })}
           onSubmit={values => {
+
             onCompleteEditListingWizardTab(tab, values);
           }}
         />
       );
     }
 
-    case PRICING: {
-      const submitButtonTranslationKey = isNewListingFlow
-        ? 'EditListingWizard.saveNewPricing'
-        : 'EditListingWizard.saveEditPricing';
-      return (
-        <EditListingPricingPanel
-          {...panelProps(PRICING)}
-          submitButtonText={intl.formatMessage({ id: submitButtonTranslationKey })}
-          onSubmit={values => {
-            console.log('price values',values)
-            onCompleteEditListingWizardTab(tab, values);
-          }}
-        />
-      );
-    }
+
+
 
     case NEW_PRICING: {
       const submitButtonTranslationKey = isNewListingFlow
@@ -216,7 +204,7 @@ const EditListingWizardTab = props => {
         : 'EditListingWizard.saveEditPricing';
       return (
         <EditListingNewPricingPanel
-          {...panelProps(PRICING)}
+          {...panelProps(NEW_PRICING)}
           submitButtonText={intl.formatMessage({ id: submitButtonTranslationKey })}
           add={add}
           remove={remove}

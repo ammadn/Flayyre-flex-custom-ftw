@@ -49,6 +49,7 @@ const EditListingNewPricingPanel = props => {
 const addToArray=(values)=> {
 
     var arr = {};
+    let minPrice=0;
     if (values) {
       console.log(values);
 
@@ -67,7 +68,32 @@ const addToArray=(values)=> {
           })
         }
       });
+
+
+      if(arr[Object.keys(arr)[0]]){
+
+        console.log('dddd',arr[Object.keys(arr)[1]])
+        minPrice=arr[Object.keys(arr)[1]][1];
+        for(var key in arr){
+          console.log('key',arr[key][1]);
+          if( minPrice>parseFloat(arr[key][1])){
+
+            minPrice=arr[key][1]
+          }
+        }
+      }
+
+console.log('minn',minPrice)
+      let price={
+        "price": {
+          "_sdkType": "Money",
+          "amount": parseFloat(minPrice),
+          "currency": "EUR"
+        }
+      }
+
       let updateValues = {}
+      updateValues=price;
 
       updateValues.publicData={};
       updateValues.publicData.values=arr;
