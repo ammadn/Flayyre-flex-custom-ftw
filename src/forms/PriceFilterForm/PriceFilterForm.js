@@ -123,7 +123,7 @@ const PriceFilterFormComponent = props => {
           >
             <div className={css.contentWrapper}>
               <span className={css.label}>
-                <FormattedMessage id="PriceFilterForm.label" />
+                <FormattedMessage id="FollowersFilterForm.label" />
               </span>
               <div className={css.inputsWrapper}>
                 <Field

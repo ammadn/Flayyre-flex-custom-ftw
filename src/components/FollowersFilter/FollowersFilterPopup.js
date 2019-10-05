@@ -114,8 +114,8 @@ class FollowersFilterPopup extends Component {
       ? intl.formatMessage(
           { id: 'PriceFilter.labelSelectedButton' },
           {
-            minPrice: formatCurrencyMajorUnit(intl, currencyConfig.currency, minPrice),
-            maxPrice: formatCurrencyMajorUnit(intl, currencyConfig.currency, maxPrice),
+            minPrice:  minPrice,
+            maxPrice:  maxPrice,
           }
         )
       : intl.formatMessage({ id: 'FollowersFilterForm.label' });
@@ -137,7 +137,7 @@ class FollowersFilterPopup extends Component {
         </button>
         <PriceFilterForm
           id={id}
-          initialValues={hasInitialValues ? initialValues : { minPrice: min, maxPrice: max }}
+          initialValues={hasInitialValues ? initialValues : { minPrice: 0, maxPrice: 150000000 }}
           onClear={this.handleClear}
           onCancel={this.handleCancel}
           onSubmit={this.handleSubmit}
@@ -147,7 +147,7 @@ class FollowersFilterPopup extends Component {
           }}
           style={contentStyle}
           min={min}
-          max={max}
+          max={150000000}
           step={step}
           showAsPopup
           isOpen={this.state.isOpen}

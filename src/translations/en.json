@@ -653,6 +653,7 @@
   "PriceFilterForm.cancel": "Cancel",
   "PriceFilterForm.clear": "Clear",
   "PriceFilterForm.label": "Price range:",
+  "FollowersFilterForm.label": "Price range:",
   "PriceFilterForm.submit": "Apply",
 
   "FollowersFilterForm.cancel": "Cancel",

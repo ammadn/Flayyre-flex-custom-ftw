@@ -48,7 +48,7 @@
 .contentWrapper {
   display: flex;
   flex-wrap: wrap;
-  max-width: 300px;
+  max-width: 500px;
   padding-top: 5px;
   padding-bottom: 5px;
   margin-top: 0px;
@@ -73,6 +73,7 @@
 }
 
 .inputsWrapper {
+  width: 500px;
   display: flex;
 }
 
@@ -92,7 +93,7 @@
 }
 .maxPrice {
   @apply --marketplaceSearchFilterSublabelFontStyles;
-  width: 48px;
+  width: 100px;
   text-align: center;
   border-bottom-color: var(--attentionColor);
   border-bottom-width: 3px;
