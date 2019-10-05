@@ -8,16 +8,50 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { injectIntl } from 'react-intl';
 import { withRouter } from 'react-router-dom';
+import css from '../SectionLocations/SectionLocations.css';
 
+import beauty from '../../categoryImages/Beauty.jpg'
 
+class LocationImage extends Component {
+  render() {
+    const { alt, ...rest } = this.props;
+    return <img alt={alt} {...rest} />;
+  }
+}
 
+const LazyImage = lazyLoadWithDimensions(LocationImage);
 
 const locationLink = (name, searchQuery) => {
-  const nameText = <span>{name}</span>;
-  return (
-    <NamedLink name="SearchPage" to={{ search: searchQuery }}>
 
-      <div>
+  function importAll(r) {
+    return r.keys().map(r);
+  }
+
+
+  const images = importAll(require.context('../../categoryImages/', false, /\.(png|jpe?g|svg)$/));
+
+  let imgUrl=null;
+  for(var key in images){
+    console.log('key',key)
+    var matchingKey = images[key].indexOf(name) !== -1;
+    console.log('match',matchingKey)
+    if(matchingKey){
+      imgUrl=images[key];
+    }
+
+  }
+  console.log('images',images[1])
+
+  const nameText =  <span className={css.locationName}>{name}</span>;
+  return (
+    <NamedLink  className={css.location} name="SearchPage" to={{ search: searchQuery }}>
+      <div className={css.imageWrapper}>
+        <div className={css.aspectWrapper}>
+          <LazyImage src={imgUrl} alt={name} className={css.locationImage} />
+
+        </div>
+      </div>
+      <div className={css.linkText}>
         {nameText}
       </div>
     </NamedLink>
@@ -34,10 +68,10 @@ export class TypesOfInfluencers extends Component {
     const { rootClassName, className } = this.props;
     const classes = classNames(rootClassName, className);
 
-    const listItems = this.props.categories.map((link) =>
-      <div key={link.key}>
-        {locationLink(link.key, 'pub_category=' + link.label)}
-      </div>,
+    const listItems = this.props.categories.map((link,index) =>
+
+        locationLink (link.key, 'pub_category=' + link.label)
+
     );
 
     return (
@@ -45,7 +79,9 @@ export class TypesOfInfluencers extends Component {
         <div>
           Types Of Influencers
         </div>
-        <div>
+        <div className={css.locations}>
+
+
           {listItems}
         </div>
       </div>
