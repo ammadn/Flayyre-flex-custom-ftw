@@ -10,7 +10,7 @@ import config from '../../config';
 
 import css from './EditListingDescriptionPanel.css';
 
-const EditListingDescriptionPanel = props => {
+const   EditListingDescriptionPanel = props => {
   const {
     className,
     rootClassName,

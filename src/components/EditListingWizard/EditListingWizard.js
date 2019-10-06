@@ -57,7 +57,7 @@ const tabLabel = (intl, tab) => {
   } else if (tab === FOLLOWERS) {
     key = 'EditListingWizard.tabLabelFollowers';
   } else if (tab === NEW_PRICING) {
-    key = 'EditListingWizard.tabLabelFollowers';
+    key = 'EditListingWizard.tabLabelNewPrice';
   }
 
   return intl.formatMessage({ id: key });
@@ -290,6 +290,12 @@ class EditListingWizard extends Component {
 
     };
 
+    const mustBeNumber =value => (isNaN(value) ? 'Must be a number' : undefined);
+    const minValue = min => value =>
+      isNaN(value) || value >= min ? undefined : `Should be greater than ${min}`
+    const composeValidators = (...validators) => value =>
+      validators.reduce((error, validator) => error || validator(value), undefined)
+
     const add = () => {
       let str="price";
       let promotionType="pro_price";
@@ -307,7 +313,7 @@ class EditListingWizard extends Component {
             placeholder='enter promotion type'
 
           />
-          <FieldPhoneNumberInput
+          <FieldTextInput
             type="new"
           id={str}
           name={str}
@@ -315,7 +321,7 @@ class EditListingWizard extends Component {
 
           placeholder='enter price'
           currencyConfig={config.currencyConfig}
-          validate={priceValidators}
+            validate={composeValidators( mustBeNumber, minValue(5))}
         />
         </div>
       );
