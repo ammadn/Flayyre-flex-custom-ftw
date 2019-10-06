@@ -383,14 +383,14 @@ export class ListingPageComponent extends Component {
 
     const handleSubmitBooking = values => {
       console.log('valuesss',values);
-      if (values['paymentType']==='offer'&& values['offer']) {
+      if ( values['offer']) {
         this.setState({
           bookingData: {
             values: values['offer'],
             type:'offer'
           },
         });
-      } else if(values['paymentType']==='direct')  {
+      } else if(values['offer']==null)  {
         console.log('direct values',values)
         const newvalue = Object.keys(values).reduce((object, key) => {
           if (key !== 'paymentType') {

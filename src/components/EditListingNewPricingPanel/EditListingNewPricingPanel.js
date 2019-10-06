@@ -74,14 +74,21 @@ const addToArray=(values)=> {
       pricetype.direct_pricing=false;
 
       Object.keys(values).forEach(function(key) {
+        console.log('keeeee',key);
         var matchingKey = key.indexOf('offer_listing') !== -1;
         var matchingKey2 = key.indexOf('direct_pricing') !== -1;
 
         if (matchingKey) {
-          pricetype.offer_listing=true;
+          if(values[key][0]==='true'){
+            pricetype.offer_listing=true;
+          }
+
         }
         else if (matchingKey2) {
-          pricetype.direct_pricing=true;
+          if(values[key][0]==='true'){
+            pricetype.direct_pricing=true;
+          }
+
         }
       })
 
