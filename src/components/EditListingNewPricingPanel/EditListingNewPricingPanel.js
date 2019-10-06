@@ -70,10 +70,10 @@ const addToArray=(values)=> {
       });
 
 
-      if(arr[Object.keys(arr)[0]]){
+      if(arr[Object.keys(arr)[0]]&& arr[Object.keys(arr)[0]][1]){
 
         console.log('dddd',arr[Object.keys(arr)[1]])
-        minPrice=arr[Object.keys(arr)[1]][1];
+        minPrice=arr[Object.keys(arr)[0]][1];
         for(var key in arr){
           console.log('key',arr[key][1]);
           if( minPrice>parseFloat(arr[key][1])){
@@ -88,11 +88,11 @@ console.log('minn',minPrice)
         "price": {
           "_sdkType": "Money",
           "amount": parseFloat(minPrice),
-          "currency": "EUR"
+          "currency": "USD"
         }
-      }
+      };
 
-      let updateValues = {}
+      let updateValues = {};
       updateValues=price;
 
       updateValues.publicData={};
