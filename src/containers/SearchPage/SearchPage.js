@@ -14,7 +14,7 @@ import { parse, stringify } from '../../util/urlHelpers';
 import { propTypes } from '../../util/types';
 import { getListingsById } from '../../ducks/marketplaceData.duck';
 import { manageDisableScrolling, isScrollingDisabled } from '../../ducks/UI.duck';
-import { SearchMap, ModalInMobile, Page } from '../../components';
+import { SearchMap, ModalInMobile, Page, Footer, LayoutWrapperFooter } from '../../components';
 import { TopbarContainer } from '../../containers';
 
 import { searchListings, searchMapListings, setActiveListing } from './SearchPage.duck';
@@ -237,6 +237,9 @@ export class SearchPageComponent extends Component {
           />
 
         </div>
+        <LayoutWrapperFooter>
+          <Footer/>
+        </LayoutWrapperFooter>
       </Page>
     );
     /* eslint-enable jsx-a11y/no-static-element-interactions */

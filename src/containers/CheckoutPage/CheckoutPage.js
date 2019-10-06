@@ -146,16 +146,27 @@ export class CheckoutPageComponent extends Component {
 
     let arr=[];
 
-    Object.keys(bookingData).map(function(key) {
-      if(bookingData[key].length != 0 ) {
+    if(bookingData.type==='direct'){
+    Object.keys(bookingData.values).map(function(key) {
+      console.log('booking data velues',bookingData.values[key])
+      console.log('booking data velues2',values[bookingData.values[key]])
+      if(bookingData.values[key].length != 0 ) {
      arr.push({
        code: 'line-item/'+key,
-       unitPrice: new Money(parseFloat(values[bookingData[key]][1]), currency),
+       unitPrice: new Money(parseFloat(values[bookingData.values[key]][1]), currency),
        quantity,
      })
 
       }
-    });
+    })}else{
+      arr.push({
+          code: 'line-item/offer',
+          unitPrice: new Money(parseFloat(bookingData.values), currency),
+          quantity,
+        }
+      )
+    }
+
 
     console.log('array',arr);
     console.log( {

@@ -44,7 +44,6 @@ import SectionDescriptionMaybe from './SectionDescriptionMaybe';
 
 import SectionReviews from './SectionReviews';
 import SectionHostMaybe from './SectionHostMaybe';
-import SectionRulesMaybe from './SectionRulesMaybe';
 
 import css from './ListingPage.css';
 import SectionFollowers from './SectionFollowers';
@@ -382,9 +381,29 @@ export class ListingPageComponent extends Component {
     );
 
 
-    const handleSubmit = values => {
-      this.setState({bookingData:values});
+    const handleSubmitBooking = values => {
+      console.log('valuesss',values);
+      if (values['paymentType']==='offer'&& values['offer']) {
+        this.setState({
+          bookingData: {
+            values: values['offer'],
+            type:'offer'
+          },
+        });
+      } else if(values['paymentType']==='direct')  {
+        console.log('direct values',values)
+        const newvalue = Object.keys(values).reduce((object, key) => {
+          if (key !== 'paymentType') {
+            object[key] = values[key]
+          }
+          return object
+        }, {})
 
+        this.setState({ bookingData: {
+          values: newvalue,
+          type:'direct'
+        } });
+      }
     };
 
     const category =
@@ -444,7 +463,7 @@ export class ListingPageComponent extends Component {
                     showContactUser={showContactUser}
                     onContactUser={this.onContactUser}
                   />
-                  <SectionSelectPromotionType onSubmit={handleSubmit} publicData={publicData}/>
+                  <SectionSelectPromotionType onSubmit={handleSubmitBooking} publicData={publicData}/>
 
                   <SectionDescriptionMaybe description={description}/>
 

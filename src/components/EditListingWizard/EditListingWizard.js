@@ -12,7 +12,7 @@ import {
 } from '../../util/urlHelpers';
 import { ensureCurrentUser, ensureListing } from '../../util/data';
 import { PayoutDetailsForm } from '../../forms';
-import { FieldCurrencyInput, Form, Modal, NamedRedirect, Tabs } from '../../components';
+import { FieldCurrencyInput, Footer, Form, LayoutWrapperFooter, Modal, NamedRedirect, Tabs } from '../../components';
 
 import EditListingWizardTab, {
   AVAILABILITY,
@@ -409,6 +409,9 @@ if(fieldRenderProps){
             />
           </div>
         </Modal>
+        <LayoutWrapperFooter>
+          <Footer/>
+        </LayoutWrapperFooter>
       </div>
     );
   }

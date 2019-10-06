@@ -69,6 +69,22 @@ const addToArray=(values)=> {
         }
       });
 
+      let pricetype={};
+      pricetype.offer_listing=false;
+      pricetype.direct_pricing=false;
+
+      Object.keys(values).forEach(function(key) {
+        var matchingKey = key.indexOf('offer_listing') !== -1;
+        var matchingKey2 = key.indexOf('direct_pricing') !== -1;
+
+        if (matchingKey) {
+          pricetype.offer_listing=true;
+        }
+        else if (matchingKey2) {
+          pricetype.direct_pricing=true;
+        }
+      })
+
 
       if(arr[Object.keys(arr)[0]]&& arr[Object.keys(arr)[0]][1]){
 
@@ -97,6 +113,7 @@ console.log('minn',minPrice)
 
       updateValues.publicData={};
       updateValues.publicData.values=arr;
+      updateValues.publicData.pricetype=pricetype;
 
 console.log('values',updateValues);
      return updateValues;

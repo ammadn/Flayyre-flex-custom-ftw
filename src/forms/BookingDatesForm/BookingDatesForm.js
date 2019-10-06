@@ -138,29 +138,43 @@ export class BookingDatesFormComponent extends Component {
 
           const findTotal = () => {
             let total = 0;
-            Object.keys(promotions).map(function(key) {
-             if(promotions[key].length != 0 ) {
-               total = total + parseFloat(publicData.values[promotions[key]][1]);
-             }
-            });
-            return total;
+            console.log('type log',promotions)
+            if(promotions.type==='direct') {
+              Object.keys(promotions.values).map(function(key) {
+                if (promotions.values[key].length != 0 && publicData.values[promotions.values[key]]) {
+                  total = total + parseFloat(publicData.values[promotions.values[key]][1]);
+                }
+              });
+              return total;
+            }else if(promotions.type==='offer'){
+              return promotions.values;
+            }
           };
 
-          const newbookingInfo = promotions && publicData ? (
+          const newbookingInfo = promotions && publicData && promotions.type==='direct'? (
             <div className={css.priceBreakdownContainer}>
               <h3 className={css.priceBreakdownTitle}>
                 <FormattedMessage id="BookingDatesForm.priceBreakdownTitle"/>
               </h3>
               {
-                Object.keys(promotions).map(function(key) {
-                  return promotions[key].length != 0 ? <div>
-                    {publicData.values[promotions[key]][0]} promotion ${publicData.values[promotions[key]][1]}
+                Object.keys(promotions.values).map(function(key) {
+                  return promotions.values[key].length != 0 && publicData.values[promotions.values[key]] ? <div>
+                    {publicData.values[promotions.values[key]][0]} promotion ${publicData.values[promotions.values[key]][1]}
                   </div> : null;
                 })}
 
               <div>total=${findTotal()}</div>
             </div>
-          ) : null;
+          ) :(promotions && publicData && promotions.type==='offer'?(
+            <div className={css.priceBreakdownContainer}>
+              <h3 className={css.priceBreakdownTitle}>
+                <FormattedMessage id="BookingDatesForm.priceBreakdownTitle"/>
+              </h3>
+              Total Offer is
+
+              <div>=${findTotal()}</div>
+            </div>
+          ):null);
 
 
           const dateFormatOptions = {
