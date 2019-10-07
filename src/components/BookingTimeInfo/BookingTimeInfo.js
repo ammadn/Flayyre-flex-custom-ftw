@@ -21,6 +21,7 @@ const bookingData = (unitType, tx, isOrder, intl) => {
   // from actual start and end times used for availability reservation. It can help in situations
   // where there are preparation time needed between bookings.
   // Read more: https://www.sharetribe.com/api-reference/#bookings
+  if(tx.booking){
   const { start, end, displayStart, displayEnd } = tx.booking.attributes;
   const startDate = dateFromAPIToLocalNoon(displayStart || start);
   const endDateRaw = dateFromAPIToLocalNoon(displayEnd || end);
@@ -38,6 +39,7 @@ const bookingData = (unitType, tx, isOrder, intl) => {
       : endDateRaw;
   const bookingEnd = formatDateToText(intl, endDate);
   return { bookingStart, bookingEnd, isSingleDay };
+  }
 };
 
 const BookingTimeInfoComponent = props => {
@@ -50,34 +52,32 @@ const BookingTimeInfoComponent = props => {
 
   const bookingTimes = bookingData(unitType, tx, isOrder, intl);
 
-  const { bookingStart, bookingEnd, isSingleDay } = bookingTimes;
 
-  if (isSingleDay && dateType === DATE_TYPE_DATE) {
+
+  if (  dateType === DATE_TYPE_DATE) {
     return (
       <div className={classNames(css.bookingInfo, bookingClassName)}>
-        <span className={css.dateSection}>{`${bookingStart.date}`}</span>
+
       </div>
     );
   } else if (dateType === DATE_TYPE_DATE) {
     return (
       <div className={classNames(css.bookingInfo, bookingClassName)}>
-        <span className={css.dateSection}>{`${bookingStart.date} -`}</span>
-        <span className={css.dateSection}>{`${bookingEnd.date}`}</span>
+
       </div>
     );
-  } else if (isSingleDay && dateType === DATE_TYPE_DATETIME) {
+  } else if ( dateType === DATE_TYPE_DATETIME) {
     return (
       <div className={classNames(css.bookingInfo, bookingClassName)}>
         <span className={css.dateSection}>
-          {`${bookingStart.date}, ${bookingStart.time} - ${bookingEnd.time}`}
+
         </span>
       </div>
     );
   } else {
     return (
       <div className={classNames(css.bookingInfo, bookingClassName)}>
-        <span className={css.dateSection}>{`${bookingStart.dateAndTime} - `}</span>
-        <span className={css.dateSection}>{`${bookingEnd.dateAndTime}`}</span>
+
       </div>
     );
   }

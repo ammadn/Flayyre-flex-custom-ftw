@@ -443,17 +443,12 @@ export class CheckoutPageComponent extends Component {
 
     const requestParams = this.customPricingParams({
       listing: this.state.pageData.listing,
-      bookingStart: speculatedTransaction.booking.attributes.start,
-      bookingEnd: speculatedTransaction.booking.attributes.end,
+      bookingStart: "3019-10-07T06:30:00.000Z",
+      bookingEnd: "3019-10-08T06:30:00.000Z",
       ...optionalPaymentParams,
     });
 
-    const orderParams = {
-      listingId: pageData.listing.id,
-      bookingStart: tx.booking.attributes.start,
-      bookingEnd: tx.booking.attributes.end,
-      ...optionalPaymentParams,
-    };
+
 
     return handlePaymentIntentCreation(requestParams);
   }
@@ -500,12 +495,7 @@ export class CheckoutPageComponent extends Component {
       ...addressMaybe,
     };
 
-    const requestParams = this.customPricingParams({
-      listing: this.state.pageData.listing,
-      bookingStart: speculatedTransaction.booking.attributes.start,
-      bookingEnd: speculatedTransaction.booking.attributes.end,
 
-    });
 
     const requestPaymentParams = {
       pageData: this.state.pageData,

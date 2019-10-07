@@ -194,6 +194,8 @@ export class TransactionPanelComponent extends Component {
     } = this.props;
 
     const currentTransaction = ensureTransaction(transaction);
+    console.log('transaction id',currentTransaction)
+
     const currentListing = ensureListing(currentTransaction.listing);
     const currentProvider = ensureUser(currentTransaction.provider);
     const currentCustomer = ensureUser(currentTransaction.customer);
@@ -446,6 +448,8 @@ export class TransactionPanelComponent extends Component {
                   fetchTimeSlotsError={fetchTimeSlotsError}
                 />
               ) : null}
+
+
               <BreakdownMaybe
                 className={css.breakdownContainer}
                 transaction={currentTransaction}
