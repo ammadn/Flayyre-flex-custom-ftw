@@ -11,6 +11,7 @@
     "array-includes": "^3.0.3",
     "array.prototype.find": "^2.0.4",
     "autosize": "^4.0.0",
+    "axios": "^0.18.0",
     "basic-auth": "^2.0.1",
     "body-parser": "^1.18.3",
     "classnames": "^2.2.6",
@@ -45,6 +46,7 @@
     "react-google-maps": "^9.4.5",
     "react-helmet-async": "^1.0.2",
     "react-intl": "^3.1.13",
+    "react-items-carousel": "^2.7.0",
     "react-moment-proptypes": "^1.6.0",
     "react-redux": "^7.1.1",
     "react-router-dom": "^5.0.1",
@@ -55,8 +57,7 @@
     "sharetribe-scripts": "3.1.1",
     "smoothscroll-polyfill": "^0.4.0",
     "source-map-support": "^0.5.9",
-    "url": "^0.11.0",
-    "axios": "^0.18.0"
+    "url": "^0.11.0"
   },
   "devDependencies": {
     "babel-jest": "24.9.0",

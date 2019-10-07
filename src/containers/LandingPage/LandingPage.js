@@ -23,9 +23,11 @@ import twitterImage from '../../assets/saunatimeTwitter-600x314.jpg';
 import css from './LandingPage.css';
 import AllListing from '../../components/AllListing/AllListing';
 import TypesOfInfluencers from '../../components/TypesOfInfluencers/TypesOfInfluencers';
+import ItemsCarousel from 'react-items-carousel';
 
 export const LandingPageComponent = props => {
   const { history, intl, location, scrollingDisabled } = props;
+
 
   // Schema for search engines (helps them to understand what this page is about)
   // http://schema.org
