@@ -194,7 +194,7 @@ export class TransactionPanelComponent extends Component {
     } = this.props;
 
     const currentTransaction = ensureTransaction(transaction);
-    console.log('transaction id',currentTransaction)
+
 
     const currentListing = ensureListing(currentTransaction.listing);
     const currentProvider = ensureUser(currentTransaction.provider);

@@ -235,7 +235,7 @@ export class ListingPageComponent extends Component {
       return <NamedRedirect name="ListingPage" params={params} search={location.search}/>;
     }
 
-    // console.log('current listing',currentListing.attributes);
+
     const {
       description = '',
 
@@ -382,7 +382,7 @@ export class ListingPageComponent extends Component {
 
 
     const handleSubmitBooking = values => {
-      console.log('valuesss',values);
+
       if ( values['offer']) {
         this.setState({
           bookingData: {

@@ -138,7 +138,7 @@ export class BookingDatesFormComponent extends Component {
 
           const findTotal = () => {
             let total = 0;
-            console.log('type log',promotions)
+
             if(promotions.type==='direct') {
               Object.keys(promotions.values).map(function(key) {
                 if (promotions.values[key].length != 0 && publicData.values[promotions.values[key]]) {

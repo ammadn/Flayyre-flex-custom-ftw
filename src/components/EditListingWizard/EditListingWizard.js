@@ -268,7 +268,7 @@ class EditListingWizard extends Component {
     };
 
     const changeState = (state, type) => {
-      console.log(state, type);
+
       switch (type) {
         case 'IG': {
           this.setState({ IG: !state });
@@ -334,7 +334,7 @@ class EditListingWizard extends Component {
     };
 
 if(fieldRenderProps){
-  console.log(fieldRenderProps.values)
+
 }
 
 

@@ -8,7 +8,7 @@ const SectionFollowers = props => {
   const { publicData } = props;
 
 
-  // console.log('capacity', publicData);
+
 
   return (
 
