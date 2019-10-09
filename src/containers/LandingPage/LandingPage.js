@@ -16,18 +16,46 @@ import {
   SectionHowItWorks,
   SectionLocations,
 } from '../../components';
-import { TopbarContainer } from '../../containers';
+import { TopbarContainer,SearchPage2 } from '../../containers';
 
 import facebookImage from '../../assets/saunatimeFacebook-1200x630.jpg';
 import twitterImage from '../../assets/saunatimeTwitter-600x314.jpg';
 import css from './LandingPage.css';
 import AllListing from '../../components/AllListing/AllListing';
 import TypesOfInfluencers from '../../components/TypesOfInfluencers/TypesOfInfluencers';
-import ItemsCarousel from 'react-items-carousel';
+
+import { fakeIntl } from '../../util/test-data';
+
 
 export const LandingPageComponent = props => {
   const { history, intl, location, scrollingDisabled } = props;
+  const noop = () => null;
+  const props2 = {
+    location: { search: '' },
+    history: {
+      push: () => console.log('HistoryPush called'),
+    },
+    pagination: {
+      page: 1,
+      perPage: 12,
+      totalItems: 22,
+      totalPages: 2,
+    },
+    tab: 'listings',
+    scrollingDisabled: false,
+    searchInProgress: false,
+    authInProgress: false,
+    currentUserHasListings: false,
+    intl: fakeIntl,
+    isAuthenticated: false,
+    onActivateListing: noop,
+    onLogout: noop,
+    onManageDisableScrolling: noop,
+    onSearchMapListings: noop,
+    sendVerificationEmailInProgress: false,
+    onResendVerificationEmail: noop,
 
+  };
 
   // Schema for search engines (helps them to understand what this page is about)
   // http://schema.org
@@ -88,6 +116,12 @@ export const LandingPageComponent = props => {
             {/*    <SectionHowItWorks/>*/}
             {/*  </div>*/}
             {/*</li>*/}
+
+            <li>
+              <div className={css.sectionContentFirstChild}>
+                <SearchPage2 {...props}/>
+              </div>
+            </li>
           </ul>
 
         </LayoutWrapperMain>

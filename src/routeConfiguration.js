@@ -21,6 +21,7 @@ import {
   ProfilePage,
   ProfileSettingsPage,
   SearchPage,
+  SearchPage2,
   StyleguidePage,
   TermsOfServicePage,
   TransactionPage,
@@ -52,6 +53,7 @@ const routeConfiguration = () => {
       path: '/',
       name: 'LandingPage',
       component: props => <LandingPage {...props} />,
+      loadData: SearchPage2.loadData
     },
     {
       path: '/contactUs',
