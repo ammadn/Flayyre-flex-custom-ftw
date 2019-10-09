@@ -65,16 +65,14 @@ const SectionSelectPromotionType = props => (
             {
               (!fieldRenderProps.values.paymentType || fieldRenderProps.values.paymentType === 'direct') && props.publicData && props.publicData.pricetype.direct_pricing ?
 
-                (promotionTypes) : null
-            }
+                (promotionTypes) :(
 
-            {
               (!fieldRenderProps.values.paymentType || fieldRenderProps.values.paymentType === 'offer') && props.publicData && props.publicData.pricetype.offer_listing ? (
                 <div>
                   Enter an offer
                   <FieldTextInput  validate={composeValidators( mustBeNumber, minValue(5))} name="offer" id="offer"/>
                 </div>
-              ) : null
+              ) : null)
             }
 
 

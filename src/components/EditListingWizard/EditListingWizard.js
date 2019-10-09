@@ -313,7 +313,7 @@ class EditListingWizard extends Component {
             placeholder='enter promotion type'
 
           />
-          <FieldTextInput
+          <FieldCurrencyInput
             type="new"
           id={str}
           name={str}
@@ -321,7 +321,7 @@ class EditListingWizard extends Component {
 
           placeholder='enter price'
           currencyConfig={config.currencyConfig}
-            validate={composeValidators( mustBeNumber, minValue(5))}
+            validate={priceValidators}
         />
         </div>
       );

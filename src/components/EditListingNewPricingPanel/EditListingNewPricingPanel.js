@@ -61,7 +61,7 @@ const addToArray=(values)=> {
             if (key2.indexOf(key.substr(key.length - 4)) !== -1 && key!=key2){
               console.log('this if',key,key2)
               if(arr[key]==null&&arr[key2]==null) {
-                arr[key]=[values[key], values[key2]]
+                arr[key]=[values[key], values[key2].amount]
 
               }
             }
@@ -95,7 +95,7 @@ const addToArray=(values)=> {
 
       if(arr[Object.keys(arr)[0]]&& arr[Object.keys(arr)[0]][1]){
 
-        console.log('dddd',arr[Object.keys(arr)[1]])
+
         minPrice=arr[Object.keys(arr)[0]][1];
         for(var key in arr){
           console.log('key',arr[key][1]);
@@ -106,7 +106,7 @@ const addToArray=(values)=> {
         }
       }
 
-console.log('minn',minPrice)
+
       let price={
         "price": {
           "_sdkType": "Money",
@@ -122,7 +122,6 @@ console.log('minn',minPrice)
       updateValues.publicData.values=arr;
       updateValues.publicData.pricetype=pricetype;
 
-console.log('values',updateValues);
      return updateValues;
 
     } else {

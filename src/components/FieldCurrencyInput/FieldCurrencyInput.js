@@ -79,15 +79,19 @@ class CurrencyInputComponent extends Component {
             usesComma
           )
         : '';
+
+
       // Formatted value fully localized currency string ("$1,000.99")
       const formattedValue = hasInitialValue
         ? intl.formatNumber(ensureDotSeparator(unformattedValue), currencyConfig)
         : '';
 
+      const formattedValue2 = formattedValue.substr(1);
+
       this.state = {
-        formattedValue,
+        formattedValue2,
         unformattedValue,
-        value: formattedValue,
+        value: formattedValue2,
         usesComma,
       };
     } catch (e) {
