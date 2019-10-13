@@ -14,7 +14,7 @@ class ContactForm extends Component {
   }
 
   send = () => {
-
+console.log('contac',process.env.CONTAC_US)
 
       axios.post('http://localhost:4000/api/v1/other/contactUs', {
         name: JSON.stringify(this.state.name),
