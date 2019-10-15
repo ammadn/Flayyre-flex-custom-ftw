@@ -7,55 +7,24 @@ import { injectIntl, intlShape } from '../../util/reactIntl';
 import { isScrollingDisabled } from '../../ducks/UI.duck';
 import config from '../../config';
 import {
-  Footer,
-  LayoutSingleColumn,
-  LayoutWrapperFooter,
-  LayoutWrapperMain,
-  LayoutWrapperTopbar,
   Page,
+  SectionHero,
   SectionHowItWorks,
   SectionLocations,
+  LayoutSingleColumn,
+  LayoutWrapperTopbar,
+  LayoutWrapperMain,
+  LayoutWrapperFooter,
+  Footer,
 } from '../../components';
-import { TopbarContainer,SearchPage2 } from '../../containers';
+import { TopbarContainer } from '../../containers';
 
 import facebookImage from '../../assets/saunatimeFacebook-1200x630.jpg';
 import twitterImage from '../../assets/saunatimeTwitter-600x314.jpg';
 import css from './LandingPage.css';
-import AllListing from '../../components/AllListing/AllListing';
-import TypesOfInfluencers from '../../components/TypesOfInfluencers/TypesOfInfluencers';
-
-import { fakeIntl } from '../../util/test-data';
-
 
 export const LandingPageComponent = props => {
   const { history, intl, location, scrollingDisabled } = props;
-  const noop = () => null;
-  const props2 = {
-    location: { search: '' },
-    history: {
-      push: () => console.log('HistoryPush called'),
-    },
-    pagination: {
-      page: 1,
-      perPage: 12,
-      totalItems: 22,
-      totalPages: 2,
-    },
-    tab: 'listings',
-    scrollingDisabled: false,
-    searchInProgress: false,
-    authInProgress: false,
-    currentUserHasListings: false,
-    intl: fakeIntl,
-    isAuthenticated: false,
-    onActivateListing: noop,
-    onLogout: noop,
-    onManageDisableScrolling: noop,
-    onSearchMapListings: noop,
-    sendVerificationEmailInProgress: false,
-    onResendVerificationEmail: noop,
-
-  };
 
   // Schema for search engines (helps them to understand what this page is about)
   // http://schema.org
@@ -86,47 +55,27 @@ export const LandingPageComponent = props => {
     >
       <LayoutSingleColumn>
         <LayoutWrapperTopbar>
-          <TopbarContainer/>
+          <TopbarContainer />
         </LayoutWrapperTopbar>
         <LayoutWrapperMain>
-          {/*<div className={css.heroContainer}>*/}
-          {/*  <SectionHero className={css.hero} history={history} location={location}/>*/}
-          {/*</div>*/}
-
+          <div className={css.heroContainer}>
+            <SectionHero className={css.hero} history={history} location={location} />
+          </div>
           <ul className={css.sections}>
-
             <li className={css.section}>
               <div className={css.sectionContentFirstChild}>
-                <AllListing/>
+                <SectionLocations />
               </div>
             </li>
-
-            {/*<li>*/}
-            {/*  <div className={css.sectionContentFirstChild}>*/}
-            {/*    <SectionLocations/>*/}
-            {/*  </div>*/}
-            {/*</li>*/}
-            <li>
-              <div className={css.sectionContentFirstChild}>
-                <TypesOfInfluencers/>
-              </div>
-            </li>
-            {/*<li className={css.section}>*/}
-            {/*  <div className={css.sectionContent}>*/}
-            {/*    <SectionHowItWorks/>*/}
-            {/*  </div>*/}
-            {/*</li>*/}
-
-            <li>
-              <div className={css.sectionContentFirstChild}>
-                <SearchPage2 {...props}/>
+            <li className={css.section}>
+              <div className={css.sectionContent}>
+                <SectionHowItWorks />
               </div>
             </li>
           </ul>
-
         </LayoutWrapperMain>
         <LayoutWrapperFooter>
-          <Footer/>
+          <Footer />
         </LayoutWrapperFooter>
       </LayoutSingleColumn>
     </Page>
@@ -134,7 +83,6 @@ export const LandingPageComponent = props => {
 };
 
 const { bool, object } = PropTypes;
-
 
 LandingPageComponent.propTypes = {
   scrollingDisabled: bool.isRequired,
@@ -162,7 +110,7 @@ const mapStateToProps = state => {
 const LandingPage = compose(
   withRouter,
   connect(mapStateToProps),
-  injectIntl,
+  injectIntl
 )(LandingPageComponent);
 
 export default LandingPage;

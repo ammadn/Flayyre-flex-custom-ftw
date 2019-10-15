@@ -46,7 +46,7 @@ const locationLink = (name, searchQuery) => {
     <NamedLink name="SearchPage" to={{ search: searchQuery }}>
       <div>
       <div>
-        <div style={{ height: 220, overflow:'hidden'}}>
+        <div style={{ height: 300, overflow:'hidden'}}>
           <img style={{ height: '200px' }} src={imgUrl}/>
           {nameText}
         </div>
