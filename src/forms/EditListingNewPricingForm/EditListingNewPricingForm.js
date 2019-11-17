@@ -38,7 +38,7 @@ export const EditListingPricingFormComponent = props => (
         add,
         remove,
         directPriceInputArray,
-        addOther
+        addOther,
       } = fieldRenderProps;
 
       const { direct_pricing } = values;
@@ -88,7 +88,7 @@ export const EditListingPricingFormComponent = props => (
       const { updateListingError, showListingsError } = fetchErrors || {};
 
 
-      const element = (item,key) => {
+      const element = (item, key) => {
 
 
         console.log('ptypeee', item);
@@ -129,9 +129,13 @@ export const EditListingPricingFormComponent = props => (
 
                 if (value === 'Others') {
                   console.log('samee samee');
-                  {addOther(key,true)}
+                  {
+                    addOther(key, true);
+                  }
                 } else {
-                  {addOther(key,false)}
+                  {
+                    addOther(key, false);
+                  }
                 }
               }
 
@@ -141,8 +145,8 @@ export const EditListingPricingFormComponent = props => (
 
             {item.other ? <FieldTextInput
               type="new"
-              id={item.promotionType}
-              name={item.promotionType}
+              id={'other' + item.promotionType}
+              name={'other' + item.promotionType}
               className={css.priceInput}
 
               placeholder='enter promotion type'
@@ -167,7 +171,7 @@ export const EditListingPricingFormComponent = props => (
       const priceCom = (
 
         directPriceInputArray.map((item, key) =>
-          <div key={key}>{element(item,key)}</div>,
+          <div className={css.direct_pricing_item} key={key}>{element(item, key)}</div>,
         )
 
       );
@@ -198,9 +202,9 @@ export const EditListingPricingFormComponent = props => (
             </p>
           ) : null}
 
-          Offer listing <FieldCheckbox value='true' name="offer_listing" id="offer_listing"/>
+          <div className={css.price_checkbox_group}>  <FieldCheckbox value='true' name="offer_listing" id="offer_listing"/> <label>Offer listing</label></div>
 
-          Direct pricing <FieldCheckbox value='true' name="direct_pricing" id="direct_pricing"/>
+          <div className={css.price_checkbox_group}><FieldCheckbox value='true' name="direct_pricing" id="direct_pricing"/><label>Direct pricing </label></div>
           {
             directPrice
           }

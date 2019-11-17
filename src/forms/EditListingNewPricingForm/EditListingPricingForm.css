@@ -33,3 +33,12 @@
     margin-top: 100px;
   }
 }
+
+.direct_pricing_item {
+  padding-top: 11px;
+  padding-bottom: 11px;
+}
+
+.price_checkbox_group {
+  display: flex;
+}
