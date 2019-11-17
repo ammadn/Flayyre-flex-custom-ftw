@@ -12,6 +12,9 @@ import { types as sdkTypes } from '../../util/sdkLoader';
 import { Button, Form, FieldCurrencyInput } from '../../components';
 import css from './EditListingPricingForm.css';
 import FieldCheckbox from '../../components/FieldCheckbox/FieldCheckbox';
+import FieldSelect from '../../components/FieldSelect/FieldSelect';
+import { OnChange } from 'react-final-form-listeners';
+import FieldTextInput from '../../components/FieldTextInput/FieldTextInput';
 
 
 const { Money } = sdkTypes;
@@ -37,7 +40,7 @@ export const EditListingPricingFormComponent = props => (
         directPriceInputArray
       } = fieldRenderProps;
 
-      const {direct_pricing}=values;
+      const { direct_pricing } = values;
       const unitType = config.bookingUnitType;
       const isNightly = unitType === LINE_ITEM_NIGHT;
       const isDaily = unitType === LINE_ITEM_DAY;
@@ -45,8 +48,8 @@ export const EditListingPricingFormComponent = props => (
       const translationKey = isNightly
         ? 'EditListingPricingForm.pricePerNight'
         : isDaily
-        ? 'EditListingPricingForm.pricePerDay'
-        : 'EditListingPricingForm.pricePerUnit';
+          ? 'EditListingPricingForm.pricePerDay'
+          : 'EditListingPricingForm.pricePerUnit';
 
       const pricePerUnitMessage = intl.formatMessage({
         id: translationKey,
@@ -84,14 +87,91 @@ export const EditListingPricingFormComponent = props => (
       const { updateListingError, showListingsError } = fetchErrors || {};
 
 
+
+      const element = (index) =>{
+        let str = 'price';
+        let promotionType = 'pro_price';
+        str = str.concat(index);
+        promotionType = promotionType.concat(index);
+
+        console.log('ptypeee',promotionType)
+        return(
+
+        <div>
+
+          <FieldSelect
+            id={promotionType}
+            name={promotionType}
+
+            className={css.selectCountry}
+            label='Select promotion type'
+          >
+            <option value="Brand">
+              Brand Sponsorship
+            </option>
+            <option value="IG Story">
+              IG Story Promo
+            </option>
+            <option value="IG Post">
+              IG Post Promo
+            </option>
+            <option value="Twitter">
+              Twitter Promo
+            </option>
+            <option value="YT">
+              YT Promo
+            </option>
+            <option value="Others">
+              Others
+            </option>
+          </FieldSelect>
+
+          <OnChange name={promotionType}>
+
+            {(value, previous) => {
+
+
+            }
+
+            }
+          </OnChange>
+
+
+          {/*{this.state.other ? <FieldTextInput*/}
+          {/*  type="new"*/}
+          {/*  id={promotionType}*/}
+          {/*  name={promotionType}*/}
+          {/*  className={css.priceInput}*/}
+
+          {/*  placeholder='enter promotion type'*/}
+
+          {/*/> : null}*/}
+
+          <FieldCurrencyInput
+            type="new"
+            id={str}
+            name={str}
+            className={css.priceInput}
+
+            placeholder='enter price'
+            currencyConfig={config.currencyConfig}
+            validate={priceValidators}
+          />
+        </div>)
+    };
+
+
       console.log(values);
       const priceCom=(
 
         directPriceInputArray.map((item, key) =>
-          <div key={key}>{item}</div>
+          <div key={key}>{element(key)}</div>
         )
 
       );
+
+
+
 
       const directPrice=
         (direct_pricing && direct_pricing[0])?
@@ -104,7 +184,7 @@ export const EditListingPricingFormComponent = props => (
           ):null;
 
 
-      console.log(values.direct_pricing);
+      console.log('vaaaaa', fieldRenderProps.values);
       return (
         <Form onSubmit={handleSubmit} className={classes}>
           {updateListingError ? (
@@ -118,9 +198,9 @@ export const EditListingPricingFormComponent = props => (
             </p>
           ) : null}
 
-         offer listing <FieldCheckbox value='true' name="offer_listing" id="offer_listing"/>
+         Offer listing <FieldCheckbox value='true' name="offer_listing" id="offer_listing"/>
 
-         direct pricing <FieldCheckbox value='true' name="direct_pricing" id="direct_pricing"/>
+         Direct pricing <FieldCheckbox value='true' name="direct_pricing" id="direct_pricing"/>
           {
             directPrice
           }

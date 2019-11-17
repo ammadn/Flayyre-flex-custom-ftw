@@ -29,6 +29,8 @@ import { formatMoney } from '../../util/currency';
 import { types as sdkTypes } from '../../util/sdkLoader';
 import FieldTextInput from '../FieldTextInput/FieldTextInput';
 import FieldPhoneNumberInput from '../FieldPhoneNumberInput/FieldPhoneNumberInput';
+import FieldSelect from '../FieldSelect/FieldSelect';
+import { OnChange } from 'react-final-form-listeners';
 
 // Show availability calendar only if environment variable availabilityEnabled is true
 const availabilityMaybe = config.enableAvailability ? [AVAILABILITY] : [];
@@ -143,6 +145,7 @@ class EditListingWizard extends Component {
       Fb: false,
       Other: false,
       directPriceInputArray: [],
+      other: false,
     };
     this.handleCreateFlowTabScrolling = this.handleCreateFlowTabScrolling.bind(this);
     this.handlePublishListing = this.handlePublishListing.bind(this);
@@ -186,7 +189,6 @@ class EditListingWizard extends Component {
   }
 
 
-
   render() {
     const {
       id,
@@ -209,7 +211,7 @@ class EditListingWizard extends Component {
     const priceRequired = validators.required(
       intl.formatMessage({
         id: 'EditListingPricingForm.priceRequired',
-      })
+      }),
     );
     const priceValidators = config.listingMinimumPriceSubUnits
       ? validators.composeValidators(priceRequired, minPriceRequired)
@@ -223,10 +225,11 @@ class EditListingWizard extends Component {
         },
         {
           minPrice: formatMoney(intl, minPrice),
-        }
+        },
       ),
-      config.listingMinimumPriceSubUnits
+      config.listingMinimumPriceSubUnits,
     );
+
 
     const selectedTab = params.tab;
     const isNewListingFlow = [LISTING_PAGE_PARAM_TYPE_NEW, LISTING_PAGE_PARAM_TYPE_DRAFT].includes(
@@ -290,41 +293,116 @@ class EditListingWizard extends Component {
 
     };
 
-    const mustBeNumber =value => (isNaN(value) ? 'Must be a number' : undefined);
+    const mustBeNumber = value => (isNaN(value) ? 'Must be a number' : undefined);
     const minValue = min => value =>
-      isNaN(value) || value >= min ? undefined : `Should be greater than ${min}`
+      isNaN(value) || value >= min ? undefined : `Should be greater than ${min}`;
     const composeValidators = (...validators) => value =>
-      validators.reduce((error, validator) => error || validator(value), undefined)
+      validators.reduce((error, validator) => error || validator(value), undefined);
 
     const add = () => {
-      let str="price";
-      let promotionType="pro_price";
-      str=str.concat(this.state.directPriceInputArray.length.toString());
-      promotionType=promotionType.concat(this.state.directPriceInputArray.length.toString());
-      const element = (
+      let str = 'price';
+      let promotionType = 'pro_price';
+      str = str.concat(this.state.directPriceInputArray.length.toString());
+      promotionType = promotionType.concat(this.state.directPriceInputArray.length.toString());
 
-        <div>
-          <FieldTextInput
-            type="new"
-            id={promotionType}
-            name={promotionType}
-            className={css.priceInput}
+      // var arr = this.state.other;
+      // arr[promotionType] = false;
+      this.setState({
+        other: false,
+      });
 
-            placeholder='enter promotion type'
+      const onChange = (valeu) => {
+        console.log('runnn', valeu.target.value);
+      };
+      // const element = (
+      //
+      //   <div>
+      //
+      //     <FieldSelect
+      //       id={promotionType}
+      //       name={promotionType}
+      //
+      //       className={css.selectCountry}
+      //       label='Select promotion type'
+      //     >
+      //       <option value="Brand">
+      //         Brand Sponsorship
+      //       </option>
+      //       <option value="IG Story">
+      //         IG Story Promo
+      //       </option>
+      //       <option value="IG Post">
+      //         IG Post Promo
+      //       </option>
+      //       <option value="Twitter">
+      //         Twitter Promo
+      //       </option>
+      //       <option value="YT">
+      //         YT Promo
+      //       </option>
+      //       <option value="Others">
+      //         Others
+      //       </option>
+      //     </FieldSelect>
+      //
+      //     <OnChange name={promotionType}>
+      //
+      //       {(value, previous) => {
+      //         console.log('other',this.state.other)
+      //         if (value === 'Others') {
+      //
+      //           console.log('value is ok')
+      //           // var arr = this.state.other;
+      //           // arr[promotionType] = true;
+      //           this.setState({
+      //             other: true,
+      //           },()=>{
+      //             this.forceUpdate();
+      //             console.log('afterrr',this.state.other)
+      //           });
+      //
+      //         }
+      //         else {
+      //           // var arr = this.state.other;
+      //           // arr[promotionType] = false;
+      //           this.setState({
+      //             other: true,
+      //           });
+      //         }
+      //       }
+      //
+      //       }
+      //     </OnChange>
+      //
+      //     {console.log('statttttta', this.state)}
+      //
+      //     {this.state.other ? <FieldTextInput
+      //       type="new"
+      //       id={promotionType}
+      //       name={promotionType}
+      //       className={css.priceInput}
+      //
+      //       placeholder='enter promotion type'
+      //
+      //     /> : null}
+      //
+      //     <FieldCurrencyInput
+      //       type="new"
+      //       id={str}
+      //       name={str}
+      //       className={css.priceInput}
+      //
+      //       placeholder='enter price'
+      //       currencyConfig={config.currencyConfig}
+      //       validate={priceValidators}
+      //     />
+      //   </div>
+      // );
 
-          />
-          <FieldCurrencyInput
-            type="new"
-          id={str}
-          name={str}
-          className={css.priceInput}
-
-          placeholder='enter price'
-          currencyConfig={config.currencyConfig}
-            validate={priceValidators}
-        />
-        </div>
-      );
+      const element={
+        'str':str,
+        'promotionType':promotionType
+      }
 
       this.setState({
         directPriceInputArray: [...this.state.directPriceInputArray, element],
@@ -333,18 +411,16 @@ class EditListingWizard extends Component {
 
     };
 
-if(fieldRenderProps){
-
-}
-
-
-
-
-    const remove=()=>{
-      const directPriceInput = this.state.directPriceInputArray.filter(item => item !== this.state.directPriceInputArray[this.state.directPriceInputArray.length-1]);
-      this.setState({ directPriceInputArray: directPriceInput });
+    if (fieldRenderProps) {
 
     }
+
+
+    const remove = () => {
+      const directPriceInput = this.state.directPriceInputArray.filter(item => item !== this.state.directPriceInputArray[this.state.directPriceInputArray.length - 1]);
+      this.setState({ directPriceInputArray: directPriceInput });
+
+    };
 
     return (
       <div className={classes}>
@@ -381,6 +457,7 @@ if(fieldRenderProps){
                 add={add}
                 remove={remove}
                 directPriceInputArray={this.state.directPriceInputArray}
+                other={this.state.other}
               />
             );
           })}
@@ -423,7 +500,7 @@ EditListingWizard.defaultProps = {
   rootClassName: null,
   listing: null,
   updateInProgress: false,
-  fieldRenderProps:null,
+  fieldRenderProps: null,
 };
 
 EditListingWizard.propTypes = {

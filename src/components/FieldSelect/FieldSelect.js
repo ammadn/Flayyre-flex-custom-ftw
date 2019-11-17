@@ -62,7 +62,7 @@ FieldSelectComponent.propTypes = {
 };
 
 const FieldSelect = props => {
-  return <Field component={FieldSelectComponent} {...props} />;
+  return <Field  component={FieldSelectComponent} {...props} />;
 };
 
 export default FieldSelect;
