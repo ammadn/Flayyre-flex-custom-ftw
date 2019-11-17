@@ -132,6 +132,7 @@ export { default as PriceFilter } from './PriceFilter/PriceFilter';
 export { default as Reviews } from './Reviews/Reviews';
 export { default as SavedCardDetails } from './SavedCardDetails/SavedCardDetails';
 export { default as SearchFilters } from './SearchFilters/SearchFilters';
+export { default as SearchFilters2 } from './SearchFilters2/SearchFilters2';
 export { default as SearchFiltersMobile } from './SearchFiltersMobile/SearchFiltersMobile';
 export { default as SearchFiltersPanel } from './SearchFiltersPanel/SearchFiltersPanel';
 export { default as SearchMap } from './SearchMap/SearchMap';

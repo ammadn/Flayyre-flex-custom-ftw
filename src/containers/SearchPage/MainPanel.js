@@ -13,6 +13,7 @@ import {
 import { validFilterParams } from './SearchPage.helpers';
 
 import css from './SearchPage.css';
+import SearchFilters2 from '../../components/SearchFilters2/SearchFilters2';
 
 class MainPanel extends Component {
   constructor(props) {
@@ -76,6 +77,17 @@ class MainPanel extends Component {
     return (
       <div className={classes}>
         <SearchFilters
+          className={css.searchFilters}
+          urlQueryParams={urlQueryParams}
+          listingsAreLoaded={listingsAreLoaded}
+          resultsCount={totalItems}
+          searchInProgress={searchInProgress}
+          searchListingsError={searchListingsError}
+          onManageDisableScrolling={onManageDisableScrolling}
+          {...searchFiltersPanelProps}
+          {...primaryFilters}
+        />
+        <SearchFilters2
           className={css.searchFilters}
           urlQueryParams={urlQueryParams}
           listingsAreLoaded={listingsAreLoaded}
