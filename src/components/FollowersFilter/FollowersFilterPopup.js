@@ -3,7 +3,12 @@ import { func, number, shape, string } from 'prop-types';
 import classNames from 'classnames';
 import { injectIntl, intlShape } from '../../util/reactIntl';
 import { propTypes } from '../../util/types';
-import { formatCurrencyMajorUnit } from '../../util/currency';
+import {
+  formatCurrencyMajorUnit,
+  formatFollowerMaxUnit,
+  formatFollowerMinUnit,
+  formatFollowerUnit,
+} from '../../util/currency';
 import config from '../../config';
 
 import { PriceFilterForm } from '../../forms';
@@ -115,8 +120,8 @@ class FollowersFilterPopup extends Component {
       ? intl.formatMessage(
           { id: 'PriceFilter.labelSelectedButton' },
           {
-            minPrice:  minPrice,
-            maxPrice:  maxPrice,
+            minPrice: formatFollowerMinUnit(intl,  minPrice),
+            maxPrice: formatFollowerMaxUnit(intl, maxPrice),
           }
         )
       : intl.formatMessage({ id: 'FollowersFilterForm.label' });

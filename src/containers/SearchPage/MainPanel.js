@@ -76,17 +76,7 @@ class MainPanel extends Component {
 
     return (
       <div className={classes}>
-        <SearchFilters
-          className={css.searchFilters}
-          urlQueryParams={urlQueryParams}
-          listingsAreLoaded={listingsAreLoaded}
-          resultsCount={totalItems}
-          searchInProgress={searchInProgress}
-          searchListingsError={searchListingsError}
-          onManageDisableScrolling={onManageDisableScrolling}
-          {...searchFiltersPanelProps}
-          {...primaryFilters}
-        />
+
         <SearchFilters2
           className={css.searchFilters}
           urlQueryParams={urlQueryParams}
@@ -98,6 +88,18 @@ class MainPanel extends Component {
           {...searchFiltersPanelProps}
           {...primaryFilters}
         />
+        <SearchFilters
+          className={css.searchFilters}
+          urlQueryParams={urlQueryParams}
+          listingsAreLoaded={listingsAreLoaded}
+          resultsCount={totalItems}
+          searchInProgress={searchInProgress}
+          searchListingsError={searchListingsError}
+          onManageDisableScrolling={onManageDisableScrolling}
+          {...searchFiltersPanelProps}
+          {...primaryFilters}
+        />
+
         <SearchFiltersMobile
           className={css.searchFiltersMobile}
           urlQueryParams={urlQueryParams}

@@ -286,7 +286,6 @@ const SearchFiltersComponent = props => {
   return (
     <div className={classes}>
       <div className={css.filters}>
-        {categoryFilterElement}
         {amenitiesFilterElement}
         {priceFilterElement}
         {keywordFilterElement}

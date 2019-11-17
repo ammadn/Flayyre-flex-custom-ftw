@@ -285,3 +285,23 @@ export const formatCurrencyMajorUnit = (intl, currency, valueWithoutSubunits) =>
 
   return intl.formatNumber(valueAsNumber, numberFormatOptions);
 };
+
+export const formatFollowerMaxUnit = (intl,value) => {
+  const valueAsNumber = new Decimal(value).toNumber();
+
+  // See: https://github.com/yahoo/react-intl/wiki/API#formatnumber
+  const numberFormatOptions = {
+  };
+
+  return intl.formatNumber(valueAsNumber, numberFormatOptions)+'+';
+};
+
+export const formatFollowerMinUnit = (intl,value) => {
+  const valueAsNumber = new Decimal(value).toNumber();
+
+  // See: https://github.com/yahoo/react-intl/wiki/API#formatnumber
+  const numberFormatOptions = {
+  };
+
+  return intl.formatNumber(valueAsNumber, numberFormatOptions);
+};
