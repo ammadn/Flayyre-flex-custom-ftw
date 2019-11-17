@@ -8,6 +8,7 @@ import config from '../../config';
 
 import { PriceFilterForm } from '../../forms';
 import css from './PriceFilterPopup.css';
+import FollowersFilterForm from '../../forms/FollowersFilterForm/FollowersFilterForm';
 
 const KEY_CODE_ESCAPE = 27;
 
@@ -135,7 +136,7 @@ class FollowersFilterPopup extends Component {
         <button className={labelStyles} onClick={() => this.toggleOpen()}>
           {label}
         </button>
-        <PriceFilterForm
+        <FollowersFilterForm
           id={id}
           initialValues={hasInitialValues ? initialValues : { minPrice: 0, maxPrice: 150000000 }}
           onClear={this.handleClear}

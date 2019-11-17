@@ -9,6 +9,7 @@ import config from '../../config';
 import { PriceFilterForm } from '../../forms';
 
 import css from './FollowersFilterPlain.css';
+import FollowersFilterForm from '../../forms/FollowersFilterForm/FollowersFilterForm';
 
 class PriceFilterPlainComponent extends Component {
   constructor(props) {
@@ -74,7 +75,7 @@ class PriceFilterPlainComponent extends Component {
           </button>
         </div>
         <div className={css.formWrapper}>
-          <PriceFilterForm
+          <FollowersFilterForm
             id={id}
             initialValues={hasInitialValues ? initialValues : { minPrice: min, maxPrice: max }}
             onChange={this.handleChange}

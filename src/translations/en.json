@@ -654,7 +654,6 @@
   "PriceFilterForm.cancel": "Cancel",
   "PriceFilterForm.clear": "Clear",
   "PriceFilterForm.label": "Price range:",
-  "FollowersFilterForm.label": "Price range:",
   "PriceFilterForm.submit": "Apply",
 
   "FollowersFilterForm.cancel": "Cancel",
@@ -909,7 +908,7 @@
   "TopbarDesktop.yourListingsLink": "Your listings",
   "TopbarDesktop.aboutUs": "About Us",
   "TopbarDesktop.contactUs": "Contact Us",
-  "TopbarDesktop.applyInfluence": "Apply As An Influencer",
+  "TopbarDesktop.applyInfluence": "Enroll As Talent",
   "TopbarMobileMenu.accountSettingsLink": "Account settings",
   "TopbarMobileMenu.greeting": "Hello {displayName}",
   "TopbarMobileMenu.inboxLink": "Inbox",
