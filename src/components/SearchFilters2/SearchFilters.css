@@ -258,3 +258,56 @@
    color: var(--matterColor);
  }
 }
+
+
+.menuItem {
+  @apply --marketplaceListingAttributeFontStyles;
+  color: var(--matterColor);
+
+  /* Layout */
+  position: relative;
+  margin: 0;
+  padding: 4px 30px;
+
+  /* Override button styles */
+  outline: none;
+  text-align: left;
+  border: none;
+
+  cursor: pointer;
+
+&:focus,
+&:hover {
+   color: var(--matterColorDark);
+ }
+
+&:hover .menuItemBorder {
+   width: 6px;
+ }
+}
+
+.menuItemSelected {
+  @apply --marketplaceH4FontStyles;
+  font-weight: var(--fontWeightMedium);
+
+  color: red;
+
+  /* Layout */
+  position: relative;
+  margin: 0;
+  padding: 32px 30px 18px 30px;
+
+  /* Override button styles */
+  outline: none;
+  text-align: left;
+  border: none;
+
+  cursor: pointer;
+  transition: width var(--transitionStyleButton);
+
+
+&:hover {
+   color: var(--matterColor);
+   transition: width var(--transitionStyleButton);
+ }
+}

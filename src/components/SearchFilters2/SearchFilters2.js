@@ -22,6 +22,10 @@ import FollowersFilter from '../FollowersFilter/FollowersFilter';
 
 // Dropdown container can have a positional offset (in pixels)
 
+const initialValue = (queryParams, paramName) => {
+  return queryParams[paramName];
+};
+
 
 const SearchFilters2Component = props => {
   const {
@@ -46,6 +50,11 @@ const SearchFilters2Component = props => {
 
   const hasNoResult = listingsAreLoaded && resultsCount === 0;
   const classes = classNames(rootClassName || css.root, { [css.longInfo]: hasNoResult }, className);
+
+  const initialCategory = categoryFilter
+    ? initialValue(urlQueryParams, categoryFilter.paramName)
+    : null;
+
 
 
   const handleSelectOption = (urlParam, option) => {
@@ -74,8 +83,18 @@ const SearchFilters2Component = props => {
       <div>
         {categoryFilter.options.map(option => {
           // check if this option is selected
+          const selected = initialCategory === option.key;
+
+          const optionBorderClass =  classNames({
+              [css.menuItemSelected]: selected,
+              [css.menuItem]: !selected,
+
+            })
+
+
           return (
             <button
+              className={optionBorderClass}
               key={option.key}
               onClick={() => selectOption(option.key)}
             >
@@ -83,6 +102,7 @@ const SearchFilters2Component = props => {
               {option.label}
             </button>
           );
+
         })}
       </div>
     </div>
