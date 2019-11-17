@@ -114,9 +114,6 @@ const SearchFiltersComponent = props => {
     : null;
 
 
-  const initialDateRange = dateRangeFilter
-    ? initialDateRangeValue(urlQueryParams, dateRangeFilter.paramName)
-    : null;
 
   const initialKeyword = keywordFilter
     ? initialValue(urlQueryParams, keywordFilter.paramName)
@@ -157,19 +154,7 @@ const SearchFiltersComponent = props => {
     history.push(createResourceLocatorString('SearchPage', routeConfiguration(), {}, queryParams));
   };
 
-  const handleDateRange = (urlParam, dateRange) => {
-    const hasDates = dateRange && dateRange.dates;
-    const { startDate, endDate } = hasDates ? dateRange.dates : {};
 
-    const start = startDate ? stringifyDateToISO8601(startDate) : null;
-    const end = endDate ? stringifyDateToISO8601(endDate) : null;
-
-    const queryParams =
-      start != null && end != null
-        ? { ...urlQueryParams, [urlParam]: `${start},${end}` }
-        : omit(urlQueryParams, urlParam);
-    history.push(createResourceLocatorString('SearchPage', routeConfiguration(), {}, queryParams));
-  };
 
   const handleKeyword = (urlParam, values) => {
     const queryParams = values
@@ -181,15 +166,6 @@ const SearchFiltersComponent = props => {
 
 
 
-  const handleFollowers = (urlParam, range) => {
-    const { minFollwers, maxFollowers } = range || {};
-    const queryParams =
-      minFollwers != null && maxFollowers != null
-        ? { ...urlQueryParams, [urlParam]: `${minFollwers},${maxFollowers}` }
-        : omit(urlQueryParams, urlParam);
-
-    history.push(createResourceLocatorString('SearchPage', routeConfiguration(), {}, queryParams));
-  };
 
 
   // const followersFilterElement=(
