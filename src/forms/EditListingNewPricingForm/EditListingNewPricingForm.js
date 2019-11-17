@@ -37,7 +37,8 @@ export const EditListingPricingFormComponent = props => (
         values,
         add,
         remove,
-        directPriceInputArray
+        directPriceInputArray,
+        addOther
       } = fieldRenderProps;
 
       const { direct_pricing } = values;
@@ -62,7 +63,7 @@ export const EditListingPricingFormComponent = props => (
       const priceRequired = validators.required(
         intl.formatMessage({
           id: 'EditListingPricingForm.priceRequired',
-        })
+        }),
       );
       const minPrice = new Money(config.listingMinimumPriceSubUnits, config.currency);
       const minPriceRequired = validators.moneySubUnitAmountAtLeast(
@@ -72,9 +73,9 @@ export const EditListingPricingFormComponent = props => (
           },
           {
             minPrice: formatMoney(intl, minPrice),
-          }
+          },
         ),
-        config.listingMinimumPriceSubUnits
+        config.listingMinimumPriceSubUnits,
       );
       const priceValidators = config.listingMinimumPriceSubUnits
         ? validators.composeValidators(priceRequired, minPriceRequired)
@@ -87,101 +88,100 @@ export const EditListingPricingFormComponent = props => (
       const { updateListingError, showListingsError } = fetchErrors || {};
 
 
-
-      const element = (index) =>{
-        let str = 'price';
-        let promotionType = 'pro_price';
-        str = str.concat(index);
-        promotionType = promotionType.concat(index);
-
-        console.log('ptypeee',promotionType)
-        return(
-
-        <div>
-
-          <FieldSelect
-            id={promotionType}
-            name={promotionType}
-
-            className={css.selectCountry}
-            label='Select promotion type'
-          >
-            <option value="Brand">
-              Brand Sponsorship
-            </option>
-            <option value="IG Story">
-              IG Story Promo
-            </option>
-            <option value="IG Post">
-              IG Post Promo
-            </option>
-            <option value="Twitter">
-              Twitter Promo
-            </option>
-            <option value="YT">
-              YT Promo
-            </option>
-            <option value="Others">
-              Others
-            </option>
-          </FieldSelect>
-
-          <OnChange name={promotionType}>
-
-            {(value, previous) => {
+      const element = (item,key) => {
 
 
-            }
+        console.log('ptypeee', item);
+        return (
 
-            }
-          </OnChange>
+          <div>
+
+            <FieldSelect
+              id={item.promotionType}
+              name={item.promotionType}
+
+              className={css.selectCountry}
+              label='Select promotion type'
+            >
+              <option value="Brand">
+                Brand Sponsorship
+              </option>
+              <option value="IG Story">
+                IG Story Promo
+              </option>
+              <option value="IG Post">
+                IG Post Promo
+              </option>
+              <option value="Twitter">
+                Twitter Promo
+              </option>
+              <option value="YT">
+                YT Promo
+              </option>
+              <option value="Others">
+                Others
+              </option>
+            </FieldSelect>
+
+            <OnChange name={item.promotionType}>
+
+              {(value, previous) => {
+
+                if (value === 'Others') {
+                  console.log('samee samee');
+                  {addOther(key,true)}
+                } else {
+                  {addOther(key,false)}
+                }
+              }
+
+              }
+            </OnChange>
 
 
-          {/*{this.state.other ? <FieldTextInput*/}
-          {/*  type="new"*/}
-          {/*  id={promotionType}*/}
-          {/*  name={promotionType}*/}
-          {/*  className={css.priceInput}*/}
+            {item.other ? <FieldTextInput
+              type="new"
+              id={item.promotionType}
+              name={item.promotionType}
+              className={css.priceInput}
 
-          {/*  placeholder='enter promotion type'*/}
+              placeholder='enter promotion type'
 
-          {/*/> : null}*/}
+            /> : null}
 
-          <FieldCurrencyInput
-            type="new"
-            id={str}
-            name={str}
-            className={css.priceInput}
+            <FieldCurrencyInput
+              type="new"
+              id={item.str}
+              name={item.str}
+              className={css.priceInput}
 
-            placeholder='enter price'
-            currencyConfig={config.currencyConfig}
-            validate={priceValidators}
-          />
-        </div>)
-    };
+              placeholder='enter price'
+              currencyConfig={config.currencyConfig}
+              validate={priceValidators}
+            />
+          </div>);
+      };
 
 
       console.log(values);
-      const priceCom=(
+      const priceCom = (
 
         directPriceInputArray.map((item, key) =>
-          <div key={key}>{element(key)}</div>
+          <div key={key}>{element(item,key)}</div>,
         )
 
       );
 
 
-
-
-      const directPrice=
-        (direct_pricing && direct_pricing[0])?
+      const directPrice =
+        (direct_pricing && direct_pricing[0]) ?
           (<div>
-            {priceCom}
+              {priceCom}
 
-            <button type='button' onClick={add}>add</button>
-              <button type='button' onClick={remove} >remove</button>
+              <button type='button' onClick={add}>add</button>
+              <button type='button' onClick={remove}>remove</button>
             </div>
-          ):null;
+          ) : null;
 
 
       console.log('vaaaaa', fieldRenderProps.values);
@@ -189,18 +189,18 @@ export const EditListingPricingFormComponent = props => (
         <Form onSubmit={handleSubmit} className={classes}>
           {updateListingError ? (
             <p className={css.error}>
-              <FormattedMessage id="EditListingPricingForm.updateFailed" />
+              <FormattedMessage id="EditListingPricingForm.updateFailed"/>
             </p>
           ) : null}
           {showListingsError ? (
             <p className={css.error}>
-              <FormattedMessage id="EditListingPricingForm.showListingFailed" />
+              <FormattedMessage id="EditListingPricingForm.showListingFailed"/>
             </p>
           ) : null}
 
-         Offer listing <FieldCheckbox value='true' name="offer_listing" id="offer_listing"/>
+          Offer listing <FieldCheckbox value='true' name="offer_listing" id="offer_listing"/>
 
-         Direct pricing <FieldCheckbox value='true' name="direct_pricing" id="direct_pricing"/>
+          Direct pricing <FieldCheckbox value='true' name="direct_pricing" id="direct_pricing"/>
           {
             directPrice
           }
@@ -232,7 +232,7 @@ export const EditListingPricingFormComponent = props => (
 
 EditListingPricingFormComponent.defaultProps = {
   fetchErrors: null,
-  direct_pricing:null
+  direct_pricing: null,
 };
 
 EditListingPricingFormComponent.propTypes = {

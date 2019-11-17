@@ -399,10 +399,11 @@ class EditListingWizard extends Component {
       //   </div>
       // );
 
-      const element={
-        'str':str,
-        'promotionType':promotionType
-      }
+      const element = {
+        'str': str,
+        'promotionType': promotionType,
+        'other': null,
+      };
 
       this.setState({
         directPriceInputArray: [...this.state.directPriceInputArray, element],
@@ -415,6 +416,16 @@ class EditListingWizard extends Component {
 
     }
 
+    const addOther = (key, value) => {
+      console.log('key====', key);
+      console.log('value====', value);
+      var directPriceInputArray = [...this.state.directPriceInputArray];
+      directPriceInputArray[key].other = value;
+      this.setState({
+        directPriceInputArray: directPriceInputArray,
+      });
+
+    };
 
     const remove = () => {
       const directPriceInput = this.state.directPriceInputArray.filter(item => item !== this.state.directPriceInputArray[this.state.directPriceInputArray.length - 1]);
@@ -458,6 +469,7 @@ class EditListingWizard extends Component {
                 remove={remove}
                 directPriceInputArray={this.state.directPriceInputArray}
                 other={this.state.other}
+                addOther={addOther}
               />
             );
           })}

@@ -28,7 +28,8 @@ const EditListingNewPricingPanel = props => {
     errors,
     add,
     remove,
-    directPriceInputArray
+    directPriceInputArray,
+    addOther
   } = props;
 
   const classes = classNames(rootClassName || css.root, className);
@@ -137,6 +138,7 @@ const addToArray=(values)=> {
       directPriceInputArray={directPriceInputArray}
       className={css.form}
       initialValues={{ price }}
+      addOther={addOther}
       onSubmit={values=>{
         delete values.price;
 

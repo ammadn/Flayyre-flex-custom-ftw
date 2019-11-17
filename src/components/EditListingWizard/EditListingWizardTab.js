@@ -103,7 +103,8 @@ const EditListingWizardTab = props => {
     Other,
     add,
     remove,
-    directPriceInputArray
+    directPriceInputArray,
+    addOther
   } = props;
 
   const { type } = params;
@@ -207,6 +208,7 @@ const EditListingWizardTab = props => {
           {...panelProps(NEW_PRICING)}
           submitButtonText={intl.formatMessage({ id: submitButtonTranslationKey })}
           add={add}
+          addOther={addOther}
           remove={remove}
           directPriceInputArray={directPriceInputArray}
           onSubmit={values => {
