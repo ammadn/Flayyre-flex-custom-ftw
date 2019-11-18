@@ -44,7 +44,6 @@ export const EditListingFollowersFormComponent = props => (
       ) : null;
 
 
-
       const classes = classNames(css.root, className);
       const submitReady = updated && pristine;
       const submitInProgress = updateInProgress;
@@ -53,76 +52,93 @@ export const EditListingFollowersFormComponent = props => (
       return (
         <Form className={classes} onSubmit={handleSubmit}>
           {errorMessage}
-          followers
-          <FieldCheckboxForFollowers com='followers' change={changeState} value="Followers" name='followers' id='followers'/>
 
-          {followers ?
-            <div>
-              Fb Followers
+
+          <div>
+            <div className={css.Follower}>
               <FieldCheckboxForFollowers com='Fb' change={changeState} value="boxFb" name='boxFb' id='boxFb'/>
+              <label>Fb Followers</label>
+            </div>
 
-
-              {Fb ?
-                <FieldTextInput
-                  id="Fb"
-                  name="Fb"
-                  className={css.title}
-                  type="Fb"
-                  label='Fb'
-                  placeholder='Fb'
-                  maxLength='55'
-                  autoFocus
-                  disabled={submitDisabled}
-                />:null}
-              IG followers
-              <FieldCheckboxForFollowers com='IG' change={changeState} value="boxIG" name='boxIG' id='boxIG'/>
-
-              {IG ?
-            < FieldTextInput
-            id = "IG"
-            name="IG"
-            className={css.title}
-            type="IG"
-            label='IG'
-            placeholder='IG'
-            maxLength='55'
-            autoFocus
-            disabled={submitDisabled}
-            />:null}
-              Twitter Followers
-              <FieldCheckboxForFollowers com='Twitter' change={changeState} value="boxTwitter" name='boxTwitter' id='boxTwitter'/>
-
-
-              {Twitter ?
             <FieldTextInput
-            id="Twitter"
-            name="Twitter"
-            className={css.title}
-            type="Twitter"
-            label='Twitter'
-            placeholder='Twitter'
-            maxLength='55'
-            autoFocus
-            disabled={submitDisabled}
-            />:null}
-              Other
-              <FieldCheckboxForFollowers com='Other' change={changeState} value="boxOther" name='boxOther' id='boxOther'/>
+              id="Fb"
+              name="Fb"
+              className={css.title}
+              type="Fb"
 
-              {Other ?
+              placeholder=''
+              maxLength='55'
+              autoFocus
+              disabled={submitDisabled || !Fb}
+            />
+
+
+            <div className={css.Follower}>
+              <FieldCheckboxForFollowers
+                com='IG'
+                change={changeState}
+                value="boxIG"
+                name='boxIG'
+                id='boxIG'/>
+              <label>IG followers</label>
+            </div>
+
+
+            < FieldTextInput
+              id="IG"
+              name="IG"
+              className={css.title}
+              type="IG"
+              placeholder=''
+              maxLength='55'
+              autoFocus
+              disabled={submitDisabled || !IG}
+            />
+
+
+            <div className={css.Follower}>
+              <FieldCheckboxForFollowers
+                com='Twitter'
+                change={changeState}
+                value="boxTwitter"
+                name='boxTwitter'
+                id='boxTwitter'/>
+              <label>Twitter Followers</label>
+            </div>
+
+
+            <FieldTextInput
+              id="Twitter"
+              name="Twitter"
+              className={css.title}
+              type="Twitter"
+
+              placeholder=''
+              maxLength='55'
+              autoFocus
+              disabled={submitDisabled || !Twitter}
+            />
+
+            <div className={css.Follower_types}>
+              <div className={css.Follower}>
+                <FieldCheckboxForFollowers com='Other' change={changeState} value="boxOther" name='boxOther'
+                                           id='boxOther'/>
+                <label>Other</label>
+              </div>
+
 
               <FieldTextInput
                 id="Other"
                 name="Other"
                 className={css.title}
                 type="Other"
-                label='Other'
-                placeholder='Other'
+                placeholder=''
                 maxLength='55'
                 autoFocus
-                disabled={submitDisabled}
-              />:null}
-
-            </div> :null}
+                disabled={submitDisabled || !Other}
+              />
+            </div>
+          </div>
 
           <Button
             className={css.submitButton}
