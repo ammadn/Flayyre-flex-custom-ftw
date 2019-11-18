@@ -15,7 +15,7 @@ import {
   NamedLink,
 } from '../../components';
 import { TopbarSearchForm } from '../../forms';
-
+import LogoImg from './../../assets/FlayyreNewLogo2[368].png';
 import css from './TopbarDesktop.css';
 
 const TopbarDesktop = props => {
@@ -156,13 +156,8 @@ const TopbarDesktop = props => {
   );
   return (
     <nav className={classes}>
-      <NamedLink className={css.logoLink} name="LandingPage">
-        <h3>your logo here</h3>
-        {/*<Logo*/}
-        {/*  format="desktop"*/}
-        {/*  className={css.logo}*/}
-        {/*  alt={intl.formatMessage({ id: 'TopbarDesktop.logo' })}*/}
-        {/*/>*/}
+      <NamedLink  className={css.logoLink} name="LandingPage">
+        <img  className={css.logoFlayyre}  src={LogoImg}/>
       </NamedLink>
       {search}
 

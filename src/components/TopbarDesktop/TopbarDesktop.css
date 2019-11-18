@@ -62,14 +62,15 @@
 
 /* logo */
 .logoLink {
-  @apply --TopbarDesktop_linkHover;
-  flex-shrink: 0;
-  padding: 21px 24px 21px 24px;
-  height: 100%;
 
-  @media (--viewportLarge) {
-    padding: 21px 36px 21px 36px;
-  }
+  flex-shrink: 0;
+  height: 100%;
+padding-top: 5px;
+
+}
+
+.logoFlayyre {
+  height: 100%;
 }
 
 .logo {
