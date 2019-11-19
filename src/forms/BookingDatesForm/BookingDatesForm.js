@@ -13,6 +13,7 @@ import { FieldDateRangeInput, Form, PrimaryButton } from '../../components';
 import EstimatedBreakdownMaybe from './EstimatedBreakdownMaybe';
 
 import css from './BookingDatesForm.css';
+import { formatCurrencyMajorUnit, formatMoney } from '../../util/currency';
 
 const identity = v => v;
 
@@ -36,12 +37,12 @@ export class BookingDatesFormComponent extends Component {
   // default handleSubmit function.
   handleFormSubmit(e) {
 
-      this.props.onSubmit({
-        "bookingDates": {
-          "startDate": "3019-10-07T06:30:00.000Z",
-          "endDate": "3019-10-08T06:30:00.000Z"
-        }
-      });
+    this.props.onSubmit({
+      'bookingDates': {
+        'startDate': '3019-10-07T06:30:00.000Z',
+        'endDate': '3019-10-08T06:30:00.000Z',
+      },
+    });
 
   }
 
@@ -135,47 +136,92 @@ export class BookingDatesFormComponent extends Component {
               <EstimatedBreakdownMaybe bookingData={bookingData}/>
             </div>
           ) : null;
-
+          let total;
           const findTotal = () => {
-            let total = 0;
+            total = 0;
 
-            if(promotions.type==='direct') {
+            if (promotions.type === 'direct') {
               Object.keys(promotions.values).map(function(key) {
                 if (promotions.values[key].length != 0 && publicData.values[promotions.values[key]]) {
                   total = total + parseFloat(publicData.values[promotions.values[key]][1]);
                 }
               });
               return total;
-            }else if(promotions.type==='offer'){
+            } else if (promotions.type === 'offer') {
+              total=promotions.values;
               return promotions.values;
             }
           };
 
-          const newbookingInfo = promotions && publicData && promotions.type==='direct'? (
+          const findComition = () => {
+            if (total > 0) {
+              return total * 0.05;
+            }else{
+              return null
+            }
+
+          };
+
+          const newbookingInfo = promotions && publicData && promotions.type === 'direct' ? (
             <div className={css.priceBreakdownContainer}>
               <h3 className={css.priceBreakdownTitle}>
                 <FormattedMessage id="BookingDatesForm.priceBreakdownTitle"/>
               </h3>
-              {
-                Object.keys(promotions.values).map(function(key) {
-                  return promotions.values[key].length != 0 && publicData.values[promotions.values[key]] ? <div>
-                    {publicData.values[promotions.values[key]][0]} promotion ${publicData.values[promotions.values[key]][1]}
-                  </div> : null;
-                })}
+              <div className={css.selectedPricelist}>
+                {
 
-              <div>total=${findTotal()}</div>
+                  Object.keys(promotions.values).map(function(key) {
+
+                    return promotions.values[key].length != 0 && publicData.values[promotions.values[key]] ?
+                      <div>
+                        <div className={css.lineItem}>
+                          <span
+                            className={css.itemLabel}> {publicData.values[promotions.values[key]][0]} promotion </span>
+                          <span
+                            className={css.itemValue}>{formatCurrencyMajorUnit(intl, 'USD', publicData.values[promotions.values[key]][1])}</span>
+                        </div>
+
+                      </div> : null;
+                  })}
+              </div>
+              <hr className={css.totalDivider}/>
+              <div>
+                <div className={css.lineItem}>
+                  <span className={css.itemLabel}> Subtotal</span>
+                  <span className={css.itemValue}>{formatCurrencyMajorUnit(intl, 'USD', findTotal())}</span>
+                </div>
+              </div>
+
             </div>
-          ) :(promotions && publicData && promotions.type==='offer'?(
+          ) : (promotions && publicData && promotions.type === 'offer' ? (
             <div className={css.priceBreakdownContainer}>
               <h3 className={css.priceBreakdownTitle}>
                 <FormattedMessage id="BookingDatesForm.priceBreakdownTitle"/>
               </h3>
-              Total Offer is
 
-              <div>=${findTotal()}</div>
+              <div className={css.lineItem}>
+                <span className={css.itemLabel}>  Total Offer is</span>
+                <span className={css.itemValue}>{formatCurrencyMajorUnit(intl, 'USD', findTotal())}</span>
+              </div>
+
             </div>
-          ):null);
+          ) : null);
 
+          const comition=findComition()?<div className={css.lineItem}>
+            <span className={css.itemLabel}>  Flayyre fee *</span>
+            <span className={css.itemValue}>{formatCurrencyMajorUnit(intl, 'USD', findComition())}</span>
+          </div>:null
+
+          const findFinalTotal = ()=>{
+            return parseFloat(total)+parseFloat(findComition());
+          }
+          const finalTotal=findComition()?<div>
+            <hr className={css.totalDivider} />
+            <div className={css.lineItemTotal}>
+              <div className={css.totalLabel}>Total price</div>
+              <div className={css.totalPrice}>{formatCurrencyMajorUnit(intl, 'USD', findFinalTotal())}</div>
+            </div>
+          </div>:null
 
           const dateFormatOptions = {
             weekday: 'short',
@@ -201,6 +247,8 @@ export class BookingDatesFormComponent extends Component {
             <Form onSubmit={handleSubmit} className={classes}>
               {timeSlotsError}
               {newbookingInfo}
+              {comition}
+              {finalTotal}
               <p className={css.smallPrint}>
                 <FormattedMessage
                   id={

@@ -13,6 +13,30 @@
   z-index: 1;
 }
 
+.itemLabel {
+  @apply --marketplaceSmallFontStyles;
+  flex: 1;
+}
+
+.itemValue {
+  @apply --marketplaceSmallFontStyles;
+  margin: 0 0 0 10px;
+}
+
+.lineItem {
+  @apply --marketplaceH4FontStyles;
+  margin: 0;
+
+@media (--viewportMedium) {
+  padding-top: 6px;
+  padding-bottom: 2px;
+}
+
+display: flex;
+flex-direction: row;
+justify-content: space-between;
+}
+
 .priceBreakdownContainer {
   padding: 0 24px;
   margin-bottom: 40px;
@@ -84,4 +108,49 @@
     padding: 0;
     width: 100%;
   }
+}
+
+.selectedPricelist {
+
+}
+
+
+.totalDivider {
+  /* dimensions */
+  width: 100%;
+  height: 1px;
+  margin: 12px 0 5px 0;
+
+  border: none;
+  background-color: var(--matterColorNegative);
+
+@media (--viewportMedium) {
+  margin: 7px 0 0px 0;
+}
+}
+
+.lineItemTotal {
+  @apply --marketplaceH4FontStyles;
+  margin: 0;
+  padding-top: 6px;
+  padding-bottom: 6px;
+
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  justify-content: space-between;
+
+@media (--viewportMedium) {
+  padding-bottom: 2px;
+}
+}
+
+.totalLabel {
+  font-weight: var(--fontWeightNormal);
+}
+
+.totalPrice {
+  @apply --marketplaceButtonFontStyles;
+  margin: 0 0 0 10px;
+  padding-top: 0px;
 }
