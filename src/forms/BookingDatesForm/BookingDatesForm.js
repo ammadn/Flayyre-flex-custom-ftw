@@ -112,6 +112,23 @@ export class BookingDatesFormComponent extends Component {
             </p>
           ) : null;
 
+          const priceData = (price, intl) => {
+            if (price && price.currency === config.currency) {
+              const formattedPrice = formatMoney(intl, price);
+              return { formattedPrice, priceTitle: formattedPrice };
+            } else if (price) {
+              return {
+                formattedPrice: `(${price.currency})`,
+                priceTitle: `Unsupported currency (${price.currency})`,
+              };
+            }
+            return {};
+          };
+
+          const monewObj =(amoung)=>{
+
+            return {"_sdkType": "Money", "amount": amoung, "currency": "USD"}
+          }
           // This is the place to collect breakdown estimation data. See the
           // EstimatedBreakdownMaybe component to change the calculations
           // for customized payment processes.
@@ -178,7 +195,7 @@ export class BookingDatesFormComponent extends Component {
                           <span
                             className={css.itemLabel}> {publicData.values[promotions.values[key]][0]} promotion </span>
                           <span
-                            className={css.itemValue}>{formatCurrencyMajorUnit(intl, 'USD', publicData.values[promotions.values[key]][1])}</span>
+                            className={css.itemValue}>{ priceData(monewObj(publicData.values[promotions.values[key]][1]), intl).formattedPrice}</span>
                         </div>
 
                       </div> : null;
@@ -188,7 +205,7 @@ export class BookingDatesFormComponent extends Component {
               <div>
                 <div className={css.lineItem}>
                   <span className={css.itemLabel}> Subtotal</span>
-                  <span className={css.itemValue}>{formatCurrencyMajorUnit(intl, 'USD', findTotal())}</span>
+                  <span className={css.itemValue}>{priceData(monewObj(findTotal()), intl).formattedPrice }</span>
                 </div>
               </div>
 
@@ -201,7 +218,7 @@ export class BookingDatesFormComponent extends Component {
 
               <div className={css.lineItem}>
                 <span className={css.itemLabel}>  Total Offer is</span>
-                <span className={css.itemValue}>{formatCurrencyMajorUnit(intl, 'USD', findTotal())}</span>
+                <span className={css.itemValue}>{priceData(monewObj(findTotal()), intl).formattedPrice}</span>
               </div>
 
             </div>
@@ -209,7 +226,7 @@ export class BookingDatesFormComponent extends Component {
 
           const comition=findComition()?<div className={css.lineItem}>
             <span className={css.itemLabel}>  Flayyre fee *</span>
-            <span className={css.itemValue}>{formatCurrencyMajorUnit(intl, 'USD', findComition())}</span>
+            <span className={css.itemValue}>{priceData(monewObj(findComition()), intl).formattedPrice}</span>
           </div>:null
 
           const findFinalTotal = ()=>{
@@ -219,7 +236,7 @@ export class BookingDatesFormComponent extends Component {
             <hr className={css.totalDivider} />
             <div className={css.lineItemTotal}>
               <div className={css.totalLabel}>Total price</div>
-              <div className={css.totalPrice}>{formatCurrencyMajorUnit(intl, 'USD', findFinalTotal())}</div>
+              <div className={css.totalPrice}>{priceData(monewObj(findFinalTotal()), intl).formattedPrice}</div>
             </div>
           </div>:null
 
@@ -228,6 +245,8 @@ export class BookingDatesFormComponent extends Component {
             month: 'short',
             day: 'numeric',
           };
+
+
 
           const now = moment();
           const today = now.startOf('day').toDate();

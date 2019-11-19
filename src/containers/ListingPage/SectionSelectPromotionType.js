@@ -40,7 +40,7 @@ const SectionSelectPromotionType = props => (
 
       const monewObj =(amoung)=>{
 
-        return {"_sdkType": "Money", "amount": 454500, "currency": "USD"}
+        return {"_sdkType": "Money", "amount": amoung, "currency": "USD"}
       }
       let promotionTypes = props.publicData ? Object.keys(props.publicData.values).map(function(key) {
         return <div className={css.promotionGroup}>
