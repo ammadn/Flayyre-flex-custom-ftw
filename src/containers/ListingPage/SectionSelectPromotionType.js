@@ -3,8 +3,10 @@ import { shape } from 'prop-types';
 import { FieldRadioButton, Form } from '../../components';
 import { Form as FinalForm } from 'react-final-form';
 import FieldCheckboxComponent from '../../components/FieldCheckbox/FieldCheckbox';
-import css from '../../forms/PayoutDetailsForm/PayoutDetailsForm.css';
+import css from './SectionSelectPromotionType.css';
 import FieldTextInput from '../../components/FieldTextInput/FieldTextInput';
+import { formatCurrencyMajorUnit, formatMoney } from '../../util/currency';
+import { Money } from 'sharetribe-flex-sdk/src/types';
 
 
 const SectionSelectPromotionType = props => (
@@ -13,6 +15,8 @@ const SectionSelectPromotionType = props => (
     render={fieldRenderProps => {
       const {
         handleSubmit,
+        currencyConfig,
+        intl,
       } = fieldRenderProps;
 
       // console.log('pub', props.publicData);
@@ -21,21 +25,29 @@ const SectionSelectPromotionType = props => (
 
 
       let promotionTypes = props.publicData ? Object.keys(props.publicData.values).map(function(key) {
-        return <div><FieldCheckboxComponent key={key} value={key} name={props.publicData.values[key][0]}
-                                            id={props.publicData.values[key][0]}/>
-          {props.publicData.values[key][0]} promotion ${props.publicData.values[key][1]}
+        return <div className={css.promotionGroup}>
+          <div className={css.promotionSubGrop}>
+            <FieldCheckboxComponent
+              key={key} value={key}
+              name={props.publicData.values[key][0]}
+              id={props.publicData.values[key][0]}/>
+
+            {props.publicData.values[key][0]} promotion
+          </div>
+
+          <div className={css.promotionPrice}> {formatCurrencyMajorUnit(intl,'USD' ,props.publicData.values[key][1] )}</div>
         </div>;
       }) : null;
 
-      const mustBeNumber =value => (isNaN(value) ? 'Must be a number' : undefined);
+      const mustBeNumber = value => (isNaN(value) ? 'Must be a number' : undefined);
       const minValue = min => value =>
-        isNaN(value) || value >= min ? undefined : `Should be greater than ${min}`
+        isNaN(value) || value >= min ? undefined : `Should be greater than ${min}`;
       const composeValidators = (...validators) => value =>
-        validators.reduce((error, validator) => error || validator(value), undefined)
+        validators.reduce((error, validator) => error || validator(value), undefined);
 
       return (
 
-        <div>
+        <div className={css.sectionPromotionPrice}>
 
           <Form onChange={value => {
             console.log('render props', fieldRenderProps.values);
@@ -65,14 +77,14 @@ const SectionSelectPromotionType = props => (
             {
               (!fieldRenderProps.values.paymentType || fieldRenderProps.values.paymentType === 'direct') && props.publicData && props.publicData.pricetype.direct_pricing ?
 
-                (promotionTypes) :(
+                (promotionTypes) : (
 
-              (!fieldRenderProps.values.paymentType || fieldRenderProps.values.paymentType === 'offer') && props.publicData && props.publicData.pricetype.offer_listing ? (
-                <div>
-                  Enter an offer
-                  <FieldTextInput  validate={composeValidators( mustBeNumber, minValue(5))} name="offer" id="offer"/>
-                </div>
-              ) : null)
+                  (!fieldRenderProps.values.paymentType || fieldRenderProps.values.paymentType === 'offer') && props.publicData && props.publicData.pricetype.offer_listing ? (
+                    <div>
+                      Enter an offer
+                      <FieldTextInput validate={composeValidators(mustBeNumber, minValue(5))} name="offer" id="offer"/>
+                    </div>
+                  ) : null)
             }
 
 

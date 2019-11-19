@@ -463,7 +463,7 @@ export class ListingPageComponent extends Component {
                     showContactUser={showContactUser}
                     onContactUser={this.onContactUser}
                   />
-                  <SectionSelectPromotionType onSubmit={handleSubmitBooking} publicData={publicData}/>
+                  <SectionSelectPromotionType intl={intl} onSubmit={handleSubmitBooking} publicData={publicData}/>
 
                   <SectionDescriptionMaybe description={description}/>
 
