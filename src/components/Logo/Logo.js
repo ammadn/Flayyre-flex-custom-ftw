@@ -4,7 +4,7 @@ import classNames from 'classnames';
 
 import config from '../../config';
 import IconLogo from './IconLogo';
-import LogoImage from './FlayyreLogoWordS.png';
+import LogoImage from './../../assets/FlayyreNewLogo2[368].png';
 import css from './Logo.css';
 
 const Logo = props => {
