@@ -7,6 +7,7 @@ import css from './SectionSelectPromotionType.css';
 import FieldTextInput from '../../components/FieldTextInput/FieldTextInput';
 import { formatCurrencyMajorUnit, formatMoney } from '../../util/currency';
 import { Money } from 'sharetribe-flex-sdk/src/types';
+import config from '../../config';
 
 
 const SectionSelectPromotionType = props => (
@@ -23,7 +24,24 @@ const SectionSelectPromotionType = props => (
 
       console.log('pub data', props.publicData);
 
+      const priceData = (price, intl) => {
+        if (price && price.currency === config.currency) {
+          const formattedPrice = formatMoney(intl, price);
+          return { formattedPrice, priceTitle: formattedPrice };
+        } else if (price) {
+          return {
+            formattedPrice: `(${price.currency})`,
+            priceTitle: `Unsupported currency (${price.currency})`,
+          };
+        }
+        return {};
+      };
 
+
+      const monewObj =(amoung)=>{
+
+        return {"_sdkType": "Money", "amount": 454500, "currency": "USD"}
+      }
       let promotionTypes = props.publicData ? Object.keys(props.publicData.values).map(function(key) {
         return <div className={css.promotionGroup}>
           <div className={css.promotionSubGrop}>
@@ -35,7 +53,7 @@ const SectionSelectPromotionType = props => (
             {props.publicData.values[key][0]} promotion
           </div>
 
-          <div className={css.promotionPrice}> {formatCurrencyMajorUnit(intl,'USD' ,props.publicData.values[key][1] )}</div>
+          <div className={css.promotionPrice}> {priceData(monewObj(props.publicData.values[key][1]), intl).formattedPrice}</div>
         </div>;
       }) : null;
 

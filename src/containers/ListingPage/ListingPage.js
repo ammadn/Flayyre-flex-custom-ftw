@@ -336,6 +336,7 @@ export class ListingPageComponent extends Component {
 
     const { formattedPrice, priceTitle } = priceData(price, intl);
 
+    console.log('price tupe', price);
     const handleBookingSubmit = values => {
       const isCurrentlyClosed = currentListing.attributes.state === LISTING_STATE_CLOSED;
       if (isOwnListing || isCurrentlyClosed) {
