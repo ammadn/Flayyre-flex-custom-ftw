@@ -7,6 +7,7 @@ import ImgFaceBook from '../../assets/facebook.png';
 import ImgTwiter from '../../assets/twitter.png';
 import ImgInstar from '../../assets/instagram.png';
 import Other from '../../assets/Other.png';
+import ImgYouTube from '../../assets/youtube.png';
 import config from '../../config';
 
 const SectionFollowers = props => {
@@ -43,7 +44,7 @@ const SectionFollowers = props => {
             <label>{publicData.IGEng}</label>
           </div>
           <div className={css.follower}>
-            <img className={css.img__follower} src={ImgInstar}  />
+            <img className={css.img__follower} src={ImgYouTube}  />
             <label>YouTube</label>
             <label>{publicData.YouTube}</label>
             <label>{publicData.YouTubeName}</label>
