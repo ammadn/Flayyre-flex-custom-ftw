@@ -88,7 +88,7 @@ export const EditListingFollowersFormComponent = props => (
                 placeholder='Instagram Username'
                 maxLength='55'
                 autoFocus
-                disabled={submitDisabled || !Fb}
+                disabled={submitDisabled || !IG}
               />
               <FieldTextInput
                 id="IGEng"
@@ -99,7 +99,7 @@ export const EditListingFollowersFormComponent = props => (
                 placeholder='Instagram Engagement'
                 maxLength='55'
                 autoFocus
-                disabled={submitDisabled || !Fb}
+                disabled={submitDisabled || !IG}
               />
 
 
@@ -137,7 +137,7 @@ export const EditListingFollowersFormComponent = props => (
                 placeholder='Twitter Username'
                 maxLength='55'
                 autoFocus
-                disabled={submitDisabled || !Fb}
+                disabled={submitDisabled || !Twitter}
               />
               <FieldTextInput
                 id="TwitterEng"
@@ -148,7 +148,7 @@ export const EditListingFollowersFormComponent = props => (
                 placeholder='Twitter Engagement'
                 maxLength='55'
                 autoFocus
-                disabled={submitDisabled || !Fb}
+                disabled={submitDisabled || !Twitter}
               />
 
             </div>
@@ -228,7 +228,7 @@ export const EditListingFollowersFormComponent = props => (
                   placeholder='Other Username'
                   maxLength='55'
                   autoFocus
-                  disabled={submitDisabled || !Fb}
+                  disabled={submitDisabled || !Other}
                 />
                 <FieldTextInput
                   id="OtherEng"
@@ -239,7 +239,7 @@ export const EditListingFollowersFormComponent = props => (
                   placeholder='Other Engagement'
                   maxLength='55'
                   autoFocus
-                  disabled={submitDisabled || !Fb}
+                  disabled={submitDisabled || !Other}
                 />
 
               </div>
