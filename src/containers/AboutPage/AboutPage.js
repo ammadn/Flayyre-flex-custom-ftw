@@ -35,34 +35,28 @@ const AboutPage = () => {
         </LayoutWrapperTopbar>
 
         <LayoutWrapperMain className={css.staticPageWrapper}>
-          <h1 className={css.pageTitle}>The Power Of Influence.</h1>
+          <h1 className={css.pageTitle}>ABOUT US</h1>
           <img className={css.coverImage} src={image} alt="My first ice cream." />
 
-          <div className={css.contentWrapper}>
-            <div className={css.contentSide}>
-              <p>The market is made by influencer. So why not hire one to promote your business/brand?</p>
-            </div>
-
-            <div className={css.contentMain}>
-              <h2>
-                Influencers are awesome and so is Ammad and this text body is just filler
-              </h2>
-
-              <p>
-                Influencers are cool and everyone is too
-              </p>
-
-              <h3 className={css.subtitle}>Are you a sauna owner?</h3>
-
-              <p>
-                Team Section Maybe? Also we need a fee section
-              </p>
-
-              <h3 id="contact" className={css.subtitle}>
-Flayyre is going to be the hottest startup of 2020              </h3>
-
-
-            </div>
+          <div >
+            <p>Flayyre is a P2P marketplace platform for brands to find the right creators and influencers to
+              promote their products and services.</p>
+            <p>
+            Influencer marketing has created an authentic, people-centered approach that outperforms
+            traditional advertising. This highly successful method draws traction from the digital footprints of
+            creators who’ve built credibility and a dedicated following. A recommendation or endorsement
+            from an influencer is a form of social proof, and creates instant points of entry to audiences and
+            consumers. In other words, you’re meeting the consumer where they are.
+            </p>
+            <p>
+            Flayyre’s mission is to curate talent and creative solutions that deliver outstanding campaigns
+            while also working to solve influencer monetization disparity. You’ll find the world’s biggest
+            influencers on Flayyre, as well as extraordinary talent in niche markets with audiences from
+            every walk of life. We’re dedicated to sharing diverse voices that pack a punch and creative
+            dynamite. We don’t judge or overlook creators based on the size of their audience. We search
+            for the users who have have a unique voice and the ability to generate awareness and positively
+            impact your brand.
+            </p>
           </div>
         </LayoutWrapperMain>
 
