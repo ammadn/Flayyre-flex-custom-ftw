@@ -77,14 +77,14 @@ const SectionSelectPromotionType = props => (
                   <FieldRadioButton
                     id="direct"
                     name="paymentType"
-                    label='direct payment categories'
+                    label='Choose your influencer marketing service'
                     value="direct"
                     showAsRequired={true}
                   />
                   <FieldRadioButton
                     id="offer"
                     name="paymentType"
-                    label='Offer price'
+                    label=' Put in an Offer'
                     value="offer"
                     showAsRequired={true}
                   />
