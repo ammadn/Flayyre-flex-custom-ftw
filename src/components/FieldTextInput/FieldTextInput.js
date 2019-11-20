@@ -144,7 +144,7 @@ class FieldTextInput extends Component {
   }
 
   render() {
-    return <Field component={FieldTextInputComponent} {...this.props} />;
+    return <Field  component={FieldTextInputComponent} {...this.props} />;
   }
 }
 

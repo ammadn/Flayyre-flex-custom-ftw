@@ -43,6 +43,13 @@ const SectionFollowers = props => {
             <label>{publicData.IGEng}</label>
           </div>
           <div className={css.follower}>
+            <img className={css.img__follower} src={ImgInstar}  />
+            <label>YouTube</label>
+            <label>{publicData.YouTube}</label>
+            <label>{publicData.YouTubeName}</label>
+            <label>{publicData.YouTubeEng}</label>
+          </div>
+          <div className={css.follower}>
             <img className={css.img__follower} src={Other}  />
             <label>Other</label>
             <label>{publicData.Other}</label>

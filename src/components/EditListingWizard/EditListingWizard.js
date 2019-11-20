@@ -146,6 +146,7 @@ class EditListingWizard extends Component {
       Other: false,
       directPriceInputArray: [],
       other: false,
+      YouTube:false,
     };
     this.handleCreateFlowTabScrolling = this.handleCreateFlowTabScrolling.bind(this);
     this.handlePublishListing = this.handlePublishListing.bind(this);
@@ -285,6 +286,9 @@ class EditListingWizard extends Component {
           break;
         case 'Fb':
           this.setState({ Fb: !state });
+          break;
+        case 'YouTube':
+          this.setState({ YouTube: !state });
           break;
         case 'followers':
           this.setState({ followers: !this.state.followers });
@@ -448,6 +452,7 @@ class EditListingWizard extends Component {
                 Fb={this.state.Fb}
                 Twitter={this.state.Twitter}
                 Other={this.state.Other}
+                YouTube={this.state.YouTube}
                 changeState={changeState}
                 {...rest}
                 key={tab}

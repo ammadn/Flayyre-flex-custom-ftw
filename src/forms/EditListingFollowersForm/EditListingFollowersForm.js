@@ -33,6 +33,7 @@ export const EditListingFollowersFormComponent = props => (
         Fb,
         Twitter,
         Other,
+        YouTube
 
       } = fieldRenderProps;
 
@@ -199,6 +200,52 @@ export const EditListingFollowersFormComponent = props => (
               />
 
             </div>
+
+            <div className={css.Follower_types}>
+              <div className={css.Follower}>
+                <FieldCheckboxForFollowers com='YouTube' change={changeState} value="boxYouTube" name='boxYouTube'
+                                           id='boxYouTube'/>
+                <label>YouTube</label>
+              </div>
+
+              <div className={css.Follower__details}>
+                <FieldTextInput
+                  id="YouTube"
+                  name="YouTube"
+                  className={css.title}
+                  type="YouTube"
+                  placeholder='YouTube Followers'
+                  maxLength='55'
+                  autoFocus
+                  disabled={submitDisabled || !YouTube}
+                />
+
+                <FieldTextInput
+                  id="YouTubeName"
+                  name="YouTubeName"
+                  className={css.title}
+                  type="YouTubeName"
+
+                  placeholder='YouTube Username'
+                  maxLength='55'
+                  autoFocus
+                  disabled={submitDisabled || !YouTube}
+                />
+                <FieldTextInput
+                  id="YouTubeEng"
+                  name="YouTubeEng"
+                  className={css.title}
+                  type="YouTubeEng"
+
+                  placeholder='YouTube Engagement'
+                  maxLength='55'
+                  autoFocus
+                  disabled={submitDisabled || !YouTube}
+                />
+
+              </div>
+            </div>
+
 
             <div className={css.Follower_types}>
               <div className={css.Follower}>
