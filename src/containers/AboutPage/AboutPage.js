@@ -40,7 +40,7 @@ const AboutPage = () => {
 
           <div className={css.contentWrapper}>
             <div className={css.contentSide}>
-              <p>The market is made by infuencers. So why not hire one to promote your business/brand?</p>
+              <p>The market is made by influencer. So why not hire one to promote your business/brand?</p>
             </div>
 
             <div className={css.contentMain}>
