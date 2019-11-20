@@ -54,7 +54,12 @@ const EditListingFollowersPanel = props => {
         className={css.form}
         initialValues={{ capacity: publicData.capacity }}
         onSubmit={values => {
-          const { capacity,IG,Twitter,Other,Fb,boxOther,boxTwitter,boxIG,boxFb,maxFollowers } = values;
+          const { capacity,IG,Twitter,Other,Fb,boxOther,boxTwitter,boxIG,boxFb,maxFollowers
+            ,IGName,IGEng
+            ,TwitterName,TwitterEng
+            ,FbName,FbEng
+            ,OtherName,OtherEng
+          } = values;
           let max=0;
           if(IG>max){
           max=IG;
@@ -82,7 +87,10 @@ const EditListingFollowersPanel = props => {
               boxIG,
               Other,
               Twitter,
-              Fb
+              Fb,IGName,IGEng
+              ,TwitterName,TwitterEng
+              ,FbName,FbEng
+              ,OtherName,OtherEng
             },
           };
           onSubmit(updateValues);
