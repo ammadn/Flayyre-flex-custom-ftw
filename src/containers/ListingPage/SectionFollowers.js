@@ -12,9 +12,6 @@ import config from '../../config';
 const SectionFollowers = props => {
   const { publicData } = props;
 
-
-
-
   return (
 
     <div className={css.sectionCapacity}>
@@ -28,21 +25,29 @@ const SectionFollowers = props => {
             <img className={css.img__follower} src={ImgFaceBook}  />
             <label>Facebook</label>
             <label>{publicData.Fb}</label>
+            <label>{publicData.FbName}</label>
+            <label>{publicData.FbEng}</label>
           </div>
           <div className={css.follower}>
             <img className={css.img__follower} src={ImgTwiter}  />
             <label>Twitter</label>
             <label>{publicData.Twitter}</label>
+            <label>{publicData.TwitterName}</label>
+            <label>{publicData.TwitterEng}</label>
           </div>
           <div className={css.follower}>
             <img className={css.img__follower} src={ImgInstar}  />
             <label>Instagram</label>
             <label>{publicData.IG}</label>
+            <label>{publicData.IGName}</label>
+            <label>{publicData.IGEng}</label>
           </div>
           <div className={css.follower}>
             <img className={css.img__follower} src={Other}  />
             <label>Other</label>
             <label>{publicData.Other}</label>
+            <label>{publicData.OtherName}</label>
+            <label>{publicData.OtherEng}</label>
           </div>
         </div>:null
       }
