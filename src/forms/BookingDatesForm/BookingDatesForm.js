@@ -155,6 +155,9 @@ export class BookingDatesFormComponent extends Component {
           ) : null;
           let total;
           const findTotal = () => {
+
+            console.log('promotion',promotions);
+            console.log('public data',publicData)
             total = 0;
 
             if (promotions.type === 'direct') {
@@ -165,8 +168,12 @@ export class BookingDatesFormComponent extends Component {
               });
               return total;
             } else if (promotions.type === 'offer') {
-              total=promotions.values;
-              return promotions.values;
+
+              Object.keys(promotions.values).map(function(key) {
+                total = total + parseFloat(promotions.values[key]);
+              })
+
+              return total;
             }
           };
 
@@ -215,10 +222,29 @@ export class BookingDatesFormComponent extends Component {
               <h3 className={css.priceBreakdownTitle}>
                 <FormattedMessage id="BookingDatesForm.priceBreakdownTitle"/>
               </h3>
+              <div className={css.selectedPricelist}>
+                {
 
-              <div className={css.lineItem}>
-                <span className={css.itemLabel}>  Total Offer is</span>
-                <span className={css.itemValue}>{priceData(monewObj(findTotal()), intl).formattedPrice}</span>
+                  Object.keys(promotions.values).map(function(key) {
+
+                    return promotions.values[key].length != 0 ?
+                      <div>
+                        <div className={css.lineItem}>
+                          <span
+                            className={css.itemLabel}> {key} promotion offer </span>
+                          <span
+                            className={css.itemValue}>{ priceData(monewObj(promotions.values[key]), intl).formattedPrice}</span>
+                        </div>
+
+                      </div> : null;
+                  })}
+              </div>
+              <hr className={css.totalDivider}/>
+              <div>
+                <div className={css.lineItem}>
+                  <span className={css.itemLabel}> Subtotal</span>
+                  <span className={css.itemValue}>{priceData(monewObj(findTotal()), intl).formattedPrice }</span>
+                </div>
               </div>
 
             </div>

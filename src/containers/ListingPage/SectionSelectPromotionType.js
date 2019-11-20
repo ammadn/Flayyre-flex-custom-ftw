@@ -57,7 +57,9 @@ const SectionSelectPromotionType = props => (
         </div>;
       }) : null;
 
-      const mustBeNumber = value => (isNaN(value) ? 'Must be a number' : undefined);
+      const mustBeNumber = (value) => {
+        console.log('valllll',value);
+       return  (typeof value !== 'undefined'&&isNaN(value)) ? 'Must be a number' : undefined};
       const minValue = min => value =>
         isNaN(value) || value >= min ? undefined : `Should be greater than ${min}`;
       const composeValidators = (...validators) => value =>
@@ -100,7 +102,13 @@ const SectionSelectPromotionType = props => (
                   (!fieldRenderProps.values.paymentType || fieldRenderProps.values.paymentType === 'offer') && props.publicData && props.publicData.pricetype.offer_listing ? (
                     <div>
                       Enter an offer
-                      <FieldTextInput validate={composeValidators(mustBeNumber, minValue(5))} name="offer" id="offer"/>
+                      <FieldTextInput label="Brand Sponsorship" validate={composeValidators(mustBeNumber, minValue(5))} name="Brand Sponsorship" id="offer"/>
+                      <FieldTextInput label="IG Post Promo" validate={composeValidators(mustBeNumber, minValue(5))} name="IG Post Promo" id="offerIGPost"/>
+                      <FieldTextInput label="IG Story Promo" validate={composeValidators(mustBeNumber, minValue(5))} name="IG Story Promo" id="offerIGStory"/>
+                      <FieldTextInput label="Twitter Promo" validate={composeValidators(mustBeNumber, minValue(5))} name="Twitter Promo" id="offerTwitter"/>
+                      <FieldTextInput label="FB Promo" validate={composeValidators(mustBeNumber, minValue(5))} name="FB Promo" id="offerFB"/>
+                      <FieldTextInput label="Youtube Promo" validate={composeValidators(mustBeNumber, minValue(5))} name="Youtube Promo" id="offerYoutube"/>
+                      <FieldTextInput label="Others " validate={composeValidators(mustBeNumber, minValue(5))} name="Others" id="offerOthers"/>
                     </div>
                   ) : null)
             }

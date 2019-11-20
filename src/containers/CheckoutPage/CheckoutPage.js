@@ -159,12 +159,19 @@ export class CheckoutPageComponent extends Component {
 
       }
     })}else{
-      arr.push({
-          code: 'line-item/offer',
-          unitPrice: new Money(parseFloat(bookingData.values), currency),
-          quantity,
+
+      Object.keys(bookingData.values).map(function(key) {
+
+        if(bookingData.values[key].length != 0 ) {
+          arr.push({
+            code: 'line-item/'+key,
+            unitPrice: new Money(parseFloat(bookingData.values[key]), currency),
+            quantity,
+          })
+
         }
-      )
+      })
+
     }
 
 
