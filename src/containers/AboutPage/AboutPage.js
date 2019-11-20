@@ -39,16 +39,16 @@ const AboutPage = () => {
           <img className={css.coverImage} src={image} alt="My first ice cream." />
 
           <div >
-            <p>Flayyre is a P2P marketplace platform for brands to find the right creators and influencers to
+            <p className={css.paragraphJust}>Flayyre is a P2P marketplace platform for brands to find the right creators and influencers to
               promote their products and services.</p>
-            <p>
+            <p className={css.paragraphJust}>
             Influencer marketing has created an authentic, people-centered approach that outperforms
             traditional advertising. This highly successful method draws traction from the digital footprints of
             creators who’ve built credibility and a dedicated following. A recommendation or endorsement
             from an influencer is a form of social proof, and creates instant points of entry to audiences and
             consumers. In other words, you’re meeting the consumer where they are.
             </p>
-            <p>
+            <p className={css.paragraphJust}>
             Flayyre’s mission is to curate talent and creative solutions that deliver outstanding campaigns
             while also working to solve influencer monetization disparity. You’ll find the world’s biggest
             influencers on Flayyre, as well as extraordinary talent in niche markets with audiences from
