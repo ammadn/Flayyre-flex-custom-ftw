@@ -55,22 +55,6 @@ export const EditListingFollowersFormComponent = props => (
 
 
           <div>
-            <div className={css.Follower}>
-              <FieldCheckboxForFollowers com='Fb' change={changeState} value="boxFb" name='boxFb' id='boxFb'/>
-              <label>Fb Followers</label>
-            </div>
-
-            <FieldTextInput
-              id="Fb"
-              name="Fb"
-              className={css.title}
-              type="Fb"
-
-              placeholder=''
-              maxLength='55'
-              autoFocus
-              disabled={submitDisabled || !Fb}
-            />
 
 
             <div className={css.Follower}>
@@ -80,21 +64,46 @@ export const EditListingFollowersFormComponent = props => (
                 value="boxIG"
                 name='boxIG'
                 id='boxIG'/>
-              <label>IG followers</label>
+              <label>Instagram followers</label>
             </div>
 
+            <div className={css.Follower__details}>
+              < FieldTextInput
+                id="IG"
+                name="IG"
+                className={css.title}
+                type="IG"
+                placeholder='Instagram Followers'
+                maxLength='55'
+                autoFocus
+                disabled={submitDisabled || !IG}
+              />
 
-            < FieldTextInput
-              id="IG"
-              name="IG"
-              className={css.title}
-              type="IG"
-              placeholder=''
-              maxLength='55'
-              autoFocus
-              disabled={submitDisabled || !IG}
-            />
+              <FieldTextInput
+                id="IGName"
+                name="IGName"
+                className={css.title}
+                type="IGName"
 
+                placeholder='Instagram Username'
+                maxLength='55'
+                autoFocus
+                disabled={submitDisabled || !Fb}
+              />
+              <FieldTextInput
+                id="IGEng"
+                name="IGEng"
+                className={css.title}
+                type="IGEng"
+
+                placeholder='Instagram Engagement'
+                maxLength='55'
+                autoFocus
+                disabled={submitDisabled || !Fb}
+              />
+
+
+            </div>
 
             <div className={css.Follower}>
               <FieldCheckboxForFollowers
@@ -106,18 +115,90 @@ export const EditListingFollowersFormComponent = props => (
               <label>Twitter Followers</label>
             </div>
 
+            <div className={css.Follower__details}>
+              <FieldTextInput
+                id="Twitter"
+                name="Twitter"
+                className={css.title}
+                type="Twitter"
 
-            <FieldTextInput
-              id="Twitter"
-              name="Twitter"
-              className={css.title}
-              type="Twitter"
+                placeholder='Twitter Followers'
+                maxLength='55'
+                autoFocus
+                disabled={submitDisabled || !Twitter}
+              />
 
-              placeholder=''
-              maxLength='55'
-              autoFocus
-              disabled={submitDisabled || !Twitter}
-            />
+              <FieldTextInput
+                id="TwitterName"
+                name="TwitterName"
+                className={css.title}
+                type="TwitterName"
+
+                placeholder='Twitter Username'
+                maxLength='55'
+                autoFocus
+                disabled={submitDisabled || !Fb}
+              />
+              <FieldTextInput
+                id="TwitterEng"
+                name="TwitterEng"
+                className={css.title}
+                type="TwitterEng"
+
+                placeholder='Twitter Engagement'
+                maxLength='55'
+                autoFocus
+                disabled={submitDisabled || !Fb}
+              />
+
+            </div>
+
+            <div className={css.Follower}>
+              <FieldCheckboxForFollowers
+                com='Fb'
+                change={changeState}
+                value="boxFb"
+                name='boxFb' id='boxFb'/>
+              <label>Facebook Followers</label>
+            </div>
+
+
+            <div className={css.Follower__details}>
+              <FieldTextInput
+                id="Fb"
+                name="Fb"
+                className={css.title}
+                type="Fb"
+
+                placeholder='Facebook Followers'
+                maxLength='55'
+                autoFocus
+                disabled={submitDisabled || !Fb}
+              />
+              <FieldTextInput
+                id="FbName"
+                name="FbName"
+                className={css.title}
+                type="FbName"
+
+                placeholder='Facebook Username'
+                maxLength='55'
+                autoFocus
+                disabled={submitDisabled || !Fb}
+              />
+              <FieldTextInput
+                id="FbEng"
+                name="FbEng"
+                className={css.title}
+                type="FbEng"
+
+                placeholder='FB Engagement'
+                maxLength='55'
+                autoFocus
+                disabled={submitDisabled || !Fb}
+              />
+
+            </div>
 
             <div className={css.Follower_types}>
               <div className={css.Follower}>
@@ -126,17 +207,42 @@ export const EditListingFollowersFormComponent = props => (
                 <label>Other</label>
               </div>
 
+              <div className={css.Follower__details}>
+                <FieldTextInput
+                  id="Other"
+                  name="Other"
+                  className={css.title}
+                  type="Other"
+                  placeholder='Other Followers'
+                  maxLength='55'
+                  autoFocus
+                  disabled={submitDisabled || !Other}
+                />
 
-              <FieldTextInput
-                id="Other"
-                name="Other"
-                className={css.title}
-                type="Other"
-                placeholder=''
-                maxLength='55'
-                autoFocus
-                disabled={submitDisabled || !Other}
-              />
+                <FieldTextInput
+                  id="OtherName"
+                  name="OtherName"
+                  className={css.title}
+                  type="OtherName"
+
+                  placeholder='Other Username'
+                  maxLength='55'
+                  autoFocus
+                  disabled={submitDisabled || !Fb}
+                />
+                <FieldTextInput
+                  id="OtherEng"
+                  name="OtherEng"
+                  className={css.title}
+                  type="OtherEng"
+
+                  placeholder='Other Engagement'
+                  maxLength='55'
+                  autoFocus
+                  disabled={submitDisabled || !Fb}
+                />
+
+              </div>
             </div>
           </div>
 

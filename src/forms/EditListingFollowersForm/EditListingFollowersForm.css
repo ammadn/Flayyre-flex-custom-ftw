@@ -5,3 +5,8 @@
 .Follower_types {
   padding-bottom: 20px;
 }
+
+.Follower__details {
+  display: flex;
+  justify-content: space-between;
+}
