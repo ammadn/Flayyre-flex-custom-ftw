@@ -160,6 +160,7 @@ const PriceFilterFormComponent = props => {
                 max={max}
                 step={step}
                 handles={[minPrice, maxPrice]}
+
                 onChange={handles => {
                   form.change('minPrice', handles[0]);
                   form.change('maxPrice', handles[1]);

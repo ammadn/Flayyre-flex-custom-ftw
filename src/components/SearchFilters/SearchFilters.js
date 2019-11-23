@@ -146,7 +146,7 @@ const SearchFiltersComponent = props => {
     const { minPrice, maxPrice } = range || {};
     const queryParams =
       minPrice != null && maxPrice != null
-        ? { ...urlQueryParams, [urlParam]: `${minPrice},${maxPrice}` }
+        ?(maxPrice!=1000 ?{ ...urlQueryParams, [urlParam]: `${minPrice},${maxPrice}` }:{ ...urlQueryParams, [urlParam]: `${minPrice},${'99999999999'}` })
         : omit(urlQueryParams, urlParam);
 
     console.log('quary param',queryParams);

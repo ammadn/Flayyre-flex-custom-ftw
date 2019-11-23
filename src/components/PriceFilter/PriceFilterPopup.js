@@ -111,13 +111,20 @@ class PriceFilterPopup extends Component {
     const hasInitialValues = initialValues && hasValue(minPrice) && hasValue(maxPrice);
 
     const label = hasInitialValues
-      ? intl.formatMessage(
+      ? (maxPrice!=1000?intl.formatMessage(
           { id: 'PriceFilter.labelSelectedButton' },
           {
             minPrice: formatCurrencyMajorUnit(intl, currencyConfig.currency, minPrice),
             maxPrice: formatCurrencyMajorUnit(intl, currencyConfig.currency, maxPrice),
           }
-        )
+        ):intl.formatMessage(
+        { id: 'PriceFilter.labelSelectedButton' },
+        {
+          minPrice: formatCurrencyMajorUnit(intl, currencyConfig.currency, minPrice),
+          maxPrice: formatCurrencyMajorUnit(intl, currencyConfig.currency, maxPrice)+"+",
+        })
+
+      )
       : intl.formatMessage({ id: 'PriceFilter.label' });
 
     const labelStyles = hasInitialValues ? css.labelSelected : css.label;
