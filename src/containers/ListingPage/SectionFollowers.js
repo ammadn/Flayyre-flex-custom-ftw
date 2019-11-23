@@ -23,6 +23,13 @@ const SectionFollowers = props => {
       {publicData?
         <div className={css.follower__group}>
           <div className={css.follower}>
+            <div className={css.emptyImg} ></div>
+            <label><br/></label>
+            <label>Followers</label>
+            <label>Username</label>
+            <label>Engagement</label>
+          </div>
+          <div className={css.follower}>
             <img className={css.img__follower} src={ImgFaceBook}  />
             <label>Facebook</label>
             <label>{publicData.Fb}</label>
