@@ -129,6 +129,10 @@ export class BookingDatesFormComponent extends Component {
 
             return {"_sdkType": "Money", "amount": amoung, "currency": "USD"}
           }
+          const monewObjForOffer =(amoung)=>{
+
+            return {"_sdkType": "Money", "amount": amoung*100, "currency": "USD"}
+          }
           // This is the place to collect breakdown estimation data. See the
           // EstimatedBreakdownMaybe component to change the calculations
           // for customized payment processes.
@@ -154,9 +158,10 @@ export class BookingDatesFormComponent extends Component {
             </div>
           ) : null;
           let total;
+          console.log('promotion2',promotions);
           const findTotal = () => {
 
-            console.log('promotion',promotions);
+            console.log('promotion2',promotions);
             console.log('public data',publicData)
             total = 0;
 
@@ -226,6 +231,7 @@ export class BookingDatesFormComponent extends Component {
                 {
 
                   Object.keys(promotions.values).map(function(key) {
+                    console.log('pm values',promotions.values);
 
                     return promotions.values[key].length != 0 ?
                       <div>
@@ -233,7 +239,7 @@ export class BookingDatesFormComponent extends Component {
                           <span
                             className={css.itemLabel}> {key} promotion offer </span>
                           <span
-                            className={css.itemValue}>{ priceData(monewObj(promotions.values[key]), intl).formattedPrice}</span>
+                            className={css.itemValue}>{ priceData(monewObjForOffer(promotions.values[key]), intl).formattedPrice}</span>
                         </div>
 
                       </div> : null;

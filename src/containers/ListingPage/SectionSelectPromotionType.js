@@ -8,6 +8,7 @@ import FieldTextInput from '../../components/FieldTextInput/FieldTextInput';
 import { formatCurrencyMajorUnit, formatMoney } from '../../util/currency';
 import { Money } from 'sharetribe-flex-sdk/src/types';
 import config from '../../config';
+import FieldTextInputNew from '../../components/FieldTextInputNew/FieldTextInputNew';
 
 
 const SectionSelectPromotionType = props => (
@@ -102,13 +103,13 @@ const SectionSelectPromotionType = props => (
                   (!fieldRenderProps.values.paymentType || fieldRenderProps.values.paymentType === 'offer') && props.publicData && props.publicData.pricetype.offer_listing ? (
                     <div>
                       Enter an offer
-                      <FieldTextInput label="Brand Sponsorship" validate={composeValidators(mustBeNumber, minValue(5))} name="Brand Sponsorship" id="offer"/>
-                      <FieldTextInput label="IG Post Promo" validate={composeValidators(mustBeNumber, minValue(5))} name="IG Post Promo" id="offerIGPost"/>
-                      <FieldTextInput label="IG Story Promo" validate={composeValidators(mustBeNumber, minValue(5))} name="IG Story Promo" id="offerIGStory"/>
-                      <FieldTextInput label="Twitter Promo" validate={composeValidators(mustBeNumber, minValue(5))} name="Twitter Promo" id="offerTwitter"/>
-                      <FieldTextInput label="FB Promo" validate={composeValidators(mustBeNumber, minValue(5))} name="FB Promo" id="offerFB"/>
-                      <FieldTextInput label="Youtube Promo" validate={composeValidators(mustBeNumber, minValue(5))} name="Youtube Promo" id="offerYoutube"/>
-                      <FieldTextInput label="Others " validate={composeValidators(mustBeNumber, minValue(5))} name="Others" id="offerOthers"/>
+                      <FieldTextInputNew label="Brand Sponsorship" validate={composeValidators(mustBeNumber, minValue(5))} name="Brand Sponsorship" id="offer"/>
+                      <FieldTextInputNew label="IG Post Promo" validate={composeValidators(mustBeNumber, minValue(5))} name="IG Post Promo" id="offerIGPost"/>
+                      <FieldTextInputNew label="IG Story Promo" validate={composeValidators(mustBeNumber, minValue(5))} name="IG Story Promo" id="offerIGStory"/>
+                      <FieldTextInputNew label="Twitter Promo" validate={composeValidators(mustBeNumber, minValue(5))} name="Twitter Promo" id="offerTwitter"/>
+                      <FieldTextInputNew label="FB Promo" validate={composeValidators(mustBeNumber, minValue(5))} name="FB Promo" id="offerFB"/>
+                      <FieldTextInputNew label="Youtube Promo" validate={composeValidators(mustBeNumber, minValue(5))} name="Youtube Promo" id="offerYoutube"/>
+                      <FieldTextInputNew label="Others " validate={composeValidators(mustBeNumber, minValue(5))} name="Others" id="offerOthers"/>
                     </div>
                   ) : null)
             }

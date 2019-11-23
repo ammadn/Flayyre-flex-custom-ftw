@@ -386,6 +386,13 @@ export class ListingPageComponent extends Component {
       console.log('offer values', values);
       var value2 = JSON.parse(JSON.stringify(values));
       delete value2.paymentType;
+
+
+      Object.keys(value2).forEach(key=>{
+        value2[key]=value2[key]*100;
+      });
+
+
       console.log('neww offer values', value2);
       if (values['Brand Sponsorship'] || values['IG Post Promo'] || values['IG Story Promo'] || values['Twitter Promo'] || values['FB Promo'] || values['Youtube Promo'] || values['Others']) {
         this.setState({
