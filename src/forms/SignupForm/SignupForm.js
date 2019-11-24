@@ -107,6 +107,27 @@ const SignupFormComponent = props => (
       });
       const lastNameRequired = validators.required(lastNameRequiredMessage);
 
+      const telRequiredMessage = intl.formatMessage({
+        id: 'SignupForm.telNameRequired',
+      });
+      const telRequired = validators.required(telRequiredMessage);
+
+
+      const stateRequiredMessage = intl.formatMessage({
+        id: 'SignupForm.stateNameRequired',
+      });
+      const stateRequired = validators.required(stateRequiredMessage);
+
+
+      const cityRequiredMessage = intl.formatMessage({
+        id: 'SignupForm.cityNameRequired',
+      });
+      const cityRequired = validators.required(cityRequiredMessage);
+
+
+
+
+
       const classes = classNames(rootClassName || css.root, className);
       const submitInProgress = inProgress;
       const submitDisabled = invalid || submitInProgress;
@@ -163,6 +184,38 @@ const SignupFormComponent = props => (
                 validate={lastNameRequired}
               />
             </div>
+            <FieldTextInput
+              className={css.password}
+              type="number"
+              id={formId ? `${formId}.tel` : 'tel'}
+              name="tel"
+              autoComplete="tel"
+              label="Contact number"
+
+              validate={telRequired}
+            />
+
+            <FieldTextInput
+              className={css.password}
+              type="text"
+              id={formId ? `${formId}.city` : 'city'}
+              name="city"
+              autoComplete="city"
+              label="City"
+
+              validate={cityRequired}
+            />
+
+            <FieldTextInput
+              className={css.password}
+              type="text"
+              id={formId ? `${formId}.state` : 'state'}
+              name="state"
+              autoComplete="state"
+              label="State"
+
+              validate={stateRequired}
+            />
             <FieldTextInput
               className={css.password}
               type="password"
