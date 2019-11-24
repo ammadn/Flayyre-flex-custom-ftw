@@ -23,7 +23,7 @@ const locationLink = (name, image, searchQuery) => {
     <NamedLink name="SearchPage" to={{ search: searchQuery }} className={css.location}>
 
       <div>
-        Browse Influencers
+        Browse Influencers ggg
       </div>
     </NamedLink>
   );
