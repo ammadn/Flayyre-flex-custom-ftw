@@ -1,8 +1,8 @@
 @import '../../marketplace.css';
 
 .logoMobile {
+  height:25px;
 
-height:25px;
 
   & path {
     fill: var(--marketplaceColor);
