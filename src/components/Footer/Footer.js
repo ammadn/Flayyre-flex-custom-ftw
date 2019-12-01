@@ -110,11 +110,6 @@ const Footer = props => {
               <ul className={css.list}>
 
                 <li className={css.listItem}>
-                  <NamedLink name="LandingPage" className={css.link}>
-                    <FormattedMessage id="Footer.toHelpPage" />
-                  </NamedLink>
-                </li>
-                <li className={css.listItem}>
                   <NamedLink name="contactUs" className={css.link}>
                     <FormattedMessage id="Footer.toContactPage" />
                   </NamedLink>

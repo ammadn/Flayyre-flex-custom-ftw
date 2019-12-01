@@ -147,13 +147,7 @@ const TopbarDesktop = props => {
       </span>
     </NamedLink>
   );
-  const contactUs=(
-    <NamedLink name="contactUs" className={css.loginLink}>
-      <span className={css.login}>
-        <FormattedMessage id="TopbarDesktop.contactUs" />
-      </span>
-    </NamedLink>
-  );
+
   return (
     <nav className={classes}>
       <NamedLink  className={css.logoLink} name="LandingPage">
@@ -162,7 +156,6 @@ const TopbarDesktop = props => {
       {search}
 
       {aboutUs}
-      {contactUs}
       {inboxLink}
 
       {signupLink}

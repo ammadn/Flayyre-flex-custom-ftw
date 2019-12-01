@@ -39,23 +39,29 @@ const AboutPage = () => {
           <img className={css.coverImage} src={image} alt="My first ice cream." />
 
           <div >
-            <p className={css.paragraphJust}>Flayyre is a P2P marketplace platform for brands to find the right creators and influencers to
-              promote their products and services.</p>
-            <p className={css.paragraphJust}>
-            Influencer marketing has created an authentic, people-centered approach that outperforms
-            traditional advertising. This highly successful method draws traction from the digital footprints of
-            creators who’ve built credibility and a dedicated following. A recommendation or endorsement
-            from an influencer is a form of social proof, and creates instant points of entry to audiences and
-            consumers. In other words, you’re meeting the consumer where they are.
+            <p className={css.paragraphJust}>Flayyre is a P2P marketplace platform for brands to find the right creators and influencers to promote their products and services.
             </p>
             <p className={css.paragraphJust}>
-            Flayyre’s mission is to curate talent and creative solutions that deliver outstanding campaigns
-            while also working to solve influencer monetization disparity. You’ll find the world’s biggest
-            influencers on Flayyre, as well as extraordinary talent in niche markets with audiences from
-            every walk of life. We’re dedicated to sharing diverse voices that pack a punch and creative
-            dynamite. We don’t judge or overlook creators based on the size of their audience. We search
-            for the users who have have a unique voice and the ability to generate awareness and positively
-            impact your brand.
+              Influencer marketing has created an authentic, people-centered approach that outperforms traditional advertising.
+              This highly successful method draws traction from the digital footprints of creators who’ve built credibility and a dedicated following.
+              A recommendation or endorsement from an influencer is a form of social proof, and creates instant points of entry to audiences and consumers.
+              In other words, you’re meeting the consumer where they are.
+
+            </p>
+            <p className={css.paragraphJust}>
+              Flayyre’s mission is to curate talent and creative solutions that deliver outstanding campaigns while also working to solve influencer monetization disparity.
+              You’ll find the world’s biggest influencers on Flayyre, as well as extraordinary talent in niche markets with audiences from every walk of life.
+              We’re dedicated to sharing diverse voices that pack a punch and creative dynamite. We don’t judge or overlook creators based on the size of their audience.
+              We search for the users who have have a unique voice and the ability to generate awareness and positively impact your brand.
+            </p>
+
+            <h1 className={css.pageTitle}>Fees</h1>
+
+            <p className={css.paragraphJust}>
+            At Flayyre, we aim to create simplicity within the Influencer community. We do this by introducing products
+              to the market that simplifies talent monetization. In order to create simplistic methods for Influencer monetization,
+              we eliminated fees when using our platform and only charge Influencers 10% after a business has purchased their services. Businesses have a
+              5% fee.
             </p>
           </div>
         </LayoutWrapperMain>
