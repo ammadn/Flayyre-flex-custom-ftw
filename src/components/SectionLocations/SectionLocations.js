@@ -67,6 +67,12 @@ const SectionLocations = props => {
         )}
 
       </div>
+
+      <div className={css.createsearchpagelink}>
+        <NamedLink name="SearchPage">
+          <FormattedMessage id="SectionLocation.createsearchpageLink" />
+        </NamedLink>
+      </div>
     </div>
   );
 };

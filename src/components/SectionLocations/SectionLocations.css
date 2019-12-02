@@ -5,7 +5,6 @@
 
   margin-top: 0;
   max-width: 735px;
-
 @media (--viewportMedium) {
   margin-bottom: 23px;
 }
@@ -87,8 +86,8 @@
 .linkText {
   @apply --marketplaceH2FontStyles;
   color: var(--matterColor);
-  margin-top: 15px;
-  margin-bottom: 0;
+  margin-top: 5px;
+  margin-bottom: 100px;
 
 @media (--viewportMedium) {
   margin-top: 21px;
@@ -97,4 +96,10 @@
 
 .locationName {
   color: var(--marketplaceColor);
+}
+.createsearchpageLink {
+  margin-top: 36px;
+@media (--viewportMedium) {
+  margin-top: 52px;
+}
 }
