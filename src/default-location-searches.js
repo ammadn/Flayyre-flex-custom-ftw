@@ -11,15 +11,13 @@ export default [
   {
     id: 'default-helsinki',
     predictionPlace: {
-      address: 'Helsinki, Finland',
-      bounds: new LatLngBounds(new LatLng(60.29783, 25.25448), new LatLng(59.92248, 24.78287)),
+      address: 'Beauty',
     },
   },
   {
-    id: 'default-turku',
+    id: 'default-rovaniemi',
     predictionPlace: {
-      address: 'Turku, Finland',
-      bounds: new LatLngBounds(new LatLng(60.53045, 22.38197), new LatLng(60.33361, 22.06644)),
+      address: 'Fashion',
     },
   },
   {
@@ -39,8 +37,7 @@ export default [
   {
     id: 'default-ruka',
     predictionPlace: {
-      address: 'Ruka, Finland',
-      bounds: new LatLngBounds(new LatLng(66.16997, 29.16773), new LatLng(66.16095, 29.13572)),
+      address: 'Lifestyle',
     },
   },
 ];

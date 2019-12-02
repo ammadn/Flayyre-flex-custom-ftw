@@ -22,6 +22,7 @@ import { TopbarContainer } from '../../containers';
 import facebookImage from '../../assets/saunatimeFacebook-1200x630.jpg';
 import twitterImage from '../../assets/saunatimeTwitter-600x314.jpg';
 import css from './LandingPage.css';
+import { categories } from '../../marketplace-custom-config';
 
 export const LandingPageComponent = props => {
   const { history, intl, location, scrollingDisabled } = props;
@@ -59,7 +60,7 @@ export const LandingPageComponent = props => {
         </LayoutWrapperTopbar>
         <LayoutWrapperMain>
           <div className={css.heroContainer}>
-            <SectionHero className={css.hero} history={history} location={location} />
+            <SectionHero className={css.hero} history={history} location={categories} />
           </div>
           <ul className={css.sections}>
             <li className={css.section}>
