@@ -131,7 +131,7 @@ export class BookingDatesFormComponent extends Component {
           }
           const monewObjForOffer =(amoung)=>{
 
-            return {"_sdkType": "Money", "amount": amoung*100, "currency": "USD"}
+            return {"_sdkType": "Money", "amount": amoung, "currency": "USD"}
           }
           // This is the place to collect breakdown estimation data. See the
           // EstimatedBreakdownMaybe component to change the calculations
@@ -231,7 +231,7 @@ export class BookingDatesFormComponent extends Component {
                 {
 
                   Object.keys(promotions.values).map(function(key) {
-                    console.log('pm values',promotions.values);
+
 
                     return promotions.values[key].length != 0 ?
                       <div>
