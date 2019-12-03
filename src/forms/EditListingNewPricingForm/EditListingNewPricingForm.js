@@ -103,13 +103,15 @@ export const EditListingPricingFormComponent = props => (
               className={css.selectCountry}
               label='Select promotion type'
             >
+              <option value="">
+              </option>
               <option value="Brand">
                 Brand Sponsorship
               </option>
               <option value="IG Story">
                 IG Story Promo
               </option>
-              <option value="IG Post">
+              <option value="IG Post44">
                 IG Post Promo
               </option>
               <option value="Twitter">

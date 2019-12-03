@@ -49,10 +49,12 @@ const EditListingNewPricingPanel = props => {
 
 const addToArray=(values)=> {
 
+
+
     var arr = {};
     let minPrice=0;
     if (values) {
-      console.log(values);
+      console.log('all values',values);
 
       Object.keys(values).forEach(function(key) {
         var matchingKey = key.indexOf('price') !== -1;
@@ -75,7 +77,7 @@ const addToArray=(values)=> {
       pricetype.direct_pricing=false;
 
       Object.keys(values).forEach(function(key) {
-        console.log('keeeee',key);
+
         var matchingKey = key.indexOf('offer_listing') !== -1;
         var matchingKey2 = key.indexOf('direct_pricing') !== -1;
 
@@ -122,6 +124,8 @@ const addToArray=(values)=> {
       updateValues.publicData={};
       updateValues.publicData.values=arr;
       updateValues.publicData.pricetype=pricetype;
+
+      console.log("update value",updateValues)
 
      return updateValues;
 
