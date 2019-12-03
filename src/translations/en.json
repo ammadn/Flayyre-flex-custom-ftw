@@ -738,7 +738,7 @@
   "SearchFiltersMobile.heading": "Filter listing",
   "SearchFiltersMobile.keywordLabel": "Keyword",
   "SearchFiltersMobile.resetAll": "Reset all",
-  "SearchFiltersMobile.showListings": "Show {count, number} {count, plural, one {sauna} other {saunas}}",
+  "SearchFiltersMobile.showListings": "Show {count, number} {count, plural, one {Influencers} other {Influencers}}",
   "SearchFiltersPanel.apply": "Apply",
   "SearchFiltersPanel.cancel": "Cancel",
   "SearchFiltersPanel.resetAll": "Reset all",
