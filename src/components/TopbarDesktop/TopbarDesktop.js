@@ -151,7 +151,7 @@ const TopbarDesktop = props => {
   return (
     <nav className={classes}>
       <NamedLink  className={css.logoLink} name="LandingPage">
-        <img  className={css.logoFlayyre}  src={LogoImg}/>
+        <img  className={css.logo}  src={LogoImg}/>
       </NamedLink>
       {search}
 
