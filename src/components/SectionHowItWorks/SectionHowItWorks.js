@@ -6,6 +6,10 @@ import classNames from 'classnames';
 import { NamedLink } from '../../components';
 
 import css from './SectionHowItWorks.css';
+import stepImage from './images/stepImg.png';
+import LogoImage from '../../assets/FlayyreLogoArialV.png';
+import config from '../../config';
+
 
 const SectionHowItWorks = props => {
   const { rootClassName, className } = props;
@@ -20,39 +24,45 @@ const SectionHowItWorks = props => {
       </div>
 
       <div className={css.steps}>
-        <div className={css.step}>
-          <h2 className={css.stepTitle}>
-            <FormattedMessage id="SectionHowItWorks.part1Title" />
-          </h2>
-          <p>
-            <FormattedMessage id="SectionHowItWorks.part1Text" />
-          </p>
-        </div>
 
         <div className={css.step}>
-          <h2 className={css.stepTitle}>
-            <FormattedMessage id="SectionHowItWorks.part2Title" />
-          </h2>
-          <p>
-            <FormattedMessage id="SectionHowItWorks.part2Text" />
-          </p>
+          <img className={css.stepImg} src={stepImage} alt={config.siteTitle}/>
         </div>
 
-        <div className={css.step}>
-          <h2 className={css.stepTitle}>
-            <FormattedMessage id="SectionHowItWorks.part3Title" />
-          </h2>
-          <p>
-            <FormattedMessage id="SectionHowItWorks.part3Text" />
-          </p>
-        </div>
+        {/*<div className={css.step}>*/}
+        {/*  <h2 className={css.stepTitle}>*/}
+        {/*    <FormattedMessage id="SectionHowItWorks.part1Title" />*/}
+        {/*  </h2>*/}
+        {/*  <p>*/}
+        {/*    <FormattedMessage id="SectionHowItWorks.part1Text" />*/}
+        {/*  </p>*/}
+        {/*</div>*/}
+
+        {/*<div className={css.step}>*/}
+        {/*  <h2 className={css.stepTitle}>*/}
+        {/*    <FormattedMessage id="SectionHowItWorks.part2Title" />*/}
+        {/*  </h2>*/}
+        {/*  <p>*/}
+        {/*    <FormattedMessage id="SectionHowItWorks.part2Text" />*/}
+        {/*  </p>*/}
+        {/*</div>*/}
+
+        {/*<div className={css.step}>*/}
+        {/*  <h2 className={css.stepTitle}>*/}
+        {/*    <FormattedMessage id="SectionHowItWorks.part3Title" />*/}
+        {/*  </h2>*/}
+        {/*  <p>*/}
+        {/*    <FormattedMessage id="SectionHowItWorks.part3Text" />*/}
+        {/*  </p>*/}
+        {/*</div>*/}
+
       </div>
 
-      <div className={css.createListingLink}>
-        <NamedLink name="NewListingPage">
-          <FormattedMessage id="SectionHowItWorks.createListingLink" />
-        </NamedLink>
-      </div>
+      {/*<div className={css.createListingLink}>*/}
+      {/*  <NamedLink name="NewListingPage">*/}
+      {/*    <FormattedMessage id="SectionHowItWorks.createListingLink" />*/}
+      {/*  </NamedLink>*/}
+      {/*</div>*/}
     </div>
   );
 };
