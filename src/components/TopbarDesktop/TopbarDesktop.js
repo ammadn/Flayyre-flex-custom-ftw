@@ -15,7 +15,7 @@ import {
   NamedLink,
 } from '../../components';
 import { TopbarSearchForm } from '../../forms';
-import LogoImg from './../../assets/FlayyreNewLogo2[368].png';
+import LogoImg from './../../assets/FlayyreLogoArialH.png';
 import css from './TopbarDesktop.css';
 
 const TopbarDesktop = props => {
