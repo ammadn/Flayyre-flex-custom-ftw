@@ -23,7 +23,6 @@ const SectionHowItWorks = props => {
         <FormattedMessage id="SectionHowItWorks.titleLineTwo" />
       </div>
 
-      <div className={css.steps}>
 
         <div className={css.step}>
           <img className={css.stepImg} src={stepImage} alt={config.siteTitle}/>
@@ -56,7 +55,6 @@ const SectionHowItWorks = props => {
         {/*  </p>*/}
         {/*</div>*/}
 
-      </div>
 
       {/*<div className={css.createListingLink}>*/}
       {/*  <NamedLink name="NewListingPage">*/}
