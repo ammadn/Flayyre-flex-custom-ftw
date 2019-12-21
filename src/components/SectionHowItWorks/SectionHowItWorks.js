@@ -23,8 +23,7 @@ const SectionHowItWorks = props => {
         <FormattedMessage id="SectionHowItWorks.titleLineTwo" />
       </div>
 
-
-        <div className={css.step}>
+        <div>
           <img className={css.stepImg} src={stepImage} alt={config.siteTitle}/>
         </div>
 

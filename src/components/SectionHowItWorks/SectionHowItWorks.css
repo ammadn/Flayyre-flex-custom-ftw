@@ -14,17 +14,21 @@
   }
 }
 
-.step {
-  @media (--viewportMedium) {
-    width: 324px;
-    margin-right: 40px;
-  }
-}
-
 .step:last-of-type {
   @media (--viewportMedium) {
     margin-right: 0;
   }
+}
+
+.stepImg {
+  margin-top: 18px;
+  margin-bottom: 18px;
+  width: 100%;
+
+@media (--viewportMedium) {
+  margin-top: 21px;
+  margin-bottom: 18px;
+}
 }
 
 .stepTitle {
@@ -35,16 +39,6 @@
     margin-top: 21px;
     margin-bottom: 18px;
   }
-}
-
-.stepImg {
-  margin-top: 18px;
-  margin-bottom: 18px;
-
-@media (--viewportMedium) {
-  margin-top: 21px;
-  margin-bottom: 18px;
-}
 }
 
 
