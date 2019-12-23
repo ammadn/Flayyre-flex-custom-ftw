@@ -33,7 +33,8 @@ export const EditListingFollowersFormComponent = props => (
         Fb,
         Twitter,
         Other,
-        YouTube
+        YouTube,
+        TikTok
 
       } = fieldRenderProps;
 
@@ -57,7 +58,7 @@ export const EditListingFollowersFormComponent = props => (
 
           <div>
 
-
+            {/*IG*/}
             <div className={css.Follower}>
               <FieldCheckboxForFollowers
                 com='IG'
@@ -106,6 +107,7 @@ export const EditListingFollowersFormComponent = props => (
 
             </div>
 
+            {/*Twitter*/}
             <div className={css.Follower}>
               <FieldCheckboxForFollowers
                 com='Twitter'
@@ -154,6 +156,7 @@ export const EditListingFollowersFormComponent = props => (
 
             </div>
 
+            {/*Facebook*/}
             <div className={css.Follower}>
               <FieldCheckboxForFollowers
                 com='Fb'
@@ -162,7 +165,6 @@ export const EditListingFollowersFormComponent = props => (
                 name='boxFb' id='boxFb'/>
               <label>Facebook Followers</label>
             </div>
-
 
             <div className={css.Follower__details}>
               <FieldTextInput
@@ -201,6 +203,7 @@ export const EditListingFollowersFormComponent = props => (
 
             </div>
 
+            {/*Youtube*/}
             <div className={css.Follower_types}>
               <div className={css.Follower}>
                 <FieldCheckboxForFollowers com='YouTube' change={changeState} value="boxYouTube" name='boxYouTube'
@@ -246,7 +249,53 @@ export const EditListingFollowersFormComponent = props => (
               </div>
             </div>
 
+            {/*TikTok*/}
 
+            <div className={css.Follower_types}>
+              <div className={css.Follower}>
+                <FieldCheckboxForFollowers com='TikTok' change={changeState} value="boxTikTok" name='boxTikTok' id='boxTikTok'/>
+                <label>TikTok</label>
+              </div>
+
+              <div className={css.Follower__details}>
+                <FieldTextInput
+                  id="TikTok"
+                  name="TikTok"
+                  className={css.title}
+                  type="TikTok"
+                  placeholder='TikTok Followers'
+                  maxLength='55'
+                  autoFocus
+                  disabled={submitDisabled || !TikTok}
+                />
+
+                <FieldTextInput
+                  id="TikTokName"
+                  name="TikTokName"
+                  className={css.title}
+                  type="TikTokName"
+
+                  placeholder='TikTok Username'
+                  maxLength='55'
+                  autoFocus
+                  disabled={submitDisabled || !TikTok}
+                />
+                <FieldTextInput
+                  id="TikTokEng"
+                  name="TikTokEng"
+                  className={css.title}
+                  type="TikTokEng"
+
+                  placeholder='TikTok Engagement'
+                  maxLength='55'
+                  autoFocus
+                  disabled={submitDisabled || !TikTok}
+                />
+
+              </div>
+            </div>
+
+            {/*Other*/}
             <div className={css.Follower_types}>
               <div className={css.Follower}>
                 <FieldCheckboxForFollowers com='Other' change={changeState} value="boxOther" name='boxOther'
