@@ -7,6 +7,7 @@ import ImgFaceBook from '../../assets/facebook.png';
 import ImgTwiter from '../../assets/twitter.png';
 import ImgInstar from '../../assets/instagram.png';
 import ImgTikTok from '../../assets/tiktok.png';
+import ImgTwitch from '../../assets/twitch.png';
 import Other from '../../assets/Other.png';
 import ImgYouTube from '../../assets/youtube.png';
 import config from '../../config';
@@ -64,6 +65,13 @@ const SectionFollowers = props => {
             <label>{publicData.TikTok}</label>
             <label>{publicData.TikTokName}</label>
             <label>{publicData.TikTokEng}</label>
+          </div>
+          <div className={css.follower}>
+            <img className={css.img__follower} src={ImgTwitch}  />
+            <label>Twitch</label>
+            <label>{publicData.Twitch}</label>
+            <label>{publicData.TwitchName}</label>
+            <label>{publicData.TwitchEng}</label>
           </div>
           <div className={css.follower}>
             <img className={css.img__follower} src={Other}  />

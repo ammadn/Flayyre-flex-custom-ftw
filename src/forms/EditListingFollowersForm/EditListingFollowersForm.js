@@ -34,7 +34,8 @@ export const EditListingFollowersFormComponent = props => (
         Twitter,
         Other,
         YouTube,
-        TikTok
+        TikTok,
+        Twitch
 
       } = fieldRenderProps;
 
@@ -59,6 +60,7 @@ export const EditListingFollowersFormComponent = props => (
           <div>
 
             {/*IG*/}
+            <div className={css.Follower_types}>
             <div className={css.Follower}>
               <FieldCheckboxForFollowers
                 com='IG'
@@ -106,8 +108,10 @@ export const EditListingFollowersFormComponent = props => (
 
 
             </div>
+            </div>
 
             {/*Twitter*/}
+            <div className={css.Follower_types}>
             <div className={css.Follower}>
               <FieldCheckboxForFollowers
                 com='Twitter'
@@ -155,8 +159,10 @@ export const EditListingFollowersFormComponent = props => (
               />
 
             </div>
+            </div>
 
             {/*Facebook*/}
+            <div className={css.Follower_types}>
             <div className={css.Follower}>
               <FieldCheckboxForFollowers
                 com='Fb'
@@ -166,42 +172,44 @@ export const EditListingFollowersFormComponent = props => (
               <label>Facebook Followers</label>
             </div>
 
-            <div className={css.Follower__details}>
-              <FieldTextInput
-                id="Fb"
-                name="Fb"
-                className={css.title}
-                type="Fb"
+              <div className={css.Follower__details}>
+                <FieldTextInput
+                  id="Fb"
+                  name="Fb"
+                  className={css.title}
+                  type="Fb"
 
-                placeholder='Facebook Followers'
-                maxLength='55'
-                autoFocus
-                disabled={submitDisabled || !Fb}
-              />
-              <FieldTextInput
-                id="FbName"
-                name="FbName"
-                className={css.title}
-                type="FbName"
+                  placeholder='Facebook Followers'
+                  maxLength='55'
+                  autoFocus
+                  disabled={submitDisabled || !Fb}
+                />
+                <FieldTextInput
+                  id="FbName"
+                  name="FbName"
+                  className={css.title}
+                  type="FbName"
 
-                placeholder='Facebook Username'
-                maxLength='55'
-                autoFocus
-                disabled={submitDisabled || !Fb}
-              />
-              <FieldTextInput
-                id="FbEng"
-                name="FbEng"
-                className={css.title}
-                type="FbEng"
+                  placeholder='Facebook Username'
+                  maxLength='55'
+                  autoFocus
+                  disabled={submitDisabled || !Fb}
+                />
+                <FieldTextInput
+                  id="FbEng"
+                  name="FbEng"
+                  className={css.title}
+                  type="FbEng"
 
-                placeholder='FB Engagement'
-                maxLength='55'
-                autoFocus
-                disabled={submitDisabled || !Fb}
-              />
+                  placeholder='FB Engagement'
+                  maxLength='55'
+                  autoFocus
+                  disabled={submitDisabled || !Fb}
+                />
 
+              </div>
             </div>
+
 
             {/*Youtube*/}
             <div className={css.Follower_types}>
@@ -290,6 +298,51 @@ export const EditListingFollowersFormComponent = props => (
                   maxLength='55'
                   autoFocus
                   disabled={submitDisabled || !TikTok}
+                />
+
+              </div>
+            </div>
+
+            {/*Twitch*/}
+            <div className={css.Follower_types}>
+              <div className={css.Follower}>
+                <FieldCheckboxForFollowers com='Twitch' change={changeState} value="boxTwitch" name='boxTwitch' id='boxTwitch'/>
+                <label>Twitch</label>
+              </div>
+
+              <div className={css.Follower__details}>
+                <FieldTextInput
+                  id="Twitch"
+                  name="Twitch"
+                  className={css.title}
+                  type="Twitch"
+                  placeholder='Twitch Followers'
+                  maxLength='55'
+                  autoFocus
+                  disabled={submitDisabled || !Twitch}
+                />
+
+                <FieldTextInput
+                  id="TwitchName"
+                  name="TwitchName"
+                  className={css.title}
+                  type="TwitchName"
+
+                  placeholder='Twitch Username'
+                  maxLength='55'
+                  autoFocus
+                  disabled={submitDisabled || !Twitch}
+                />
+                <FieldTextInput
+                  id="TwitchEng"
+                  name="TwitchEng"
+                  className={css.title}
+                  type="TwitchEng"
+
+                  placeholder='Twitch Engagement'
+                  maxLength='55'
+                  autoFocus
+                  disabled={submitDisabled || !Twitch}
                 />
 
               </div>

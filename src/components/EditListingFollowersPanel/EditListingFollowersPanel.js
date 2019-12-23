@@ -28,6 +28,7 @@ const EditListingFollowersPanel = props => {
     Other,
     YouTube,
     TikTok,
+    Twitch
   } = props;
 
   const classes = classNames(rootClassName || css.root, className);
@@ -53,6 +54,7 @@ const EditListingFollowersPanel = props => {
         Other={Other}
         YouTube={YouTube}
         TikTok={TikTok}
+        Twitch={Twitch}
         changeState={changeState}
         followers={followers}
         className={css.form}
@@ -65,6 +67,7 @@ const EditListingFollowersPanel = props => {
             ,FbName,FbEng
             ,OtherName,OtherEng,YouTube
             ,boxTikTok,TikTokName,TikTokEng,TikTok
+            ,boxTwitch,TwitchName,TwitchEng,Twitch
           } = values;
           let max=0;
           if(IG>max){
@@ -84,6 +87,10 @@ const EditListingFollowersPanel = props => {
                 } else {
                   if (TikTok > max) {
                     max = TikTok;
+                  } else {
+                    if (Twitch > max) {
+                      max = Twitch;
+                    }
                   }
                 }
               }
@@ -108,6 +115,7 @@ const EditListingFollowersPanel = props => {
               boxYouTube
               ,YouTubeName,YouTubeEng,
               YouTube, boxTikTok,TikTokName,TikTokEng,TikTok
+              ,boxTwitch,TwitchName,TwitchEng,Twitch
             },
           };
           onSubmit(updateValues);

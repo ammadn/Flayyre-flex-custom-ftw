@@ -394,7 +394,7 @@ export class ListingPageComponent extends Component {
 
 
       console.log('neww offer values', value2);
-      if (values['Brand Sponsorship'] || values['IG Post Promo'] || values['IG Story Promo'] || values['Twitter Promo'] || values['FB Promo'] || values['Youtube Promo'] || values['TikTok Promo'] || values['Others']) {
+      if (values['Brand Sponsorship'] || values['IG Post Promo'] || values['IG Story Promo'] || values['Twitter Promo'] || values['FB Promo'] || values['Youtube Promo'] || values['TikTok Promo'] || values['Twitch Promo'] || values['Others']) {
         this.setState({
           bookingData: {
             values: value2,
