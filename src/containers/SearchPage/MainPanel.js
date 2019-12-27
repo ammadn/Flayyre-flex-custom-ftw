@@ -101,6 +101,7 @@ class MainPanel extends Component {
         />
 
         <SearchFiltersMobile
+          urlQueryParams={ urlQueryParams}
           className={css.searchFiltersMobile}
           urlQueryParams={urlQueryParams}
           listingsAreLoaded={listingsAreLoaded}

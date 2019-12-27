@@ -19,6 +19,7 @@ import {
 } from '../../components';
 import { propTypes } from '../../util/types';
 import css from './SearchFiltersMobile.css';
+import FollowersFilter from '../FollowersFilter/FollowersFilter';
 
 const RADIX = 10;
 
@@ -198,7 +199,48 @@ class SearchFiltersMobileComponent extends Component {
       dateRangeFilter,
       keywordFilter,
       intl,
+      history,
+      urlQueryParams,
     } = this.props;
+
+    const FILTER_DROPDOWN_OFFSET = -14;
+
+
+    const initialPriceRangeValue = (queryParams, paramName) => {
+      const price = queryParams[paramName];
+      const valuesFromParams = !!price ? price.split(',').map(v => Number.parseInt(v, RADIX)) : [];
+
+      return !!price && valuesFromParams.length === 2
+        ? {
+          minPrice: valuesFromParams[0],
+          maxPrice: valuesFromParams[1],
+        }
+        : null;
+    };
+
+    const initialFollowersRange = priceFilter
+      ? initialPriceRangeValue(urlQueryParams, 'pub_max')
+      : null;
+
+
+
+
+    const handlePrice = (urlParam, range) => {
+      console.log('url parram',urlParam);
+      console.log('renge',range);
+
+
+      const { minPrice, maxPrice } = range || {};
+      const queryParams =
+        minPrice != null && maxPrice != null
+          ?(maxPrice!=1000 ?{ ...urlQueryParams, [urlParam]: `${minPrice},${maxPrice}` }:{ ...urlQueryParams, [urlParam]: `${minPrice},${'99999999999'}` })
+          : omit(urlQueryParams, urlParam);
+
+      console.log('quary param',queryParams);
+      console.log(createResourceLocatorString('SearchPage', routeConfiguration(), {}, queryParams));
+      history.push(createResourceLocatorString('SearchPage', routeConfiguration(), {}, queryParams));
+    };
+
 
     const classes = classNames(rootClassName || css.root, className);
 
@@ -285,6 +327,22 @@ class SearchFiltersMobileComponent extends Component {
         />
       ) : null;
 
+
+
+    const followerFilterElement =  (
+      <FollowersFilter
+        id="SearchFilters.followersFilter"
+        urlParam={'pub_max'}
+        onSubmit={handlePrice}
+        showAsPopup
+        {...priceFilter.config}
+        initialValues={initialFollowersRange}
+        contentPlacementOffset={FILTER_DROPDOWN_OFFSET}
+      />
+    ) ;
+
+
+
     return (
       <div className={classes}>
         <div className={css.searchResultSummary}>
@@ -321,7 +379,9 @@ class SearchFiltersMobileComponent extends Component {
               {categoryFilterElement}
 
               {priceFilterElement}
-
+              <div className={css.followerFilter}>
+              {followerFilterElement}
+              </div>
             </div>
           ) : null}
 
