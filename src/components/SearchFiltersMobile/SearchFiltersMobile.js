@@ -321,7 +321,6 @@ class SearchFiltersMobileComponent extends Component {
               {categoryFilterElement}
 
               {priceFilterElement}
-              {dateRangeFilterElement}
 
             </div>
           ) : null}
