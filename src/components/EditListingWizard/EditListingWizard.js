@@ -147,6 +147,8 @@ class EditListingWizard extends Component {
       directPriceInputArray: [],
       other: false,
       YouTube:false,
+      TikTok:false,
+      Twitch:false
     };
     this.handleCreateFlowTabScrolling = this.handleCreateFlowTabScrolling.bind(this);
     this.handlePublishListing = this.handlePublishListing.bind(this);
@@ -289,6 +291,12 @@ class EditListingWizard extends Component {
           break;
         case 'YouTube':
           this.setState({ YouTube: !state });
+          break;
+        case 'TikTok':
+          this.setState({ TikTok: !state });
+          break;
+        case 'Twitch':
+          this.setState({ Twitch: !state });
           break;
         case 'followers':
           this.setState({ followers: !this.state.followers });
@@ -453,6 +461,8 @@ class EditListingWizard extends Component {
                 Twitter={this.state.Twitter}
                 Other={this.state.Other}
                 YouTube={this.state.YouTube}
+                TikTok={this.state.TikTok}
+                Twitch={this.state.Twitch}
                 changeState={changeState}
                 {...rest}
                 key={tab}

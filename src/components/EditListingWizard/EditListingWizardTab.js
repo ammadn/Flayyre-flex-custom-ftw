@@ -100,6 +100,8 @@ const EditListingWizardTab = props => {
     IG,
     Fb,
     YouTube,
+    TikTok,
+    Twitch,
     Twitter,
     Other,
     add,
@@ -268,6 +270,8 @@ const EditListingWizardTab = props => {
           Fb={Fb}
           YouTube={YouTube}
           Twitter={Twitter}
+          TikTok={TikTok}
+          Twitch={Twitch}
           Other={Other}
           changeState={changeState}
           followers={followers}

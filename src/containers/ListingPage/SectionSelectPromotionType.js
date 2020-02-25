@@ -109,6 +109,8 @@ const SectionSelectPromotionType = props => (
                       <FieldTextInputNew label="Twitter Promo" validate={composeValidators(mustBeNumber, minValue(5))} name="Twitter Promo" id="offerTwitter"/>
                       <FieldTextInputNew label="FB Promo" validate={composeValidators(mustBeNumber, minValue(5))} name="FB Promo" id="offerFB"/>
                       <FieldTextInputNew label="Youtube Promo" validate={composeValidators(mustBeNumber, minValue(5))} name="Youtube Promo" id="offerYoutube"/>
+                      <FieldTextInputNew label="TikTok Promo" validate={composeValidators(mustBeNumber, minValue(5))} name="TikTok Promo" id="offerTikTok"/>
+                      <FieldTextInputNew label="Twitch Promo" validate={composeValidators(mustBeNumber, minValue(5))} name="Twitch Promo" id="offerTwitch"/>
                       <FieldTextInputNew label="Others " validate={composeValidators(mustBeNumber, minValue(5))} name="Others" id="offerOthers"/>
                     </div>
                   ) : null)
