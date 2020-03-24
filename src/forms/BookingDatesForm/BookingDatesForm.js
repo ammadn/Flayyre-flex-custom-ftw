@@ -9,18 +9,22 @@ import { bookingDatesRequired, composeValidators, required } from '../../util/va
 import { END_DATE, START_DATE } from '../../util/dates';
 import { propTypes } from '../../util/types';
 import config from '../../config';
-import { FieldDateRangeInput, Form, PrimaryButton } from '../../components';
+import { FieldDateRangeInput, FieldPhoneNumberInput, Form, PrimaryButton } from '../../components';
 import EstimatedBreakdownMaybe from './EstimatedBreakdownMaybe';
 
 import css from './BookingDatesForm.css';
 import { formatCurrencyMajorUnit, formatMoney } from '../../util/currency';
+import { OnChange } from 'react-final-form-listeners';
 
 const identity = v => v;
 
 export class BookingDatesFormComponent extends Component {
   constructor(props) {
     super(props);
-    this.state = { focusedInput: null };
+    this.state = {
+      focusedInput: null,
+      dates: 1,
+    };
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
     this.onFocusedInputChange = this.onFocusedInputChange.bind(this);
   }
@@ -35,12 +39,26 @@ export class BookingDatesFormComponent extends Component {
   // In case start or end date for the booking is missing
   // focus on that input, otherwise continue with the
   // default handleSubmit function.
-  handleFormSubmit(e) {
 
+  addDays(date, days) {
+    const copy = new Date(Number(date));
+    copy.setDate(date.getDate() + days);
+    return copy;
+  }
+
+  handleFormSubmit(e) {
+    var dateobj = new Date();
+
+// Contents of above date object is
+// converted into a string using toISOString() function.
+    var B = dateobj.toISOString();
+
+    console.log('date value',this.state.dates);
+    var increment=this.state.dates;
     this.props.onSubmit({
       'bookingDates': {
-        'startDate': '3019-10-07T06:30:00.000Z',
-        'endDate': '3019-10-08T06:30:00.000Z',
+        'startDate': B,
+        'endDate': this.addDays(dateobj,parseInt(increment)).toISOString(),
       },
     });
 
@@ -125,14 +143,14 @@ export class BookingDatesFormComponent extends Component {
             return {};
           };
 
-          const monewObj =(amoung)=>{
+          const monewObj = (amoung) => {
 
-            return {"_sdkType": "Money", "amount": amoung, "currency": "USD"}
-          }
-          const monewObjForOffer =(amoung)=>{
+            return { '_sdkType': 'Money', 'amount': amoung, 'currency': 'USD' };
+          };
+          const monewObjForOffer = (amoung) => {
 
-            return {"_sdkType": "Money", "amount": amoung, "currency": "USD"}
-          }
+            return { '_sdkType': 'Money', 'amount': amoung, 'currency': 'USD' };
+          };
           // This is the place to collect breakdown estimation data. See the
           // EstimatedBreakdownMaybe component to change the calculations
           // for customized payment processes.
@@ -158,11 +176,11 @@ export class BookingDatesFormComponent extends Component {
             </div>
           ) : null;
           let total;
-          console.log('promotion2',promotions);
+          console.log('promotion2', promotions);
           const findTotal = () => {
 
-            console.log('promotion2',promotions);
-            console.log('public data',publicData)
+            console.log('promotion2', promotions);
+            console.log('public data', publicData);
             total = 0;
 
             if (promotions.type === 'direct') {
@@ -176,7 +194,7 @@ export class BookingDatesFormComponent extends Component {
 
               Object.keys(promotions.values).map(function(key) {
                 total = total + parseFloat(promotions.values[key]);
-              })
+              });
 
               return total;
             }
@@ -185,8 +203,8 @@ export class BookingDatesFormComponent extends Component {
           const findComition = () => {
             if (total > 0) {
               return total * 0.05;
-            }else{
-              return null
+            } else {
+              return null;
             }
 
           };
@@ -207,7 +225,7 @@ export class BookingDatesFormComponent extends Component {
                           <span
                             className={css.itemLabel}> {publicData.values[promotions.values[key]][0]} promotion </span>
                           <span
-                            className={css.itemValue}>{ priceData(monewObj(publicData.values[promotions.values[key]][1]), intl).formattedPrice}</span>
+                            className={css.itemValue}>{priceData(monewObj(publicData.values[promotions.values[key]][1]), intl).formattedPrice}</span>
                         </div>
 
                       </div> : null;
@@ -217,7 +235,7 @@ export class BookingDatesFormComponent extends Component {
               <div>
                 <div className={css.lineItem}>
                   <span className={css.itemLabel}> Subtotal</span>
-                  <span className={css.itemValue}>{priceData(monewObj(findTotal()), intl).formattedPrice }</span>
+                  <span className={css.itemValue}>{priceData(monewObj(findTotal()), intl).formattedPrice}</span>
                 </div>
               </div>
 
@@ -239,7 +257,7 @@ export class BookingDatesFormComponent extends Component {
                           <span
                             className={css.itemLabel}> {key} promotion offer </span>
                           <span
-                            className={css.itemValue}>{ priceData(monewObjForOffer(promotions.values[key]), intl).formattedPrice}</span>
+                            className={css.itemValue}>{priceData(monewObjForOffer(promotions.values[key]), intl).formattedPrice}</span>
                         </div>
 
                       </div> : null;
@@ -249,35 +267,34 @@ export class BookingDatesFormComponent extends Component {
               <div>
                 <div className={css.lineItem}>
                   <span className={css.itemLabel}> Subtotal</span>
-                  <span className={css.itemValue}>{priceData(monewObj(findTotal()), intl).formattedPrice }</span>
+                  <span className={css.itemValue}>{priceData(monewObj(findTotal()), intl).formattedPrice}</span>
                 </div>
               </div>
 
             </div>
           ) : null);
 
-          const comition=findComition()?<div className={css.lineItem}>
+          const comition = findComition() ? <div className={css.lineItem}>
             <span className={css.itemLabel}>  Flayyre fee *</span>
             <span className={css.itemValue}>{priceData(monewObj(findComition()), intl).formattedPrice}</span>
-          </div>:null
+          </div> : null;
 
-          const findFinalTotal = ()=>{
-            return parseFloat(total)+parseFloat(findComition());
-          }
-          const finalTotal=findComition()?<div>
-            <hr className={css.totalDivider} />
+          const findFinalTotal = () => {
+            return parseFloat(total) + parseFloat(findComition());
+          };
+          const finalTotal = findComition() ? <div>
+            <hr className={css.totalDivider}/>
             <div className={css.lineItemTotal}>
               <div className={css.totalLabel}>Total price</div>
               <div className={css.totalPrice}>{priceData(monewObj(findFinalTotal()), intl).formattedPrice}</div>
             </div>
-          </div>:null
+          </div> : null;
 
           const dateFormatOptions = {
             weekday: 'short',
             month: 'short',
             day: 'numeric',
           };
-
 
 
           const now = moment();
@@ -294,12 +311,30 @@ export class BookingDatesFormComponent extends Component {
             submitButtonWrapperClassName || css.submitButtonWrapper,
           );
 
+
           return (
             <Form onSubmit={handleSubmit} className={classes}>
               {timeSlotsError}
               {newbookingInfo}
               {comition}
               {finalTotal}
+              <FieldPhoneNumberInput
+                className={css.phone}
+                name="dates"
+                id='dates'
+                label='dates'
+                placeholder='dates'
+              />
+              <OnChange name='dates'>
+
+                {(value, previous) => {
+                  this.setState({ dates: value });
+
+                }
+
+                }
+              </OnChange>
+
               <p className={css.smallPrint}>
                 <FormattedMessage
                   id={

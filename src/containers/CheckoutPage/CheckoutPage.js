@@ -128,13 +128,15 @@ export class CheckoutPageComponent extends Component {
 
   const  {bookingData}=this.props;
 
-    console.log('bdataas',bookingData)
+
 
     const { bookingStart, bookingEnd, listing, ...rest } = params;
     const { amount, currency } = listing.attributes.price;
     const {values}=listing.attributes.publicData;
 
-    console.log("listinf at",params);
+
+    console.log('starttttttt',bookingStart);
+    console.log('endd',bookingEnd);
 
     const unitType = config.bookingUnitType;
     const promotionType=config.promotionType;
@@ -148,8 +150,7 @@ export class CheckoutPageComponent extends Component {
 
     if(bookingData.type==='direct'){
     Object.keys(bookingData.values).map(function(key) {
-      console.log('booking data velues',bookingData.values[key])
-      console.log('booking data velues2',values[bookingData.values[key]])
+
       if(bookingData.values[key].length != 0 ) {
      arr.push({
        code: 'line-item/'+key,
@@ -175,12 +176,7 @@ export class CheckoutPageComponent extends Component {
     }
 
 
-    console.log('array',arr);
-    console.log( {
-      code: unitType,
-      unitPrice: new Money(amount, currency),
-      quantity,
-    })
+
     return {
       listingId: listing.id,
       bookingStart,
