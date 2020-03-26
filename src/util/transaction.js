@@ -54,6 +54,19 @@ export const TRANSITION_EXPIRE_CUSTOMER_REVIEW_PERIOD = 'transition/expire-custo
 export const TRANSITION_EXPIRE_PROVIDER_REVIEW_PERIOD = 'transition/expire-provider-review-period';
 export const TRANSITION_EXPIRE_REVIEW_PERIOD = 'transition/expire-review-period';
 
+
+export const TRANSITION_ACCEPT_BY_CUSTOMER = 'transition/accept-by-customer';
+export const TRANSITION_DECLINED_BY_CUSTOMER = 'transition/declined-by-customer';
+export const TRANSITION_EXPIRE_DELIVARY_ACCEPT = 'transition/expire-delivary-accept';
+export const TRANSITION_EXPIRE_DELIVARY = 'transition/expire-delivary';
+export const TRANSITION_CUSTOMER_CANCEL_AFTER_EXPIRE = 'transition/customer-cancel-after-expire';
+export const TRANSITION_COMPLETE_BY_PROVIDER_IN_CANCEL_PENDING = 'transition/complete-by-provider-in-cancel-pending';
+export const TRANSITION_EXPIRE_DELIVARY_DENIED_FOR_CANCEL_BY_CUSTOMER = 'transition/expire-delivary-denied-for-cancel-by-customer';
+export const TRANSITION_COMPLETE_BY_PROVIDER_AFTER_EXPIRE = 'transition/complete-by-provider-after-expire';
+export const TRANSITION_AUTOMATICALLY_CANCEL_AFTER_GIVEN_PERIOD = 'transition/automatically-cancel-after-given-period';
+export const TRANSITION_COMPLETE_PAYMENT_AFTER_DELIVARY = 'transition/complete-payment-after-delivary';
+
+
 /**
  * Actors
  *
@@ -88,12 +101,20 @@ const STATE_PENDING_PAYMENT = 'pending-payment';
 const STATE_PAYMENT_EXPIRED = 'payment-expired';
 const STATE_PREAUTHORIZED = 'preauthorized';
 const STATE_DECLINED = 'declined';
-const STATE_ACCEPTED = 'accepted';
+const STATE_ACCEPTED = 'accepted2';
 const STATE_CANCELED = 'canceled';
 const STATE_DELIVERED = 'delivered';
 const STATE_REVIEWED = 'reviewed';
 const STATE_REVIEWED_BY_CUSTOMER = 'reviewed-by-customer';
 const STATE_REVIEWED_BY_PROVIDER = 'reviewed-by-provider';
+
+
+const STATE_DELIVARY_ACCEPT_BY_CUSTOMER = 'delivary-accept-by-customer';
+const STATE_PENDING_CANCEL_BY_CUSTOMER = 'pending-cancel-by-customer';
+const STATE_DELIVERD_BY_PROVIDER = 'delivered-by-provider';
+const STATE_WAITING_FOR_DELIVERY_AFTER_EXPIRE = 'waiting-for-delivery-after-expire';
+const STATE_COMPLETE_PAYMENT = 'complete-payment';
+
 
 /**
  * Description of transaction process
@@ -148,11 +169,38 @@ const stateDescription = {
       on: {
         [TRANSITION_CANCEL]: STATE_CANCELED,
         [TRANSITION_COMPLETE]: STATE_DELIVERED,
+        [TRANSITION_EXPIRE_DELIVARY]: STATE_PENDING_CANCEL_BY_CUSTOMER,
       },
     },
 
+
+    [STATE_PENDING_CANCEL_BY_CUSTOMER]: {
+      on: {
+        [TRANSITION_CUSTOMER_CANCEL_AFTER_EXPIRE]: STATE_CANCELED,
+        [TRANSITION_COMPLETE_BY_PROVIDER_IN_CANCEL_PENDING]: STATE_DELIVERD_BY_PROVIDER,
+        [TRANSITION_EXPIRE_DELIVARY_DENIED_FOR_CANCEL_BY_CUSTOMER]: STATE_WAITING_FOR_DELIVERY_AFTER_EXPIRE,
+      },
+    },
+
+    [STATE_DELIVERD_BY_PROVIDER]: {
+      on: {
+        [TRANSITION_ACCEPT_BY_CUSTOMER]: STATE_DELIVARY_ACCEPT_BY_CUSTOMER,
+        [TRANSITION_DECLINED_BY_CUSTOMER]: STATE_DECLINED,
+        [TRANSITION_EXPIRE_DELIVARY_ACCEPT]: STATE_DELIVARY_ACCEPT_BY_CUSTOMER,
+      },
+    },
+
+
+    [STATE_WAITING_FOR_DELIVERY_AFTER_EXPIRE]: {
+      on: {
+        [TRANSITION_COMPLETE_BY_PROVIDER_AFTER_EXPIRE]: STATE_DELIVERD_BY_PROVIDER,
+        [TRANSITION_AUTOMATICALLY_CANCEL_AFTER_GIVEN_PERIOD]: STATE_CANCELED,
+      },
+    },
+
+
     [STATE_CANCELED]: {},
-    [STATE_DELIVERED]: {
+    [STATE_DELIVARY_ACCEPT_BY_CUSTOMER]: {
       on: {
         [TRANSITION_EXPIRE_REVIEW_PERIOD]: STATE_REVIEWED,
         [TRANSITION_REVIEW_1_BY_CUSTOMER]: STATE_REVIEWED_BY_CUSTOMER,
@@ -172,7 +220,12 @@ const stateDescription = {
         [TRANSITION_EXPIRE_CUSTOMER_REVIEW_PERIOD]: STATE_REVIEWED,
       },
     },
-    [STATE_REVIEWED]: { type: 'final' },
+    [STATE_REVIEWED]: {
+      on: {
+        [TRANSITION_COMPLETE_PAYMENT_AFTER_DELIVARY]: STATE_COMPLETE_PAYMENT,
+      },
+    },
+    [STATE_COMPLETE_PAYMENT]: { type: 'final' },
   },
 };
 
@@ -197,7 +250,7 @@ const getTransitions = states => {
 
 // This is a list of all the transitions that this app should be able to handle.
 export const TRANSITIONS = getTransitions(statesFromStateDescription(stateDescription)).map(
-  t => t.key
+  t => t.key,
 );
 
 // This function returns a function that has given stateDesc in scope chain.
@@ -259,6 +312,22 @@ export const txIsInFirstReviewBy = (tx, isCustomer) =>
 
 export const txIsReviewed = tx =>
   getTransitionsToState(STATE_REVIEWED).includes(txLastTransition(tx));
+
+
+export const txIsDeliveryAcceptByCustomer = tx =>
+  getTransitionsToState(STATE_DELIVARY_ACCEPT_BY_CUSTOMER).includes(txLastTransition(tx));
+
+export const txIsPendingCancelByCustomer = tx =>
+  getTransitionsToState(STATE_PENDING_CANCEL_BY_CUSTOMER).includes(txLastTransition(tx));
+
+export const txIsDeliveredByProvider = tx =>
+  getTransitionsToState(STATE_DELIVERD_BY_PROVIDER).includes(txLastTransition(tx));
+
+export const txIsWaitingForDeliveryAfterExpire = tx =>
+  getTransitionsToState(STATE_WAITING_FOR_DELIVERY_AFTER_EXPIRE).includes(txLastTransition(tx));
+
+export const txIsCompletePayment = tx =>
+  getTransitionsToState(STATE_COMPLETE_PAYMENT).includes(txLastTransition(tx));
 
 /**
  * Helper functions to figure out if transaction has passed a given state.
