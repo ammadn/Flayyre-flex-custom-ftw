@@ -329,6 +329,8 @@ export const txIsWaitingForDeliveryAfterExpire = tx =>
 export const txIsCompletePayment = tx =>
   getTransitionsToState(STATE_COMPLETE_PAYMENT).includes(txLastTransition(tx));
 
+
+
 /**
  * Helper functions to figure out if transaction has passed a given state.
  * This is based on transitions history given by transaction object.

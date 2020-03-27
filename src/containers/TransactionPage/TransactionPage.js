@@ -35,6 +35,10 @@ import {
   sendMessage,
   sendReview,
   fetchMoreMessages,
+  completeByProvider,
+  completeByTheProviderAfterExpire,
+  completeByProviderInCancelPending,
+  customerCancelAfterExpire, acceptByCustomer, declinedByCustomer,
 } from './TransactionPage.duck';
 import css from './TransactionPage.css';
 
@@ -72,6 +76,14 @@ export const TransactionPageComponent = props => {
     declineInProgress,
     declineSaleError,
     onAcceptSale,
+
+    onComplete,
+    onCustomerCancelAfterExpire,
+    onCompleteByProviderInCancelPending,
+    onCompleteByProviderAfterExpire,
+    onAcceptByCustomer,
+    onDeclinedByCustomer,
+
     onDeclineSale,
     timeSlots,
     fetchTimeSlotsError,
@@ -100,8 +112,8 @@ export const TransactionPageComponent = props => {
         'CheckoutPage',
         routes,
         { id: currentListing.id.uuid, slug: createSlug(currentListing.attributes.title) },
-        {}
-      )
+        {},
+      ),
     );
   };
 
@@ -178,11 +190,11 @@ export const TransactionPageComponent = props => {
   if (isDataAvailable && isProviderRole && !isOwnSale) {
     // eslint-disable-next-line no-console
     console.error('Tried to access a sale that was not owned by the current user');
-    return <NamedRedirect name="InboxPage" params={{ tab: 'sales' }} />;
+    return <NamedRedirect name="InboxPage" params={{ tab: 'sales' }}/>;
   } else if (isDataAvailable && isCustomerRole && !isOwnOrder) {
     // eslint-disable-next-line no-console
     console.error('Tried to access an order that was not owned by the current user');
-    return <NamedRedirect name="InboxPage" params={{ tab: 'orders' }} />;
+    return <NamedRedirect name="InboxPage" params={{ tab: 'orders' }}/>;
   }
 
   const detailsClassName = classNames(css.tabContent, css.tabContentVisible);
@@ -196,11 +208,11 @@ export const TransactionPageComponent = props => {
 
   const loadingOrFailedFetching = fetchTransactionError ? (
     <p className={css.error}>
-      <FormattedMessage id={`${fetchErrorMessage}`} />
+      <FormattedMessage id={`${fetchErrorMessage}`}/>
     </p>
   ) : (
     <p className={css.loading}>
-      <FormattedMessage id={`${loadingMessage}`} />
+      <FormattedMessage id={`${loadingMessage}`}/>
     </p>
   );
 
@@ -234,6 +246,15 @@ export const TransactionPageComponent = props => {
       onSendReview={onSendReview}
       transactionRole={transactionRole}
       onAcceptSale={onAcceptSale}
+      onComplete={onComplete}
+
+      onCustomerCancelAfterExpire={onCustomerCancelAfterExpire}
+      onCompleteByProviderInCancelPending={onCompleteByProviderInCancelPending}
+      onCompleteByProviderAfterExpire={onCompleteByProviderAfterExpire}
+      onAcceptByCustomer={onAcceptByCustomer}
+      onDeclinedByCustomer={onDeclinedByCustomer}
+
+
       onDeclineSale={onDeclineSale}
       acceptInProgress={acceptInProgress}
       declineInProgress={declineInProgress}
@@ -255,13 +276,13 @@ export const TransactionPageComponent = props => {
     >
       <LayoutSingleColumn>
         <LayoutWrapperTopbar>
-          <TopbarContainer />
+          <TopbarContainer/>
         </LayoutWrapperTopbar>
         <LayoutWrapperMain>
           <div className={css.root}>{panel}</div>
         </LayoutWrapperMain>
         <LayoutWrapperFooter className={css.footer}>
-          <Footer />
+          <Footer/>
         </LayoutWrapperFooter>
       </LayoutSingleColumn>
     </Page>
@@ -294,6 +315,15 @@ TransactionPageComponent.propTypes = {
   acceptInProgress: bool.isRequired,
   declineInProgress: bool.isRequired,
   onAcceptSale: func.isRequired,
+  onComplete: func.isRequired,
+
+
+  onCustomerCancelAfterExpire: func.isRequired,
+  onCompleteByProviderInCancelPending: func.isRequired,
+  onCompleteByProviderAfterExpire: func.isRequired,
+  onAcceptByCustomer: func.isRequired,
+  onDeclinedByCustomer: func.isRequired,
+
   onDeclineSale: func.isRequired,
   scrollingDisabled: bool.isRequired,
   transaction: propTypes.transaction,
@@ -381,6 +411,14 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     onAcceptSale: transactionId => dispatch(acceptSale(transactionId)),
+    onCustomerCancelAfterExpire: transactionId => dispatch(completeByTheProviderAfterExpire(transactionId)),
+    onCompleteByProviderInCancelPending: transactionId => dispatch(completeByProviderInCancelPending(transactionId)),
+    onCompleteByProviderAfterExpire: transactionId => dispatch(customerCancelAfterExpire(transactionId)),
+    onAcceptByCustomer: transactionId => dispatch(acceptByCustomer(transactionId)),
+    onDeclinedByCustomer: transactionId => dispatch(declinedByCustomer(transactionId)),
+
+
+    onComplete: transactionId => dispatch(completeByProvider(transactionId)),
     onDeclineSale: transactionId => dispatch(declineSale(transactionId)),
     onShowMoreMessages: txId => dispatch(fetchMoreMessages(txId)),
     onSendMessage: (txId, message) => dispatch(sendMessage(txId, message)),
@@ -393,13 +431,14 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
+
 const TransactionPage = compose(
   withRouter,
   connect(
     mapStateToProps,
-    mapDispatchToProps
+    mapDispatchToProps,
   ),
-  injectIntl
+  injectIntl,
 )(TransactionPageComponent);
 
 TransactionPage.loadData = loadData;

@@ -12,6 +12,10 @@ import {
   txIsPaymentPending,
   txIsRequested,
   txHasBeenDelivered,
+  txIsPendingCancelByCustomer,
+  txIsWaitingForDeliveryAfterExpire,
+  txIsDeliveredByProvider,
+  txIsDeliveryAcceptByCustomer,
 } from '../../util/transaction';
 import { LINE_ITEM_NIGHT, LINE_ITEM_DAY, propTypes } from '../../util/types';
 import {
@@ -182,6 +186,15 @@ export class TransactionPanelComponent extends Component {
       transactionRole,
       intl,
       onAcceptSale,
+
+      onComplete,
+      onCustomerCancelAfterExpire,
+      onCompleteByProviderInCancelPending,
+      onCompleteByProviderAfterExpire,
+      onAcceptByCustomer,
+      onDeclinedByCustomer,
+
+
       onDeclineSale,
       acceptInProgress,
       declineInProgress,
@@ -245,6 +258,7 @@ export class TransactionPanelComponent extends Component {
           headingState: HEADING_ACCEPTED,
           showDetailCardHeadings: isCustomer,
           showAddress: isCustomer,
+          showCompleteButton: isProvider,
         };
       } else if (txIsDeclined(tx)) {
         return {
@@ -252,6 +266,26 @@ export class TransactionPanelComponent extends Component {
           showDetailCardHeadings: isCustomer,
         };
       } else if (txIsCanceled(tx)) {
+        return {
+          headingState: HEADING_CANCELED,
+          showDetailCardHeadings: isCustomer,
+        };
+      } else if (txIsPendingCancelByCustomer(tx)) {
+        return {
+          headingState: HEADING_CANCELED,
+          showCancelButtonForCus: isCustomer,
+        };
+      } else if (txIsWaitingForDeliveryAfterExpire(tx)) {
+        return {
+          headingState: HEADING_CANCELED,
+          showDetailCardHeadings: isCustomer,
+        };
+      } else if (txIsDeliveredByProvider(tx)) {
+        return {
+          headingState: HEADING_CANCELED,
+          showDetailCardHeadings: isCustomer,
+        };
+      } else if (txIsDeliveryAcceptByCustomer(tx)) {
         return {
           headingState: HEADING_CANCELED,
           showDetailCardHeadings: isCustomer,
@@ -312,6 +346,18 @@ export class TransactionPanelComponent extends Component {
         declineSaleError={declineSaleError}
         onAcceptSale={() => onAcceptSale(currentTransaction.id)}
         onDeclineSale={() => onDeclineSale(currentTransaction.id)}
+      />
+    );
+
+    const CompleteButton = (
+      <SaleActionButtonsMaybe
+        showButtons={stateData.showCompleteButton}
+        acceptInProgress={acceptInProgress}
+        declineInProgress={declineInProgress}
+        acceptSaleError={acceptSaleError}
+        declineSaleError={declineSaleError}
+        onAcceptSale={() => onComplete(currentTransaction.id)}
+        onDeclineSale={null}
       />
     );
 
@@ -413,6 +459,10 @@ export class TransactionPanelComponent extends Component {
             {stateData.showSaleButtons ? (
               <div className={css.mobileActionButtons}>{saleButtons}</div>
             ) : null}
+
+            {stateData.showCompleteButton ? (
+              <div>{CompleteButton}</div>
+            ):null}
           </div>
 
           <div className={css.asideDesktop}>

@@ -12,6 +12,12 @@ import {
   txIsInFirstReviewBy,
   TRANSITION_ACCEPT,
   TRANSITION_DECLINE,
+  TRANSITION_COMPLETE,
+  TRANSITION_ACCEPT_BY_CUSTOMER,
+  TRANSITION_DECLINED_BY_CUSTOMER,
+  TRANSITION_COMPLETE_BY_PROVIDER_IN_CANCEL_PENDING,
+  TRANSITION_CUSTOMER_CANCEL_AFTER_EXPIRE,
+  TRANSITION_COMPLETE_BY_PROVIDER_AFTER_EXPIRE,
 } from '../../util/transaction';
 import * as log from '../../util/log';
 import {
@@ -322,12 +328,14 @@ export const fetchTransaction = (id, txRole) => (dispatch, getState, sdk) => {
     });
 };
 
+
 export const acceptSale = id => (dispatch, getState, sdk) => {
   if (acceptOrDeclineInProgress(getState())) {
     return Promise.reject(new Error('Accept or decline already in progress'));
   }
   dispatch(acceptSaleRequest());
-
+console.log("accept",id);
+  console.log("sdk accept",sdk);
   return sdk.transactions
     .transition({ id, transition: TRANSITION_ACCEPT, params: {} }, { expand: true })
     .then(response => {
@@ -345,6 +353,138 @@ export const acceptSale = id => (dispatch, getState, sdk) => {
       throw e;
     });
 };
+
+
+
+export const completeByProvider = id => (dispatch, getState, sdk) => {
+
+  console.log("complete transction",id);
+  console.log("sdk",sdk);
+  return sdk.transactions
+    .transition({ id, transition: TRANSITION_COMPLETE, params: {} }, { expand: true })
+    .then(response => {
+
+      return response;
+    })
+    .catch(e => {
+
+      log.error(e, 'complete-sale-failed', {
+        txId: id,
+        transition: TRANSITION_COMPLETE,
+      });
+      throw e;
+    });
+};
+
+
+
+
+export const acceptByCustomer = id => (dispatch, getState, sdk) => {
+
+  console.log("complete transction",id);
+  console.log("sdk",sdk);
+  return sdk.transactions
+    .transition({ id, transition: TRANSITION_ACCEPT_BY_CUSTOMER, params: {} }, { expand: true })
+    .then(response => {
+
+      return response;
+    })
+    .catch(e => {
+
+      log.error(e, 'complete-sale-failed', {
+        txId: id,
+        transition: TRANSITION_ACCEPT_BY_CUSTOMER,
+      });
+      throw e;
+    });
+};
+
+export const declinedByCustomer = id => (dispatch, getState, sdk) => {
+
+  console.log("complete transction",id);
+  console.log("sdk",sdk);
+  return sdk.transactions
+    .transition({ id, transition: TRANSITION_DECLINED_BY_CUSTOMER, params: {} }, { expand: true })
+    .then(response => {
+
+      return response;
+    })
+    .catch(e => {
+
+      log.error(e, 'complete-sale-failed', {
+        txId: id,
+        transition: TRANSITION_DECLINED_BY_CUSTOMER,
+      });
+      throw e;
+    });
+};
+
+
+
+export const completeByProviderInCancelPending = id => (dispatch, getState, sdk) => {
+
+  console.log("complete transction",id);
+  console.log("sdk",sdk);
+  return sdk.transactions
+    .transition({ id, transition: TRANSITION_COMPLETE_BY_PROVIDER_IN_CANCEL_PENDING, params: {} }, { expand: true })
+    .then(response => {
+
+      return response;
+    })
+    .catch(e => {
+
+      log.error(e, 'complete-sale-failed', {
+        txId: id,
+        transition: TRANSITION_COMPLETE_BY_PROVIDER_IN_CANCEL_PENDING,
+      });
+      throw e;
+    });
+};
+
+export const customerCancelAfterExpire = id => (dispatch, getState, sdk) => {
+
+  console.log("complete transction",id);
+  console.log("sdk",sdk);
+  return sdk.transactions
+    .transition({ id, transition: TRANSITION_CUSTOMER_CANCEL_AFTER_EXPIRE, params: {} }, { expand: true })
+    .then(response => {
+
+      return response;
+    })
+    .catch(e => {
+
+      log.error(e, 'complete-sale-failed', {
+        txId: id,
+        transition: TRANSITION_CUSTOMER_CANCEL_AFTER_EXPIRE,
+      });
+      throw e;
+    });
+};
+
+
+
+
+export const completeByTheProviderAfterExpire = id => (dispatch, getState, sdk) => {
+
+  console.log("complete transction",id);
+  console.log("sdk",sdk);
+  return sdk.transactions
+    .transition({ id, transition: TRANSITION_COMPLETE_BY_PROVIDER_AFTER_EXPIRE, params: {} }, { expand: true })
+    .then(response => {
+
+      return response;
+    })
+    .catch(e => {
+
+      log.error(e, 'complete-sale-failed', {
+        txId: id,
+        transition: TRANSITION_COMPLETE_BY_PROVIDER_AFTER_EXPIRE,
+      });
+      throw e;
+    });
+};
+
+
 
 export const declineSale = id => (dispatch, getState, sdk) => {
   if (acceptOrDeclineInProgress(getState())) {
