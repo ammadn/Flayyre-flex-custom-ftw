@@ -55,6 +55,7 @@ import PanelHeading, {
 } from './PanelHeading';
 
 import css from './TransactionPanel.css';
+import SaleAcctionButtonSingle from './SaleAcctionButtonSingle';
 
 // Helper function to get display names for different roles
 const displayNames = (currentUser, currentProvider, currentCustomer, intl) => {
@@ -274,16 +275,18 @@ export class TransactionPanelComponent extends Component {
         return {
           headingState: HEADING_CANCELED,
           showCancelButtonForCus: isCustomer,
+          showCompleteInPending:isProvider
         };
       } else if (txIsWaitingForDeliveryAfterExpire(tx)) {
         return {
           headingState: HEADING_CANCELED,
-          showDetailCardHeadings: isCustomer,
+          showCompleteButtonAfterExpire: isProvider,
         };
       } else if (txIsDeliveredByProvider(tx)) {
         return {
           headingState: HEADING_CANCELED,
-          showDetailCardHeadings: isCustomer,
+          showAcceptButtonForCustomer: isCustomer,
+          showDeniedButtonForCustomer: isCustomer,
         };
       } else if (txIsDeliveryAcceptByCustomer(tx)) {
         return {
@@ -350,14 +353,63 @@ export class TransactionPanelComponent extends Component {
     );
 
     const CompleteButton = (
-      <SaleActionButtonsMaybe
+      <SaleAcctionButtonSingle
         showButtons={stateData.showCompleteButton}
         acceptInProgress={acceptInProgress}
         declineInProgress={declineInProgress}
         acceptSaleError={acceptSaleError}
         declineSaleError={declineSaleError}
         onAcceptSale={() => onComplete(currentTransaction.id)}
-        onDeclineSale={null}
+        btnMsg="Complete Delivery"
+      />
+    );
+
+    const customerCancelAfterExpireButton = (
+      <SaleAcctionButtonSingle
+        showButtons={stateData.showCompleteButton}
+        acceptInProgress={acceptInProgress}
+        declineInProgress={declineInProgress}
+        acceptSaleError={acceptSaleError}
+        declineSaleError={declineSaleError}
+        onAcceptSale={() => onCustomerCancelAfterExpire(currentTransaction.id)}
+        btnMsg="Cancel Order"
+      />
+    );
+
+    const completeAfterExpireInCancelPendingButton = (
+      <SaleAcctionButtonSingle
+        showButtons={stateData.showCompleteButton}
+        acceptInProgress={acceptInProgress}
+        declineInProgress={declineInProgress}
+        acceptSaleError={acceptSaleError}
+        declineSaleError={declineSaleError}
+        onAcceptSale={() => onCompleteByProviderInCancelPending(currentTransaction.id)}
+        btnMsg="Complete Delivery"
+      />
+    );
+
+    const completeAfterExpireButton = (
+      <SaleAcctionButtonSingle
+        showButtons={stateData.showCompleteButton}
+        acceptInProgress={acceptInProgress}
+        declineInProgress={declineInProgress}
+        acceptSaleError={acceptSaleError}
+        declineSaleError={declineSaleError}
+        onAcceptSale={() => onCompleteByProviderAfterExpire(currentTransaction.id)}
+        btnMsg="Complete Delivery"
+      />
+    );
+
+
+    const customerSaleButtons = (
+      <SaleActionButtonsMaybe
+        showButtons={stateData.showSaleButtons}
+        acceptInProgress={acceptInProgress}
+        declineInProgress={declineInProgress}
+        acceptSaleError={acceptSaleError}
+        declineSaleError={declineSaleError}
+        onAcceptSale={() => onAcceptSale(currentTransaction.id)}
+        onDeclineSale={() => onDeclineSale(currentTransaction.id)}
       />
     );
 
@@ -460,9 +512,7 @@ export class TransactionPanelComponent extends Component {
               <div className={css.mobileActionButtons}>{saleButtons}</div>
             ) : null}
 
-            {stateData.showCompleteButton ? (
-              <div>{CompleteButton}</div>
-            ):null}
+
           </div>
 
           <div className={css.asideDesktop}>
@@ -509,6 +559,26 @@ export class TransactionPanelComponent extends Component {
               {stateData.showSaleButtons ? (
                 <div className={css.desktopActionButtons}>{saleButtons}</div>
               ) : null}
+
+              {stateData.showCompleteButton ? (
+                <div>{CompleteButton}</div>
+              ):null}
+
+              {stateData.showCancelButtonForCus ? (
+                <div>{customerCancelAfterExpireButton}</div>
+              ):null}
+
+              {stateData.showCompleteInPending ? (
+                <div>{completeAfterExpireInCancelPendingButton}</div>
+              ):null}
+
+              {stateData.showCompleteButtonAfterExpire ? (
+                <div>{completeAfterExpireButton}</div>
+              ):null}
+
+              {stateData.showAcceptButtonForCustomer ? (
+                <div>{customerSaleButtons}</div>
+              ):null}
             </div>
           </div>
         </div>
