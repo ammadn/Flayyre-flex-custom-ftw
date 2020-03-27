@@ -408,8 +408,8 @@ export class TransactionPanelComponent extends Component {
         declineInProgress={declineInProgress}
         acceptSaleError={acceptSaleError}
         declineSaleError={declineSaleError}
-        onAcceptSale={() => onAcceptSale(currentTransaction.id)}
-        onDeclineSale={() => onDeclineSale(currentTransaction.id)}
+        onAcceptSale={() => onAcceptByCustomer(currentTransaction.id)}
+        onDeclineSale={() => onDeclinedByCustomer(currentTransaction.id)}
       />
     );
 
