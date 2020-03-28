@@ -196,6 +196,23 @@ export class TransactionPanelComponent extends Component {
       onDeclinedByCustomer,
 
 
+
+      completeByProviderInProgress,
+      acceptByCustomerInProgress,
+      declinedByCustomerInProgress,
+      completeByProviderInCancelPendingInProgress,
+      customerCancelAfterExpireInProgress,
+      completeByTheProviderAfterExpireInProgress,
+
+      completeByProviderError,
+      acceptByCustomerError,
+      declinedByCustomerError,
+      completeByProviderInCancelPendingError,
+      customerCancelAfterExpireError,
+      completeByTheProviderAfterExpireError,
+
+
+
       onDeclineSale,
       acceptInProgress,
       declineInProgress,
@@ -359,9 +376,9 @@ export class TransactionPanelComponent extends Component {
     const CompleteButton = (
       <SaleAcctionButtonSingle
         showButtons={stateData.showCompleteButton}
-        acceptInProgress={acceptInProgress}
+        acceptInProgress={completeByProviderInProgress}
         declineInProgress={declineInProgress}
-        acceptSaleError={acceptSaleError}
+        acceptSaleError={completeByProviderError}
         declineSaleError={declineSaleError}
         onAcceptSale={() => onComplete(currentTransaction.id)}
         btnMsg="Complete Delivery"
@@ -371,9 +388,9 @@ export class TransactionPanelComponent extends Component {
     const customerCancelAfterExpireButton = (
       <SaleAcctionButtonSingle
         showButtons={stateData.showCompleteButton}
-        acceptInProgress={acceptInProgress}
+        acceptInProgress={customerCancelAfterExpireInProgress}
         declineInProgress={declineInProgress}
-        acceptSaleError={acceptSaleError}
+        acceptSaleError={customerCancelAfterExpireError}
         declineSaleError={declineSaleError}
         onAcceptSale={() => onCustomerCancelAfterExpire(currentTransaction.id)}
         btnMsg="Cancel Order"
@@ -383,9 +400,9 @@ export class TransactionPanelComponent extends Component {
     const completeAfterExpireInCancelPendingButton = (
       <SaleAcctionButtonSingle
         showButtons={stateData.showCompleteButton}
-        acceptInProgress={acceptInProgress}
+        acceptInProgress={completeByProviderInCancelPendingInProgress}
         declineInProgress={declineInProgress}
-        acceptSaleError={acceptSaleError}
+        acceptSaleError={completeByProviderInCancelPendingError}
         declineSaleError={declineSaleError}
         onAcceptSale={() => onCompleteByProviderInCancelPending(currentTransaction.id)}
         btnMsg="Complete Delivery"
@@ -395,9 +412,9 @@ export class TransactionPanelComponent extends Component {
     const completeAfterExpireButton = (
       <SaleAcctionButtonSingle
         showButtons={stateData.showCompleteButton}
-        acceptInProgress={acceptInProgress}
+        acceptInProgress={completeByTheProviderAfterExpireInProgress}
         declineInProgress={declineInProgress}
-        acceptSaleError={acceptSaleError}
+        acceptSaleError={completeByTheProviderAfterExpireError}
         declineSaleError={declineSaleError}
         onAcceptSale={() => onCompleteByProviderAfterExpire(currentTransaction.id)}
         btnMsg="Complete Delivery"
@@ -408,10 +425,10 @@ export class TransactionPanelComponent extends Component {
     const customerSaleButtons = (
       <SaleActionButtonsMaybe
         showButtons={stateData.showAcceptButtonForCustomer}
-        acceptInProgress={acceptInProgress}
-        declineInProgress={declineInProgress}
-        acceptSaleError={acceptSaleError}
-        declineSaleError={declineSaleError}
+        acceptInProgress={acceptByCustomerInProgress}
+        declineInProgress={declinedByCustomerInProgress}
+        acceptSaleError={acceptByCustomerError}
+        declineSaleError={declinedByCustomerError}
         onAcceptSale={() => onAcceptByCustomer(currentTransaction.id)}
         onDeclineSale={() => onDeclinedByCustomer(currentTransaction.id)}
       />

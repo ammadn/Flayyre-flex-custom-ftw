@@ -77,6 +77,24 @@ export const TransactionPageComponent = props => {
     declineSaleError,
     onAcceptSale,
 
+
+
+    completeByProviderInProgress,
+    acceptByCustomerInProgress,
+    declinedByCustomerInProgress,
+    completeByProviderInCancelPendingInProgress,
+    customerCancelAfterExpireInProgress,
+    completeByTheProviderAfterExpireInProgress,
+
+    completeByProviderError,
+    acceptByCustomerError,
+    declinedByCustomerError,
+    completeByProviderInCancelPendingError,
+    customerCancelAfterExpireError,
+    completeByTheProviderAfterExpireError,
+
+
+
     onComplete,
     onCustomerCancelAfterExpire,
     onCompleteByProviderInCancelPending,
@@ -253,6 +271,23 @@ export const TransactionPageComponent = props => {
       onCompleteByProviderAfterExpire={onCompleteByProviderAfterExpire}
       onAcceptByCustomer={onAcceptByCustomer}
       onDeclinedByCustomer={onDeclinedByCustomer}
+
+
+      completeByProviderInProgress={completeByProviderInProgress}
+      acceptByCustomerInProgress={acceptByCustomerInProgress}
+      declinedByCustomerInProgress={declinedByCustomerInProgress}
+      completeByProviderInCancelPendingInProgress={completeByProviderInCancelPendingInProgress}
+      customerCancelAfterExpireInProgress={customerCancelAfterExpireInProgress}
+      completeByTheProviderAfterExpireInProgress={completeByTheProviderAfterExpireInProgress}
+
+      completeByProviderError={completeByProviderError}
+      acceptByCustomerError={acceptByCustomerError}
+      declinedByCustomerError={declinedByCustomerError}
+      completeByProviderInCancelPendingError={completeByProviderInCancelPendingError}
+      customerCancelAfterExpireError={customerCancelAfterExpireError}
+      completeByTheProviderAfterExpireError={completeByTheProviderAfterExpireError}
+
+
 
 
       onDeclineSale={onDeclineSale}
