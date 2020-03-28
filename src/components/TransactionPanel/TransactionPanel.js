@@ -226,6 +226,8 @@ export class TransactionPanelComponent extends Component {
     const isProviderDeleted = isProviderLoaded && currentProvider.attributes.deleted;
 
     const stateDataFn = tx => {
+      console.log('statee');
+      console.log(tx);
       if (txIsEnquired(tx)) {
         const transitions = Array.isArray(nextTransitions)
           ? nextTransitions.map(transition => {
@@ -283,6 +285,7 @@ export class TransactionPanelComponent extends Component {
           showCompleteButtonAfterExpire: isProvider,
         };
       } else if (txIsDeliveredByProvider(tx)) {
+        console.log("DeliverdByProvider");
         return {
           headingState: HEADING_CANCELED,
           showAcceptButtonForCustomer: isCustomer,
@@ -292,6 +295,7 @@ export class TransactionPanelComponent extends Component {
         return {
           headingState: HEADING_CANCELED,
           showDetailCardHeadings: isCustomer,
+          showAddress: isCustomer,
         };
       } else if (txHasBeenDelivered(tx)) {
         return {
@@ -403,7 +407,7 @@ export class TransactionPanelComponent extends Component {
 
     const customerSaleButtons = (
       <SaleActionButtonsMaybe
-        showButtons={stateData.showSaleButtons}
+        showButtons={stateData.showAcceptButtonForCustomer}
         acceptInProgress={acceptInProgress}
         declineInProgress={declineInProgress}
         acceptSaleError={acceptSaleError}
