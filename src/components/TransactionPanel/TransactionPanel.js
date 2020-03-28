@@ -52,6 +52,10 @@ import PanelHeading, {
   HEADING_DECLINED,
   HEADING_CANCELED,
   HEADING_DELIVERED,
+  HEADING_PENDING_CANCEL,
+  HEADING_WAITING_FOR_DELIVERY_AFTER_EXPIRE,
+  HEADING_DELIVERD_BY_PROVIDER,
+  HEADING_DELIVERY_ACCEPTED,
 } from './PanelHeading';
 
 import css from './TransactionPanel.css';
@@ -292,25 +296,25 @@ export class TransactionPanelComponent extends Component {
         };
       } else if (txIsPendingCancelByCustomer(tx)) {
         return {
-          headingState: HEADING_CANCELED,
+          headingState: HEADING_PENDING_CANCEL,
           showCancelButtonForCus: isCustomer,
           showCompleteInPending:isProvider
         };
       } else if (txIsWaitingForDeliveryAfterExpire(tx)) {
         return {
-          headingState: HEADING_CANCELED,
+          headingState: HEADING_WAITING_FOR_DELIVERY_AFTER_EXPIRE,
           showCompleteButtonAfterExpire: isProvider,
         };
       } else if (txIsDeliveredByProvider(tx)) {
         console.log("DeliverdByProvider");
         return {
-          headingState: HEADING_CANCELED,
+          headingState: HEADING_DELIVERD_BY_PROVIDER,
           showAcceptButtonForCustomer: isCustomer,
           showDeniedButtonForCustomer: isCustomer,
         };
       } else if (txIsDeliveryAcceptByCustomer(tx)) {
         return {
-          headingState: HEADING_CANCELED,
+          headingState: HEADING_DELIVERY_ACCEPTED,
           showDetailCardHeadings: isCustomer,
           showAddress: isCustomer,
         };
