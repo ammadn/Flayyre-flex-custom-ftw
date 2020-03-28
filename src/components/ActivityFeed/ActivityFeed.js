@@ -26,7 +26,7 @@ import {
   txRoleIsProvider,
   txRoleIsCustomer,
   getUserTxRole,
-  isRelevantPastTransition,
+  isRelevantPastTransition, TRANSITION_ACCEPT_BY_CUSTOMER, txIsDeliveryAcceptByCustomer,
 } from '../../util/transaction';
 import { propTypes } from '../../util/types';
 import * as log from '../../util/log';
@@ -113,7 +113,9 @@ const resolveTransitionMessage = (
   const currentTransition = transition.transition;
   const displayName = otherUsersName;
 
+  console.log('current transaction',currentTransition);
   switch (currentTransition) {
+
     case TRANSITION_CONFIRM_PAYMENT:
       return isOwnTransition ? (
         <FormattedMessage id="ActivityFeed.ownTransitionRequest" values={{ listingTitle }} />
@@ -145,7 +147,7 @@ const resolveTransitionMessage = (
       return <FormattedMessage id="ActivityFeed.transitionCancel" />;
     case TRANSITION_COMPLETE:
       // Show the leave a review link if the state is delivered and if the current user is the first to leave a review
-      const reviewPeriodJustStarted = txIsDelivered(transaction);
+      const reviewPeriodJustStarted = txIsDeliveryAcceptByCustomer(transaction);
 
       const reviewAsFirstLink = reviewPeriodJustStarted ? (
         <InlineTextButton onClick={onOpenReviewModal}>
@@ -159,6 +161,7 @@ const resolveTransitionMessage = (
           values={{ reviewLink: reviewAsFirstLink }}
         />
       );
+
 
     case TRANSITION_REVIEW_1_BY_PROVIDER:
     case TRANSITION_REVIEW_1_BY_CUSTOMER:

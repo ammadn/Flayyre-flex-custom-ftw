@@ -332,7 +332,7 @@ const PanelHeading = props => {
       />
     ); 
     default:
-      console.warning('Unknown state given to panel heading.');
+      // console.warning('Unknown state given to panel heading.');
       return null;
   }
 };

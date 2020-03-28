@@ -505,7 +505,9 @@ export const completeByProvider = id => (dispatch, getState, sdk) => {
   return sdk.transactions
     .transition({ id, transition: TRANSITION_COMPLETE, params: {} }, { expand: true })
     .then(response => {
+      dispatch(addMarketplaceEntities(response));
       dispatch(completeByProviderSuccess());
+      dispatch(fetchCurrentUserNotifications());
       return response;
     })
     .catch(e => {
@@ -525,7 +527,9 @@ export const acceptByCustomer = id => (dispatch, getState, sdk) => {
   return sdk.transactions
     .transition({ id, transition: TRANSITION_ACCEPT_BY_CUSTOMER, params: {} }, { expand: true })
     .then(response => {
+      dispatch(addMarketplaceEntities(response));
       dispatch(acceptByCustomerSuccess());
+      dispatch(fetchCurrentUserNotifications());
       return response;
     })
     .catch(e => {
@@ -544,7 +548,9 @@ export const declinedByCustomer = id => (dispatch, getState, sdk) => {
   return sdk.transactions
     .transition({ id, transition: TRANSITION_DECLINED_BY_CUSTOMER, params: {} }, { expand: true })
     .then(response => {
+      dispatch(addMarketplaceEntities(response));
       dispatch(declinedByCustomerSuccess());
+      dispatch(fetchCurrentUserNotifications());
       return response;
     })
     .catch(e => {
@@ -564,7 +570,9 @@ export const completeByProviderInCancelPending = id => (dispatch, getState, sdk)
   return sdk.transactions
     .transition({ id, transition: TRANSITION_COMPLETE_BY_PROVIDER_IN_CANCEL_PENDING, params: {} }, { expand: true })
     .then(response => {
+      dispatch(addMarketplaceEntities(response));
       dispatch(completeByProviderInCancelPendingSuccess());
+      dispatch(fetchCurrentUserNotifications());
       return response;
     })
     .catch(e => {
@@ -583,7 +591,9 @@ export const customerCancelAfterExpire = id => (dispatch, getState, sdk) => {
   return sdk.transactions
     .transition({ id, transition: TRANSITION_CUSTOMER_CANCEL_AFTER_EXPIRE, params: {} }, { expand: true })
     .then(response => {
+      dispatch(addMarketplaceEntities(response));
       dispatch(customerCancelAfterExpireSuccess());
+      dispatch(fetchCurrentUserNotifications());
       return response;
     })
     .catch(e => {
@@ -603,7 +613,9 @@ export const completeByTheProviderAfterExpire = id => (dispatch, getState, sdk) 
   return sdk.transactions
     .transition({ id, transition: TRANSITION_COMPLETE_BY_PROVIDER_AFTER_EXPIRE, params: {} }, { expand: true })
     .then(response => {
+      dispatch(addMarketplaceEntities(response));
       dispatch(completeByTheProviderAfterExpireSuccess());
+      dispatch(fetchCurrentUserNotifications());
       return response;
     })
     .catch(e => {
