@@ -402,7 +402,7 @@ export class TransactionPanelComponent extends Component {
         declineInProgress={declineInProgress}
         acceptSaleError={completeRevisionError}
         declineSaleError={declineSaleError}
-        onAcceptSale={() => onComplete(currentTransaction.id)}
+        onAcceptSale={() => onCompleteRevision(currentTransaction.id)}
         btnMsg="Complete Revision"
       />
     );

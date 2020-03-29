@@ -36,9 +36,7 @@ import {
   sendReview,
   fetchMoreMessages,
   completeByProvider,
-  completeByTheProviderAfterExpire,
-  completeByProviderInCancelPending,
-  customerCancelAfterExpire, acceptByCustomer, askingForRevision, completeRevision,
+ acceptByCustomer, askingForRevision, completeRevision,
 } from './TransactionPage.duck';
 import css from './TransactionPage.css';
 
@@ -483,9 +481,9 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     onAcceptSale: transactionId => dispatch(acceptSale(transactionId)),
-    onCustomerCancelAfterExpire: transactionId => dispatch(completeByTheProviderAfterExpire(transactionId)),
-    onCompleteByProviderInCancelPending: transactionId => dispatch(completeByProviderInCancelPending(transactionId)),
-    onCompleteByProviderAfterExpire: transactionId => dispatch(customerCancelAfterExpire(transactionId)),
+    // onCustomerCancelAfterExpire: transactionId => dispatch(completeByTheProviderAfterExpire(transactionId)),
+    // onCompleteByProviderInCancelPending: transactionId => dispatch(completeByProviderInCancelPending(transactionId)),
+    // onCompleteByProviderAfterExpire: transactionId => dispatch(customerCancelAfterExpire(transactionId)),
     onAcceptByCustomer: transactionId => dispatch(acceptByCustomer(transactionId)),
     onAskingForRevision: transactionId => dispatch(askingForRevision(transactionId)),
     onCompleteRevision: transactionId => dispatch(completeRevision(transactionId)),
