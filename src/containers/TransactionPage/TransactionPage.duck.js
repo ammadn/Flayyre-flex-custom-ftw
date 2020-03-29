@@ -13,11 +13,7 @@ import {
   TRANSITION_ACCEPT,
   TRANSITION_DECLINE,
   TRANSITION_COMPLETE,
-  TRANSITION_ACCEPT_BY_CUSTOMER,
-  TRANSITION_DECLINED_BY_CUSTOMER,
-  TRANSITION_COMPLETE_BY_PROVIDER_IN_CANCEL_PENDING,
-  TRANSITION_CUSTOMER_CANCEL_AFTER_EXPIRE,
-  TRANSITION_COMPLETE_BY_PROVIDER_AFTER_EXPIRE,
+  TRANSITION_ACCEPT_BY_CUSTOMER, TRANSITION_ASK_FOR_REVISION, TRANSITION_COMPLETE_REVISION,
 } from '../../util/transaction';
 import * as log from '../../util/log';
 import {
@@ -74,14 +70,19 @@ export const COMPLETE_BY_PROVIDER_REQUEST = 'app/TransactionPage/COMPLETE_BY_PRO
 export const COMPLETE_BY_PROVIDER_SUCCESS = 'app/TransactionPage/COMPLETE_BY_PROVIDER_SUCCESS';
 export const COMPLETE_BY_PROVIDER_ERROR = 'app/TransactionPage/COMPLETE_BY_PROVIDER_ERROR';
 
+
+export const COMPLETE_REVISION_REQUEST = 'app/TransactionPage/COMPLETE_REVISION_REQUEST';
+export const COMPLETE_REVISION_SUCCESS = 'app/TransactionPage/COMPLETE_REVISION_SUCCESS';
+export const COMPLETE_REVISION_ERROR = 'app/TransactionPage/COMPLETE_REVISION_ERROR';
+
 export const ACCEPT_BY_CUSTOMER_REQUEST = 'app/TransactionPage/ACCEPT_BY_CUSTOMER_REQUEST';
 export const ACCEPT_BY_CUSTOMER_SUCCESS = 'app/TransactionPage/ACCEPT_BY_CUSTOMER_SUCCESS';
 export const ACCEPT_BY_CUSTOMER_ERROR = 'app/TransactionPage/ACCEPT_BY_CUSTOMER_ERROR';
 
 
-export const DECLINED_BY_CUSTOMER_REQUEST = 'app/TransactionPage/DECLINED_BY_CUSTOMER_REQUEST';
-export const DECLINED_BY_CUSTOMER_SUCCESS = 'app/TransactionPage/DECLINED_BY_CUSTOMER_SUCCESS';
-export const DECLINED_BY_CUSTOMER_ERROR = 'app/TransactionPage/DECLINED_BY_CUSTOMER_ERROR';
+export const ASKING_FOR_REVISION_REQUEST = 'app/TransactionPage/ASKING_FOR_REVISION_REQUEST';
+export const ASKING_FOR_REVISION_SUCCESS = 'app/TransactionPage/ASKING_FOR_REVISION_SUCCESS';
+export const ASKING_FOR_REVISION_ERROR = 'app/TransactionPage/ASKING_FOR_REVISION_ERROR';
 
 
 export const COMPLETE_BY_PROVIDER_IN_CANCEL_PENDING_REQUEST = 'app/TransactionPage/COMPLETE_BY_PROVIDER_IN_CANCEL_PENDING_REQUEST';
@@ -108,14 +109,14 @@ const initialState = {
 
   completeByProviderInProgress: false,
   acceptByCustomerInProgress: false,
-  declinedByCustomerInProgress: false,
+  askingForRevisionInProgress: false,
   completeByProviderInCancelPendingInProgress: false,
   customerCancelAfterExpireInProgress: false,
   completeByTheProviderAfterExpireInProgress: false,
 
   completeByProviderError: null,
   acceptByCustomerError: null,
-  declinedByCustomerError: null,
+  askingForRevisionError: null,
   completeByProviderInCancelPendingError: null,
   customerCancelAfterExpireError: null,
   completeByTheProviderAfterExpireError: null,
@@ -191,6 +192,16 @@ export default function checkoutPageReducer(state = initialState, action = {}) {
     case COMPLETE_BY_PROVIDER_ERROR:
       return { ...state, completeByProviderInProgress: false, completeByProviderError: payload };
 
+
+    case COMPLETE_REVISION_REQUEST:
+      return { ...state, completeRevisionInProgress: true, completeRevisionError: null };
+    case COMPLETE_REVISION_SUCCESS:
+      return { ...state, completeRevisionInProgress: false };
+    case COMPLETE_REVISION_ERROR:
+      return { ...state, completeRevisionInProgress: false, completeRevisionError: payload };
+
+
+
     case ACCEPT_BY_CUSTOMER_REQUEST:
       return { ...state, acceptByCustomerInProgress: true, acceptByCustomerError: null };
     case ACCEPT_BY_CUSTOMER_SUCCESS:
@@ -198,12 +209,12 @@ export default function checkoutPageReducer(state = initialState, action = {}) {
     case ACCEPT_BY_CUSTOMER_ERROR:
       return { ...state, acceptByCustomerInProgress: false, acceptByCustomerError: payload };
 
-    case DECLINED_BY_CUSTOMER_REQUEST:
-      return { ...state, declinedByCustomerInProgress: true, declinedByCustomerError: null };
-    case DECLINED_BY_CUSTOMER_SUCCESS:
-      return { ...state, declinedByCustomerInProgress: false };
-    case DECLINED_BY_CUSTOMER_ERROR:
-      return { ...state, declinedByCustomerInProgress: false, declinedByCustomerError: payload };
+    case ASKING_FOR_REVISION_REQUEST:
+      return { ...state, askingForRevisionInProgress: true, askingForRevisionError: null };
+    case ASKING_FOR_REVISION_SUCCESS:
+      return { ...state, askingForRevisionInProgress: false };
+    case ASKING_FOR_REVISION_ERROR:
+      return { ...state, askingForRevisionInProgress: false, askingForRevisionError: payload };
 
     case COMPLETE_BY_PROVIDER_IN_CANCEL_PENDING_REQUEST:
       return {
@@ -331,14 +342,20 @@ const completeByProviderSuccess = () => ({ type: COMPLETE_BY_PROVIDER_SUCCESS })
 const completeByProviderError = e => ({ type: COMPLETE_BY_PROVIDER_ERROR, error: true, payload: e });
 
 
+const completeRevisionRequest = () => ({ type: COMPLETE_REVISION_REQUEST });
+const completeRevisionSuccess = () => ({ type: COMPLETE_REVISION_SUCCESS });
+const completeRevisionError = e => ({ type: COMPLETE_REVISION_ERROR, error: true, payload: e });
+
+
+
 const acceptByCustomerRequest = () => ({ type: ACCEPT_BY_CUSTOMER_REQUEST });
 const acceptByCustomerSuccess = () => ({ type: ACCEPT_BY_CUSTOMER_SUCCESS });
 const acceptByCustomerError = e => ({ type: ACCEPT_BY_CUSTOMER_ERROR, error: true, payload: e });
 
 
-const declinedByCustomerRequest = () => ({ type: DECLINED_BY_CUSTOMER_REQUEST });
-const declinedByCustomerSuccess = () => ({ type: DECLINED_BY_CUSTOMER_SUCCESS });
-const declinedByCustomerError = e => ({ type: DECLINED_BY_CUSTOMER_ERROR, error: true, payload: e });
+const askingForRevisionRequest = () => ({ type: ASKING_FOR_REVISION_REQUEST });
+const askingForRevisionSuccess = () => ({ type: ASKING_FOR_REVISION_SUCCESS });
+const askingForRevisionError = e => ({ type: ASKING_FOR_REVISION_ERROR, error: true, payload: e });
 
 
 const completeByProviderInCancelPendingRequest = () => ({ type: COMPLETE_BY_PROVIDER_IN_CANCEL_PENDING_REQUEST });
@@ -542,91 +559,112 @@ export const acceptByCustomer = id => (dispatch, getState, sdk) => {
     });
 };
 
-export const declinedByCustomer = id => (dispatch, getState, sdk) => {
+export const askingForRevision = id => (dispatch, getState, sdk) => {
 
-  dispatch(declinedByCustomerRequest());
+  dispatch(askingForRevisionRequest());
   return sdk.transactions
-    .transition({ id, transition: TRANSITION_DECLINED_BY_CUSTOMER, params: {} }, { expand: true })
+    .transition({ id, transition: TRANSITION_ASK_FOR_REVISION, params: {} }, { expand: true })
     .then(response => {
       dispatch(addMarketplaceEntities(response));
-      dispatch(declinedByCustomerSuccess());
+      dispatch(askingForRevisionSuccess());
       dispatch(fetchCurrentUserNotifications());
       return response;
     })
     .catch(e => {
-      dispatch(declinedByCustomerError(e));
+      dispatch(askingForRevisionError(e));
       log.error(e, 'complete-sale-failed', {
         txId: id,
-        transition: TRANSITION_DECLINED_BY_CUSTOMER,
+        transition: TRANSITION_ASK_FOR_REVISION,
       });
       throw e;
     });
 };
 
 
-export const completeByProviderInCancelPending = id => (dispatch, getState, sdk) => {
+export const completeRevision= id => (dispatch, getState, sdk) => {
 
-  dispatch(completeByProviderInCancelPendingRequest());
+  dispatch(completeRevisionRequest());
   return sdk.transactions
-    .transition({ id, transition: TRANSITION_COMPLETE_BY_PROVIDER_IN_CANCEL_PENDING, params: {} }, { expand: true })
+    .transition({ id, transition: TRANSITION_COMPLETE_REVISION, params: {} }, { expand: true })
     .then(response => {
       dispatch(addMarketplaceEntities(response));
-      dispatch(completeByProviderInCancelPendingSuccess());
+      dispatch(completeRevisionSuccess());
       dispatch(fetchCurrentUserNotifications());
       return response;
     })
     .catch(e => {
-      dispatch(completeByProviderInCancelPendingError(e));
+      dispatch(completeRevisionError(e));
       log.error(e, 'complete-sale-failed', {
         txId: id,
-        transition: TRANSITION_COMPLETE_BY_PROVIDER_IN_CANCEL_PENDING,
+        transition: TRANSITION_COMPLETE_REVISION,
       });
       throw e;
     });
 };
 
-export const customerCancelAfterExpire = id => (dispatch, getState, sdk) => {
-
-  dispatch(customerCancelAfterExpireRequest());
-  return sdk.transactions
-    .transition({ id, transition: TRANSITION_CUSTOMER_CANCEL_AFTER_EXPIRE, params: {} }, { expand: true })
-    .then(response => {
-      dispatch(addMarketplaceEntities(response));
-      dispatch(customerCancelAfterExpireSuccess());
-      dispatch(fetchCurrentUserNotifications());
-      return response;
-    })
-    .catch(e => {
-      dispatch(customerCancelAfterExpireError(e));
-      log.error(e, 'complete-sale-failed', {
-        txId: id,
-        transition: TRANSITION_CUSTOMER_CANCEL_AFTER_EXPIRE,
-      });
-      throw e;
-    });
-};
-
-
-export const completeByTheProviderAfterExpire = id => (dispatch, getState, sdk) => {
-
-  dispatch(completeByTheProviderAfterExpireRequest());
-  return sdk.transactions
-    .transition({ id, transition: TRANSITION_COMPLETE_BY_PROVIDER_AFTER_EXPIRE, params: {} }, { expand: true })
-    .then(response => {
-      dispatch(addMarketplaceEntities(response));
-      dispatch(completeByTheProviderAfterExpireSuccess());
-      dispatch(fetchCurrentUserNotifications());
-      return response;
-    })
-    .catch(e => {
-      dispatch(completeByTheProviderAfterExpireError(e));
-      log.error(e, 'complete-sale-failed', {
-        txId: id,
-        transition: TRANSITION_COMPLETE_BY_PROVIDER_AFTER_EXPIRE,
-      });
-      throw e;
-    });
-};
+// export const completeByProviderInCancelPending = id => (dispatch, getState, sdk) => {
+//
+//   dispatch(completeByProviderInCancelPendingRequest());
+//   return sdk.transactions
+//     .transition({ id, transition: TRANSITION_COMPLETE_BY_PROVIDER_IN_CANCEL_PENDING, params: {} }, { expand: true })
+//     .then(response => {
+//       dispatch(addMarketplaceEntities(response));
+//       dispatch(completeByProviderInCancelPendingSuccess());
+//       dispatch(fetchCurrentUserNotifications());
+//       return response;
+//     })
+//     .catch(e => {
+//       dispatch(completeByProviderInCancelPendingError(e));
+//       log.error(e, 'complete-sale-failed', {
+//         txId: id,
+//         transition: TRANSITION_COMPLETE_BY_PROVIDER_IN_CANCEL_PENDING,
+//       });
+//       throw e;
+//     });
+// };
+//
+// export const customerCancelAfterExpire = id => (dispatch, getState, sdk) => {
+//
+//   dispatch(customerCancelAfterExpireRequest());
+//   return sdk.transactions
+//     .transition({ id, transition: TRANSITION_CUSTOMER_CANCEL_AFTER_EXPIRE, params: {} }, { expand: true })
+//     .then(response => {
+//       dispatch(addMarketplaceEntities(response));
+//       dispatch(customerCancelAfterExpireSuccess());
+//       dispatch(fetchCurrentUserNotifications());
+//       return response;
+//     })
+//     .catch(e => {
+//       dispatch(customerCancelAfterExpireError(e));
+//       log.error(e, 'complete-sale-failed', {
+//         txId: id,
+//         transition: TRANSITION_CUSTOMER_CANCEL_AFTER_EXPIRE,
+//       });
+//       throw e;
+//     });
+// };
+//
+//
+// export const completeByTheProviderAfterExpire = id => (dispatch, getState, sdk) => {
+//
+//   dispatch(completeByTheProviderAfterExpireRequest());
+//   return sdk.transactions
+//     .transition({ id, transition: TRANSITION_COMPLETE_BY_PROVIDER_AFTER_EXPIRE, params: {} }, { expand: true })
+//     .then(response => {
+//       dispatch(addMarketplaceEntities(response));
+//       dispatch(completeByTheProviderAfterExpireSuccess());
+//       dispatch(fetchCurrentUserNotifications());
+//       return response;
+//     })
+//     .catch(e => {
+//       dispatch(completeByTheProviderAfterExpireError(e));
+//       log.error(e, 'complete-sale-failed', {
+//         txId: id,
+//         transition: TRANSITION_COMPLETE_BY_PROVIDER_AFTER_EXPIRE,
+//       });
+//       throw e;
+//     });
+// };
 
 
 export const declineSale = id => (dispatch, getState, sdk) => {

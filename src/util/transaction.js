@@ -56,15 +56,13 @@ export const TRANSITION_EXPIRE_REVIEW_PERIOD = 'transition/expire-review-period'
 
 
 export const TRANSITION_ACCEPT_BY_CUSTOMER = 'transition/accept-by-customer';
-export const TRANSITION_DECLINED_BY_CUSTOMER = 'transition/declined-by-customer';
+
 export const TRANSITION_EXPIRE_DELIVARY_ACCEPT = 'transition/expire-delivary-accept';
-export const TRANSITION_EXPIRE_DELIVARY = 'transition/expire-delivary';
-export const TRANSITION_CUSTOMER_CANCEL_AFTER_EXPIRE = 'transition/customer-cancel-after-expire';
-export const TRANSITION_COMPLETE_BY_PROVIDER_IN_CANCEL_PENDING = 'transition/complete-by-provider-in-cancel-pending';
-export const TRANSITION_EXPIRE_DELIVARY_DENIED_FOR_CANCEL_BY_CUSTOMER = 'transition/expire-delivary-denied-for-cancel-by-customer';
-export const TRANSITION_COMPLETE_BY_PROVIDER_AFTER_EXPIRE = 'transition/complete-by-provider-after-expire';
-export const TRANSITION_AUTOMATICALLY_CANCEL_AFTER_GIVEN_PERIOD = 'transition/automatically-cancel-after-given-period';
+
 export const TRANSITION_COMPLETE_PAYMENT_AFTER_DELIVARY = 'transition/complete-payment-after-delivary';
+
+export const TRANSITION_ASK_FOR_REVISION= 'transition/asking-for-revision';
+export const TRANSITION_COMPLETE_REVISION= 'transition/complete-revision';
 
 
 /**
@@ -110,9 +108,10 @@ const STATE_REVIEWED_BY_PROVIDER = 'reviewed-by-provider';
 
 
 const STATE_DELIVARY_ACCEPT_BY_CUSTOMER = 'delivary-accept-by-customer';
-const STATE_PENDING_CANCEL_BY_CUSTOMER = 'pending-cancel-by-customer';
+
 const STATE_DELIVERD_BY_PROVIDER = 'delivered-by-provider';
-const STATE_WAITING_FOR_DELIVERY_AFTER_EXPIRE = 'waiting-for-delivery-after-expire';
+const STATE_REVISION = 'revision';
+
 const STATE_COMPLETE_PAYMENT = 'complete-payment';
 
 
@@ -169,34 +168,25 @@ const stateDescription = {
       on: {
         [TRANSITION_CANCEL]: STATE_CANCELED,
         [TRANSITION_COMPLETE]: STATE_DELIVERD_BY_PROVIDER,
-        [TRANSITION_EXPIRE_DELIVARY]: STATE_PENDING_CANCEL_BY_CUSTOMER,
+
       },
     },
 
 
-    [STATE_PENDING_CANCEL_BY_CUSTOMER]: {
-      on: {
-        [TRANSITION_CUSTOMER_CANCEL_AFTER_EXPIRE]: STATE_CANCELED,
-        [TRANSITION_COMPLETE_BY_PROVIDER_IN_CANCEL_PENDING]: STATE_DELIVERD_BY_PROVIDER,
-        [TRANSITION_EXPIRE_DELIVARY_DENIED_FOR_CANCEL_BY_CUSTOMER]: STATE_WAITING_FOR_DELIVERY_AFTER_EXPIRE,
-      },
-    },
 
     [STATE_DELIVERD_BY_PROVIDER]: {
       on: {
         [TRANSITION_ACCEPT_BY_CUSTOMER]: STATE_DELIVARY_ACCEPT_BY_CUSTOMER,
-        [TRANSITION_DECLINED_BY_CUSTOMER]: STATE_DECLINED,
+        [TRANSITION_ASK_FOR_REVISION]: STATE_REVISION,
         [TRANSITION_EXPIRE_DELIVARY_ACCEPT]: STATE_DELIVARY_ACCEPT_BY_CUSTOMER,
       },
     },
-
-
-    [STATE_WAITING_FOR_DELIVERY_AFTER_EXPIRE]: {
+    [STATE_REVISION]: {
       on: {
-        [TRANSITION_COMPLETE_BY_PROVIDER_AFTER_EXPIRE]: STATE_DELIVERD_BY_PROVIDER,
-        [TRANSITION_AUTOMATICALLY_CANCEL_AFTER_GIVEN_PERIOD]: STATE_CANCELED,
+        [TRANSITION_COMPLETE_REVISION]: STATE_DELIVERD_BY_PROVIDER,
       },
     },
+
 
 
     [STATE_CANCELED]: {},
@@ -317,14 +307,16 @@ export const txIsReviewed = tx =>
 export const txIsDeliveryAcceptByCustomer = tx =>
   getTransitionsToState(STATE_DELIVARY_ACCEPT_BY_CUSTOMER).includes(txLastTransition(tx));
 
-export const txIsPendingCancelByCustomer = tx =>
-  getTransitionsToState(STATE_PENDING_CANCEL_BY_CUSTOMER).includes(txLastTransition(tx));
 
 export const txIsDeliveredByProvider = tx =>
   getTransitionsToState(STATE_DELIVERD_BY_PROVIDER).includes(txLastTransition(tx));
 
-export const txIsWaitingForDeliveryAfterExpire = tx =>
-  getTransitionsToState(STATE_WAITING_FOR_DELIVERY_AFTER_EXPIRE).includes(txLastTransition(tx));
+
+export const txIsRevision= tx =>
+  getTransitionsToState(STATE_REVISION).includes(txLastTransition(tx));
+
+
+
 
 export const txIsCompletePayment = tx =>
   getTransitionsToState(STATE_COMPLETE_PAYMENT).includes(txLastTransition(tx));

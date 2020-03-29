@@ -38,7 +38,7 @@ import {
   completeByProvider,
   completeByTheProviderAfterExpire,
   completeByProviderInCancelPending,
-  customerCancelAfterExpire, acceptByCustomer, declinedByCustomer,
+  customerCancelAfterExpire, acceptByCustomer, askingForRevision, completeRevision,
 } from './TransactionPage.duck';
 import css from './TransactionPage.css';
 
@@ -81,18 +81,19 @@ export const TransactionPageComponent = props => {
 
     completeByProviderInProgress,
     acceptByCustomerInProgress,
-    declinedByCustomerInProgress,
+    askingForRevisionInProgress,
     completeByProviderInCancelPendingInProgress,
     customerCancelAfterExpireInProgress,
     completeByTheProviderAfterExpireInProgress,
+    completeRevisionInProgress,
 
     completeByProviderError,
     acceptByCustomerError,
-    declinedByCustomerError,
+    askingForRevisionError,
     completeByProviderInCancelPendingError,
     customerCancelAfterExpireError,
     completeByTheProviderAfterExpireError,
-
+    completeRevisionError,
 
 
     onComplete,
@@ -100,7 +101,8 @@ export const TransactionPageComponent = props => {
     onCompleteByProviderInCancelPending,
     onCompleteByProviderAfterExpire,
     onAcceptByCustomer,
-    onDeclinedByCustomer,
+    onAskingForRevision,
+    onCompleteRevision,
 
     onDeclineSale,
     timeSlots,
@@ -270,23 +272,26 @@ export const TransactionPageComponent = props => {
       onCompleteByProviderInCancelPending={onCompleteByProviderInCancelPending}
       onCompleteByProviderAfterExpire={onCompleteByProviderAfterExpire}
       onAcceptByCustomer={onAcceptByCustomer}
-      onDeclinedByCustomer={onDeclinedByCustomer}
+      onAskingForRevision={onAskingForRevision}
+      onCompleteRevision={onCompleteRevision}
+
 
 
       completeByProviderInProgress={completeByProviderInProgress}
       acceptByCustomerInProgress={acceptByCustomerInProgress}
-      declinedByCustomerInProgress={declinedByCustomerInProgress}
+      askingForRevisionInProgress={askingForRevisionInProgress}
       completeByProviderInCancelPendingInProgress={completeByProviderInCancelPendingInProgress}
       customerCancelAfterExpireInProgress={customerCancelAfterExpireInProgress}
       completeByTheProviderAfterExpireInProgress={completeByTheProviderAfterExpireInProgress}
+      completeRevisionInProgress={completeRevisionInProgress}
 
       completeByProviderError={completeByProviderError}
       acceptByCustomerError={acceptByCustomerError}
-      declinedByCustomerError={declinedByCustomerError}
+      askingForRevisionError={askingForRevisionError}
       completeByProviderInCancelPendingError={completeByProviderInCancelPendingError}
       customerCancelAfterExpireError={customerCancelAfterExpireError}
       completeByTheProviderAfterExpireError={completeByTheProviderAfterExpireError}
-
+      completeRevisionError={completeRevisionError}
 
 
 
@@ -357,7 +362,8 @@ TransactionPageComponent.propTypes = {
   onCompleteByProviderInCancelPending: func.isRequired,
   onCompleteByProviderAfterExpire: func.isRequired,
   onAcceptByCustomer: func.isRequired,
-  onDeclinedByCustomer: func.isRequired,
+  onAskingForRevision: func.isRequired,
+  onCompleteRevision: func.isRequired,
 
   onDeclineSale: func.isRequired,
   scrollingDisabled: bool.isRequired,
@@ -397,17 +403,19 @@ const mapStateToProps = state => {
     acceptInProgress,
     completeByProviderInProgress,
     acceptByCustomerInProgress,
-    declinedByCustomerInProgress,
+    askingForRevisionInProgress,
     completeByProviderInCancelPendingInProgress,
     customerCancelAfterExpireInProgress,
     completeByTheProviderAfterExpireInProgress,
+    completeRevisionInProgress,
 
     completeByProviderError,
     acceptByCustomerError,
-    declinedByCustomerError,
+    askingForRevisionError,
     completeByProviderInCancelPendingError,
     customerCancelAfterExpireError,
     completeByTheProviderAfterExpireError,
+    completeRevisionError,
 
     declineInProgress,
     transactionRef,
@@ -439,14 +447,16 @@ const mapStateToProps = state => {
     acceptInProgress,
     completeByProviderInProgress,
     acceptByCustomerInProgress,
-    declinedByCustomerInProgress,
+    askingForRevisionInProgress,
     completeByProviderInCancelPendingInProgress,
     customerCancelAfterExpireInProgress,
     completeByTheProviderAfterExpireInProgress,
+    completeRevisionInProgress,
+    completeRevisionError,
 
     completeByProviderError,
     acceptByCustomerError,
-    declinedByCustomerError,
+    askingForRevisionError,
     completeByProviderInCancelPendingError,
     customerCancelAfterExpireError,
     completeByTheProviderAfterExpireError,
@@ -477,7 +487,8 @@ const mapDispatchToProps = dispatch => {
     onCompleteByProviderInCancelPending: transactionId => dispatch(completeByProviderInCancelPending(transactionId)),
     onCompleteByProviderAfterExpire: transactionId => dispatch(customerCancelAfterExpire(transactionId)),
     onAcceptByCustomer: transactionId => dispatch(acceptByCustomer(transactionId)),
-    onDeclinedByCustomer: transactionId => dispatch(declinedByCustomer(transactionId)),
+    onAskingForRevision: transactionId => dispatch(askingForRevision(transactionId)),
+    onCompleteRevision: transactionId => dispatch(completeRevision(transactionId)),
 
 
     onComplete: transactionId => dispatch(completeByProvider(transactionId)),

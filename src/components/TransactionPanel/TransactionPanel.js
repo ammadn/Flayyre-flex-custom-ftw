@@ -12,10 +12,8 @@ import {
   txIsPaymentPending,
   txIsRequested,
   txHasBeenDelivered,
-  txIsPendingCancelByCustomer,
-  txIsWaitingForDeliveryAfterExpire,
   txIsDeliveredByProvider,
-  txIsDeliveryAcceptByCustomer,
+  txIsDeliveryAcceptByCustomer, txIsRevision,
 } from '../../util/transaction';
 import { LINE_ITEM_NIGHT, LINE_ITEM_DAY, propTypes } from '../../util/types';
 import {
@@ -63,8 +61,8 @@ import SaleAcctionButtonSingle from './SaleAcctionButtonSingle';
 
 // Helper function to get display names for different roles
 const displayNames = (currentUser, currentProvider, currentCustomer, intl) => {
-  const authorDisplayName = <UserDisplayName user={currentProvider} intl={intl} />;
-  const customerDisplayName = <UserDisplayName user={currentCustomer} intl={intl} />;
+  const authorDisplayName = <UserDisplayName user={currentProvider} intl={intl}/>;
+  const customerDisplayName = <UserDisplayName user={currentCustomer} intl={intl}/>;
 
   let otherUserDisplayName = '';
   let otherUserDisplayNameString = '';
@@ -197,24 +195,26 @@ export class TransactionPanelComponent extends Component {
       onCompleteByProviderInCancelPending,
       onCompleteByProviderAfterExpire,
       onAcceptByCustomer,
-      onDeclinedByCustomer,
-
+      onAskingForRevision,
+      onCompleteRevision,
 
 
       completeByProviderInProgress,
       acceptByCustomerInProgress,
-      declinedByCustomerInProgress,
+      askingForRevisionInProgress,
       completeByProviderInCancelPendingInProgress,
       customerCancelAfterExpireInProgress,
       completeByTheProviderAfterExpireInProgress,
+      completeRevisionInProgress,
+
 
       completeByProviderError,
       acceptByCustomerError,
-      declinedByCustomerError,
+      askingForRevisionError,
       completeByProviderInCancelPendingError,
       customerCancelAfterExpireError,
       completeByTheProviderAfterExpireError,
-
+      completeRevisionError,
 
 
       onDeclineSale,
@@ -252,8 +252,8 @@ export class TransactionPanelComponent extends Component {
       if (txIsEnquired(tx)) {
         const transitions = Array.isArray(nextTransitions)
           ? nextTransitions.map(transition => {
-              return transition.attributes.name;
-            })
+            return transition.attributes.name;
+          })
           : [];
         const hasCorrectNextTransition =
           transitions.length > 0 && transitions.includes(TRANSITION_REQUEST_PAYMENT_AFTER_ENQUIRY);
@@ -294,19 +294,19 @@ export class TransactionPanelComponent extends Component {
           headingState: HEADING_CANCELED,
           showDetailCardHeadings: isCustomer,
         };
-      } else if (txIsPendingCancelByCustomer(tx)) {
-        return {
-          headingState: HEADING_PENDING_CANCEL,
-          showCancelButtonForCus: isCustomer,
-          showCompleteInPending:isProvider
-        };
-      } else if (txIsWaitingForDeliveryAfterExpire(tx)) {
-        return {
-          headingState: HEADING_WAITING_FOR_DELIVERY_AFTER_EXPIRE,
-          showCompleteButtonAfterExpire: isProvider,
-        };
+        // } else if (txIsPendingCancelByCustomer(tx)) {
+        //   return {
+        //     headingState: HEADING_PENDING_CANCEL,
+        //     showCancelButtonForCus: isCustomer,
+        //     showCompleteInPending:isProvider
+        //   };
+        // } else if (txIsWaitingForDeliveryAfterExpire(tx)) {
+        //   return {
+        //     headingState: HEADING_WAITING_FOR_DELIVERY_AFTER_EXPIRE,
+        //     showCompleteButtonAfterExpire: isProvider,
+        //   };
       } else if (txIsDeliveredByProvider(tx)) {
-        console.log("DeliverdByProvider");
+        console.log('DeliverdByProvider');
         return {
           headingState: HEADING_DELIVERD_BY_PROVIDER,
           showAcceptButtonForCustomer: isCustomer,
@@ -317,6 +317,12 @@ export class TransactionPanelComponent extends Component {
           headingState: HEADING_DELIVERY_ACCEPTED,
           showDetailCardHeadings: isCustomer,
           showAddress: isCustomer,
+        };
+      } else if (txIsRevision(tx)) {
+        return {
+          headingState: HEADING_DECLINED,
+          showDetailCardHeadings: isCustomer,
+          showCompleteRevisionButton: isProvider,
         };
       } else if (txHasBeenDelivered(tx)) {
         return {
@@ -354,8 +360,8 @@ export class TransactionPanelComponent extends Component {
     const unitTranslationKey = isNightly
       ? 'TransactionPanel.perNight'
       : isDaily
-      ? 'TransactionPanel.perDay'
-      : 'TransactionPanel.perUnit';
+        ? 'TransactionPanel.perDay'
+        : 'TransactionPanel.perUnit';
 
     const price = currentListing.attributes.price;
     const bookingSubTitle = price
@@ -388,6 +394,19 @@ export class TransactionPanelComponent extends Component {
         btnMsg="Complete Delivery"
       />
     );
+
+    const CompleteRevisionButton = (
+      <SaleAcctionButtonSingle
+        showButtons={stateData.showCompleteRevisionButton}
+        acceptInProgress={completeRevisionInProgress}
+        declineInProgress={declineInProgress}
+        acceptSaleError={completeRevisionError}
+        declineSaleError={declineSaleError}
+        onAcceptSale={() => onComplete(currentTransaction.id)}
+        btnMsg="Complete Revision"
+      />
+    );
+
 
     const customerCancelAfterExpireButton = (
       <SaleAcctionButtonSingle
@@ -430,11 +449,11 @@ export class TransactionPanelComponent extends Component {
       <SaleActionButtonsMaybe
         showButtons={stateData.showAcceptButtonForCustomer}
         acceptInProgress={acceptByCustomerInProgress}
-        declineInProgress={declinedByCustomerInProgress}
+        declineInProgress={askingForRevisionInProgress}
         acceptSaleError={acceptByCustomerError}
-        declineSaleError={declinedByCustomerError}
+        declineSaleError={askingForRevisionError}
         onAcceptSale={() => onAcceptByCustomer(currentTransaction.id)}
-        onDeclineSale={() => onDeclinedByCustomer(currentTransaction.id)}
+        onDeclineSale={() => onAskingForRevision(currentTransaction.id)}
       />
     );
 
@@ -443,7 +462,7 @@ export class TransactionPanelComponent extends Component {
 
     const sendMessagePlaceholder = intl.formatMessage(
       { id: 'TransactionPanel.sendMessagePlaceholder' },
-      { name: otherUserDisplayNameString }
+      { name: otherUserDisplayNameString },
     );
 
     const sendingMessageNotAllowed = intl.formatMessage({
@@ -452,7 +471,7 @@ export class TransactionPanelComponent extends Component {
 
     const paymentMethodsPageLink = (
       <NamedLink name="PaymentMethodsPage">
-        <FormattedMessage id="TransactionPanel.paymentMethodsPageLink" />
+        <FormattedMessage id="TransactionPanel.paymentMethodsPageLink"/>
       </NamedLink>
     );
 
@@ -472,7 +491,7 @@ export class TransactionPanelComponent extends Component {
             />
             {isProvider ? (
               <div className={css.avatarWrapperProviderDesktop}>
-                <AvatarLarge user={currentCustomer} className={css.avatarDesktop} />
+                <AvatarLarge user={currentCustomer} className={css.avatarDesktop}/>
               </div>
             ) : null}
 
@@ -494,7 +513,7 @@ export class TransactionPanelComponent extends Component {
                 geolocation={geolocation}
                 showAddress={stateData.showAddress}
               />
-              <BreakdownMaybe transaction={currentTransaction} transactionRole={transactionRole} />
+              <BreakdownMaybe transaction={currentTransaction} transactionRole={transactionRole}/>
             </div>
 
             {savePaymentMethodFailed ? (
@@ -587,23 +606,28 @@ export class TransactionPanelComponent extends Component {
 
               {stateData.showCompleteButton ? (
                 <div>{CompleteButton}</div>
-              ):null}
+              ) : null}
 
-              {stateData.showCancelButtonForCus ? (
-                <div>{customerCancelAfterExpireButton}</div>
-              ):null}
+              {/*{stateData.showCancelButtonForCus ? (*/}
+              {/*  <div>{customerCancelAfterExpireButton}</div>*/}
+              {/*):null}*/}
 
-              {stateData.showCompleteInPending ? (
-                <div>{completeAfterExpireInCancelPendingButton}</div>
-              ):null}
+              {/*{stateData.showCompleteInPending ? (*/}
+              {/*  <div>{completeAfterExpireInCancelPendingButton}</div>*/}
+              {/*):null}*/}
 
-              {stateData.showCompleteButtonAfterExpire ? (
-                <div>{completeAfterExpireButton}</div>
-              ):null}
+              {/*{stateData.showCompleteButtonAfterExpire ? (*/}
+              {/*  <div>{completeAfterExpireButton}</div>*/}
+              {/*):null}*/}
 
               {stateData.showAcceptButtonForCustomer ? (
                 <div>{customerSaleButtons}</div>
-              ):null}
+              ) : null}
+
+
+              {stateData.showCompleteRevisionButton ? (
+                <div>{CompleteRevisionButton}</div>
+              ) : null}
             </div>
           </div>
         </div>
@@ -667,7 +691,7 @@ TransactionPanelComponent.propTypes = {
 
   // Sale related props
   onAcceptSale: func.isRequired,
-  onDeclineSale: func.isRequired,
+  onAskingForRevision: func.isRequired,
   acceptInProgress: bool.isRequired,
   declineInProgress: bool.isRequired,
   acceptSaleError: propTypes.error,
