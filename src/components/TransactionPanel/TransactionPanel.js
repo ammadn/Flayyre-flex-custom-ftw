@@ -58,6 +58,7 @@ import PanelHeading, {
 
 import css from './TransactionPanel.css';
 import SaleAcctionButtonSingle from './SaleAcctionButtonSingle';
+import TwoActionButtons from './TwoActionButtons';
 
 // Helper function to get display names for different roles
 const displayNames = (currentUser, currentProvider, currentCustomer, intl) => {
@@ -446,7 +447,7 @@ export class TransactionPanelComponent extends Component {
 
 
     const customerSaleButtons = (
-      <SaleActionButtonsMaybe
+      <TwoActionButtons
         showButtons={stateData.showAcceptButtonForCustomer}
         acceptInProgress={acceptByCustomerInProgress}
         declineInProgress={askingForRevisionInProgress}
@@ -454,6 +455,8 @@ export class TransactionPanelComponent extends Component {
         declineSaleError={askingForRevisionError}
         onAcceptSale={() => onAcceptByCustomer(currentTransaction.id)}
         onDeclineSale={() => onAskingForRevision(currentTransaction.id)}
+        primaryLable="Accept"
+        SecondryLable="Ask for revision"
       />
     );
 
