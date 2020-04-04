@@ -198,6 +198,7 @@ export class TransactionPanelComponent extends Component {
       onAcceptByCustomer,
       onAskingForRevision,
       onCompleteRevision,
+      onCancelByCustomer,
 
 
       completeByProviderInProgress,
@@ -207,7 +208,7 @@ export class TransactionPanelComponent extends Component {
       customerCancelAfterExpireInProgress,
       completeByTheProviderAfterExpireInProgress,
       completeRevisionInProgress,
-
+      cancelByCustomerInProgress,
 
       completeByProviderError,
       acceptByCustomerError,
@@ -216,7 +217,7 @@ export class TransactionPanelComponent extends Component {
       customerCancelAfterExpireError,
       completeByTheProviderAfterExpireError,
       completeRevisionError,
-
+      cancelByCustomerError,
 
       onDeclineSale,
       acceptInProgress,
@@ -273,10 +274,12 @@ export class TransactionPanelComponent extends Component {
           showDetailCardHeadings: isCustomer,
         };
       } else if (txIsRequested(tx)) {
+        // console.log("requested");
         return {
           headingState: HEADING_REQUESTED,
           showDetailCardHeadings: isCustomer,
           showSaleButtons: isProvider && !isCustomerBanned,
+          showCancelButtons: isCustomer,
         };
       } else if (txIsAccepted(tx)) {
         return {
@@ -444,7 +447,17 @@ export class TransactionPanelComponent extends Component {
         btnMsg="Complete Delivery"
       />
     );
-
+    const customerCancelButton = (
+      <SaleAcctionButtonSingle
+        showButtons={stateData.showCancelButtons}
+        acceptInProgress={cancelByCustomerInProgress}
+        declineInProgress={declineInProgress}
+        acceptSaleError={customerCancelAfterExpireError}
+        declineSaleError={cancelByCustomerError}
+        onAcceptSale={() => onCancelByCustomer(currentTransaction.id)}
+        btnMsg="Cancel Order"
+      />
+    );
 
     const customerSaleButtons = (
       <TwoActionButtons
@@ -628,8 +641,8 @@ export class TransactionPanelComponent extends Component {
               ) : null}
 
 
-              {stateData.showCompleteRevisionButton ? (
-                <div>{CompleteRevisionButton}</div>
+              {stateData.showCancelButtons ? (
+                <div>{customerCancelButton}</div>
               ) : null}
             </div>
           </div>
@@ -688,6 +701,7 @@ TransactionPanelComponent.propTypes = {
   onSendMessage: func.isRequired,
   onSendReview: func.isRequired,
   onSubmitBookingRequest: func.isRequired,
+  onCancelByCustomer: func.isRequired,
   timeSlots: arrayOf(propTypes.timeSlot),
   fetchTimeSlotsError: propTypes.error,
   nextTransitions: array,

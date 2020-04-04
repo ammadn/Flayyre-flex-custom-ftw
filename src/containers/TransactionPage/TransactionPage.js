@@ -84,6 +84,7 @@ export const TransactionPageComponent = props => {
     customerCancelAfterExpireInProgress,
     completeByTheProviderAfterExpireInProgress,
     completeRevisionInProgress,
+    cancelByCustomerInProgress,
 
     completeByProviderError,
     acceptByCustomerError,
@@ -92,6 +93,7 @@ export const TransactionPageComponent = props => {
     customerCancelAfterExpireError,
     completeByTheProviderAfterExpireError,
     completeRevisionError,
+    cancelByCustomerError,
 
 
     onComplete,
@@ -101,7 +103,7 @@ export const TransactionPageComponent = props => {
     onAcceptByCustomer,
     onAskingForRevision,
     onCompleteRevision,
-    oncCancelByCustomer,
+    onCancelByCustomer,
 
     onDeclineSale,
     timeSlots,
@@ -273,9 +275,9 @@ export const TransactionPageComponent = props => {
       onAcceptByCustomer={onAcceptByCustomer}
       onAskingForRevision={onAskingForRevision}
       onCompleteRevision={onCompleteRevision}
-      oncCancelByCustomer={oncCancelByCustomer}
+      onCancelByCustomer={onCancelByCustomer}
 
-
+      cancelByCustomerInProgress={cancelByCustomerInProgress}
       completeByProviderInProgress={completeByProviderInProgress}
       acceptByCustomerInProgress={acceptByCustomerInProgress}
       askingForRevisionInProgress={askingForRevisionInProgress}
@@ -284,6 +286,7 @@ export const TransactionPageComponent = props => {
       completeByTheProviderAfterExpireInProgress={completeByTheProviderAfterExpireInProgress}
       completeRevisionInProgress={completeRevisionInProgress}
 
+      cancelByCustomerError={cancelByCustomerError}
       completeByProviderError={completeByProviderError}
       acceptByCustomerError={acceptByCustomerError}
       askingForRevisionError={askingForRevisionError}
@@ -355,7 +358,7 @@ TransactionPageComponent.propTypes = {
   declineInProgress: bool.isRequired,
   onAcceptSale: func.isRequired,
   onComplete: func.isRequired,
-
+  onCancelByCustomer: func.isRequired,
 
   onCustomerCancelAfterExpire: func.isRequired,
   onCompleteByProviderInCancelPending: func.isRequired,
@@ -492,7 +495,7 @@ const mapDispatchToProps = dispatch => {
     onAcceptByCustomer: transactionId => dispatch(acceptByCustomer(transactionId)),
     onAskingForRevision: transactionId => dispatch(askingForRevision(transactionId)),
     onCompleteRevision: transactionId => dispatch(completeRevision(transactionId)),
-    oncCancelByCustomer: transactionId => dispatch(cancelByCustomer(transactionId)),
+    onCancelByCustomer: transactionId => dispatch(cancelByCustomer(transactionId)),
 
 
 
