@@ -36,7 +36,7 @@ import {
   sendReview,
   fetchMoreMessages,
   completeByProvider,
- acceptByCustomer, askingForRevision, completeRevision,
+  acceptByCustomer, askingForRevision, completeRevision, cancelByCustomer,
 } from './TransactionPage.duck';
 import css from './TransactionPage.css';
 
@@ -101,6 +101,7 @@ export const TransactionPageComponent = props => {
     onAcceptByCustomer,
     onAskingForRevision,
     onCompleteRevision,
+    oncCancelByCustomer,
 
     onDeclineSale,
     timeSlots,
@@ -272,7 +273,7 @@ export const TransactionPageComponent = props => {
       onAcceptByCustomer={onAcceptByCustomer}
       onAskingForRevision={onAskingForRevision}
       onCompleteRevision={onCompleteRevision}
-
+      oncCancelByCustomer={oncCancelByCustomer}
 
 
       completeByProviderInProgress={completeByProviderInProgress}
@@ -406,6 +407,7 @@ const mapStateToProps = state => {
     customerCancelAfterExpireInProgress,
     completeByTheProviderAfterExpireInProgress,
     completeRevisionInProgress,
+    cancelByCustomerInProgress,
 
     completeByProviderError,
     acceptByCustomerError,
@@ -414,6 +416,7 @@ const mapStateToProps = state => {
     customerCancelAfterExpireError,
     completeByTheProviderAfterExpireError,
     completeRevisionError,
+    cancelByCustomerError,
 
     declineInProgress,
     transactionRef,
@@ -444,6 +447,7 @@ const mapStateToProps = state => {
     declineSaleError,
     acceptInProgress,
     completeByProviderInProgress,
+    cancelByCustomerInProgress,
     acceptByCustomerInProgress,
     askingForRevisionInProgress,
     completeByProviderInCancelPendingInProgress,
@@ -451,6 +455,7 @@ const mapStateToProps = state => {
     completeByTheProviderAfterExpireInProgress,
     completeRevisionInProgress,
     completeRevisionError,
+    cancelByCustomerError,
 
     completeByProviderError,
     acceptByCustomerError,
@@ -487,6 +492,8 @@ const mapDispatchToProps = dispatch => {
     onAcceptByCustomer: transactionId => dispatch(acceptByCustomer(transactionId)),
     onAskingForRevision: transactionId => dispatch(askingForRevision(transactionId)),
     onCompleteRevision: transactionId => dispatch(completeRevision(transactionId)),
+    oncCancelByCustomer: transactionId => dispatch(cancelByCustomer(transactionId)),
+
 
 
     onComplete: transactionId => dispatch(completeByProvider(transactionId)),
