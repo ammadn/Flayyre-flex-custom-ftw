@@ -63,6 +63,7 @@ export const TRANSITION_COMPLETE_PAYMENT_AFTER_DELIVARY = 'transition/complete-p
 
 export const TRANSITION_ASK_FOR_REVISION= 'transition/asking-for-revision';
 export const TRANSITION_COMPLETE_REVISION= 'transition/complete-revision';
+export const TRANSITION_CANCEL_BY_CUSTOMER = 'transition/cancel-by-customer';
 
 
 /**
@@ -160,6 +161,7 @@ const stateDescription = {
         [TRANSITION_DECLINE]: STATE_DECLINED,
         [TRANSITION_EXPIRE]: STATE_DECLINED,
         [TRANSITION_ACCEPT]: STATE_ACCEPTED,
+        [TRANSITION_CANCEL_BY_CUSTOMER]: STATE_DECLINED,
       },
     },
 

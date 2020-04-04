@@ -13,7 +13,10 @@ import {
   TRANSITION_ACCEPT,
   TRANSITION_DECLINE,
   TRANSITION_COMPLETE,
-  TRANSITION_ACCEPT_BY_CUSTOMER, TRANSITION_ASK_FOR_REVISION, TRANSITION_COMPLETE_REVISION,
+  TRANSITION_ACCEPT_BY_CUSTOMER,
+  TRANSITION_ASK_FOR_REVISION,
+  TRANSITION_COMPLETE_REVISION,
+  TRANSITION_CANCEL_BY_CUSTOMER,
 } from '../../util/transaction';
 import * as log from '../../util/log';
 import {
@@ -48,6 +51,10 @@ export const ACCEPT_SALE_ERROR = 'app/TransactionPage/ACCEPT_SALE_ERROR';
 export const DECLINE_SALE_REQUEST = 'app/TransactionPage/DECLINE_SALE_REQUEST';
 export const DECLINE_SALE_SUCCESS = 'app/TransactionPage/DECLINE_SALE_SUCCESS';
 export const DECLINE_SALE_ERROR = 'app/TransactionPage/DECLINE_SALE_ERROR';
+
+export const CENCEL_SALE_BY_CUSTOMER_REQUEST = 'app/TransactionPage/CENCEL_SALE_BY_CUSTOMER_REQUEST';
+export const CENCEL_SALE_BY_CUSTOMER_SUCCESS = 'app/TransactionPage/CENCEL_SALE_BY_CUSTOMER_SUCCESS';
+export const CENCEL_SALE_BY_CUSTOMER_ERROR = 'app/TransactionPage/CENCEL_SALE_BY_CUSTOMER_ERROR';
 
 export const FETCH_MESSAGES_REQUEST = 'app/TransactionPage/FETCH_MESSAGES_REQUEST';
 export const FETCH_MESSAGES_SUCCESS = 'app/TransactionPage/FETCH_MESSAGES_SUCCESS';
@@ -113,6 +120,7 @@ const initialState = {
   completeByProviderInCancelPendingInProgress: false,
   customerCancelAfterExpireInProgress: false,
   completeByTheProviderAfterExpireInProgress: false,
+  cancelByCustomerInProgress:false,
 
   completeByProviderError: null,
   acceptByCustomerError: null,
@@ -120,6 +128,7 @@ const initialState = {
   completeByProviderInCancelPendingError: null,
   customerCancelAfterExpireError: null,
   completeByTheProviderAfterExpireError: null,
+  cancelByCustomerError:null,
 
 
   acceptSaleError: null,
@@ -261,6 +270,16 @@ export default function checkoutPageReducer(state = initialState, action = {}) {
     case DECLINE_SALE_ERROR:
       return { ...state, declineInProgress: false, declineSaleError: payload };
 
+
+    case CENCEL_SALE_BY_CUSTOMER_REQUEST:
+      return { ...state, cancelByCustomerInProgress: true, cancelByCustomerError: null };
+    case CENCEL_SALE_BY_CUSTOMER_SUCCESS:
+      return { ...state, cancelByCustomerInProgress: false };
+    case CENCEL_SALE_BY_CUSTOMER_ERROR:
+      return { ...state, cancelByCustomerInProgress: false, cancelByCustomerError: payload };
+
+
+
     case FETCH_MESSAGES_REQUEST:
       return { ...state, fetchMessagesInProgress: true, fetchMessagesError: null };
     case FETCH_MESSAGES_SUCCESS: {
@@ -390,6 +409,14 @@ const declineSaleRequest = () => ({ type: DECLINE_SALE_REQUEST });
 const declineSaleSuccess = () => ({ type: DECLINE_SALE_SUCCESS });
 const declineSaleError = e => ({ type: DECLINE_SALE_ERROR, error: true, payload: e });
 
+
+
+const cencelSaleByCustomerRequest = () => ({ type: CENCEL_SALE_BY_CUSTOMER_REQUEST });
+const cencelSaleByCustomerSuccess = () => ({ type: CENCEL_SALE_BY_CUSTOMER_SUCCESS });
+const cencelSaleByCustomerError = e => ({ type: CENCEL_SALE_BY_CUSTOMER_ERROR, error: true, payload: e });
+
+
+
 const fetchMessagesRequest = () => ({ type: FETCH_MESSAGES_REQUEST });
 const fetchMessagesSuccess = (messages, pagination) => ({
   type: FETCH_MESSAGES_SUCCESS,
@@ -515,6 +542,28 @@ export const acceptSale = id => (dispatch, getState, sdk) => {
     });
 };
 
+export const cancelByCustomer = id => (dispatch, getState, sdk) => {
+
+  dispatch(cencelSaleByCustomerRequest());
+  console.log('accept', id);
+  console.log('sdk accept', sdk);
+  return sdk.transactions
+    .transition({ id, transition: TRANSITION_CANCEL_BY_CUSTOMER, params: {} }, { expand: true })
+    .then(response => {
+      dispatch(addMarketplaceEntities(response));
+      dispatch(cencelSaleByCustomerSuccess());
+      dispatch(fetchCurrentUserNotifications());
+      return response;
+    })
+    .catch(e => {
+      dispatch(cencelSaleByCustomerError(e));
+      log.error(e, 'accept-sale-failed', {
+        txId: id,
+        transition: TRANSITION_CANCEL_BY_CUSTOMER,
+      });
+      throw e;
+    });
+};
 
 export const completeByProvider = id => (dispatch, getState, sdk) => {
 
