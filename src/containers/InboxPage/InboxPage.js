@@ -12,7 +12,7 @@ import {
   txIsRequested,
   txHasBeenDelivered,
   txIsPaymentExpired,
-  txIsPaymentPending,
+  txIsPaymentPending, txIsReviewed, txIsDeliveryAcceptByCustomer, txIsCompletePayment,
 } from '../../util/transaction';
 import { propTypes, DATE_TYPE_DATE } from '../../util/types';
 import { ensureCurrentUser } from '../../util/data';
@@ -147,7 +147,37 @@ export const txState = (intl, tx, type) => {
         id: 'InboxPage.stateDelivered',
       }),
     };
-  } else {
+  }else if (txIsReviewed(tx)) {
+    return {
+      nameClassName: css.nameNotEmphasized,
+      bookingClassName: css.bookingNoActionNeeded,
+      lastTransitionedAtClassName: css.lastTransitionedAtNotEmphasized,
+      stateClassName: css.stateNoActionNeeded,
+      state: intl.formatMessage({
+        id: 'completed and reviewed',
+      }),
+    };
+  } else if (txIsDeliveryAcceptByCustomer(tx)) {
+    return {
+      nameClassName: css.nameNotEmphasized,
+      bookingClassName: css.bookingNoActionNeeded,
+      lastTransitionedAtClassName: css.lastTransitionedAtNotEmphasized,
+      stateClassName: css.stateNoActionNeeded,
+      state: intl.formatMessage({
+        id: 'delivery accepted',
+      }),
+    };
+  } else if (txIsCompletePayment(tx)) {
+    return {
+      nameClassName: css.nameNotEmphasized,
+      bookingClassName: css.bookingNoActionNeeded,
+      lastTransitionedAtClassName: css.lastTransitionedAtNotEmphasized,
+      stateClassName: css.stateNoActionNeeded,
+      state: intl.formatMessage({
+        id: 'completed',
+      }),
+    };
+  }  else {
     console.warn('This transition is unknown:', tx.attributes.lastTransition);
     return null;
   }

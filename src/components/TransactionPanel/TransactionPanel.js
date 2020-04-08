@@ -13,7 +13,7 @@ import {
   txIsRequested,
   txHasBeenDelivered,
   txIsDeliveredByProvider,
-  txIsDeliveryAcceptByCustomer, txIsRevision,
+  txIsDeliveryAcceptByCustomer, txIsRevision, txIsReviewed,
 } from '../../util/transaction';
 import { LINE_ITEM_NIGHT, LINE_ITEM_DAY, propTypes } from '../../util/types';
 import {
@@ -310,7 +310,7 @@ export class TransactionPanelComponent extends Component {
         //     showCompleteButtonAfterExpire: isProvider,
         //   };
       } else if (txIsDeliveredByProvider(tx)) {
-        console.log('DeliverdByProvider');
+
         return {
           headingState: HEADING_DELIVERD_BY_PROVIDER,
           showAcceptButtonForCustomer: isCustomer,
@@ -334,7 +334,14 @@ export class TransactionPanelComponent extends Component {
           showDetailCardHeadings: isCustomer,
           showAddress: isCustomer,
         };
-      } else {
+      }else if (txIsReviewed(tx)) {
+        return {
+          headingState: HEADING_DELIVERED,
+          showDetailCardHeadings: isCustomer,
+          showAddress: isCustomer,
+        };
+      }
+      else {
         return { headingState: 'unknown' };
       }
     };

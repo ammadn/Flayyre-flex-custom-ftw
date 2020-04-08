@@ -26,7 +26,7 @@ import {
   txRoleIsProvider,
   txRoleIsCustomer,
   getUserTxRole,
-  isRelevantPastTransition, TRANSITION_ACCEPT_BY_CUSTOMER, txIsDeliveryAcceptByCustomer,
+  isRelevantPastTransition, TRANSITION_ACCEPT_BY_CUSTOMER, txIsDeliveryAcceptByCustomer, txIsCompletePayment,
 } from '../../util/transaction';
 import { propTypes } from '../../util/types';
 import * as log from '../../util/log';
@@ -245,7 +245,7 @@ const Transition = props => {
 
   let reviewComponent = null;
 
-  if (transitionIsReviewed(lastTransition)) {
+  if (transitionIsReviewed(lastTransition)||txIsCompletePayment(lastTransition)) {
     if (isCustomerReview(currentTransition)) {
       const review = reviewByAuthorId(currentTransaction, customer.id);
       reviewComponent = (

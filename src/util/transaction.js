@@ -373,6 +373,7 @@ export const isRelevantPastTransition = transition => {
     TRANSITION_REVIEW_1_BY_PROVIDER,
     TRANSITION_REVIEW_2_BY_CUSTOMER,
     TRANSITION_REVIEW_2_BY_PROVIDER,
+    TRANSITION_COMPLETE_PAYMENT_AFTER_DELIVARY
   ].includes(transition);
 };
 
