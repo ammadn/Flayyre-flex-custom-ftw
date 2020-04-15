@@ -39,7 +39,7 @@ const locationLink = (name, searchQuery) => {
     }
 
   }
-  console.log('images', images[1]);
+  // console.log('images', images[1]);
 
   const nameText = <div>{name}</div>;
   return (
@@ -68,7 +68,7 @@ export class TypesOfInfluencers extends Component {
   }
 
   render() {
-    console.log(this.props.categories);
+    // console.log(this.props.categories);
     const { rootClassName, className } = this.props;
     const classes = classNames(rootClassName, className);
 

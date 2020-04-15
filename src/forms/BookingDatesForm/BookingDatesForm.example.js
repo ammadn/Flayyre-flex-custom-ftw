@@ -10,7 +10,7 @@ export const Form = {
   props: {
     unitType: LINE_ITEM_NIGHT,
     onSubmit: values => {
-      console.log('Submit BookingDatesForm with values:', values);
+      // console.log('Submit BookingDatesForm with values:', values);
     },
     price: new Money(1099, 'USD'),
   },

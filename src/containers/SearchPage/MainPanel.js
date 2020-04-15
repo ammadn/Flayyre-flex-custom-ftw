@@ -73,7 +73,7 @@ class MainPanel extends Component {
     const secondaryFilterParamNames = secondaryFilters
       ? Object.values(secondaryFilters).map(f => f.paramName)
       : [];
-
+console.log("listing",listings);
     return (
       <div className={classes}>
 

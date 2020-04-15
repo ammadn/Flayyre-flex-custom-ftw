@@ -241,8 +241,8 @@ export const convertMoneyToNumber = value => {
  * @return {String} formatted money value
  */
 export const formatMoney = (intl, value) => {
-  console.log('valueddd',value)
-  console.log('typeeee',Money)
+  // console.log('valueddd',value)
+  // console.log('typeeee',Money)
   // if (!(value instanceof Money)) {
   //   throw new Error('Value must be a Money type');
   // }

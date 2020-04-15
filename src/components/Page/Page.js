@@ -34,9 +34,11 @@ class PageComponent extends Component {
     this.scrollPosition = 0;
     this.contentDiv = null;
     this.scrollingDisabledChanged = this.scrollingDisabledChanged.bind(this);
+
   }
 
   componentDidMount() {
+
     // By default a dropped file is loaded in the browser window as a
     // file URL. We want to prevent this since it might loose a lot of
     // data the user has typed but not yet saved. Preventing requires
@@ -198,6 +200,7 @@ class PageComponent extends Component {
           <meta httpEquiv="Content-Language" content={intl.locale} />
           {metaTags}
           <script type="application/ld+json">{schemaArrayJSONString}</script>
+
         </Helmet>
         <CookieConsent />
         <div

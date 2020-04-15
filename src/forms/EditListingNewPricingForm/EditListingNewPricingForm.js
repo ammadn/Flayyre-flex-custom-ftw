@@ -91,7 +91,7 @@ export const EditListingPricingFormComponent = props => (
       const element = (item, key) => {
 
 
-        console.log('ptypeee', item);
+        // console.log('ptypeee', item);
         return (
 
           <div>
@@ -130,7 +130,7 @@ export const EditListingPricingFormComponent = props => (
               {(value, previous) => {
 
                 if (value === 'Others') {
-                  console.log('samee samee');
+                  // console.log('samee samee');
                   {
                     addOther(key, true);
                   }
@@ -169,7 +169,7 @@ export const EditListingPricingFormComponent = props => (
       };
 
 
-      console.log(values);
+      // console.log(values);
       const priceCom = (
 
         directPriceInputArray.map((item, key) =>
@@ -190,7 +190,7 @@ export const EditListingPricingFormComponent = props => (
           ) : null;
 
 
-      console.log('vaaaaa', fieldRenderProps.values);
+      // console.log('vaaaaa', fieldRenderProps.values);
       return (
         <Form onSubmit={handleSubmit} className={classes}>
           {updateListingError ? (

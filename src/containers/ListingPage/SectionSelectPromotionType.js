@@ -23,7 +23,7 @@ const SectionSelectPromotionType = props => (
 
       // console.log('pub', props.publicData);
 
-      console.log('pub data', props.publicData);
+      // console.log('pub data', props.publicData);
 
       const priceData = (price, intl) => {
         if (price && price.currency === config.currency) {

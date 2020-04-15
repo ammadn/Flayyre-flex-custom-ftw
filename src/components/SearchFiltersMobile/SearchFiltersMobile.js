@@ -226,8 +226,8 @@ class SearchFiltersMobileComponent extends Component {
 
 
     const handlePrice = (urlParam, range) => {
-      console.log('url parram',urlParam);
-      console.log('renge',range);
+      // console.log('url parram',urlParam);
+      // console.log('renge',range);
 
 
       const { minPrice, maxPrice } = range || {};
@@ -236,7 +236,7 @@ class SearchFiltersMobileComponent extends Component {
           ?(maxPrice!=1000 ?{ ...urlQueryParams, [urlParam]: `${minPrice},${maxPrice}` }:{ ...urlQueryParams, [urlParam]: `${minPrice},${'99999999999'}` })
           : omit(urlQueryParams, urlParam);
 
-      console.log('quary param',queryParams);
+      // console.log('quary param',queryParams);
       console.log(createResourceLocatorString('SearchPage', routeConfiguration(), {}, queryParams));
       history.push(createResourceLocatorString('SearchPage', routeConfiguration(), {}, queryParams));
     };

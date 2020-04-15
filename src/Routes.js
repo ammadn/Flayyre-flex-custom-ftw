@@ -30,6 +30,11 @@ const callLoadData = props => {
       .then(() => {
         // eslint-disable-next-line no-console
         console.log(`loadData success for ${name} route`);
+        console.log("funtions")
+        global.window.Intercom("boot", {
+          app_id: "ixgsu3hl"
+        });
+        global.window.Intercom("update");
       })
       .catch(e => {
         log.error(e, 'load-data-failed', { routeName: name });

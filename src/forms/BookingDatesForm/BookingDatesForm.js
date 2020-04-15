@@ -53,7 +53,7 @@ export class BookingDatesFormComponent extends Component {
 // converted into a string using toISOString() function.
     var B = dateobj.toISOString();
 
-    console.log('date value',this.state.dates);
+    // console.log('date value',this.state.dates);
     var increment=this.state.dates;
     this.props.onSubmit({
       'bookingDates': {
@@ -176,11 +176,11 @@ export class BookingDatesFormComponent extends Component {
             </div>
           ) : null;
           let total;
-          console.log('promotion2', promotions);
+          // console.log('promotion2', promotions);
           const findTotal = () => {
 
-            console.log('promotion2', promotions);
-            console.log('public data', publicData);
+            // console.log('promotion2', promotions);
+            // console.log('public data', publicData);
             total = 0;
 
             if (promotions.type === 'direct') {

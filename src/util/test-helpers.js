@@ -43,6 +43,7 @@ export const TestProvider = props => {
 // avoids the problem by not rendering the full tree but only the
 // relevant structure for the given component.
 export const renderShallow = component => {
+
   return toJson(shallow(component));
 };
 

@@ -6,6 +6,7 @@ import { withRouter } from 'react-router-dom';
 import { injectIntl, intlShape } from '../../util/reactIntl';
 import { isScrollingDisabled } from '../../ducks/UI.duck';
 import config from '../../config';
+
 import {
   Page,
   SectionHero,
@@ -35,7 +36,18 @@ export const LandingPageComponent = props => {
   const schemaDescription = intl.formatMessage({ id: 'LandingPage.schemaDescription' });
   const schemaImage = `${config.canonicalRootURL}${facebookImage}`;
 
+//   function test(){
+//     console.log("funtions")
+//     global.window.Intercom("boot", {
+//       app_id: "eoks2xnb"
+//     });
+//     window.Intercom("update");
+//   }
+// test();
+
+
   return (
+
     <Page
       className={css.root}
       scrollingDisabled={scrollingDisabled}
@@ -54,29 +66,30 @@ export const LandingPageComponent = props => {
         image: [schemaImage],
       }}
     >
+
       <LayoutSingleColumn>
         <LayoutWrapperTopbar>
-          <TopbarContainer />
+          <TopbarContainer/>
         </LayoutWrapperTopbar>
         <LayoutWrapperMain>
           <div className={css.heroContainer}>
-            <SectionHero className={css.hero} history={history} location={categories} />
+            <SectionHero className={css.hero} history={history} location={categories}/>
           </div>
           <ul className={css.sections}>
             <li className={css.section}>
               <div className={css.sectionContentFirstChild}>
-                <SectionLocations />
+                <SectionLocations/>
               </div>
             </li>
             <li className={css.section}>
               <div className={css.sectionContent}>
-                <SectionHowItWorks />
+                <SectionHowItWorks/>
               </div>
             </li>
           </ul>
         </LayoutWrapperMain>
         <LayoutWrapperFooter>
-          <Footer />
+          <Footer/>
         </LayoutWrapperFooter>
       </LayoutSingleColumn>
     </Page>
@@ -111,7 +124,7 @@ const mapStateToProps = state => {
 const LandingPage = compose(
   withRouter,
   connect(mapStateToProps),
-  injectIntl
+  injectIntl,
 )(LandingPageComponent);
 
 export default LandingPage;

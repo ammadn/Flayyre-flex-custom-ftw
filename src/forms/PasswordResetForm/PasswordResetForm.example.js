@@ -6,7 +6,7 @@ export const Empty = {
   props: {
     formId: 'PasswordResetFormExample',
     onSubmit(values) {
-      console.log('submit with values:', values);
+      // console.log('submit with values:', values);
     },
   },
   group: 'forms',
