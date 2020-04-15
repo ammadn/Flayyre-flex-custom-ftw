@@ -23,11 +23,11 @@ const priceData = (price, intl) => {
     return {
       formattedPrice: intl.formatMessage(
         { id: 'ListingCard.unsupportedPrice' },
-        { currency: price.currency }
+        { currency: price.currency },
       ),
       priceTitle: intl.formatMessage(
         { id: 'ListingCard.unsupportedPriceTitle' },
-        { currency: price.currency }
+        { currency: price.currency },
       ),
     };
   }
@@ -39,6 +39,7 @@ class ListingImage extends Component {
     return <ResponsiveImage {...this.props} />;
   }
 }
+
 const LazyImage = lazyLoadWithDimensions(ListingImage, { loadAfterInitialRendering: 3000 });
 
 export const ListingCardComponent = props => {
@@ -62,8 +63,8 @@ export const ListingCardComponent = props => {
   const unitTranslationKey = isNightly
     ? 'ListingCard.perNight'
     : isDaily
-    ? 'ListingCard.perDay'
-    : 'ListingCard.perUnit';
+      ? 'ListingCard.perDay'
+      : 'ListingCard.perUnit';
 
   return (
     <NamedLink className={classes} name="ListingPage" params={{ id, slug }}>
@@ -83,23 +84,31 @@ export const ListingCardComponent = props => {
         </div>
       </div>
       <div className={css.info}>
-        <div className={css.price}>
-          <div className={css.priceValue} title={priceTitle}>
-            {formattedPrice}
-          </div>
-          <div className={css.perUnit}>
-            <FormattedMessage id={unitTranslationKey} />
-          </div>
+        <div className={css.tags}>
+          <div className={css.tagRoot}><span
+            className={css.prmiumTag}><span>PREMIUM</span></span><span
+            className={css.verifiedTag}><span>VERIFIED</span></span></div>
         </div>
-        <div className={css.mainInfo}>
-          <div className={css.title}>
-            {richText(title, {
-              longWordMinLength: MIN_LENGTH_FOR_LONG_WORDS,
-              longWordClass: css.longWord,
-            })}
+        <div className={css.main}>
+          <div className={css.price}>
+            <div className={css.priceValue} title={priceTitle}>
+              {formattedPrice}
+            </div>
+            <div className={css.perUnit}>
+              <FormattedMessage id={unitTranslationKey}/>
+            </div>
           </div>
-          <div className={css.authorInfo}>
-            <FormattedMessage id="ListingCard.hostedBy" values={{ authorName }} />
+
+          <div className={css.mainInfo}>
+            <div className={css.title}>
+              {richText(title, {
+                longWordMinLength: MIN_LENGTH_FOR_LONG_WORDS,
+                longWordClass: css.longWord,
+              })}
+            </div>
+            <div className={css.authorInfo}>
+              <FormattedMessage id="ListingCard.hostedBy" values={{ authorName }}/>
+            </div>
           </div>
         </div>
       </div>
