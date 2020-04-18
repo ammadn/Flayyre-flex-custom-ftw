@@ -76,6 +76,7 @@ class TopbarComponent extends Component {
     this.handleMobileSearchClose = this.handleMobileSearchClose.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleLogout = this.handleLogout.bind(this);
+
   }
 
   handleMobileMenuOpen() {
@@ -117,6 +118,13 @@ class TopbarComponent extends Component {
       } else if (typeof window !== 'undefined') {
         window.location = path;
       }
+      global.window.Intercom('shutdown');
+      global.window.Intercom("boot", {
+        app_id: "ixgsu3hl",
+        email:null,
+        name:null
+      });
+      global.window.Intercom("update");
 
       console.log('logged out'); // eslint-disable-line
     });
@@ -145,6 +153,29 @@ class TopbarComponent extends Component {
       sendVerificationEmailError,
       showGenericError,
     } = this.props;
+
+
+
+    if(this.props.isAuthenticated && this.props.currentUser){
+
+      global.window.Intercom('shutdown');
+      global.window.Intercom("boot", {
+        app_id: "ixgsu3hl",
+        email: this.props.currentUser.attributes["email"],
+        name:this.props.currentUser.attributes.profile.firstName+" "+this.props.currentUser.attributes.profile.lastName
+
+      });
+      global.window.Intercom("update");
+    }else{
+      global.window.Intercom('shutdown');
+      global.window.Intercom("boot", {
+        app_id: "ixgsu3hl",
+        email:null,
+        name:null
+      });
+      global.window.Intercom("update");
+    }
+
 
     const { mobilemenu, mobilesearch, address, origin, bounds } = parse(location.search, {
       latlng: ['origin'],

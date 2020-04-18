@@ -36,6 +36,7 @@ export const LandingPageComponent = props => {
   const schemaDescription = intl.formatMessage({ id: 'LandingPage.schemaDescription' });
   const schemaImage = `${config.canonicalRootURL}${facebookImage}`;
 
+  console.log("landing page",props)
 //   function test(){
 //     console.log("funtions")
 //     global.window.Intercom("boot", {
