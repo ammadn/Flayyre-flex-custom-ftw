@@ -65,7 +65,7 @@ export const ListingCardComponent = props => {
     : isDaily
       ? 'ListingCard.perDay'
       : 'ListingCard.perUnit';
-
+console.log('lllll',listing.attributes.metadata['featured']);
   return (
     <NamedLink className={classes} name="ListingPage" params={{ id, slug }}>
       <div
@@ -85,9 +85,14 @@ export const ListingCardComponent = props => {
       </div>
       <div className={css.info}>
         <div className={css.tags}>
-          <div className={css.tagRoot}><span
-            className={css.prmiumTag}><span>PREMIUM</span></span><span
-            className={css.verifiedTag}><span>VERIFIED</span></span></div>
+          <div className={css.tagRoot}>
+            {listing.attributes.metadata['featured']?
+              <span
+                className={css.prmiumTag}><span>FEATURED</span></span>:null
+            }
+            {/*<span*/}
+            {/*className={css.verifiedTag}><span>VERIFIED</span></span>*/}
+          </div>
         </div>
         <div className={css.main}>
           <div className={css.price}>
