@@ -121,8 +121,6 @@ class TopbarComponent extends Component {
       global.window.Intercom('shutdown');
       global.window.Intercom("boot", {
         app_id: "ixgsu3hl",
-        email:null,
-        name:null
       });
       global.window.Intercom("update");
 
@@ -170,8 +168,6 @@ class TopbarComponent extends Component {
       global.window.Intercom('shutdown');
       global.window.Intercom("boot", {
         app_id: "ixgsu3hl",
-        email:null,
-        name:null
       });
       global.window.Intercom("update");
     }
