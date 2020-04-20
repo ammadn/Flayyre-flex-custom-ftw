@@ -121,6 +121,8 @@ class TopbarComponent extends Component {
       global.window.Intercom('shutdown');
       global.window.Intercom("boot", {
         app_id: "ixgsu3hl",
+        email:null,
+        name:null
       });
       global.window.Intercom("update");
 
@@ -152,26 +154,28 @@ class TopbarComponent extends Component {
       showGenericError,
     } = this.props;
 
+if(typeof global.window !== "undefined") {
 
+  if (this.props.isAuthenticated && this.props.currentUser) {
 
-    if(this.props.isAuthenticated && this.props.currentUser){
+    global.window.Intercom('shutdown');
+    global.window.Intercom("boot", {
+      app_id: "ixgsu3hl",
+      email: this.props.currentUser.attributes["email"],
+      name: this.props.currentUser.attributes.profile.firstName + " " + this.props.currentUser.attributes.profile.lastName
 
-      global.window.Intercom('shutdown');
-      global.window.Intercom("boot", {
-        app_id: "ixgsu3hl",
-        email: this.props.currentUser.attributes["email"],
-        name:this.props.currentUser.attributes.profile.firstName+" "+this.props.currentUser.attributes.profile.lastName
-
-      });
-      global.window.Intercom("update");
-    }else{
-      global.window.Intercom('shutdown');
-      global.window.Intercom("boot", {
-        app_id: "ixgsu3hl",
-      });
-      global.window.Intercom("update");
-    }
-
+    });
+    global.window.Intercom("update");
+  } else {
+    global.window.Intercom('shutdown');
+    global.window.Intercom("boot", {
+      app_id: "ixgsu3hl",
+      email: null,
+      name: null
+    });
+    global.window.Intercom("update");
+  }
+}
 
     const { mobilemenu, mobilesearch, address, origin, bounds } = parse(location.search, {
       latlng: ['origin'],
