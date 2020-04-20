@@ -24,6 +24,7 @@ import facebookImage from '../../assets/saunatimeFacebook-1200x630.jpg';
 import twitterImage from '../../assets/saunatimeTwitter-600x314.jpg';
 import css from './LandingPage.css';
 import { categories } from '../../marketplace-custom-config';
+import SearchPage2 from '../SearchPage/SearchPage2';
 
 export const LandingPageComponent = props => {
   const { history, intl, location, scrollingDisabled } = props;
@@ -36,7 +37,7 @@ export const LandingPageComponent = props => {
   const schemaDescription = intl.formatMessage({ id: 'LandingPage.schemaDescription' });
   const schemaImage = `${config.canonicalRootURL}${facebookImage}`;
 
-  console.log("landing page",props)
+  console.log('landing page', props);
 //   function test(){
 //     console.log("funtions")
 //     global.window.Intercom("boot", {
@@ -80,6 +81,11 @@ export const LandingPageComponent = props => {
             <li className={css.section}>
               <div className={css.sectionContentFirstChild}>
                 <SectionLocations/>
+              </div>
+            </li>
+            <li className={css.section}>
+              <div className={css.sectionContent}>
+                <SearchPage2/>
               </div>
             </li>
             <li className={css.section}>
