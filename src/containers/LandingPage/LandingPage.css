@@ -67,7 +67,7 @@
   flex-grow: 1;
   justify-content: flex-end;
   padding-bottom: 32px;
-  max-height: 458px;
+  max-height: 395px;
   width: 100%;
   max-width: 1064px;
   border:0px;
@@ -108,6 +108,29 @@
   border-radius: 4px;
 }
 }
+
+.heroMainTitle {
+  max-width: 1065px !important;
+  margin-bottom: 48px;
+  color: black;
+  font-size: 48px;
+  font-weight: 600;
+  line-height: 56px;
+  letter-spacing: -1px;
+  margin-top: 24px;
+  position: relative;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+
+  @apply --SectionHero_animation;
+  animation-delay: 0.5s;
+
+@media (--viewportMedium) {
+  max-width: var(--SectionHero_desktopTitleMaxWidth);
+}
+}
+
 
 .sectionContent {
   margin: var(--LandingPage_sectionMarginTop) 24px 51px 24px;
