@@ -14,7 +14,7 @@ import { parse, stringify } from '../../util/urlHelpers';
 import { propTypes } from '../../util/types';
 import { getListingsById } from '../../ducks/marketplaceData.duck';
 import { manageDisableScrolling, isScrollingDisabled } from '../../ducks/UI.duck';
-import { SearchMap, ModalInMobile, Page, Footer, LayoutWrapperFooter } from '../../components';
+import { SearchMap, ModalInMobile, Page, Footer, LayoutWrapperFooter, NamedLink } from '../../components';
 import { TopbarContainer } from '../../containers';
 
 import { searchListings, searchMapListings, setActiveListing } from './SearchPage.duck';
@@ -27,6 +27,8 @@ import {
 import MainPanel from './MainPanel';
 import css from './SearchPage2.css';
 import MainPanel2 from './MainPanel2';
+import { FormattedMessage } from 'react-intl';
+import Page2 from '../../components/Page/Page2';
 
 // Pagination page size might need to be dynamic on responsive page layouts
 // Current design has max 3 columns 12 is divisible by 2 and 3
@@ -203,12 +205,15 @@ export class SearchPage2Component extends Component {
     // For some reason, stickyness doesn't work on Safari, if the element is <button>
     /* eslint-disable jsx-a11y/no-static-element-interactions */
     return (
-      <Page
+      <Page2
         scrollingDisabled={scrollingDisabled}
         description={description}
         title={title}
         schema={schema}
       >
+        <div className={css.title}>
+          <FormattedMessage id="Flayyre Verified Influencers" />
+        </div>
 
         <div className={css.container}>
           <MainPanel2
@@ -235,7 +240,12 @@ export class SearchPage2Component extends Component {
           />
 
         </div>
-      </Page>
+        <div className={css.createsearchpagelink}>
+          <NamedLink name="featuredPage">
+            <FormattedMessage id="SectionLocation.createsearchpageLink" />
+          </NamedLink>
+        </div>
+      </Page2>
     );
     /* eslint-enable jsx-a11y/no-static-element-interactions */
   }

@@ -71,6 +71,13 @@ const routeConfiguration = () => {
       component: props => <SearchPage {...props} />,
       loadData: SearchPage.loadData,
     },
+
+    {
+      path: '/s?meta_featured=true',
+      name: 'featuredPage',
+      component: props => <SearchPage {...props} />,
+      loadData: SearchPage.loadData,
+    },
     {
       path: '/s/filters',
       name: 'SearchFiltersPage',

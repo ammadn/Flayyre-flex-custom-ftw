@@ -3,6 +3,7 @@
 .root {
   display: flex;
   flex-direction: column;
+  max-height: 300px;
 }
 
 .ListingCard_root__2TocP SearchResultsPanel_listingCard__3Ekdf{
