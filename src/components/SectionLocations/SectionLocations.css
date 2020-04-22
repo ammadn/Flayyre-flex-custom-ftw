@@ -13,6 +13,7 @@
 .locations {
   display: flex;
   flex-direction: column;
+  position: relative;
   margin-top: 32px;
 
 @media (--viewportMedium) {
@@ -23,7 +24,9 @@
 
 .location {
   width: 100%;
+  position: relative;
   margin-top: 25px;
+
 
 /* Remove link's hover effect */
 &:hover {
@@ -84,14 +87,21 @@
 }
 
 .linkText {
-  @apply --marketplaceH2FontStyles;
-  color: var(--matterColor);
-  margin-top: 5px;
-  margin-bottom: 100px;
-
-@media (--viewportMedium) {
-  margin-top: 21px;
-}
+  /*@apply --marketplaceH2FontStyles;*/
+  /*color: var(--matterColor);*/
+  z-index: 1;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+  top: 0;
+  display: flex;
+  margin: 0px !important;
+  border: 0;
+  color: #fff;
+  font-size: 34px;
+  font-weight: 800;
 }
 
 .locationName {

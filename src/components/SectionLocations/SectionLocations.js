@@ -10,7 +10,17 @@ import css from './SectionLocations.css';
 
 import helsinkiImage from './images/location_helsinki.jpg';
 import rovaniemiImage from './images/location_rovaniemi.jpg';
-import rukaImage from './images/location_ruka.jpg';
+import beauty from './images/BeautyCategoryImage.JPG';
+import bussness from './images/BusinessCategory.jpeg';
+import entertainment from './images/EntertainmentCategoryImage.jpeg';
+import fashion from './images/FashionCatImage.jpeg';
+import fitness from './images/FitnessCategoryImage.jpeg';
+import food from './images/FoodCategoryImage.jpeg';
+import gamming from './images/GamingCategoryImage.jpeg';
+import lifeStyle from './images/Lifestylecatimage.jpeg';
+import travel from './images/TravelCategoryImage.jpeg';
+
+
 
 class LocationImage extends Component {
   render() {
@@ -22,19 +32,18 @@ const LazyImage = lazyLoadWithDimensions(LocationImage);
 
 const locationLink = (name, image, searchQuery) => {
   const nameText = <span className={css.locationName}>{name}</span>;
+  console.log("name text",nameText)
   return (
     <NamedLink name="SearchPage" to={{ search: searchQuery }} className={css.location}>
+      <div className={css.linkText}>
+        {name}
+      </div>
       <div className={css.imageWrapper}>
         <div className={css.aspectWrapper}>
           <LazyImage src={image} alt={name} className={css.locationImage} />
         </div>
       </div>
-      <div className={css.linkText}>
-        <FormattedMessage
-          id="SectionLocations.listingsInLocation"
-          values={{ location: nameText }}
-        />
-      </div>
+
     </NamedLink>
   );
 };
@@ -52,19 +61,57 @@ const SectionLocations = props => {
       <div className={css.locations}>
         {locationLink(
           'Beauty',
-          helsinkiImage,
-          '??address=beauty&pub_category=Beauty'
+          entertainment,
+          '??address=Media&pub_category=Media'
         )}
         {locationLink(
           'Fashion',
-          rovaniemiImage,
-          '?address=Fashion&pub_category=Fashion'
+          fitness,
+          '?address=Fitness&pub_category=Fitness'
         )}
         {locationLink(
           'Lifestyle',
-          rukaImage,
+          travel,
+          '??address=Travel&pub_category=Travel'
+        )}
+
+
+      </div>
+      <div className={css.locations}>
+        {locationLink(
+          'Beauty',
+          beauty,
+          '??address=Beauty&pub_category=Beauty'
+        )}
+        {locationLink(
+          'Fashion',
+          fashion,
+          '?pub_category=Fashion'
+        )}
+        {locationLink(
+          'Lifestyle',
+          food,
+          '??address=Food&pub_category=Food'
+        )}
+
+      </div>
+      <div className={css.locations}>
+        {locationLink(
+          'Beauty',
+          lifeStyle,
           '??address=Lifestyle&pub_category=Lifestyle'
         )}
+        {locationLink(
+          'Fashion',
+          gamming,
+          '?address=Gaming&pub_category=Gaming'
+        )}
+        {locationLink(
+          'Lifestyle',
+          bussness,
+          '??address=Business&pub_category=Business'
+        )}
+
 
       </div>
 
