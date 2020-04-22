@@ -46,9 +46,7 @@
   min-height: 300px;
   height: 67.5vh;
   max-height: 600px;
-  margin: 0px;
   padding: 0;
-
 
 @media (--viewportMedium) {
   min-height: 500px;
@@ -67,13 +65,6 @@
   flex-grow: 1;
   justify-content: flex-end;
   padding-bottom: 32px;
-  max-height: 395px;
-  width: 100%;
-  max-width: 1064px;
-  border:0px;
-  border-radius:0px;
-  margin: 0 auto;
-
 
 @media (--viewportMedium) {
   padding-bottom: 83px;
@@ -108,29 +99,6 @@
   border-radius: 4px;
 }
 }
-
-.heroMainTitle {
-  max-width: 1065px !important;
-  margin-bottom: 48px;
-  color: black;
-  font-size: 48px;
-  font-weight: 600;
-  line-height: 56px;
-  letter-spacing: -1px;
-  margin-top: 24px;
-  position: relative;
-  width: 100%;
-  margin-left: auto;
-  margin-right: auto;
-
-  @apply --SectionHero_animation;
-  animation-delay: 0.5s;
-
-@media (--viewportMedium) {
-  max-width: var(--SectionHero_desktopTitleMaxWidth);
-}
-}
-
 
 .sectionContent {
   margin: var(--LandingPage_sectionMarginTop) 24px 51px 24px;

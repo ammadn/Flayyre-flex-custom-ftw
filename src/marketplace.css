@@ -170,7 +170,7 @@
   --marketplaceButtonStyles {
     @apply --marketplaceButtonFontStyles;
 
-     /*Dimensionss */
+    /* Dimensions */
     display: block;
     width: 100%;
     min-height: 59px;

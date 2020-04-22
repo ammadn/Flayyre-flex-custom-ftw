@@ -25,7 +25,6 @@ import twitterImage from '../../assets/saunatimeTwitter-600x314.jpg';
 import css from './LandingPage.css';
 import { categories } from '../../marketplace-custom-config';
 import SearchPage2 from '../SearchPage/SearchPage2';
-import { FormattedMessage } from 'react-intl';
 
 export const LandingPageComponent = props => {
   const { history, intl, location, scrollingDisabled } = props;
@@ -76,11 +75,6 @@ export const LandingPageComponent = props => {
         </LayoutWrapperTopbar>
         <LayoutWrapperMain>
           <div className={css.heroContainer}>
-            <div className={css.heroMainTitleRoot}>
-              <h1 className={css.heroMainTitle}>
-                <FormattedMessage id="SectionHero.title"/>
-              </h1>
-            </div>
             <SectionHero className={css.hero} history={history} location={categories}/>
           </div>
           <ul className={css.sections}>
@@ -89,7 +83,7 @@ export const LandingPageComponent = props => {
                 <SectionLocations/>
               </div>
             </li>
-            <li>
+            <li >
               <div className={css.sectionContent}>
                 <SearchPage2/>
               </div>
