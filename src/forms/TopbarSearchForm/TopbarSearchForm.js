@@ -44,21 +44,30 @@ class TopbarSearchFormComponent extends Component {
                 name="keywords"
                 render={({ input, meta }) => {
                   return (
-                    <input
-                      className={
-                        isMobile
-                          ? css.mobileInputRoot
-                          : css.desktopInputRoot
-                      }
-                      {...input}
-                      id="keyword-search"
-                      ref={this.searchInput}
-                      type="text"
-                      placeholder={intl.formatMessage({
-                        id: 'TopbarSearchForm.placeholder',
-                      })}
-                      autoComplete="off"
-                    />
+                    <div className={css.root_search}>
+                      <div className="TopbarSearchForm__desktopIcon__1AxpD">
+                        <svg className="LocationAutocompleteInput__iconSvg__rCBZT" width="21" height="22"
+                             viewBox="0 0 21 22" xmlns="http://www.w3.org/2000/svg">
+
+                        </svg>
+                      </div>
+
+                      <input
+                        className={
+                          isMobile
+                            ? css.mobileInputRoot
+                            : css.desktopInputRoot
+                        }
+                        {...input}
+                        id="keyword-search"
+                        ref={this.searchInput}
+                        type="text"
+                        placeholder={intl.formatMessage({
+                          id: 'TopbarSearchForm.placeholder',
+                        })}
+                        autoComplete="off"
+                      />
+                    </div>
                   );
                 }}
               />
