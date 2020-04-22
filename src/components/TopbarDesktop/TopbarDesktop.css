@@ -75,17 +75,21 @@
   /*padding: 15px 24px 15px 24px;*/
   height: 100%;
   padding: 15px 36px 15px 36px;
+  /*-webkit-transition: .1s ease-in;*/
+
+  /*transition: 0.1s ease-in-out;*/
 @media (--viewportLarge) {
   /*padding: 15px 36px 15px 36px;*/
+
 }
 }
 
 .logoLink:hover {
 
-  padding: 15px 36px 11px 36px;
-  border-bottom: 4px solid #4a4a4a;
-  border-radius: 0;
-  /*border-bottom: 4px ;*/
+padding: 15px 36px 11px 36px;
+border-bottom: 4px solid #4a4a4a;
+border-radius: 0;
+/*border-bottom: 4px ;*/
 }
 /*.logoFlayyre {*/
 /*  height: 100%;*/

@@ -83,7 +83,7 @@ export const LandingPageComponent = props => {
                 <SectionLocations/>
               </div>
             </li>
-            <li className={css.section}>
+            <li >
               <div className={css.sectionContent}>
                 <SearchPage2/>
               </div>
