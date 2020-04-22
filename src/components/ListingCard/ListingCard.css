@@ -41,7 +41,8 @@
   bottom: 0;
   left: 0;
   right: 0;
-  width: 95%;
+  width: 100%;
+  /*width: 95%;*/
   border-radius: var(--borderRadius);
 }
 
