@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { propTypes } from '../../util/types';
 import { ListingCard, PaginationLinks } from '../../components';
-import css from './SearchResultsPanel2.css';
+import css from './SearchResultsPanel.css';
 
 const SearchResultsPanel = props => {
   const { className, rootClassName, listings, pagination, search, setActiveListing } = props;
