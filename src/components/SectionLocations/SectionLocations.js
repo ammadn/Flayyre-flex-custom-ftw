@@ -60,17 +60,17 @@ const SectionLocations = props => {
       </div>
       <div className={css.locations}>
         {locationLink(
-          'Beauty',
+          'Media',
           entertainment,
           '??address=Media&pub_category=Media'
         )}
         {locationLink(
-          'Fashion',
+          'Fitness',
           fitness,
           '?address=Fitness&pub_category=Fitness'
         )}
         {locationLink(
-          'Lifestyle',
+          'Travel',
           travel,
           '??address=Travel&pub_category=Travel'
         )}
@@ -89,7 +89,7 @@ const SectionLocations = props => {
           '?pub_category=Fashion'
         )}
         {locationLink(
-          'Lifestyle',
+          'Food',
           food,
           '??address=Food&pub_category=Food'
         )}
@@ -97,17 +97,17 @@ const SectionLocations = props => {
       </div>
       <div className={css.locations}>
         {locationLink(
-          'Beauty',
+          'Lifestyle',
           lifeStyle,
           '??address=Lifestyle&pub_category=Lifestyle'
         )}
         {locationLink(
-          'Fashion',
+          'Gaming',
           gamming,
           '?address=Gaming&pub_category=Gaming'
         )}
         {locationLink(
-          'Lifestyle',
+          'Business',
           bussness,
           '??address=Business&pub_category=Business'
         )}
