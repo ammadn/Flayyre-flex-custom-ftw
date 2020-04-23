@@ -115,6 +115,7 @@
   @apply --marketplaceButtonStyles;
   @apply --SectionHero_animation;
 
+  margin-top:350px !important;
   animation-delay: 0.8s;
 
   @media (--viewportMedium) {
