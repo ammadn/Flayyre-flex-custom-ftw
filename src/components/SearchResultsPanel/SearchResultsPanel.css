@@ -5,6 +5,7 @@
   flex-direction: column;
 }
 
+
 .ListingCard_root__2TocP SearchResultsPanel_listingCard__3Ekdf{
 @media (min-width: 1024px){
   flex-basis: calc(25%-20px) !important;
@@ -13,7 +14,7 @@
 }
 .listingCards {
   padding: 0 24px 96px 24px;
-//test test
+
   @media (--viewportMedium) {
     display: flex;
     flex-direction: row;

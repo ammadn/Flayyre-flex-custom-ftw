@@ -339,7 +339,7 @@ const mapDispatchToProps = dispatch => ({
 // connect HOC, otherwise React Router won't rerender any Route
 // components since connect implements a shouldComponentUpdate
 // lifecycle hook.
-//
+//test
 // See: https://github.com/ReactTraining/react-router/issues/4671
 const SearchPage = compose(
   withRouter,
