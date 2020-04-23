@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
@@ -6,6 +6,7 @@ import { withRouter } from 'react-router-dom';
 import { injectIntl, intlShape } from '../../util/reactIntl';
 import { isScrollingDisabled } from '../../ducks/UI.duck';
 import config from '../../config';
+import affiliate from '../../assets/iNFLUENCER SOCIAL MEDIA PROMO 1 (1).jpg';
 
 import {
   Page,
@@ -16,7 +17,7 @@ import {
   LayoutWrapperTopbar,
   LayoutWrapperMain,
   LayoutWrapperFooter,
-  Footer,
+  Footer, NamedLink,
 } from '../../components';
 import { TopbarContainer } from '../../containers';
 
@@ -25,6 +26,15 @@ import twitterImage from '../../assets/saunatimeTwitter-600x314.jpg';
 import css from './LandingPage.css';
 import { categories } from '../../marketplace-custom-config';
 import SearchPage2 from '../SearchPage/SearchPage2';
+import { lazyLoadWithDimensions } from '../../util/contextHelpers';
+import Affiliate from '../../components/SectionAffiliate/Affiliate';
+
+class LocationImage extends Component {
+  render() {
+    const { alt, ...rest } = this.props;
+    return <img alt={alt} {...rest} />;
+  }
+}
 
 export const LandingPageComponent = props => {
   const { history, intl, location, scrollingDisabled } = props;
@@ -46,7 +56,7 @@ export const LandingPageComponent = props => {
 //     window.Intercom("update");
 //   }
 // test();
-
+  const LazyImage = lazyLoadWithDimensions(LocationImage);
 
   return (
 
@@ -81,6 +91,13 @@ export const LandingPageComponent = props => {
             <li className={css.section}>
               <div className={css.sectionContentFirstChild}>
                 <SectionLocations/>
+              </div>
+            </li>
+            <li className={css.section}>
+              <div className={css.sectionContentFirstChild}>
+
+                  <Affiliate/>
+
               </div>
             </li>
             <li >

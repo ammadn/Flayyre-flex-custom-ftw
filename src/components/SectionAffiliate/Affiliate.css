@@ -1,0 +1,93 @@
+@import '../../marketplace.css';
+
+.title {
+  @apply --marketplaceH1FontStyles;
+  margin-top: 0;
+}
+
+.steps {
+  display: flex;
+  flex-direction: column;
+
+  @media (--viewportMedium) {
+    flex-direction: row;
+  }
+}
+
+.step:last-of-type {
+  @media (--viewportMedium) {
+    margin-right: 0;
+  }
+}
+
+.stepImg {
+  margin-top: 18px;
+  margin-bottom: 18px;
+  width: 100%;
+
+@media (--viewportMedium) {
+  margin-top: 21px;
+  margin-bottom: 18px;
+}
+}
+
+.stepTitle {
+  margin-top: 18px;
+  margin-bottom: 18px;
+
+  @media (--viewportMedium) {
+    margin-top: 21px;
+    margin-bottom: 18px;
+  }
+}
+.txtBtn {
+  font-size: 14px;
+ text-align: center;
+  text-transform: uppercase;
+}
+.imgRoot{
+  position: relative;
+}
+.btn{
+  font-size: 14px;
+  text-transform: uppercase;
+  border-radius: 4px;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  width: 165px;
+  min-height: 44px;
+  padding: 10px;
+  margin-top: 250px;
+  background-color: #fff;
+  color: #000;
+  text-align: center;
+  transition: all .1s ease-in-out;
+}
+.btn:hover{
+  background-color: #e7e7e7;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,.1);
+}
+
+.bttn {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+  top: 0;
+  display: flex;
+  margin: 0px !important;
+  border: 0;
+  color: #fff;
+  font-size: 34px;
+  font-weight: 800;
+  transition: .1s ease-in-out;
+}
+.createListingLink {
+  margin-top: 36px;
+
+  @media (--viewportMedium) {
+    margin-top: 52px;
+  }
+}
+
