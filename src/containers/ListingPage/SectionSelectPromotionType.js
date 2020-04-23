@@ -39,28 +39,31 @@ const SectionSelectPromotionType = props => (
       };
 
 
-      const monewObj =(amoung)=>{
+      const monewObj = (amoung) => {
 
-        return {"_sdkType": "Money", "amount": amoung, "currency": "USD"}
-      }
+        return { '_sdkType': 'Money', 'amount': amoung, 'currency': 'USD' };
+      };
       let promotionTypes = props.publicData ? Object.keys(props.publicData.values).map(function(key) {
-        return <div className={css.promotionGroup}>
+        return  <div className={css.selectingCard}>
+          <FieldCheckboxComponent
+            key={key} value={key}
+            name={props.publicData.values[key][0]}
+            id={props.publicData.values[key][0]}/>
+         <h4><span>{props.publicData.values[key][0]} promotion</span></h4>
           <div className={css.promotionSubGrop}>
-            <FieldCheckboxComponent
-              key={key} value={key}
-              name={props.publicData.values[key][0]}
-              id={props.publicData.values[key][0]}/>
 
-            {props.publicData.values[key][0]} promotion
           </div>
 
-          <div className={css.promotionPrice}> {priceData(monewObj(props.publicData.values[key][1]), intl).formattedPrice}</div>
+          <div
+            className={css.promotionPrice}> {priceData(monewObj(props.publicData.values[key][1]), intl).formattedPrice}</div>
+
         </div>;
       }) : null;
 
       const mustBeNumber = (value) => {
-        console.log('valllll',value);
-       return  (typeof value !== 'undefined'&&isNaN(value)) ? 'Must be a number' : undefined};
+        console.log('valllll', value);
+        return (typeof value !== 'undefined' && isNaN(value)) ? 'Must be a number' : undefined;
+      };
       const minValue = min => value =>
         isNaN(value) || value >= min ? undefined : `Should be greater than ${min}`;
       const composeValidators = (...validators) => value =>
@@ -98,21 +101,71 @@ const SectionSelectPromotionType = props => (
             {
               (!fieldRenderProps.values.paymentType || fieldRenderProps.values.paymentType === 'direct') && props.publicData && props.publicData.pricetype.direct_pricing ?
 
-                (promotionTypes) : (
+                ( <div className={css.rootOfOfferCard}>{promotionTypes}</div>) : (
 
                   (!fieldRenderProps.values.paymentType || fieldRenderProps.values.paymentType === 'offer') && props.publicData && props.publicData.pricetype.offer_listing ? (
-                    <div>
-                      Enter an offer
-                      <FieldTextInputNew label="Brand Sponsorship" validate={composeValidators(mustBeNumber, minValue(5))} name="Brand Sponsorship" id="offer"/>
-                      <FieldTextInputNew label="IG Post Promo" validate={composeValidators(mustBeNumber, minValue(5))} name="IG Post Promo" id="offerIGPost"/>
-                      <FieldTextInputNew label="IG Story Promo" validate={composeValidators(mustBeNumber, minValue(5))} name="IG Story Promo" id="offerIGStory"/>
-                      <FieldTextInputNew label="Twitter Promo" validate={composeValidators(mustBeNumber, minValue(5))} name="Twitter Promo" id="offerTwitter"/>
-                      <FieldTextInputNew label="FB Promo" validate={composeValidators(mustBeNumber, minValue(5))} name="FB Promo" id="offerFB"/>
-                      <FieldTextInputNew label="Youtube Promo" validate={composeValidators(mustBeNumber, minValue(5))} name="Youtube Promo" id="offerYoutube"/>
-                      <FieldTextInputNew label="TikTok Promo" validate={composeValidators(mustBeNumber, minValue(5))} name="TikTok Promo" id="offerTikTok"/>
-                      <FieldTextInputNew label="Twitch Promo" validate={composeValidators(mustBeNumber, minValue(5))} name="Twitch Promo" id="offerTwitch"/>
-                      <FieldTextInputNew label="Others " validate={composeValidators(mustBeNumber, minValue(5))} name="Others" id="offerOthers"/>
+                    <div className={css.rootOfOfferCard}>
+
+
+                      <div className={css.selectingCard}><h4><span>Brand Sponsorship</span></h4>
+                        <div className={css.txtField}>
+                          <FieldTextInputNew label="" validate={composeValidators(mustBeNumber, minValue(5))}
+                                             name="Brand Sponsorship" id="offer"/>
+                        </div>
+                      </div>
+                      <div className={css.selectingCard}><h4><span>IG Post Promo</span></h4>
+                        <div className={css.txtField}>
+                          <FieldTextInputNew label="" validate={composeValidators(mustBeNumber, minValue(5))}
+                                             name="IG Post Promo" id="offerIGPost"/>
+                        </div>
+                      </div>
+
+                      <div className={css.selectingCard}><h4><span>IG Story Promo</span></h4>
+                        <div className={css.txtField}>
+                          <FieldTextInputNew label="" validate={composeValidators(mustBeNumber, minValue(5))}
+                                             name="IG Story Promo" id="offerIGStory"/>
+                        </div>
+                      </div>
+                      <div className={css.selectingCard}><h4><span>Twitter Promo</span></h4>
+                        <div className={css.txtField}>
+
+                          <FieldTextInputNew label="" validate={composeValidators(mustBeNumber, minValue(5))}
+                                             name="Twitter Promo" id="offerTwitter"/>
+                        </div>
+                      </div>
+                      <div className={css.selectingCard}><h4><span>FB Promo</span></h4>
+                        <div className={css.txtField}>
+                          <FieldTextInputNew label="" validate={composeValidators(mustBeNumber, minValue(5))}
+                                             name="FB Promo" id="offerFB"/>
+                        </div>
+                      </div>
+                      <div className={css.selectingCard}><h4><span>Youtube Promo</span></h4>
+                        <div className={css.txtField}>
+                          <FieldTextInputNew label="" validate={composeValidators(mustBeNumber, minValue(5))}
+                                             name="Youtube Promo" id="offerYoutube"/>
+                        </div>
+                      </div>
+                      <div className={css.selectingCard}><h4><span>TikTok Prom</span></h4>
+                        <div className={css.txtField}>
+                          <FieldTextInputNew label="" validate={composeValidators(mustBeNumber, minValue(5))}
+                                             name="TikTok Promo" id="offerTikTok"/>
+                        </div>
+                      </div>
+                      <div className={css.selectingCard}><h4><span>Twitch Promo</span></h4>
+                        <div className={css.txtField}>
+                          <FieldTextInputNew label="" validate={composeValidators(mustBeNumber, minValue(5))}
+                                             name="Twitch Promo" id="offerTwitch"/>
+                        </div>
+                      </div>
+                      <div className={css.selectingCard}><h4><span>Others </span></h4>
+                        <div className={css.txtField}>
+                          <FieldTextInputNew label="" validate={composeValidators(mustBeNumber, minValue(5))}
+                                             name="Others" id="offerOthers"/>
+                        </div>
+                      </div>
+
                     </div>
+
                   ) : null)
             }
 

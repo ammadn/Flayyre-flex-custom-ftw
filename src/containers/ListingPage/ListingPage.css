@@ -224,8 +224,10 @@
     margin-top: 50px;
     margin-bottom: 0px;
     /* contentContainer's full width - (bookingColumn + two paddings + margin + border) */
-    max-width: calc(100% - 433px);
-    flex-basis: calc(100% - 433px);
+    /*max-width: calc(100% - 433px);*/
+    max-width: calc(100% - 350px);
+    /*flex-basis: calc(100% - 433px);*/
+    flex-basis: calc(100% - 350px);
     flex-shrink: 0;
     flex-grow: 1;
   }
