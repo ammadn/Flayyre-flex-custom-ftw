@@ -40,7 +40,7 @@
 }
 
 .root {
-  background: url('../../assets/FlayyreBannerPic.jpg');
+  background: url('../../assets/FlayyreBannerPic.png');
 
   /* Add loading color for the div */
   background-color: var(--matterColor);
