@@ -65,7 +65,7 @@ export const ListingCardComponent = props => {
     : isDaily
       ? 'ListingCard.perDay'
       : 'ListingCard.perUnit';
-console.log('lllll',listing.attributes.metadata['featured']);
+
   return (
     <NamedLink className={classes} name="ListingPage" params={{ id, slug }}>
       <div

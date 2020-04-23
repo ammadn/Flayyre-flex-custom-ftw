@@ -309,7 +309,7 @@ const mapStateToProps = state => {
     searchMapListingIds,
     activeListingId,
   } = state.SearchPage;
-  console.log("curretnt",currentPageResultIds);
+
   const pageListings = getListingsById(state, currentPageResultIds);
   const mapListings = getListingsById(
     state,

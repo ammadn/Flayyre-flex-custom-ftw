@@ -77,6 +77,29 @@ class TopbarComponent extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleLogout = this.handleLogout.bind(this);
 
+    if(typeof global.window !== "undefined") {
+
+      if (this.props.isAuthenticated && this.props.currentUser) {
+
+        global.window.Intercom('shutdown');
+        global.window.Intercom("boot", {
+          app_id: "ixgsu3hl",
+          email: this.props.currentUser.attributes["email"],
+          name: this.props.currentUser.attributes.profile.firstName + " " + this.props.currentUser.attributes.profile.lastName
+
+        });
+        global.window.Intercom("update");
+      } else {
+        global.window.Intercom('shutdown');
+        global.window.Intercom("boot", {
+          app_id: "ixgsu3hl",
+          email: null,
+          name: null
+        });
+        global.window.Intercom("update");
+      }
+    }
+
   }
 
   handleMobileMenuOpen() {
@@ -130,6 +153,7 @@ class TopbarComponent extends Component {
     });
   }
 
+
   render() {
     const {
       className,
@@ -154,28 +178,7 @@ class TopbarComponent extends Component {
       showGenericError,
     } = this.props;
 
-if(typeof global.window !== "undefined") {
 
-  if (this.props.isAuthenticated && this.props.currentUser) {
-
-    global.window.Intercom('shutdown');
-    global.window.Intercom("boot", {
-      app_id: "ixgsu3hl",
-      email: this.props.currentUser.attributes["email"],
-      name: this.props.currentUser.attributes.profile.firstName + " " + this.props.currentUser.attributes.profile.lastName
-
-    });
-    global.window.Intercom("update");
-  } else {
-    global.window.Intercom('shutdown');
-    global.window.Intercom("boot", {
-      app_id: "ixgsu3hl",
-      email: null,
-      name: null
-    });
-    global.window.Intercom("update");
-  }
-}
 
     const { mobilemenu, mobilesearch, address, origin, bounds } = parse(location.search, {
       latlng: ['origin'],
