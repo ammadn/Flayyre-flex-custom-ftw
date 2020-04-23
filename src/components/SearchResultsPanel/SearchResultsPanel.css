@@ -30,7 +30,7 @@
 
 .listingCard {
   margin-bottom: 36px;
-  margin-right: 24px;
+  margin-right: 24px !important;
   flex-basis: 100%;
 
   @media (--viewportLarge) {
