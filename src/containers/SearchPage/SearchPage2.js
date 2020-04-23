@@ -241,8 +241,8 @@ export class SearchPage2Component extends Component {
 
         </div>
         <div className={css.createsearchpagelink}>
-          <NamedLink name="featuredPage">
-            <FormattedMessage id="SectionLocation.createsearchpageLink" />
+          <NamedLink name="SearchPage"  to={{ search: "?meta_featured=true" }} >
+            <FormattedMessage id="View more verified influencers" />
           </NamedLink>
         </div>
       </Page2>
