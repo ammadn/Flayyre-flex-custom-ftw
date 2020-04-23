@@ -72,7 +72,9 @@
   padding-bottom: calc(2 / 3 * 100%); /* 3:2 Aspect Ratio */
 }
 }
-
+.aspectWrapper:hover {
+  background-color: rgba(0, 0, 0, .8);
+}
 .locationImage {
   /* Layout - image will take space defined by aspect ratio wrapper */
   position: absolute;
@@ -102,8 +104,11 @@
   color: #fff;
   font-size: 34px;
   font-weight: 800;
+  transition: .1s ease-in-out;
 }
-
+.linkText:hover {
+  background-color: rgba(0, 0, 0, .8);
+}
 .locationName {
   color: var(--marketplaceColor);
 }
