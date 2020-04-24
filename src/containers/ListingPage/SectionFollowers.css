@@ -1,11 +1,15 @@
 .follower__group {
+
+  display: none;
+@media (--viewportMedium) {
   width: 100%;
   display: flex;
   justify-content: space-between;
   border-bottom-style: solid;
   border-bottom-width: 1px;
   border-bottom-color: #e7e7e7;
-padding-bottom: 20px;
+  padding-bottom: 20px;
+}
 }
 
 .img__follower {
