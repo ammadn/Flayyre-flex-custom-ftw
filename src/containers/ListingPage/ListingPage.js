@@ -198,7 +198,7 @@ export class ListingPageComponent extends Component {
       categoriesConfig,
       amenitiesConfig,
     } = this.props;
-
+console.log("all data",this.props)
     const listingId = new UUID(rawParams.id);
     const isPendingApprovalVariant = rawParams.variant === LISTING_PAGE_PENDING_APPROVAL_VARIANT;
     const isDraftVariant = rawParams.variant === LISTING_PAGE_DRAFT_VARIANT;
@@ -242,9 +242,10 @@ export class ListingPageComponent extends Component {
       price = null,
       title = '',
       publicData,
+      metadata
     } = currentListing.attributes;
 
-
+console.log('attr',currentListing.attributes)
     const richTitle = (
       <span>
         {richText(title, {
@@ -465,7 +466,7 @@ export class ListingPageComponent extends Component {
                 onManageDisableScrolling={onManageDisableScrolling}
               />
               <div className={css.contentContainer}>
-                <SectionAvatar user={currentAuthor} params={params}/>
+                {/*<SectionAvatar user={currentAuthor} params={params}/>*/}
                 <div className={css.mainContent}>
                   <SectionHeading
                     priceTitle={priceTitle}
@@ -475,6 +476,7 @@ export class ListingPageComponent extends Component {
                     hostLink={hostLink}
                     showContactUser={showContactUser}
                     onContactUser={this.onContactUser}
+                    metadata={metadata}
                   />
                   <SectionSelectPromotionType intl={intl} onSubmit={handleSubmitBooking} publicData={publicData}/>
 
@@ -502,6 +504,8 @@ export class ListingPageComponent extends Component {
                 </div>
 
                 <BookingPanel
+                  priceTitle={priceTitle}
+                  formattedPrice={formattedPrice}
                   promotions={this.state.bookingData}
                   className={css.bookingPanel}
                   listing={currentListing}

@@ -15,6 +15,7 @@ const SectionHeading = props => {
     hostLink,
     showContactUser,
     onContactUser,
+    metadata,
   } = props;
 
   const unitType = config.bookingUnitType;
@@ -24,31 +25,43 @@ const SectionHeading = props => {
   const unitTranslationKey = isNightly
     ? 'ListingPage.perNight'
     : isDaily
-    ? 'ListingPage.perDay'
-    : 'ListingPage.perUnit';
+      ? 'ListingPage.perDay'
+      : 'ListingPage.perUnit';
 
   return (
     <div className={css.sectionHeading}>
-      <div className={css.desktopPriceContainer}>
-        <div className={css.desktopPriceValue} title={priceTitle}>
-          {formattedPrice}
-        </div>
-        <div className={css.desktopPerUnit}>
-          <FormattedMessage id={unitTranslationKey} />
-        </div>
-      </div>
+      {/*<div className={css.desktopPriceContainer}>*/}
+      {/*  <div className={css.desktopPriceValue} title={priceTitle}>*/}
+      {/*    {formattedPrice}*/}
+      {/*  </div>*/}
+      {/*  <div className={css.desktopPerUnit}>*/}
+      {/*    <FormattedMessage id={unitTranslationKey} />*/}
+      {/*  </div>*/}
+      {/*</div>*/}
       <div className={css.heading}>
-        <h1 className={css.title}>{richTitle}</h1>
+
+          <h1 className={css.title}>
+            <span className={css.titleSpm}>{richTitle}</span>
+            {metadata && metadata.featured ? (
+              <span className={css.ListingPage__featured}><span>PREMIUM</span></span>
+
+            ) : null
+            }
+          </h1>
+
         <div className={css.author}>
           {category}
-          <FormattedMessage id="ListingPage.hostedBy" values={{ name: hostLink }} />
+          <FormattedMessage id="ListingPage.hostedBy" values={{ name: hostLink }}/>
           {showContactUser ? (
+
             <span className={css.contactWrapper}>
               <span className={css.separator}>•</span>
               <InlineTextButton rootClassName={css.contactLink} onClick={onContactUser}>
-                <FormattedMessage id="ListingPage.contactUser" />
+                <FormattedMessage id="ListingPage.contactUser"/>
               </InlineTextButton>
             </span>
+
+
           ) : null}
         </div>
       </div>

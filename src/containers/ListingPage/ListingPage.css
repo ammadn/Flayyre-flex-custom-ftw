@@ -307,7 +307,22 @@
     padding: 0;
   }
 }
-
+.titleSpm {
+  margin-right: 12px;
+}
+.ListingPage__featured {
+  line-height: 30px;
+  padding: 1px 12px 2px;
+  display: inline-block;
+  background-color: #c4a03e;
+  border-radius: 4px;
+  margin: 0;
+  font-size: 16px !important;
+  color: #fff;
+  font-weight: 600 !important;
+  vertical-align: 32%;
+  letter-spacing: -1px;
+}
 .desktopPriceValue {
   /* Font */
   @apply --marketplaceH1FontStyles;
@@ -317,6 +332,9 @@
     margin-top: 0;
     margin-bottom: 6px;
   }
+}
+.featuredTitle {
+  display: flex;
 }
 
 .desktopPerUnit {

@@ -37,7 +37,46 @@
     display: none;
   }
 }
+.desktopPriceContainer {
+  display: none;
 
+@media (--viewportLarge) {
+  /* Layout */
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  flex-shrink: 0;
+  margin: 0 48px 0 0;
+  padding: 0;
+}
+}
+
+.desktopPriceValue {
+  /* Font */
+  font-size: 32px;
+  line-height: 40px;
+  font-weight: 600;
+  color: #4a4a4a;
+
+
+@media (--viewportMedium) {
+  margin-top: 0;
+  margin-bottom: 6px;
+}
+}
+
+.desktopPerUnit {
+  /* Font */
+  font-size: 16px;
+  font-weight: 500;
+  padding-top: 4px;
+  color: #4a4a4a;
+
+@media (--viewportMedium) {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+}
 .title {
   /* Font */
   @apply --marketplaceH1FontStyles;

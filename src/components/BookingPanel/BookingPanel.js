@@ -66,7 +66,8 @@ const BookingPanel = props => {
     location,
     intl,
     promotions,
-    publicData
+    publicData,
+
   } = props;
 
   const price = listing.attributes.price;
@@ -112,9 +113,18 @@ const BookingPanel = props => {
           </div>
         </div>
 
-        <div className={css.bookingHeading}>
-          <h2 className={titleClasses}>{title}</h2>
-          {subTitleText ? <div className={css.bookingHelp}>{subTitleText}</div> : null}
+        {/*<div className={css.bookingHeading}>*/}
+        {/*  <h2 className={titleClasses}>{title}</h2>*/}
+        {/*  {subTitleText ? <div className={css.bookingHelp}>{subTitleText}</div> : null}*/}
+        {/*</div>*/}
+
+        <div className={css.desktopPriceContainer}>
+          <div className={css.desktopPriceValue} title={priceTitle}>
+            {formattedPrice}
+          </div>
+          <div className={css.desktopPerUnit}>
+            <FormattedMessage id={unitTranslationKey} />
+          </div>
         </div>
 
         {showBookingDatesForm ? (
