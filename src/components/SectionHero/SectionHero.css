@@ -40,7 +40,7 @@
 }
 
 .root {
-  background: url('../../assets/FlayyreBannerPic.png');
+  background: url('../../assets/FlayyreBannerMobPic.png');
 
   /* Add loading color for the div */
   background-color: var(--matterColor);
@@ -49,8 +49,11 @@
   background-size: cover;
 
   /* Align the image within the container */
-  background-position: center center;
 
+@media (min-width: 1024px) {
+  background: url('../../assets/FlayyreBannerPic.png');
+  background-position: initial;
+}
 @media (--viewportLarge) {
   border-radius: 40px;
   border: solid 36px var(--matterColorBright);
