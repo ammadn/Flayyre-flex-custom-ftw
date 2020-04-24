@@ -57,6 +57,8 @@
 @media (--viewportLarge) {
   border-radius: 40px;
   border: solid 36px var(--matterColorBright);
+  background-position: initial;
+  background-size: cover;
 }
   display: flex;
   flex-direction: column;
