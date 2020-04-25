@@ -60,7 +60,7 @@ const SectionLocations = props => {
       </div>
       <div className={css.locations}>
         {locationLink(
-          'Media',
+          'Entertainment',
           entertainment,
           '??address=Media&pub_category=Media'
         )}

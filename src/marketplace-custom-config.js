@@ -11,7 +11,7 @@ export const categories = [
   { key: 'Gaming', label: 'Gaming' },
   { key: 'Lifestyle', label: 'Lifestyle' },
   { key: 'Business', label: 'Business' },
-  { key: 'Media', label: 'Media' },
+  { key: 'Media', label: 'Entertainment' },
   { key: 'Food', label: 'Food' },
   { key: 'Travel', label: 'Travel' },
   { key: 'other', label: 'Other' },
