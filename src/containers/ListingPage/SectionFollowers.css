@@ -26,3 +26,41 @@
   width: 50px;
   height: 50px;
 }
+
+.selectingCard {
+  display: inline-block;
+
+  height:  292px;
+  padding: 10px 18px 10px 8px;
+  margin-left: auto;
+  margin-right:auto;
+  margin-bottom:19px;
+  border: 1px solid #ccc;
+  font-size: 13px;
+  position: relative;
+  vertical-align: top;
+  border-radius: 4px;
+  line-height: 18px;
+  width: calc(100% - 50px);
+  text-align: center;
+@media (--viewportMedium) {
+  width: calc(25% - 10px);
+  margin: 10px 10px 10px 0;
+}
+}
+.nameTag{
+  color: #b2b2b2;
+}
+.rootOfOfferCard{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.txtField {
+  position: absolute;
+  bottom: 0;
+  margin-bottom: 20px;
+  margin-right: 7px;
+  text-align: -webkit-left;
+}
