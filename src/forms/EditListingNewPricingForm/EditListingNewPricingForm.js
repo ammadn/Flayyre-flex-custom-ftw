@@ -15,6 +15,7 @@ import FieldCheckbox from '../../components/FieldCheckbox/FieldCheckbox';
 import FieldSelect from '../../components/FieldSelect/FieldSelect';
 import { OnChange } from 'react-final-form-listeners';
 import FieldTextInput from '../../components/FieldTextInput/FieldTextInput';
+import ImgFaceBook from '../../assets/facebook.png';
 
 
 const { Money } = sdkTypes;
@@ -94,78 +95,84 @@ export const EditListingPricingFormComponent = props => (
         // console.log('ptypeee', item);
         return (
 
-          <div>
 
-            <FieldSelect
-              id={item.promotionType}
-              name={item.promotionType}
+            <div className={css.selectingCard}><h4><span> <label></label></span></h4>
+              <div className={css.txtField}>
 
-              className={css.selectCountry}
-              label='Select promotion type'
-            >
-              <option value="">
-              </option>
-              <option value="Brand Sponsorship">
-                Brand Sponsorship
-              </option>
-              <option value="IG Story">
-                IG Story Promo
-              </option>
-              <option value="IG Post44">
-                IG Post Promo
-              </option>
-              <option value="Twitter">
-                Twitter Promo
-              </option>
-              <option value="YT">
-                YT Promo
-              </option>
-              <option value="Others">
-                Others
-              </option>
-            </FieldSelect>
+                <FieldSelect
+                  id={item.promotionType}
+                  name={item.promotionType}
 
-            <OnChange name={item.promotionType}>
+                  className={css.selectCountry}
+                  label='Select promotion type'
+                >
+                  <option value="">
+                  </option>
+                  <option value="Brand Sponsorship">
+                    Brand Sponsorship
+                  </option>
+                  <option value="IG Story">
+                    IG Story Promo
+                  </option>
+                  <option value="IG Post44">
+                    IG Post Promo
+                  </option>
+                  <option value="Twitter">
+                    Twitter Promo
+                  </option>
+                  <option value="YT">
+                    YT Promo
+                  </option>
+                  <option value="Others">
+                    Others
+                  </option>
+                </FieldSelect>
 
-              {(value, previous) => {
+                <OnChange name={item.promotionType}>
 
-                if (value === 'Others') {
-                  // console.log('samee samee');
-                  {
-                    addOther(key, true);
+                  {(value, previous) => {
+
+                    if (value === 'Others') {
+                      // console.log('samee samee');
+                      {
+                        addOther(key, true);
+                      }
+                    } else {
+                      {
+                        addOther(key, false);
+                      }
+                    }
                   }
-                } else {
-                  {
-                    addOther(key, false);
+
                   }
-                }
-              }
-
-              }
-            </OnChange>
+                </OnChange>
 
 
-            {item.other ? <FieldTextInput
-              type="new"
-              id={'other' + item.promotionType}
-              name={'other' + item.promotionType}
-              className={css.priceInput}
+                {item.other ? <FieldTextInput
+                  type="new"
+                  id={'other' + item.promotionType}
+                  name={'other' + item.promotionType}
+                  className={css.priceInput}
 
-              placeholder='enter promotion type'
+                  placeholder='enter promotion type'
 
-            /> : null}
+                /> : null}
 
-            <FieldCurrencyInput
-              type="new"
-              id={item.str}
-              name={item.str}
-              className={css.priceInput}
+                <FieldCurrencyInput
+                  type="new"
+                  id={item.str}
+                  name={item.str}
+                  className={css.priceInput}
 
-              placeholder='enter price'
-              currencyConfig={config.currencyConfig}
-              validate={priceValidators}
-            />
-          </div>);
+                  placeholder='enter price'
+                  currencyConfig={config.currencyConfig}
+                  validate={priceValidators}
+                />
+              </div>
+            </div>
+
+
+        );
       };
 
 
@@ -173,7 +180,7 @@ export const EditListingPricingFormComponent = props => (
       const priceCom = (
 
         directPriceInputArray.map((item, key) =>
-          <div className={css.direct_pricing_item} key={key}>{element(item, key)}</div>,
+     element(item, key)
         )
 
       );
@@ -181,11 +188,13 @@ export const EditListingPricingFormComponent = props => (
 
       const directPrice =
         (direct_pricing && direct_pricing[0]) ?
-          (<div>
+          (<div><div className={css.rootOfOfferCard}>
               {priceCom}
 
-              <button type='button' onClick={add}>add</button>
-              <button type='button' onClick={remove}>remove</button>
+
+            </div>
+            <button type='button' onClick={add}>add</button>
+      <button type='button' onClick={remove}>remove</button>
             </div>
           ) : null;
 
