@@ -51,7 +51,7 @@ const SectionSelectPromotionType = props => (
             id={props.publicData.values[key][0]}
 
           />
-         <h4><span>{props.publicData.values[key][0]} promotion</span></h4>
+            <h4><span>{props.publicData.values[key][0]} <br/> promotion</span></h4>
           <div className={css.promotionSubGrop}>
 
           </div>
