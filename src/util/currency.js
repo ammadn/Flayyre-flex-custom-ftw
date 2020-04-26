@@ -295,7 +295,7 @@ export const formatFollowerMaxUnit = (intl,value) => {
   const numberFormatOptions = {
   };
 
-  return intl.formatNumber(valueAsNumber, numberFormatOptions)+'+';
+  return intl.formatNumber(valueAsNumber, numberFormatOptions);
 };
 
 export const formatFollowerMinUnit = (intl,value) => {

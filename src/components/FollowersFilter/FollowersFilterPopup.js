@@ -117,14 +117,21 @@ class FollowersFilterPopup extends Component {
     const hasInitialValues = initialValues && hasValue(minPrice) && hasValue(maxPrice);
 
     const label = hasInitialValues
-      ? intl.formatMessage(
+      ?(maxPrice!=150000000? intl.formatMessage(
           { id: 'PriceFilter.labelSelectedButton' },
           {
             minPrice: formatFollowerMinUnit(intl,  minPrice),
             maxPrice: formatFollowerMaxUnit(intl, maxPrice),
           }
-        )
-      : intl.formatMessage({ id: 'FollowersFilterForm.label' });
+        ):
+        intl.formatMessage(
+          { id: 'PriceFilter.labelSelectedButton' },
+          {
+            minPrice: formatFollowerMinUnit(intl,  minPrice),
+            maxPrice: formatFollowerMaxUnit(intl, maxPrice)+ "+",
+          })
+
+      ) : intl.formatMessage({ id: 'FollowersFilterForm.label' });
 
     const labelStyles = hasInitialValues ? css.labelSelected : css.label;
     const contentStyle = this.positionStyleForContent();
