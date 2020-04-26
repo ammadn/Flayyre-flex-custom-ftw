@@ -68,7 +68,7 @@ class PriceFilterPlainComponent extends Component {
       <div className={classes}>
         <div className={labelClass}>
           <button type="button" className={css.labelButton} onClick={this.toggleIsOpen}>
-            <span className={labelClass}>{labelText}</span>
+            <span className={labelClass}>Followers</span>
           </button>
           <button type="button" className={css.clearButton} onClick={this.handleClear}>
             <FormattedMessage id={'PriceFilter.clear'} />
@@ -77,14 +77,14 @@ class PriceFilterPlainComponent extends Component {
         <div className={css.formWrapper}>
           <FollowersFilterForm
             id={id}
-            initialValues={hasInitialValues ? initialValues : { minPrice: min, maxPrice: max }}
+            initialValues={hasInitialValues ? initialValues :{ minPrice: 0, maxPrice: 150000000 }}
             onChange={this.handleChange}
             intl={intl}
             contentRef={node => {
               this.filterContent = node;
             }}
-            min={min}
-            max={max}
+            min={0}
+            max={150000000}
             step={step}
             liveEdit
             isOpen={this.state.isOpen}

@@ -14,6 +14,7 @@
   /* Baseline adjustment for label text */
   margin-top: 0;
   margin-bottom: 12px;
+  color: black !important;
   padding: 4px 0 2px 0;
 }
 

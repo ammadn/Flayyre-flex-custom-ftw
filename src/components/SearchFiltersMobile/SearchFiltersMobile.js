@@ -20,6 +20,7 @@ import {
 import { propTypes } from '../../util/types';
 import css from './SearchFiltersMobile.css';
 import FollowersFilter from '../FollowersFilter/FollowersFilter';
+import FollowersFilterMobile from '../FollowersFilter/FollowersFilterMobile';
 
 const RADIX = 10;
 
@@ -330,7 +331,7 @@ class SearchFiltersMobileComponent extends Component {
 
 
     const followerFilterElement =  (
-      <FollowersFilter
+      <FollowersFilterMobile
         id="SearchFilters.followersFilter"
         urlParam={'pub_max'}
         onSubmit={handlePrice}
@@ -377,9 +378,9 @@ class SearchFiltersMobileComponent extends Component {
               {categoryFilterElement}
 
               {priceFilterElement}
-              <div className={css.followerFilter}>
+              {/*<div className={css.followerFilter}>*/}
               {followerFilterElement}
-              </div>
+              {/*</div>*/}
             </div>
           ) : null}
 
