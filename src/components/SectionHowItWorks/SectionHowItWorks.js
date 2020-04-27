@@ -6,7 +6,7 @@ import classNames from 'classnames';
 import { NamedLink } from '../../components';
 
 import css from './SectionHowItWorks.css';
-import stepImage from './images/stepImg.png';
+import stepImage from './images/HowtoFlayyre.png';
 import LogoImage from '../../assets/FlayyreLogoArialV.png';
 import config from '../../config';
 
