@@ -71,8 +71,8 @@
     max-height: 42px;
     padding: 2px;
     line-height: 18px;
-    font-weight: 200;
-    border-radius: 7px;
+
+    border-radius: 5px;
   }
 @media (--viewportMedium) {
   font-size: 14px;
