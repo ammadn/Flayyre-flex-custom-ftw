@@ -12,8 +12,13 @@ import {
   txIsPaymentPending,
   txIsRequested,
   txHasBeenDelivered,
+  txIsPendingCancelByCustomer,
+  txIsWaitingForDeliveryAfterExpire,
   txIsDeliveredByProvider,
-  txIsDeliveryAcceptByCustomer, txIsRevision, txIsReviewed,
+  txIsDeliveryAcceptByCustomer,
+  txIsRevision,
+  txIsReviewed,
+
 } from '../../util/transaction';
 import { LINE_ITEM_NIGHT, LINE_ITEM_DAY, propTypes } from '../../util/types';
 import {
@@ -200,6 +205,7 @@ export class TransactionPanelComponent extends Component {
       onCompleteRevision,
       onCancelByCustomer,
 
+      onDeclinedByCustomer,
 
       completeByProviderInProgress,
       acceptByCustomerInProgress,
@@ -298,17 +304,17 @@ export class TransactionPanelComponent extends Component {
           headingState: HEADING_CANCELED,
           showDetailCardHeadings: isCustomer,
         };
-        // } else if (txIsPendingCancelByCustomer(tx)) {
-        //   return {
-        //     headingState: HEADING_PENDING_CANCEL,
-        //     showCancelButtonForCus: isCustomer,
-        //     showCompleteInPending:isProvider
-        //   };
-        // } else if (txIsWaitingForDeliveryAfterExpire(tx)) {
-        //   return {
-        //     headingState: HEADING_WAITING_FOR_DELIVERY_AFTER_EXPIRE,
-        //     showCompleteButtonAfterExpire: isProvider,
-        //   };
+        } else if (txIsPendingCancelByCustomer(tx)) {
+          return {
+            headingState: HEADING_PENDING_CANCEL,
+            showCancelButtonForCus: isCustomer,
+            showCompleteInPending:isProvider
+          };
+        } else if (txIsWaitingForDeliveryAfterExpire(tx)) {
+          return {
+            headingState: HEADING_WAITING_FOR_DELIVERY_AFTER_EXPIRE,
+            showCompleteButtonAfterExpire: isProvider,
+          };
       } else if (txIsDeliveredByProvider(tx)) {
 
         return {
@@ -631,17 +637,17 @@ export class TransactionPanelComponent extends Component {
                 <div>{CompleteButton}</div>
               ) : null}
 
-              {/*{stateData.showCancelButtonForCus ? (*/}
-              {/*  <div>{customerCancelAfterExpireButton}</div>*/}
-              {/*):null}*/}
+              {stateData.showCancelButtonForCus ? (
+                <div>{customerCancelAfterExpireButton}</div>
+              ):null}
 
-              {/*{stateData.showCompleteInPending ? (*/}
-              {/*  <div>{completeAfterExpireInCancelPendingButton}</div>*/}
-              {/*):null}*/}
+              {stateData.showCompleteInPending ? (
+                <div>{completeAfterExpireInCancelPendingButton}</div>
+              ):null}
 
-              {/*{stateData.showCompleteButtonAfterExpire ? (*/}
-              {/*  <div>{completeAfterExpireButton}</div>*/}
-              {/*):null}*/}
+              {stateData.showCompleteButtonAfterExpire ? (
+                <div>{completeAfterExpireButton}</div>
+              ):null}
 
               {stateData.showAcceptButtonForCustomer ? (
                 <div>{customerSaleButtons}</div>

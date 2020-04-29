@@ -36,7 +36,12 @@ import {
   sendReview,
   fetchMoreMessages,
   completeByProvider,
-  acceptByCustomer, askingForRevision, completeRevision, cancelByCustomer,
+  acceptByCustomer,
+  askingForRevision,
+  completeRevision,
+  cancelByCustomer,
+  completeByTheProviderAfterExpire,
+  completeByProviderInCancelPending, customerCancelAfterExpire,
 } from './TransactionPage.duck';
 import css from './TransactionPage.css';
 
@@ -95,6 +100,8 @@ export const TransactionPageComponent = props => {
     completeRevisionError,
     cancelByCustomerError,
 
+
+    onDeclinedByCustomer,
 
     onComplete,
     onCustomerCancelAfterExpire,
@@ -297,6 +304,8 @@ export const TransactionPageComponent = props => {
 
 
 
+      onDeclinedByCustomer={onDeclinedByCustomer}
+
       onDeclineSale={onDeclineSale}
       acceptInProgress={acceptInProgress}
       declineInProgress={declineInProgress}
@@ -497,6 +506,9 @@ const mapDispatchToProps = dispatch => {
     onCompleteRevision: transactionId => dispatch(completeRevision(transactionId)),
     onCancelByCustomer: transactionId => dispatch(cancelByCustomer(transactionId)),
 
+    onCustomerCancelAfterExpire: transactionId => dispatch(completeByTheProviderAfterExpire(transactionId)),
+    onCompleteByProviderInCancelPending: transactionId => dispatch(completeByProviderInCancelPending(transactionId)),
+    onCompleteByProviderAfterExpire: transactionId => dispatch(customerCancelAfterExpire(transactionId)),
 
 
     onComplete: transactionId => dispatch(completeByProvider(transactionId)),

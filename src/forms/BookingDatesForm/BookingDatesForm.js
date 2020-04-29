@@ -318,22 +318,22 @@ export class BookingDatesFormComponent extends Component {
               {newbookingInfo}
               {comition}
               {finalTotal}
-              {/*<FieldPhoneNumberInput*/}
-              {/*  className={css.phone}*/}
-              {/*  name="dates"*/}
-              {/*  id='dates'*/}
-              {/*  label='dates'*/}
-              {/*  placeholder='dates'*/}
-              {/*/>*/}
-              {/*<OnChange name='dates'>*/}
+              <FieldPhoneNumberInput
+                className={css.phone}
+                name="dates"
+                id='dates'
+                label='dates'
+                placeholder='dates'
+              />
+              <OnChange name='dates'>
 
-              {/*  {(value, previous) => {*/}
-              {/*    this.setState({ dates: value });*/}
+                {(value, previous) => {
+                  this.setState({ dates: value });
 
-              {/*  }*/}
+                }
 
-              {/*  }*/}
-              {/*</OnChange>*/}
+                }
+              </OnChange>
 
               <p className={css.smallPrint}>
                 <FormattedMessage

@@ -17,6 +17,9 @@ import {
   TRANSITION_ASK_FOR_REVISION,
   TRANSITION_COMPLETE_REVISION,
   TRANSITION_CANCEL_BY_CUSTOMER,
+  TRANSITION_COMPLETE_BY_PROVIDER_AFTER_EXPIRE,
+  TRANSITION_CUSTOMER_CANCEL_AFTER_EXPIRE,
+  TRANSITION_COMPLETE_BY_PROVIDER_IN_CANCEL_PENDING,
 } from '../../util/transaction';
 import * as log from '../../util/log';
 import {
@@ -86,6 +89,9 @@ export const ACCEPT_BY_CUSTOMER_REQUEST = 'app/TransactionPage/ACCEPT_BY_CUSTOME
 export const ACCEPT_BY_CUSTOMER_SUCCESS = 'app/TransactionPage/ACCEPT_BY_CUSTOMER_SUCCESS';
 export const ACCEPT_BY_CUSTOMER_ERROR = 'app/TransactionPage/ACCEPT_BY_CUSTOMER_ERROR';
 
+export const DECLINED_BY_CUSTOMER_REQUEST = 'app/TransactionPage/DECLINED_BY_CUSTOMER_REQUEST';
+export const DECLINED_BY_CUSTOMER_SUCCESS = 'app/TransactionPage/DECLINED_BY_CUSTOMER_SUCCESS';
+export const DECLINED_BY_CUSTOMER_ERROR = 'app/TransactionPage/DECLINED_BY_CUSTOMER_ERROR';
 
 export const ASKING_FOR_REVISION_REQUEST = 'app/TransactionPage/ASKING_FOR_REVISION_REQUEST';
 export const ASKING_FOR_REVISION_SUCCESS = 'app/TransactionPage/ASKING_FOR_REVISION_SUCCESS';
@@ -651,69 +657,69 @@ export const completeRevision= id => (dispatch, getState, sdk) => {
     });
 };
 
-// export const completeByProviderInCancelPending = id => (dispatch, getState, sdk) => {
-//
-//   dispatch(completeByProviderInCancelPendingRequest());
-//   return sdk.transactions
-//     .transition({ id, transition: TRANSITION_COMPLETE_BY_PROVIDER_IN_CANCEL_PENDING, params: {} }, { expand: true })
-//     .then(response => {
-//       dispatch(addMarketplaceEntities(response));
-//       dispatch(completeByProviderInCancelPendingSuccess());
-//       dispatch(fetchCurrentUserNotifications());
-//       return response;
-//     })
-//     .catch(e => {
-//       dispatch(completeByProviderInCancelPendingError(e));
-//       log.error(e, 'complete-sale-failed', {
-//         txId: id,
-//         transition: TRANSITION_COMPLETE_BY_PROVIDER_IN_CANCEL_PENDING,
-//       });
-//       throw e;
-//     });
-// };
-//
-// export const customerCancelAfterExpire = id => (dispatch, getState, sdk) => {
-//
-//   dispatch(customerCancelAfterExpireRequest());
-//   return sdk.transactions
-//     .transition({ id, transition: TRANSITION_CUSTOMER_CANCEL_AFTER_EXPIRE, params: {} }, { expand: true })
-//     .then(response => {
-//       dispatch(addMarketplaceEntities(response));
-//       dispatch(customerCancelAfterExpireSuccess());
-//       dispatch(fetchCurrentUserNotifications());
-//       return response;
-//     })
-//     .catch(e => {
-//       dispatch(customerCancelAfterExpireError(e));
-//       log.error(e, 'complete-sale-failed', {
-//         txId: id,
-//         transition: TRANSITION_CUSTOMER_CANCEL_AFTER_EXPIRE,
-//       });
-//       throw e;
-//     });
-// };
-//
-//
-// export const completeByTheProviderAfterExpire = id => (dispatch, getState, sdk) => {
-//
-//   dispatch(completeByTheProviderAfterExpireRequest());
-//   return sdk.transactions
-//     .transition({ id, transition: TRANSITION_COMPLETE_BY_PROVIDER_AFTER_EXPIRE, params: {} }, { expand: true })
-//     .then(response => {
-//       dispatch(addMarketplaceEntities(response));
-//       dispatch(completeByTheProviderAfterExpireSuccess());
-//       dispatch(fetchCurrentUserNotifications());
-//       return response;
-//     })
-//     .catch(e => {
-//       dispatch(completeByTheProviderAfterExpireError(e));
-//       log.error(e, 'complete-sale-failed', {
-//         txId: id,
-//         transition: TRANSITION_COMPLETE_BY_PROVIDER_AFTER_EXPIRE,
-//       });
-//       throw e;
-//     });
-// };
+export const completeByProviderInCancelPending = id => (dispatch, getState, sdk) => {
+
+  dispatch(completeByProviderInCancelPendingRequest());
+  return sdk.transactions
+    .transition({ id, transition: TRANSITION_COMPLETE_BY_PROVIDER_IN_CANCEL_PENDING, params: {} }, { expand: true })
+    .then(response => {
+      dispatch(addMarketplaceEntities(response));
+      dispatch(completeByProviderInCancelPendingSuccess());
+      dispatch(fetchCurrentUserNotifications());
+      return response;
+    })
+    .catch(e => {
+      dispatch(completeByProviderInCancelPendingError(e));
+      log.error(e, 'complete-sale-failed', {
+        txId: id,
+        transition: TRANSITION_COMPLETE_BY_PROVIDER_IN_CANCEL_PENDING,
+      });
+      throw e;
+    });
+};
+
+export const customerCancelAfterExpire = id => (dispatch, getState, sdk) => {
+
+  dispatch(customerCancelAfterExpireRequest());
+  return sdk.transactions
+    .transition({ id, transition: TRANSITION_CUSTOMER_CANCEL_AFTER_EXPIRE, params: {} }, { expand: true })
+    .then(response => {
+      dispatch(addMarketplaceEntities(response));
+      dispatch(customerCancelAfterExpireSuccess());
+      dispatch(fetchCurrentUserNotifications());
+      return response;
+    })
+    .catch(e => {
+      dispatch(customerCancelAfterExpireError(e));
+      log.error(e, 'complete-sale-failed', {
+        txId: id,
+        transition: TRANSITION_CUSTOMER_CANCEL_AFTER_EXPIRE,
+      });
+      throw e;
+    });
+};
+
+
+export const completeByTheProviderAfterExpire = id => (dispatch, getState, sdk) => {
+
+  dispatch(completeByTheProviderAfterExpireRequest());
+  return sdk.transactions
+    .transition({ id, transition: TRANSITION_COMPLETE_BY_PROVIDER_AFTER_EXPIRE, params: {} }, { expand: true })
+    .then(response => {
+      dispatch(addMarketplaceEntities(response));
+      dispatch(completeByTheProviderAfterExpireSuccess());
+      dispatch(fetchCurrentUserNotifications());
+      return response;
+    })
+    .catch(e => {
+      dispatch(completeByTheProviderAfterExpireError(e));
+      log.error(e, 'complete-sale-failed', {
+        txId: id,
+        transition: TRANSITION_COMPLETE_BY_PROVIDER_AFTER_EXPIRE,
+      });
+      throw e;
+    });
+};
 
 
 export const declineSale = id => (dispatch, getState, sdk) => {

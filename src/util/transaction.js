@@ -65,6 +65,19 @@ export const TRANSITION_ASK_FOR_REVISION= 'transition/asking-for-revision';
 export const TRANSITION_COMPLETE_REVISION= 'transition/complete-revision';
 export const TRANSITION_CANCEL_BY_CUSTOMER = 'transition/cancel-by-customer';
 
+/////////////////////////
+
+
+export const TRANSITION_DECLINED_BY_CUSTOMER = 'transition/declined-by-customer';
+
+export const TRANSITION_EXPIRE_DELIVARY = 'transition/expire-delivary';
+export const TRANSITION_CUSTOMER_CANCEL_AFTER_EXPIRE = 'transition/customer-cancel-after-expire';
+export const TRANSITION_COMPLETE_BY_PROVIDER_IN_CANCEL_PENDING = 'transition/complete-by-provider-in-cancel-pending';
+export const TRANSITION_EXPIRE_DELIVARY_DENIED_FOR_CANCEL_BY_CUSTOMER = 'transition/expire-delivary-denied-for-cancel-by-customer';
+export const TRANSITION_COMPLETE_BY_PROVIDER_AFTER_EXPIRE = 'transition/complete-by-provider-after-expire';
+export const TRANSITION_AUTOMATICALLY_CANCEL_AFTER_GIVEN_PERIOD = 'transition/automatically-cancel-after-given-period';
+
+
 
 /**
  * Actors
@@ -114,6 +127,15 @@ const STATE_DELIVERD_BY_PROVIDER = 'delivered-by-provider';
 const STATE_REVISION = 'revision';
 
 const STATE_COMPLETE_PAYMENT = 'complete-payment';
+
+
+
+
+const STATE_PENDING_CANCEL_BY_CUSTOMER = 'pending-cancel-by-customer';
+
+const STATE_WAITING_FOR_DELIVERY_AFTER_EXPIRE = 'waiting-for-delivery-after-expire';
+
+
 
 
 /**
@@ -170,10 +192,24 @@ const stateDescription = {
       on: {
         [TRANSITION_CANCEL]: STATE_CANCELED,
         [TRANSITION_COMPLETE]: STATE_DELIVERD_BY_PROVIDER,
-
+        [TRANSITION_EXPIRE_DELIVARY]: STATE_PENDING_CANCEL_BY_CUSTOMER,
       },
     },
 
+    [STATE_PENDING_CANCEL_BY_CUSTOMER]: {
+      on: {
+        [TRANSITION_CUSTOMER_CANCEL_AFTER_EXPIRE]: STATE_CANCELED,
+        [TRANSITION_COMPLETE_BY_PROVIDER_IN_CANCEL_PENDING]: STATE_DELIVERD_BY_PROVIDER,
+        [TRANSITION_EXPIRE_DELIVARY_DENIED_FOR_CANCEL_BY_CUSTOMER]: STATE_WAITING_FOR_DELIVERY_AFTER_EXPIRE,
+      },
+    },
+
+    [STATE_WAITING_FOR_DELIVERY_AFTER_EXPIRE]: {
+      on: {
+        [TRANSITION_COMPLETE_BY_PROVIDER_AFTER_EXPIRE]: STATE_DELIVERD_BY_PROVIDER,
+        [TRANSITION_AUTOMATICALLY_CANCEL_AFTER_GIVEN_PERIOD]: STATE_CANCELED,
+      },
+    },
 
 
     [STATE_DELIVERD_BY_PROVIDER]: {
@@ -322,6 +358,21 @@ export const txIsRevision= tx =>
 
 export const txIsCompletePayment = tx =>
   getTransitionsToState(STATE_COMPLETE_PAYMENT).includes(txLastTransition(tx));
+
+
+
+
+export const txIsPendingCancelByCustomer = tx =>
+  getTransitionsToState(STATE_PENDING_CANCEL_BY_CUSTOMER).includes(txLastTransition(tx));
+
+
+
+export const txIsWaitingForDeliveryAfterExpire = tx =>
+  getTransitionsToState(STATE_WAITING_FOR_DELIVERY_AFTER_EXPIRE).includes(txLastTransition(tx));
+
+
+
+
 
 
 
