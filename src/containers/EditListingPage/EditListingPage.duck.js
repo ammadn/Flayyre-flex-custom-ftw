@@ -542,7 +542,8 @@ export const requestFetchBookings = fetchParams => (dispatch, getState, sdk) => 
   const monthId = monthIdStringInUTC(start);
 
   dispatch(fetchBookingsRequest({ ...fetchParams, monthId }));
-
+console.log("real start",start);
+console.log("real start",end);
   return sdk.bookings
     .query({ listingId, start, end, state }, { expand: true })
     .then(response => {

@@ -259,7 +259,7 @@ export class CheckoutPageComponent extends Component {
       const bookingStartForAPI = dateFromLocalToAPI(bookingStart);
       const bookingEndForAPI = dateFromLocalToAPI(bookingEnd);
 
-      console.log('page data',pageData);
+      console.log('page data',bookingStartForAPI);
       // Fetch speculated transaction for showing price in booking breakdown
       // NOTE: if unit type is line-item/units, quantity needs to be added.
       // The way to pass it to checkout page is through pageData.bookingData
@@ -443,11 +443,12 @@ export class CheckoutPageComponent extends Component {
         : selectedPaymentFlow === PAY_AND_SAVE_FOR_LATER_USE
         ? { setupPaymentMethodForSaving: true }
         : {};
-
+console.log("state need",this.state.pageData.bookingDates.bookingStart);
+console.log("state need",this.state.pageData.bookingDates.bookingEnd);
     const requestParams = this.customPricingParams({
       listing: this.state.pageData.listing,
-      bookingStart: "3019-10-07T06:30:00.000Z",
-      bookingEnd: "3019-10-08T06:30:00.000Z",
+      bookingStart: this.state.pageData.bookingDates.bookingStart,
+      bookingEnd:this.state.pageData.bookingDates.bookingEnd,
       ...optionalPaymentParams,
     });
 

@@ -652,11 +652,14 @@ export class TransactionPanelComponent extends Component {
               {stateData.showAcceptButtonForCustomer ? (
                 <div>{customerSaleButtons}</div>
               ) : null}
+              {stateData.showCompleteRevisionButton? (
+                <div>{CompleteRevisionButton}</div>
+              ):null}
 
-
-              {stateData.showCancelButtons ? (
-                <div>{customerCancelButton}</div>
-              ) : null}
+              {/*{stateData.showCancelButtons ? (*/}
+              {/*  <div>{customerCancelButton}</div>*/}
+              {/*) : null}*/}
+              {stateData.show}
             </div>
           </div>
         </div>

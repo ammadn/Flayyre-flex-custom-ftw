@@ -176,6 +176,8 @@ export const initiateOrder = (orderParams, transactionId) => (dispatch, getState
     include: ['booking', 'provider'],
     expand: true,
   };
+  console.log("order param",orderParams);
+  console.log("body params",bodyParams);
 
   const createOrder = transactionId ? sdk.transactions.transition : sdk.transactions.initiate;
 

@@ -251,6 +251,7 @@ export const sendEnquiry = (listingId, message) => (dispatch, getState, sdk) => 
     processAlias: config.bookingProcessAlias,
     params: { listingId },
   };
+  console.log("transaction en",bodyParams);
   return sdk.transactions
     .initiate(bodyParams)
     .then(response => {

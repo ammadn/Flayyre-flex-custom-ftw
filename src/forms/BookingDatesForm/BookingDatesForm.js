@@ -23,7 +23,7 @@ export class BookingDatesFormComponent extends Component {
     super(props);
     this.state = {
       focusedInput: null,
-      dates: 1,
+      dates: 7,
     };
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
     this.onFocusedInputChange = this.onFocusedInputChange.bind(this);
@@ -48,16 +48,17 @@ export class BookingDatesFormComponent extends Component {
 
   handleFormSubmit(e) {
     var dateobj = new Date();
-
 // Contents of above date object is
 // converted into a string using toISOString() function.
+
+    var dateobj2=this.addDays(dateobj,parseInt("1")).toISOString()
     var B = dateobj.toISOString();
 
     // console.log('date value',this.state.dates);
     var increment=this.state.dates;
     this.props.onSubmit({
       'bookingDates': {
-        'startDate': B,
+        'startDate': dateobj2,
         'endDate': this.addDays(dateobj,parseInt(increment)).toISOString(),
       },
     });
