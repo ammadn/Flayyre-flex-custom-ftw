@@ -135,8 +135,8 @@ export class CheckoutPageComponent extends Component {
     const {values}=listing.attributes.publicData;
 
 
-    console.log('starttttttt',bookingStart);
-    console.log('endd',bookingEnd);
+    // console.log('starttttttt',bookingStart);
+    // console.log('endd',bookingEnd);
 
     const unitType = config.bookingUnitType;
     const promotionType=config.promotionType;

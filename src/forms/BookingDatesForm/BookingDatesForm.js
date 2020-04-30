@@ -50,11 +50,11 @@ export class BookingDatesFormComponent extends Component {
     var dateobj = new Date();
 // Contents of above date object is
 // converted into a string using toISOString() function.
-
-    var dateobj2=this.addDays(dateobj,parseInt("1")).toISOString()
+    console.log('date value',dateobj);
+    var dateobj2=dateobj.toISOString()
     var B = dateobj.toISOString();
 
-    // console.log('date value',this.state.dates);
+    console.log('date value',dateobj2);
     var increment=this.state.dates;
     this.props.onSubmit({
       'bookingDates': {
