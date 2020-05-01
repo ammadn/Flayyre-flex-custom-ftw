@@ -4,6 +4,8 @@ import { addMarketplaceEntities } from '../../ducks/marketplaceData.duck';
 import { convertUnitToSubUnit, unitDivisor } from '../../util/currency';
 import { formatDateStringToUTC, getExclusiveEndDate } from '../../util/dates';
 import config from '../../config';
+import { denormalisedResponseEntities } from '../../util/data';
+import { fetchReviewsError, fetchReviewsSuccess } from '../ListingPage/ListingPage.duck';
 
 // ================ Action types ================ //
 
@@ -63,7 +65,7 @@ const listingPageReducer = (state = initialState, action = {}) => {
       const searchMapListingIds = unionWith(
         state.searchMapListingIds,
         resultIds(payload.data),
-        (id1, id2) => id1.uuid === id2.uuid
+        (id1, id2) => id1.uuid === id2.uuid,
       );
       return {
         ...state,
@@ -117,6 +119,9 @@ export const searchMapListingsError = e => ({
   error: true,
   payload: e,
 });
+const calculateRating=(review)=>{
+
+}
 
 export const searchListings = searchParams => (dispatch, getState, sdk) => {
   dispatch(searchListingsRequest(searchParams));
@@ -127,8 +132,8 @@ export const searchListings = searchParams => (dispatch, getState, sdk) => {
     const values = priceParam ? priceParam.split(',') : [];
     return priceParam && values.length === 2
       ? {
-          price: [inSubunits(values[0]), inSubunits(values[1]) + 1].join(','),
-        }
+        price: [inSubunits(values[0]), inSubunits(values[1]) + 1].join(','),
+      }
       : {};
   };
 
@@ -142,11 +147,11 @@ export const searchListings = searchParams => (dispatch, getState, sdk) => {
 
     return hasValues
       ? {
-          start: formatDateStringToUTC(startDate),
-          end: formatDateStringToUTC(endDate),
-          // Availability can be full or partial. Default value is full.
-          availability: 'full',
-        }
+        start: formatDateStringToUTC(startDate),
+        end: formatDateStringToUTC(endDate),
+        // Availability can be full or partial. Default value is full.
+        availability: 'full',
+      }
       : {};
   };
 
@@ -160,13 +165,30 @@ export const searchListings = searchParams => (dispatch, getState, sdk) => {
     ...datesMaybe,
     per_page: perPage,
   };
-console.log("param",params)
+// console.log("param",params)
   return sdk.listings
     .query(params)
     .then(response => {
-      console.log("total",response);
+      console.log('total', response);
       dispatch(addMarketplaceEntities(response));
       dispatch(searchListingsSuccess(response));
+      response.data.data.forEach((element,i) => {
+console.log("iiii",i);
+        sdk.reviews
+          .query({
+            listing_id: element.id.uuid,
+            state: 'public',
+            include: ['author', 'author.profileImage'],
+            'fields.image': ['variants.square-small', 'variants.square-small2x'],
+          })
+          .then(response => {
+            console.log('review', response);
+          })
+          .catch(e => {
+
+          });
+      });
+
       return response;
     })
     .catch(e => {

@@ -323,8 +323,8 @@ export class BookingDatesFormComponent extends Component {
                 className={css.phone}
                 name="dates"
                 id='dates'
-                label='dates'
-                placeholder='dates'
+                label='How many days do you need this in?'
+                placeholder='Days'
               />
               <OnChange name='dates'>
 
