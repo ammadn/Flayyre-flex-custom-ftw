@@ -176,8 +176,7 @@ export const searchListings = searchParams => (dispatch, getState, sdk) => {
     .query(params)
     .then(response => {
       console.log('total', response);
-      dispatch(addMarketplaceEntities(response));
-      dispatch(searchListingsSuccess(response));
+
       response.data.data.forEach((element, i) => {
 
         sdk.reviews
@@ -188,13 +187,15 @@ export const searchListings = searchParams => (dispatch, getState, sdk) => {
             'fields.image': ['variants.square-small', 'variants.square-small2x'],
           })
           .then(response2 => {
-            response.data.data[i].rating = calculateRating(response2);
+
+            response.data.data[i].attributes.metadata.rating = calculateRating(response2);
           })
           .catch(e => {
             console.log('err', e);
           });
       });
-
+      dispatch(addMarketplaceEntities(response));
+      dispatch(searchListingsSuccess(response));
       return response;
     })
     .catch(e => {
