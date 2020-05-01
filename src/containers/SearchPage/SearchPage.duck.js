@@ -4,8 +4,6 @@ import { addMarketplaceEntities } from '../../ducks/marketplaceData.duck';
 import { convertUnitToSubUnit, unitDivisor } from '../../util/currency';
 import { formatDateStringToUTC, getExclusiveEndDate } from '../../util/dates';
 import config from '../../config';
-import { denormalisedResponseEntities } from '../../util/data';
-import { fetchReviewsError, fetchReviewsSuccess } from '../ListingPage/ListingPage.duck';
 
 // ================ Action types ================ //
 
@@ -119,9 +117,17 @@ export const searchMapListingsError = e => ({
   error: true,
   payload: e,
 });
-const calculateRating=(review)=>{
-
-}
+const calculateRating = (review) => {
+  var totalRating = 0;
+  review.data.data.forEach((element, index) => {
+    totalRating = element.attributes.rating + totalRating;
+  });
+  if (review.data.data.length === 0) {
+    return 6;
+  } else {
+    return totalRating / review.data.data.length;
+  }
+};
 
 export const searchListings = searchParams => (dispatch, getState, sdk) => {
   dispatch(searchListingsRequest(searchParams));
@@ -172,8 +178,8 @@ export const searchListings = searchParams => (dispatch, getState, sdk) => {
       console.log('total', response);
       dispatch(addMarketplaceEntities(response));
       dispatch(searchListingsSuccess(response));
-      response.data.data.forEach((element,i) => {
-console.log("iiii",i);
+      response.data.data.forEach((element, i) => {
+
         sdk.reviews
           .query({
             listing_id: element.id.uuid,
@@ -181,11 +187,11 @@ console.log("iiii",i);
             include: ['author', 'author.profileImage'],
             'fields.image': ['variants.square-small', 'variants.square-small2x'],
           })
-          .then(response => {
-            console.log('review', response);
+          .then(response2 => {
+            response.data.data[i].rating = calculateRating(response2);
           })
           .catch(e => {
-
+            console.log('err', e);
           });
       });
 
