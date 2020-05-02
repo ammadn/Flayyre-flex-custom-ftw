@@ -332,7 +332,7 @@
   "LayoutWrapperAccountSettingsSideNav.passwordTabTitle": "Password",
   "LayoutWrapperAccountSettingsSideNav.paymentsTabTitle": "Payout details",
   "LayoutWrapperAccountSettingsSideNav.paymentMethodsTabTitle": "Payment methods",
-  "ListingCard.hostedBy": "Managed by {authorName}.",
+  "ListingCard.hostedBy": "by {authorName}.",
   "ListingCard.perDay": "per day",
   "ListingCard.perNight": "Starting From",
   "ListingCard.perUnit": "per unit",
