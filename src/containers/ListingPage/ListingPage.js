@@ -71,7 +71,17 @@ const categoryLabel = (categories, key) => {
   const cat = categories.find(c => c.key === key);
   return cat ? cat.label : key;
 };
-
+const calculateRating = (review) => {
+  var totalRating = 0;
+  review.forEach((element, index) => {
+    totalRating = element.attributes.rating + totalRating;
+  });
+  if (review.length === 0) {
+    return 6;
+  } else {
+    return totalRating / review.length;
+  }
+};
 export class ListingPageComponent extends Component {
   constructor(props) {
     super(props);
@@ -153,6 +163,8 @@ console.log("valuesssssss",values);
       this.setState({ enquiryModalOpen: true });
     }
   }
+
+
 
 
   onSubmitEnquiry(values) {
@@ -419,6 +431,7 @@ console.log('attr',currentListing.attributes)
         });
       }
     };
+    console.log("review pp",reviews);
 
     const category =
       publicData && publicData.category ? (
@@ -477,6 +490,7 @@ console.log('attr',currentListing.attributes)
                     showContactUser={showContactUser}
                     onContactUser={this.onContactUser}
                     metadata={metadata}
+                    rating={calculateRating(reviews)}
                   />
                   <SectionSelectPromotionType intl={intl} onSubmit={handleSubmitBooking} publicData={publicData}/>
 

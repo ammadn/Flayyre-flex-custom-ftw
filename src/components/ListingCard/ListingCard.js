@@ -142,7 +142,7 @@ export const ListingCardComponent = props => {
       case 6: {
         var starts = [];
         for (var i = 0; i < 5; i++) {
-          starts.push(filledStar);
+          starts.push(star);
         }
 
         return <span>{starts}</span>;
