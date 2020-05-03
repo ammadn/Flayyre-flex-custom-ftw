@@ -822,6 +822,11 @@ console.log("state need",this.state.pageData.bookingDates.bookingEnd);
     // e.g. {country: 'FI'}
 
     const initalValuesForStripePayment = { name: userName };
+    function getdate() {
+      var str=tx.booking.attributes.displayEnd.toString();
+      return str.substring(0,25);
+    }
+
 
     return (
       <Page {...pageProps}>
@@ -914,6 +919,7 @@ console.log("state need",this.state.pageData.bookingDates.bookingEnd);
             <div className={css.detailsHeadings}>
               <h2 className={css.detailsTitle}>{listingTitle}</h2>
               <p className={css.detailsSubtitle}>{detailsSubTitle}</p>
+              <p className={css.detailsSubtitle}>End date {getdate()}</p>
             </div>
             {speculateTransactionErrorMessage}
             {breakdown}

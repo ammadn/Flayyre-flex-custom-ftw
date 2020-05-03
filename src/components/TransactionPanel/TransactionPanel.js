@@ -605,6 +605,7 @@ export class TransactionPanelComponent extends Component {
                 location={location}
                 geolocation={geolocation}
                 showAddress={stateData.showAddress}
+                transaction={currentTransaction}
               />
               {stateData.showBookingPanel ? (
                 <BookingPanel

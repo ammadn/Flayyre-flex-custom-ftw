@@ -85,7 +85,8 @@ export const BookingBreakdownComponent = props => {
    * LineItemTotalPrice: prints total price of the transaction
    *
    */
-
+console.log("booking",booking.attributes.displayEnd);
+console.log("dateType");
   return (
     <div className={classes}>
       <LineItemUnitsMaybe transaction={transaction} unitType={unitType} />

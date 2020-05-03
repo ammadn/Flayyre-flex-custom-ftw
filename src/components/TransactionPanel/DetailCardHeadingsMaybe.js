@@ -12,12 +12,18 @@ const DetailCardHeadingsMaybe = props => {
     location,
     geolocation,
     showAddress,
+    transaction
   } = props;
-
+console.log("trr",transaction.booking.attributes.displayEnd);
+function getdate() {
+  var str=transaction.booking.attributes.displayEnd.toString();
+  return str.substring(0,25);
+}
   return showDetailCardHeadings ? (
     <div className={css.detailCardHeadings}>
       <h2 className={css.detailCardTitle}>{listingTitle}</h2>
       <p className={css.detailCardSubtitle}>{subTitle}</p>
+      <p className={css.detailCardSubtitle}>{getdate()}</p>
       <AddressLinkMaybe location={location} geolocation={geolocation} showAddress={showAddress} />
     </div>
   ) : null;
