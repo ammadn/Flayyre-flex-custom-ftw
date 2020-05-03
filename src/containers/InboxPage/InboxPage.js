@@ -12,7 +12,12 @@ import {
   txIsRequested,
   txHasBeenDelivered,
   txIsPaymentExpired,
-  txIsPaymentPending, txIsReviewed, txIsDeliveryAcceptByCustomer, txIsCompletePayment,
+  txIsPaymentPending,
+  txIsReviewed,
+  txIsDeliveryAcceptByCustomer,
+  txIsCompletePayment,
+  txIsDeliveredByProvider,
+  txIsRevision, txIsInFirstReviewBy,
 } from '../../util/transaction';
 import { propTypes, DATE_TYPE_DATE } from '../../util/types';
 import { ensureCurrentUser } from '../../util/data';
@@ -167,6 +172,17 @@ export const txState = (intl, tx, type) => {
         id: 'delivery accepted',
       }),
     };
+
+  } else if (txIsDeliveredByProvider(tx)) {
+    return {
+      nameClassName: css.nameNotEmphasized,
+      bookingClassName: css.bookingNoActionNeeded,
+      lastTransitionedAtClassName: css.lastTransitionedAtNotEmphasized,
+      stateClassName: css.stateNoActionNeeded,
+      state: intl.formatMessage({
+        id: 'delivery Completed',
+      }),
+    };
   } else if (txIsCompletePayment(tx)) {
     return {
       nameClassName: css.nameNotEmphasized,
@@ -175,6 +191,36 @@ export const txState = (intl, tx, type) => {
       stateClassName: css.stateNoActionNeeded,
       state: intl.formatMessage({
         id: 'completed',
+      }),
+    };
+  } else if (txIsRevision(tx)) {
+    return {
+      nameClassName: css.nameNotEmphasized,
+      bookingClassName: css.bookingNoActionNeeded,
+      lastTransitionedAtClassName: css.lastTransitionedAtNotEmphasized,
+      stateClassName: css.stateNoActionNeeded,
+      state: intl.formatMessage({
+        id: 'in the revision',
+      }),
+    };
+  } else if (txIsInFirstReviewBy(tx,true)) {
+    return {
+      nameClassName: css.nameNotEmphasized,
+      bookingClassName: css.bookingNoActionNeeded,
+      lastTransitionedAtClassName: css.lastTransitionedAtNotEmphasized,
+      stateClassName: css.stateNoActionNeeded,
+      state: intl.formatMessage({
+        id: 'customer reviewed',
+      }),
+    };
+  } else if (txIsInFirstReviewBy(tx,false)) {
+    return {
+      nameClassName: css.nameNotEmphasized,
+      bookingClassName: css.bookingNoActionNeeded,
+      lastTransitionedAtClassName: css.lastTransitionedAtNotEmphasized,
+      stateClassName: css.stateNoActionNeeded,
+      state: intl.formatMessage({
+        id: 'provider reviewed',
       }),
     };
   }  else {
