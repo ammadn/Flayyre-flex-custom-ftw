@@ -75,7 +75,9 @@ const SectionSelectPromotionType = props => (
 
         <div className={css.sectionPromotionPrice}>
 
-          <Form onChange={value => {
+          <Form
+
+            onChange={value => {
             console.log('render props', fieldRenderProps.values);
             handleSubmit();
           }}>
@@ -88,6 +90,7 @@ const SectionSelectPromotionType = props => (
                     label='Choose your influencer marketing service'
                     value="direct"
                     showAsRequired={true}
+                    defaultValue={"direct"}
                   />
                   <FieldRadioButton
                     id="offer"
