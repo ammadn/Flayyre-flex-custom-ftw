@@ -125,7 +125,10 @@ const SignupFormComponent = props => (
       const cityRequired = validators.required(cityRequiredMessage);
 
 
-
+      const refRequiredMessage = intl.formatMessage({
+        id: 'Referrer required',
+      });
+      const refRequired = validators.required(refRequiredMessage);
 
 
       const classes = classNames(rootClassName || css.root, className);
@@ -225,6 +228,16 @@ const SignupFormComponent = props => (
               label={passwordLabel}
               placeholder={passwordPlaceholder}
               validate={passwordValidators}
+            />
+            <FieldTextInput
+              className={css.password}
+              type="text"
+              id={formId ? `${formId}.affiliate` : 'affiliate'}
+              name="referred"
+              autoComplete="new-password"
+              label="Who referred you"
+              placeholder="Who referred you"
+              validate={refRequired}
             />
           </div>
 
