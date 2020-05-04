@@ -23,7 +23,7 @@ function getdate() {
     <div className={css.detailCardHeadings}>
       <h2 className={css.detailCardTitle}>{listingTitle}</h2>
       <p className={css.detailCardSubtitle}>{subTitle}</p>
-      <p className={css.detailCardSubtitle}>{getdate()}</p>
+      {/*<p className={css.detailCardSubtitle}>{getdate()}</p>*/}
       <AddressLinkMaybe location={location} geolocation={geolocation} showAddress={showAddress} />
     </div>
   ) : null;

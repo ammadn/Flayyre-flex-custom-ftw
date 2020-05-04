@@ -303,7 +303,17 @@
     padding: 6px 0 2px 0;
   }
 }
+.breakdown2 {
+  margin: 14px 24px 0 0px;
 
+@media (--viewportMedium) {
+  margin: -30px 24px 0 24px;
+}
+@media (--viewportLarge) {
+  margin: -30px 48px 13px 48px;
+  padding: 6px 0 2px 0;
+}
+}
 .breakdownContainer {
   display: none;
 

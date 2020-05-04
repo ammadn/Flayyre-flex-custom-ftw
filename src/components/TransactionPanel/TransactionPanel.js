@@ -503,6 +503,10 @@ export class TransactionPanelComponent extends Component {
         <FormattedMessage id="TransactionPanel.paymentMethodsPageLink"/>
       </NamedLink>
     );
+    function getdate() {
+      var str=currentTransaction.booking.attributes.displayEnd.toString();
+      return str.substring(0,25);
+    }
 
     const classes = classNames(rootClassName || css.root, className);
 
@@ -607,6 +611,7 @@ export class TransactionPanelComponent extends Component {
                 showAddress={stateData.showAddress}
                 transaction={currentTransaction}
               />
+
               {stateData.showBookingPanel ? (
                 <BookingPanel
                   className={css.bookingPanel}
@@ -629,7 +634,11 @@ export class TransactionPanelComponent extends Component {
                 transaction={currentTransaction}
                 transactionRole={transactionRole}
               />
-
+              <div className={css.breakdownContainer}>
+                <div className={css.breakdown2}>
+              <p className={css.detailCardSubtitle}>End date {getdate()}</p>
+                </div>
+              </div>
               {stateData.showSaleButtons ? (
                 <div className={css.desktopActionButtons}>{saleButtons}</div>
               ) : null}
