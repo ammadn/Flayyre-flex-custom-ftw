@@ -52,3 +52,8 @@
     cursor: pointer;
   }
 }
+
+.bottomWrapperText2 {
+  @apply --marketplaceModalBottomWrapperText;
+  margin-top: 0 !important;
+}

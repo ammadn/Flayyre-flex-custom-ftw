@@ -240,7 +240,16 @@ const SignupFormComponent = props => (
               validate={refRequired}
             />
           </div>
+          <div >
+          <p className={css.bottomWrapperText2}>
+              <span className={css.termsText}>
+                <FormattedMessage
+                  id="Type N/A if no one did"
 
+                />
+              </span>
+          </p>
+          </div>
           <div className={css.bottomWrapper}>
             <p className={css.bottomWrapperText}>
               <span className={css.termsText}>
