@@ -76,6 +76,14 @@ export const EditListingPoliciesFormComponent = props => (
             placeholder="Who referred you"
             validate={refRequired}
           />
+          <p className={css.bottomWrapperText2}>
+              <span className={css.termsText}>
+                <FormattedMessage
+                  id="Type N/A if no one did"
+
+                />
+              </span>
+          </p>
 
           <Button
             className={css.submitButton}
