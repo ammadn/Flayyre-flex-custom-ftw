@@ -229,16 +229,16 @@ const SignupFormComponent = props => (
               placeholder={passwordPlaceholder}
               validate={passwordValidators}
             />
-            <FieldTextInput
-              className={css.password}
-              type="text"
-              id={formId ? `${formId}.affiliate` : 'affiliate'}
-              name="referred"
-              autoComplete="new-password"
-              label="Who referred you"
-              placeholder="Who referred you"
-              validate={refRequired}
-            />
+            {/*<FieldTextInput*/}
+            {/*  className={css.password}*/}
+            {/*  type="text"*/}
+            {/*  id={formId ? `${formId}.affiliate` : 'affiliate'}*/}
+            {/*  name="referred"*/}
+            {/*  autoComplete="new-password"*/}
+            {/*  label="Who referred you"*/}
+            {/*  placeholder="Who referred you"*/}
+            {/*  validate={refRequired}*/}
+            {/*/>*/}
           </div>
           <div >
           <p className={css.bottomWrapperText2}>

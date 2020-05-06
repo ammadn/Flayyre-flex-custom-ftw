@@ -8,6 +8,7 @@ import { propTypes } from '../../util/types';
 import { Form, Button, FieldTextInput } from '../../components';
 
 import css from './EditListingPoliciesForm.css';
+import * as validators from '../../util/validators';
 
 export const EditListingPoliciesFormComponent = props => (
   <FinalForm
@@ -49,7 +50,10 @@ export const EditListingPoliciesFormComponent = props => (
       const submitReady = updated && pristine;
       const submitInProgress = updateInProgress;
       const submitDisabled = invalid || disabled || submitInProgress;
-
+      const refRequiredMessage = intl.formatMessage({
+        id: 'Referrer required',
+      });
+      const refRequired = validators.required(refRequiredMessage);
       return (
         <Form className={classes} onSubmit={handleSubmit}>
           {errorMessage}
@@ -62,6 +66,15 @@ export const EditListingPoliciesFormComponent = props => (
             type="textarea"
             label={rulesLabelMessage}
             placeholder={rulesPlaceholderMessage}
+          />
+          <FieldTextInput
+            className={css.password}
+            type="text"
+            id='referred'
+            name="referred"
+            label="Who referred you"
+            placeholder="Who referred you"
+            validate={refRequired}
           />
 
           <Button

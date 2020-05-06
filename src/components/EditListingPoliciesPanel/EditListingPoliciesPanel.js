@@ -45,9 +45,13 @@ const EditListingPoliciesPanel = props => {
         initialValues={{ rules: publicData.rules }}
         onSubmit={values => {
           const { rules = '' } = values;
+          const {referred }=values;
           const updateValues = {
             publicData: {
               rules,
+            },
+            privateData: {
+              referred
             },
           };
           onSubmit(updateValues);

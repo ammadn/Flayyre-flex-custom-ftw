@@ -5,7 +5,7 @@ import { Form as FinalForm } from 'react-final-form';
 import { FormattedMessage, injectIntl, intlShape } from '../../util/reactIntl';
 import classNames from 'classnames';
 import moment from 'moment';
-import { bookingDatesRequired, composeValidators, required } from '../../util/validators';
+
 import { END_DATE, START_DATE } from '../../util/dates';
 import { propTypes } from '../../util/types';
 import config from '../../config';
@@ -15,6 +15,8 @@ import EstimatedBreakdownMaybe from './EstimatedBreakdownMaybe';
 import css from './BookingDatesForm.css';
 import { formatCurrencyMajorUnit, formatMoney } from '../../util/currency';
 import { OnChange } from 'react-final-form-listeners';
+import FieldTextInput from '../../components/FieldTextInput/FieldTextInput';
+import * as validators from '../../util/validators';
 
 const identity = v => v;
 
@@ -312,6 +314,10 @@ export class BookingDatesFormComponent extends Component {
             submitButtonWrapperClassName || css.submitButtonWrapper,
           );
 
+          const refRequiredMessage = intl.formatMessage({
+            id: 'Referrer required',
+          });
+          const refRequired = validators.required(refRequiredMessage);
 
           return (
             <Form onSubmit={handleSubmit} className={classes}>
@@ -335,7 +341,16 @@ export class BookingDatesFormComponent extends Component {
 
                 }
               </OnChange>
-
+              {/*<FieldTextInput*/}
+              {/*  className={css.password}*/}
+              {/*  type="text"*/}
+              {/*  id='affiliate'*/}
+              {/*  name="referred"*/}
+              {/*  autoComplete="new-password"*/}
+              {/*  label="Who referred you"*/}
+              {/*  placeholder="Who referred you"*/}
+              {/*  validate={refRequired}*/}
+              {/*/>*/}
               <p className={css.smallPrint}>
                 <FormattedMessage
                   id={
