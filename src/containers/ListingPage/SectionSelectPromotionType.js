@@ -1,7 +1,7 @@
 import React from 'react';
 import { shape } from 'prop-types';
 import { FieldRadioButton, Form } from '../../components';
-import { Form as FinalForm } from 'react-final-form';
+import { Form as FinalForm, FormSpy } from 'react-final-form';
 import FieldCheckboxComponent from '../../components/FieldCheckbox/FieldCheckbox';
 import css from './SectionSelectPromotionType.css';
 import FieldTextInput from '../../components/FieldTextInput/FieldTextInput';
@@ -44,6 +44,7 @@ const SectionSelectPromotionType = props => (
         return { '_sdkType': 'Money', 'amount': amoung, 'currency': 'USD' };
       };
       let promotionTypes = props.publicData ? Object.keys(props.publicData.values).map(function(key) {
+        console.log("public data",props.publicData);
         return  <div className={css.selectingCard}>
           <FieldCheckboxComponent
             key={key} value={key}
@@ -92,6 +93,7 @@ const SectionSelectPromotionType = props => (
                     showAsRequired={true}
                     defaultValue={"direct"}
                   />
+                  {/*<FormSpy onChange={()=>handleSubmit()} />*/}
                   <FieldRadioButton
                     id="offer"
                     name="paymentType"
@@ -115,7 +117,7 @@ const SectionSelectPromotionType = props => (
                       <div className={css.selectingCard}><h4><span>Brand Sponsorship</span></h4>
                         <div className={css.txtField}>
                           <FieldTextInputNew placeholder="Put Your Offer Here" lable="" validate={composeValidators(mustBeNumber, minValue(5))}
-                                             name="Brand Sponsorship" id="offer"/>
+                                             name="Brand SponsorshipOffer" id="offer"/>
                         </div>
                       </div>
                       <div className={css.selectingCard}><h4><span>IG Post Promo</span></h4>

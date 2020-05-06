@@ -397,25 +397,48 @@ console.log('attr',currentListing.attributes)
 
     const handleSubmitBooking = values => {
       console.log('offer values', values);
-      var value2 = JSON.parse(JSON.stringify(values));
-      delete value2.paymentType;
 
 
-      Object.keys(value2).forEach(key=>{
-        value2[key]=value2[key]*100;
-      });
+
+      // Object.keys(value2).forEach(key=>{
+      //   value2[key]=value2[key]*100;
+      // });
 
 
       console.log('neww offer values', value2);
-      if (values['Brand Sponsorship'] || values['IG Post Promo'] || values['IG Story Promo'] || values['Twitter Promo'] || values['FB Promo'] || values['Youtube Promo'] || values['TikTok Promo'] || values['Twitch Promo'] || values['Others']) {
+      // if ( values['IG Post Promo'] || values['IG Story Promo'] || values['Twitter Promo'] || values['FB Promo'] || values['Youtube Promo'] || values['TikTok Promo'] || values['Twitch Promo'] || values['Others']) {
+      if ( values.paymentType !== "direct") {
+        var value2 = JSON.parse(JSON.stringify(values));
+        delete value2.paymentType;
+        // delete value2.values['IG Post Promo'];
+        var val3={};
+
+        if( values['IG Post Promo'])val3['IG Post Promo']=values['IG Post Promo'];
+
+        if(values['Brand SponsorshipOffer'])  val3['Brand SponsorshipOffer']=values['Brand SponsorshipOffer'];
+        if( values['IG Story Promo'])  val3['IG Story Promo']=values['IG Story Promo'];
+        if( values['FB Promo']) val3['FB Promo']=values['FB Promo'];
+        if( values['Youtube Promo'])  val3['Youtube Promo']=values['Youtube Promo'];
+        if( values['TikTok Promo']) val3['TikTok Promo']=values['TikTok Promo'];
+        if( values['Twitch Promo']) val3['Twitch Promo']=values['Twitch Promo'];
+        if( values['Others'])val3['Others']=values['Others'];
+
         this.setState({
           bookingData: {
-            values: value2,
+            values: val3,
             type: 'offer',
           },
         });
       } else if (values.paymentType !== "offer") {
         console.log('direct values', values);
+        delete values['IG Post Promo'];
+        delete values['Brand SponsorshipOffer'];
+        delete values['IG Story Promo'] ;
+        delete values['FB Promo'];
+        delete values['Youtube Promo'];
+        delete values['TikTok Promo'];
+        delete values['Twitch Promo'];
+        delete values['Others'];
         const newvalue = Object.keys(values).reduce((object, key) => {
           if (key !== 'paymentType') {
             object[key] = values[key];

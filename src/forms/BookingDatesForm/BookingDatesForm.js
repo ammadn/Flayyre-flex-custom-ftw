@@ -187,6 +187,7 @@ export class BookingDatesFormComponent extends Component {
             total = 0;
 
             if (promotions.type === 'direct') {
+              console.log("promotionsss",promotions);
               Object.keys(promotions.values).map(function(key) {
                 if (promotions.values[key].length != 0 && publicData.values[promotions.values[key]]) {
                   total = total + parseFloat(publicData.values[promotions.values[key]][1]);
@@ -211,7 +212,8 @@ export class BookingDatesFormComponent extends Component {
             }
 
           };
-
+          console.log("promos",promotions);
+          console.log("values",publicData)
           const newbookingInfo = promotions && publicData && promotions.type === 'direct' ? (
             <div className={css.priceBreakdownContainer}>
               <h3 className={css.priceBreakdownTitle}>
