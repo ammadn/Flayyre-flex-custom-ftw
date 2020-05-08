@@ -11,14 +11,14 @@ import css from './SectionLocations.css';
 import helsinkiImage from './images/location_helsinki.jpg';
 import rovaniemiImage from './images/location_rovaniemi.jpg';
 import beauty from './images/BeautyCategoryImage.JPG';
-import bussness from './images/BusinessCategory.jpeg';
-import entertainment from './images/EntertainmentCategoryImage.jpeg';
-import fashion from './images/FashionCatImage.jpeg';
-import fitness from './images/FitnessCategoryImage.jpeg';
-import food from './images/FoodCategoryImage.jpeg';
-import gamming from './images/GamingCategoryImage.jpeg';
-import lifeStyle from './images/Lifestylecatimage.jpeg';
-import travel from './images/TravelCategoryImage.jpeg';
+import bussness from './images/BusinessCategoryImage.jpg';
+import entertainment from './images/EntertainmentCategoryImage.jpg';
+import fashion from './images/FashionCatImage.jpg';
+import fitness from './images/FitnessCategoryImage.jpg';
+import food from './images/FoodCategoryImage.jpg';
+import gamming from './images/GamingCategoryImage.jpg';
+import lifeStyle from './images/Lifestylecatimage.jpg';
+import travel from './images/TravelCategoryImage.jpg';
 
 
 
