@@ -17,7 +17,7 @@ import {
   txIsDeliveryAcceptByCustomer,
   txIsCompletePayment,
   txIsDeliveredByProvider,
-  txIsRevision, txIsInFirstReviewBy,
+  txIsRevision, txIsInFirstReviewBy, txIsPendingCancelByCustomer,
 } from '../../util/transaction';
 import { propTypes, DATE_TYPE_DATE } from '../../util/types';
 import { ensureCurrentUser } from '../../util/data';
@@ -213,6 +213,17 @@ export const txState = (intl, tx, type) => {
         id: 'customer reviewed',
       }),
     };
+  } else if (txIsPendingCancelByCustomer(tx,true)) {
+    return {
+      nameClassName: css.nameNotEmphasized,
+      bookingClassName: css.bookingNoActionNeeded,
+      lastTransitionedAtClassName: css.lastTransitionedAtNotEmphasized,
+      stateClassName: css.stateNoActionNeeded,
+      state: intl.formatMessage({
+        id: 'expired pending cancel',
+      }),
+    };
+
   } else if (txIsInFirstReviewBy(tx,false)) {
     return {
       nameClassName: css.nameNotEmphasized,
