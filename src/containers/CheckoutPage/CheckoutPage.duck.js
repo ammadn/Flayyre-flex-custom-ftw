@@ -172,6 +172,8 @@ export const initiateOrder = (orderParams, transactionId) => (dispatch, getState
         transition: TRANSITION_REQUEST_PAYMENT,
         params: orderParams,
       };
+  bodyParams.params.bookingDisplayStart=bodyParams.params.bookingStart;
+  bodyParams.params.bookingDisplayEnd=bodyParams.params.bookingEnd;
   const queryParams = {
     include: ['booking', 'provider'],
     expand: true,
