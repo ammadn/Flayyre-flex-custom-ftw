@@ -18,7 +18,7 @@ import {
   ensureStripeCustomer,
   ensurePaymentMethodCard,
 } from '../../util/data';
-import { dateFromLocalToAPI, minutesBetween } from '../../util/dates';
+import { dateFromLocalToAPI, minutesBetween, parseDateFromISO8601 } from '../../util/dates';
 import { createSlug } from '../../util/urlHelpers';
 import {
   isTransactionInitiateAmountTooLowError,
@@ -823,7 +823,8 @@ console.log("state need",this.state.pageData.bookingDates.bookingEnd);
 
     const initalValuesForStripePayment = { name: userName };
     function getdate() {
-      var str=tx.booking.attributes.displayEnd.toString();
+      console.log("tx",parseDateFromISO8601(bookingDates.bookingEnd));
+      var str=parseDateFromISO8601(bookingDates.bookingEnd);
       return str.substring(0,25);
     }
 
