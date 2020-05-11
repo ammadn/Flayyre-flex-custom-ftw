@@ -223,7 +223,7 @@ export class BookingDatesFormComponent extends Component {
                 {
 
                   Object.keys(promotions.values).map(function(key) {
-
+console.log("values",publicData.values)
                     return promotions.values[key].length != 0 && publicData.values[promotions.values[key]] ?
                       <div>
                         <div className={css.lineItem}>

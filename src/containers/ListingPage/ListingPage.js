@@ -413,15 +413,15 @@ console.log('attr',currentListing.attributes)
         // delete value2.values['IG Post Promo'];
         var val3={};
 
-        if( values['IG Post Promo'])val3['IG Post Promo']=values['IG Post Promo'];
+        if( values['IG Post Promo'])val3['IG Post Promo']=values['IG Post Promo']*100;
 
-        if(values['Brand SponsorshipOffer'])  val3['Brand SponsorshipOffer']=values['Brand SponsorshipOffer'];
-        if( values['IG Story Promo'])  val3['IG Story Promo']=values['IG Story Promo'];
-        if( values['FB Promo']) val3['FB Promo']=values['FB Promo'];
-        if( values['Youtube Promo'])  val3['Youtube Promo']=values['Youtube Promo'];
-        if( values['TikTok Promo']) val3['TikTok Promo']=values['TikTok Promo'];
-        if( values['Twitch Promo']) val3['Twitch Promo']=values['Twitch Promo'];
-        if( values['Others'])val3['Others']=values['Others'];
+        if(values['Brand SponsorshipOffer'])  val3['Brand SponsorshipOffer']=values['Brand SponsorshipOffer']*100;
+        if( values['IG Story Promo'])  val3['IG Story Promo']=values['IG Story Promo']*100;
+        if( values['FB Promo']) val3['FB Promo']=values['FB Promo']*100;
+        if( values['Youtube Promo'])  val3['Youtube Promo']=values['Youtube Promo']*100;
+        if( values['TikTok Promo']) val3['TikTok Promo']=values['TikTok Promo']*100;
+        if( values['Twitch Promo']) val3['Twitch Promo']=values['Twitch Promo']*100;
+        if( values['Others'])val3['Others']=values['Others']*100;
 
         this.setState({
           bookingData: {
