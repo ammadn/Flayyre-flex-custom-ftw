@@ -82,6 +82,7 @@ const calculateRating = (review) => {
     return totalRating / review.length;
   }
 };
+
 export class ListingPageComponent extends Component {
   constructor(props) {
     super(props);
@@ -117,7 +118,7 @@ export class ListingPageComponent extends Component {
 
     const { bookingDates, ...tt } = values;
     const bookingData = this.state.bookingData;
-console.log("valuesssssss",values);
+    console.log('valuesssssss', values);
     const initialValues = {
       listing,
       bookingData,
@@ -165,8 +166,6 @@ console.log("valuesssssss",values);
   }
 
 
-
-
   onSubmitEnquiry(values) {
     const { history, params, onSendEnquiry } = this.props;
     const routes = routeConfiguration();
@@ -210,7 +209,7 @@ console.log("valuesssssss",values);
       categoriesConfig,
       amenitiesConfig,
     } = this.props;
-console.log("all data",this.props)
+    console.log('all data', this.props);
     const listingId = new UUID(rawParams.id);
     const isPendingApprovalVariant = rawParams.variant === LISTING_PAGE_PENDING_APPROVAL_VARIANT;
     const isDraftVariant = rawParams.variant === LISTING_PAGE_DRAFT_VARIANT;
@@ -254,10 +253,10 @@ console.log("all data",this.props)
       price = null,
       title = '',
       publicData,
-      metadata
+      metadata,
     } = currentListing.attributes;
 
-console.log('attr',currentListing.attributes)
+    console.log('attr', currentListing.attributes);
     const richTitle = (
       <span>
         {richText(title, {
@@ -394,11 +393,44 @@ console.log('attr',currentListing.attributes)
       </NamedLink>
     );
 
+    function WidthChange(mq) {
+      if (mq.matches) {
+// window width is at least 500px
+        console.log("matched");
+      } else {
+// window width is less than 500px
+        console.log("not matched");
+          window.intercomSettings = {
+            app_id: 'ixgsu3hl',
+            alignment: 'right',
+            horizontal_padding: 20,
+            vertical_padding: 100,
+          };
+        global.window.Intercom("update");
+      }
+
+    }
+
+    const changePosition = () => {
+      if (matchMedia) {
+        const mq = window.matchMedia("(min-width: 500px)");
+        mq.addListener(WidthChange);
+        WidthChange(mq);
+      }
+      // if (mq.matches) {
+      //   window.intercomSettings = {
+      //     app_id: 'ixgsu3hl',
+      //     alignment: 'right',
+      //     horizontal_padding: 20,
+      //     vertical_padding: 100,
+      //   };
+      // }
+    };
+    changePosition();
 
 
     const handleSubmitBooking = values => {
       console.log('offer values', values);
-
 
 
       // Object.keys(value2).forEach(key=>{
@@ -408,21 +440,21 @@ console.log('attr',currentListing.attributes)
 
       console.log('neww offer values', value2);
       // if ( values['IG Post Promo'] || values['IG Story Promo'] || values['Twitter Promo'] || values['FB Promo'] || values['Youtube Promo'] || values['TikTok Promo'] || values['Twitch Promo'] || values['Others']) {
-      if ( values.paymentType !== "direct") {
+      if (values.paymentType !== 'direct') {
         var value2 = JSON.parse(JSON.stringify(values));
         delete value2.paymentType;
         // delete value2.values['IG Post Promo'];
-        var val3={};
+        var val3 = {};
 
-        if( values['IG Post Promo'])val3['IG Post Promo']=values['IG Post Promo']*100;
+        if (values['IG Post Promo']) val3['IG Post Promo'] = values['IG Post Promo'] * 100;
 
-        if(values['Brand SponsorshipOffer'])  val3['Brand SponsorshipOffer']=values['Brand SponsorshipOffer']*100;
-        if( values['IG Story Promo'])  val3['IG Story Promo']=values['IG Story Promo']*100;
-        if( values['FB Promo']) val3['FB Promo']=values['FB Promo']*100;
-        if( values['Youtube Promo'])  val3['Youtube Promo']=values['Youtube Promo']*100;
-        if( values['TikTok Promo']) val3['TikTok Promo']=values['TikTok Promo']*100;
-        if( values['Twitch Promo']) val3['Twitch Promo']=values['Twitch Promo']*100;
-        if( values['Others'])val3['Others']=values['Others']*100;
+        if (values['Brand SponsorshipOffer']) val3['Brand SponsorshipOffer'] = values['Brand SponsorshipOffer'] * 100;
+        if (values['IG Story Promo']) val3['IG Story Promo'] = values['IG Story Promo'] * 100;
+        if (values['FB Promo']) val3['FB Promo'] = values['FB Promo'] * 100;
+        if (values['Youtube Promo']) val3['Youtube Promo'] = values['Youtube Promo'] * 100;
+        if (values['TikTok Promo']) val3['TikTok Promo'] = values['TikTok Promo'] * 100;
+        if (values['Twitch Promo']) val3['Twitch Promo'] = values['Twitch Promo'] * 100;
+        if (values['Others']) val3['Others'] = values['Others'] * 100;
 
         this.setState({
           bookingData: {
@@ -430,11 +462,11 @@ console.log('attr',currentListing.attributes)
             type: 'offer',
           },
         });
-      } else if (values.paymentType !== "offer") {
+      } else if (values.paymentType !== 'offer') {
         console.log('direct values', values);
         delete values['IG Post Promo'];
         delete values['Brand SponsorshipOffer'];
-        delete values['IG Story Promo'] ;
+        delete values['IG Story Promo'];
         delete values['FB Promo'];
         delete values['Youtube Promo'];
         delete values['TikTok Promo'];
@@ -455,7 +487,7 @@ console.log('attr',currentListing.attributes)
         });
       }
     };
-    console.log("review pp",reviews);
+    console.log('review pp', reviews);
 
     const category =
       publicData && publicData.category ? (
