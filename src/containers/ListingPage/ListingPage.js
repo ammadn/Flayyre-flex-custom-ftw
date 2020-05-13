@@ -395,6 +395,7 @@ console.log('attr',currentListing.attributes)
     );
 
 
+
     const handleSubmitBooking = values => {
       console.log('offer values', values);
 

@@ -25,7 +25,7 @@ const SectionFollowers = props => {
       {publicData?
 
           <div className={css.rootOfOfferCard}>
-          <div className={css.selectingCard}><h4><span><img className={css.img__follower} src={ImgFaceBook}  />  <label>Facebook</label></span></h4>
+            {publicData.Fb?(<div className={css.selectingCard}><h4><span><img className={css.img__follower} src={ImgFaceBook}  />  <label>Facebook</label></span></h4>
             <div className={css.txtField}>
               {publicData.Fb?(<div><div className={css.nameTag}>Followers</div>
                 <label>{publicData.Fb}</label></div>):null}
@@ -36,8 +36,8 @@ const SectionFollowers = props => {
               {publicData.FbEng?(<div><div className={css.nameTag}>Engagement</div>
                   <label>{publicData.FbEng}</label></div>):null}
             </div>
-          </div>
-          <div className={css.selectingCard}><h4><span><img className={css.img__follower} src={ImgTwiter}  />  <label>Twitter</label></span></h4>
+          </div>):null}
+            {publicData.Twitter?(  <div className={css.selectingCard}><h4><span><img className={css.img__follower} src={ImgTwiter}  />  <label>Twitter</label></span></h4>
             <div className={css.txtField}>
 
               {publicData.Twitter?(<div><div className={css.nameTag}>Followers</div>
@@ -47,8 +47,8 @@ const SectionFollowers = props => {
                   {publicData.TwitterEng?(<div><div className={css.nameTag}>Engagement</div>
                 <label>{publicData.TwitterEng}</label></div>):null}
             </div>
-          </div>
-          <div className={css.selectingCard}><h4><span><img className={css.img__follower} src={ImgInstar}  /><label>Instagram</label></span></h4>
+          </div>):null}
+              {publicData.IG?(  <div className={css.selectingCard}><h4><span><img className={css.img__follower} src={ImgInstar}  /><label>Instagram</label></span></h4>
             <div className={css.txtField}>
 
               {publicData.IG?(<div><div className={css.nameTag}>Followers</div>
@@ -58,8 +58,8 @@ const SectionFollowers = props => {
                   {publicData.IGEng?(<div><div className={css.nameTag}>Engagement</div>
                 <label>{publicData.IGEng}</label></div>):null}
             </div>
-          </div>
-          <div className={css.selectingCard}><h4><span><img className={css.img__follower} src={ImgYouTube}  /><label>YouTube</label></span></h4>
+          </div>):null}
+                  {publicData.YouTube?(   <div className={css.selectingCard}><h4><span><img className={css.img__follower} src={ImgYouTube}  /><label>YouTube</label></span></h4>
             <div className={css.txtField}>
 
               {publicData.YouTube?(<div><div className={css.nameTag}>Followers</div>
@@ -69,8 +69,8 @@ const SectionFollowers = props => {
                   {publicData.YouTubeEng?(<div><div className={css.nameTag}>Engagement</div>
                 <label>{publicData.YouTubeEng}</label></div>):null}
             </div>
-          </div>
-          <div className={css.selectingCard}><h4><span><img className={css.img__follower} src={ImgTikTok}  /><label>TikTok</label></span></h4>
+          </div>):null}
+                      {publicData.TikTok?(  <div className={css.selectingCard}><h4><span><img className={css.img__follower} src={ImgTikTok}  /><label>TikTok</label></span></h4>
             <div className={css.txtField}>
 
               {publicData.TikTok?(<div><div className={css.nameTag}>Followers</div>
@@ -80,8 +80,8 @@ const SectionFollowers = props => {
                   {publicData.TikTokEng?(<div><div className={css.nameTag}>Engagement</div>
                 <label>{publicData.TikTokEng}</label></div>):null}
             </div>
-          </div>
-            <div className={css.selectingCard}><h4><span><img className={css.img__follower} src={ImgTwitch}  /><label>Twitch</label></span></h4>
+          </div>):null}
+                          {publicData.Twitch?(   <div className={css.selectingCard}><h4><span><img className={css.img__follower} src={ImgTwitch}  /><label>Twitch</label></span></h4>
               <div className={css.txtField}>
 
                 {publicData.Twitch?(<div><div className={css.nameTag}>Followers</div>
@@ -91,8 +91,8 @@ const SectionFollowers = props => {
                     {publicData.TwitchEng?(<div><div className={css.nameTag}>Engagement</div>
                   <label>{publicData.TwitchEng}</label></div>):null}
               </div>
-            </div>
-            <div className={css.selectingCard}><h4><span><img className={css.img__follower} src={Other}  /> <label>Other</label></span></h4>
+            </div>):null}
+                              {publicData.Other?(  <div className={css.selectingCard}><h4><span><img className={css.img__follower} src={Other}  /> <label>Other</label></span></h4>
               <div className={css.txtField}>
 
                 {publicData.Other?(<div>
@@ -103,7 +103,7 @@ const SectionFollowers = props => {
                     {publicData.OtherEng?(<div><div className={css.nameTag}>Engagement</div>
                   <label>{publicData.OtherEng}</label></div>):null}
               </div>
-            </div>
+            </div>):null}
           {/*<div className={css.follower}>*/}
           {/*  <div className={css.emptyImg} ></div>*/}
           {/*  <label><br/></label>*/}

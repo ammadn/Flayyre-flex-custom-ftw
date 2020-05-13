@@ -625,3 +625,10 @@
 .rating {
   margin-left: 10px;
 }
+
+.intercom-lightweight-app-launcher {
+  bottom: 40px !important;
+}
+.intercom-launcher {
+  bottom: 100px !important;
+}
