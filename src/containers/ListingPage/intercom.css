@@ -1,0 +1,19 @@
+#intercom-container iframe.intercom-launcher-frame {
+  height: 50px !important;
+  width: 50px !important; }
+
+/* iframe content */
+#intercom-container .intercom-launcher {
+  height: 50px;
+  width: 50px; }
+
+#intercom-container .intercom-launcher-open-icon {
+  background-position: 50% 60%;
+  background-size: 54% 60%; }
+
+#intercom-container .intercom-launcher-close-icon {
+  background-size: 30%; }
+
+.intercom-launcher {
+  bottom: 100px !important;
+}
