@@ -80,9 +80,10 @@ const tabCompleted = (tab, listing) => {
     title,
     publicData,
     folloers,
-
+    price
   } = listing.attributes;
   const images = listing.images;
+console.log("images",listing)
 
   switch (tab) {
     case DESCRIPTION:
@@ -90,11 +91,11 @@ const tabCompleted = (tab, listing) => {
     case POLICY:
       return !!(publicData && typeof publicData.rules !== 'undefined');
     case FOLLOWERS:
-      return !!(publicData);
+      return publicData.max;
     case NEW_PRICING:
-      return !!(publicData);
+      return price;
     case PHOTOS:
-      return images && images.length > 0;
+      return true;
     default:
       return false;
   }
@@ -112,8 +113,12 @@ const tabCompleted = (tab, listing) => {
 const tabsActive = (isNew, listing) => {
   return TABS.reduce((acc, tab) => {
     const previousTabIndex = TABS.findIndex(t => t === tab) - 1;
+    console.log("previouse index",previousTabIndex);
+    console.log("tab completed",tabCompleted(TABS[previousTabIndex], listing));
+    console.log("all tabs",TABS);
     const isActive =
       previousTabIndex >= 0 ? !isNew || tabCompleted(TABS[previousTabIndex], listing) : true;
+    console.log("is acctive",isActive);
     return { ...acc, [tab]: isActive };
   }, {});
 };
@@ -453,6 +458,10 @@ class EditListingWizard extends Component {
           tabRootClassName={css.tab}
         >
           {TABS.map(tab => {
+
+           console.log("isnew listing  flow", isNewListingFlow )
+           console.log("isnew listing  flow", tab)
+           console.log("status",tabsStatus[tab] )
             return (
               <EditListingWizardTab
                 followers={this.state.followers}

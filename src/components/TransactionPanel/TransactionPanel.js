@@ -427,7 +427,7 @@ export class TransactionPanelComponent extends Component {
 
     const customerCancelAfterExpireButton = (
       <SaleAcctionButtonSingle
-        showButtons={stateData.showCompleteButton}
+        showButtons={stateData.showCancelButtons}
         acceptInProgress={customerCancelAfterExpireInProgress}
         declineInProgress={declineInProgress}
         acceptSaleError={customerCancelAfterExpireError}

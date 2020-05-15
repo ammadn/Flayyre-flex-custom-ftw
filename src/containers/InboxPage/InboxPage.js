@@ -176,7 +176,7 @@ export const txState = (intl, tx, type) => {
   } else if (txIsDeliveredByProvider(tx)) {
     return {
       nameClassName: css.nameNotEmphasized,
-      bookingClassName: css.bookingNoActionNeeded,
+      bookingClassName: css.bookingActionNeeded,
       lastTransitionedAtClassName: css.lastTransitionedAtNotEmphasized,
       stateClassName: css.stateNoActionNeeded,
       state: intl.formatMessage({
@@ -196,7 +196,7 @@ export const txState = (intl, tx, type) => {
   } else if (txIsRevision(tx)) {
     return {
       nameClassName: css.nameNotEmphasized,
-      bookingClassName: css.bookingNoActionNeeded,
+      bookingClassName: css.bookingActionNeeded,
       lastTransitionedAtClassName: css.lastTransitionedAtNotEmphasized,
       stateClassName: css.stateNoActionNeeded,
       state: intl.formatMessage({

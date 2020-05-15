@@ -825,7 +825,7 @@ console.log("state need",this.state.pageData.bookingDates.bookingEnd);
     function getdate() {
       console.log("tx",parseDateFromISO8601(bookingDates.bookingEnd));
       var str=parseDateFromISO8601(bookingDates.bookingEnd);
-      return str.substring(0,25);
+      return str.toString().substring(0,25);
     }
 
 
