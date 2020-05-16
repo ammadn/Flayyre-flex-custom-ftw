@@ -72,7 +72,8 @@ const SectionSelectPromotionType = props => (
         isNaN(value) || value >= min ? undefined : `Should be greater than ${min}`;
       const composeValidators = (...validators) => value =>
         validators.reduce((error, validator) => error || validator(value), undefined);
-
+      const maxValue = min => value =>
+        isNaN(value) || value <= min ? undefined : `Should be lesser`;
       const priceRequired = validators.required(
         intl.formatMessage({
           id: 'EditListingPricingForm.priceRequired',
@@ -139,57 +140,57 @@ const SectionSelectPromotionType = props => (
                       <div className={css.selectingCard}><h4><span>Brand Sponsorship</span></h4>
                         <div className={css.txtField}>
 
-                          <FieldTextInputNew placeholder="Put Your Offer Here" lable="" validate={composeValidators(mustBeNumber, minValue(5))}
+                          <FieldTextInputNew placeholder="Put Your Offer Here" lable="" validate={composeValidators(mustBeNumber,maxValue(99999999), minValue(5))}
                                              name="Brand SponsorshipOffer" id="offer"/>
                         </div>
                       </div>
                       <div className={css.selectingCard}><h4><span>IG Post Promo</span></h4>
                         <div className={css.txtField}>
-                          <FieldTextInputNew placeholder="Put Your Offer Here" label="" validate={composeValidators(mustBeNumber, minValue(5))}
+                          <FieldTextInputNew placeholder="Put Your Offer Here" label="" validate={composeValidators(mustBeNumber,maxValue(99999999), minValue(5))}
                                              name="IG Post Promo" id="offerIGPost"/>
                         </div>
                       </div>
 
                       <div className={css.selectingCard}><h4><span>IG Story Promo</span></h4>
                         <div className={css.txtField}>
-                          <FieldTextInputNew placeholder="Put Your Offer Here" label="" validate={composeValidators(mustBeNumber, minValue(5))}
+                          <FieldTextInputNew placeholder="Put Your Offer Here" label="" validate={composeValidators(mustBeNumber,maxValue(99999999), minValue(5))}
                                              name="IG Story Promo" id="offerIGStory"/>
                         </div>
                       </div>
                       <div className={css.selectingCard}><h4><span>Twitter Promo</span></h4>
                         <div className={css.txtField}>
 
-                          <FieldTextInputNew  placeholder="Put Your Offer Here" label="" validate={composeValidators(mustBeNumber, minValue(5))}
+                          <FieldTextInputNew  placeholder="Put Your Offer Here" label="" validate={composeValidators(mustBeNumber,maxValue(99999999), minValue(5))}
                                              name="Twitter Promo" id="offerTwitter"/>
                         </div>
                       </div>
                       <div className={css.selectingCard}><h4><span>FB Promo</span></h4>
                         <div className={css.txtField}>
-                          <FieldTextInputNew placeholder="Put Your Offer Here" label="" validate={composeValidators(mustBeNumber, minValue(5))}
+                          <FieldTextInputNew placeholder="Put Your Offer Here" label="" validate={composeValidators(mustBeNumber,maxValue(99999999), minValue(5))}
                                              name="FB Promo" id="offerFB"/>
                         </div>
                       </div>
                       <div className={css.selectingCard}><h4><span>Youtube Promo</span></h4>
                         <div className={css.txtField}>
-                          <FieldTextInputNew  placeholder="Put Your Offer Here" label="" validate={composeValidators(mustBeNumber, minValue(5))}
+                          <FieldTextInputNew  placeholder="Put Your Offer Here" label="" validate={composeValidators(mustBeNumber,maxValue(99999999), minValue(5))}
                                              name="Youtube Promo" id="offerYoutube"/>
                         </div>
                       </div>
                       <div className={css.selectingCard}><h4><span>TikTok Prom</span></h4>
                         <div className={css.txtField}>
-                          <FieldTextInputNew placeholder="Put Your Offer Here" label="" validate={composeValidators(mustBeNumber, minValue(5))}
+                          <FieldTextInputNew placeholder="Put Your Offer Here" label="" validate={composeValidators(mustBeNumber,maxValue(99999999), minValue(5))}
                                              name="TikTok Promo" id="offerTikTok"/>
                         </div>
                       </div>
                       <div className={css.selectingCard}><h4><span>Twitch Promo</span></h4>
                         <div className={css.txtField}>
-                          <FieldTextInputNew  placeholder="Put Your Offer Here" label="" validate={composeValidators(mustBeNumber, minValue(5))}
+                          <FieldTextInputNew  placeholder="Put Your Offer Here" label="" validate={composeValidators(mustBeNumber,maxValue(99999999), minValue(5))}
                                              name="Twitch Promo" id="offerTwitch"/>
                         </div>
                       </div>
                       <div className={css.selectingCard}><h4><span>Others </span></h4>
                         <div className={css.txtField}>
-                          <FieldTextInputNew placeholder="Put Your Offer Here" label="" validate={composeValidators(mustBeNumber, minValue(5))}
+                          <FieldTextInputNew placeholder="Put Your Offer Here" label="" validate={composeValidators(mustBeNumber,maxValue(99999999), minValue(5))}
                                              name="Others" id="offerOthers"/>
                         </div>
                       </div>
