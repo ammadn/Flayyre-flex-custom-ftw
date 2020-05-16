@@ -23,7 +23,7 @@
   position: relative;
   vertical-align: top;
   border-radius: 4px;
-  line-height: 18px;
+  line-height: 12px;
   width: calc(100% - 50px);
   text-align: center;
 @media (--viewportMedium) {
@@ -51,4 +51,8 @@
 }
 .title input{
   font-size: 15px !important;
+}
+.title div {
+  margin-top: 0px !important;
+  margin-bottom: 0px !important;
 }

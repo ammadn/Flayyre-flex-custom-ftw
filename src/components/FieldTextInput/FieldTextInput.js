@@ -84,7 +84,7 @@ class FieldTextInputComponent extends Component {
       <div className={classes}>
         {label ? <label htmlFor={id}>{label}</label> : null}
         {isTextarea ? <ExpandingTextarea {...inputProps} /> : <input {...inputProps} />}
-        <ValidationError fieldMeta={fieldMeta} />
+        <ValidationError  fieldMeta={fieldMeta} />
       </div>
     );
   }

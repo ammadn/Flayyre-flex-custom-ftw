@@ -15,6 +15,7 @@ import ImgYouTube from '../../assets/youtube.png';
 import ImgTikTok from '../../assets/tiktok.png';
 import ImgTwitch from '../../assets/twitch.png';
 import OtherImg from '../../assets/Other.png';
+import { composeValidators } from '../../util/validators';
 
 
 export const EditListingFollowersFormComponent = props => (
@@ -52,7 +53,10 @@ export const EditListingFollowersFormComponent = props => (
           <FormattedMessage id="EditListingCapacityForm.updateFailed"/>
         </p>
       ) : null;
-
+      const mustBeNumber = (value) => {
+        console.log('valllll', value);
+        return (typeof value !== 'undefined' && isNaN(value)) ? 'Must be a number' : undefined;
+      };
 
       const classes = classNames(css.root, className);
       const submitReady = updated && pristine;
@@ -83,7 +87,8 @@ export const EditListingFollowersFormComponent = props => (
                     placeholder='Enter Followers'
                     maxLength='55'
                     autoFocus
-                    disabled={submitDisabled || !IG}
+                    disabled={!IG}
+                    validate={composeValidators(mustBeNumber)}
                   />
 
               <div className={css.nameTag}>Username</div>
@@ -110,7 +115,8 @@ export const EditListingFollowersFormComponent = props => (
                     placeholder='Enter Engagement'
                     maxLength='55'
                     autoFocus
-                    disabled={submitDisabled || !IG}
+                    disabled={ !IG}
+                    validate={composeValidators(mustBeNumber)}
                   />
               </div>
             </div>
@@ -133,7 +139,8 @@ export const EditListingFollowersFormComponent = props => (
                     placeholder='Twitter Followers'
                     maxLength='55'
                     autoFocus
-                    disabled={submitDisabled || !Twitter}
+                    disabled={!Twitter}
+                    validate={composeValidators(mustBeNumber)}
                   />
 
                 <div className={css.nameTag}>Username</div>
@@ -160,7 +167,8 @@ export const EditListingFollowersFormComponent = props => (
                     placeholder='Twitter Engagement'
                     maxLength='55'
                     autoFocus
-                    disabled={submitDisabled || !Twitter}
+                    disabled={ !Twitter}
+                    validate={composeValidators(mustBeNumber)}
                   />
               </div>
             </div>
@@ -182,7 +190,8 @@ export const EditListingFollowersFormComponent = props => (
                       placeholder='Facebook Followers'
                       maxLength='55'
                       autoFocus
-                      disabled={submitDisabled || !Fb}
+                      disabled={ !Fb}
+                      validate={composeValidators(mustBeNumber)}
                     />
 
                 <div className={css.nameTag}>Username</div>
@@ -210,7 +219,8 @@ export const EditListingFollowersFormComponent = props => (
                       placeholder='FB Engagement'
                       maxLength='55'
                       autoFocus
-                      disabled={submitDisabled || !Fb}
+                      disabled={ !Fb}
+                      validate={composeValidators(mustBeNumber)}
                     />
               </div>
             </div>
@@ -228,7 +238,8 @@ export const EditListingFollowersFormComponent = props => (
                       placeholder='YouTube Followers'
                       maxLength='55'
                       autoFocus
-                      disabled={submitDisabled || !YouTube}
+                      disabled={!YouTube}
+                      validate={composeValidators(mustBeNumber)}
                     />
 
                 <div className={css.nameTag}>Username</div>
@@ -255,7 +266,8 @@ export const EditListingFollowersFormComponent = props => (
                       placeholder='YouTube Engagement'
                       maxLength='55'
                       autoFocus
-                      disabled={submitDisabled || !YouTube}
+                      disabled={ !YouTube}
+                      validate={composeValidators(mustBeNumber)}
                     />
               </div>
             </div>
@@ -275,7 +287,8 @@ export const EditListingFollowersFormComponent = props => (
                       placeholder='TikTok Followers'
                       maxLength='55'
                       autoFocus
-                      disabled={submitDisabled || !TikTok}
+                      disabled={ !TikTok}
+                      validate={composeValidators(mustBeNumber)}
                     />
 
                 <div className={css.nameTag}>Username</div>
@@ -302,7 +315,8 @@ export const EditListingFollowersFormComponent = props => (
                       placeholder='TikTok Engagement'
                       maxLength='55'
                       autoFocus
-                      disabled={submitDisabled || !TikTok}
+                      disabled={!TikTok}
+                      validate={composeValidators(mustBeNumber)}
                     />
               </div>
             </div>
@@ -323,7 +337,8 @@ export const EditListingFollowersFormComponent = props => (
                       placeholder='Twitch Followers'
                       maxLength='55'
                       autoFocus
-                      disabled={submitDisabled || !Twitch}
+                      disabled={!Twitch}
+                      validate={composeValidators(mustBeNumber)}
                     />
 
                 <div className={css.nameTag}>Username</div>
@@ -350,7 +365,8 @@ export const EditListingFollowersFormComponent = props => (
                       placeholder='Twitch Engagement'
                       maxLength='55'
                       autoFocus
-                      disabled={submitDisabled || !Twitch}
+                      disabled={!Twitch}
+                      validate={composeValidators(mustBeNumber)}
                     />
               </div>
             </div>
@@ -368,7 +384,8 @@ export const EditListingFollowersFormComponent = props => (
                       placeholder='Other Followers'
                       maxLength='55'
                       autoFocus
-                      disabled={submitDisabled || !Other}
+                      disabled={!Other}
+                      validate={composeValidators(mustBeNumber)}
                     />
 
                 <div className={css.nameTag}>Username</div>
@@ -395,7 +412,8 @@ export const EditListingFollowersFormComponent = props => (
                       placeholder='Other Engagement'
                       maxLength='55'
                       autoFocus
-                      disabled={submitDisabled || !Other}
+                      disabled={!Other}
+                      validate={composeValidators(mustBeNumber)}
                     />
               </div>
             </div>
