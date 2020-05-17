@@ -64,6 +64,7 @@ const addToArray=(values)=> {
             if (key2.indexOf(key.substr(key.length - 4)) !== -1 && key!=key2){
               console.log('this if',key,key2)
               if(arr[key]==null&&arr[key2]==null) {
+
                 arr[key]=[values[key], values[key2].amount]
 
               }
@@ -100,14 +101,26 @@ const addToArray=(values)=> {
 
 
         minPrice=arr[Object.keys(arr)[0]][1];
+        var newArray={};
+        var counter=0;
         for(var key in arr){
           console.log('key',arr[key][1]);
           if( minPrice>parseFloat(arr[key][1])){
 
             minPrice=arr[key][1]
           }
+          if(counter<directPriceInputArray.length){
+            newArray[key]=arr[key]
+          }
+          counter ++;
         }
       }
+
+      // var newArr=arr.slice(0, directPriceInputArray.length);
+
+      console.log("new array",newArray);
+      console.log("array length",directPriceInputArray);
+      console.log("why");
 
 
       let price={
@@ -122,10 +135,10 @@ const addToArray=(values)=> {
       updateValues=price;
 
       updateValues.publicData={};
-      updateValues.publicData.values=arr;
+      updateValues.publicData.values=newArray;
       updateValues.publicData.pricetype=pricetype;
 
-      console.log("update value",updateValues)
+      console.log("update value",updateValues);
 
      return updateValues;
 
