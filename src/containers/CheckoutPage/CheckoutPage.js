@@ -142,12 +142,13 @@ export class CheckoutPageComponent extends Component {
     const promotionType=config.promotionType;
     const isNightly = unitType === LINE_ITEM_NIGHT;
 
-    const quantity = isNightly
-      ? nightsBetween(bookingStart, bookingEnd)
-      : daysBetween(bookingStart, bookingEnd);
+    // const quantity = isNightly
+    //   ? nightsBetween(bookingStart, bookingEnd)
+    //   : daysBetween(bookingStart, bookingEnd);
 
     let arr=[];
 
+    const   quantity=1;
     if(bookingData.type==='direct'){
     Object.keys(bookingData.values).map(function(key) {
 

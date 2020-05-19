@@ -206,7 +206,7 @@ export class BookingDatesFormComponent extends Component {
 
           const findComition = () => {
             if (total > 0) {
-              return total * 0.05;
+              return total * 0;
             } else {
               return null;
             }

@@ -133,6 +133,7 @@ export class ListingPageComponent extends Component {
     const { bookingDates, ...tt } = values;
     const bookingData = this.state.bookingData;
     console.log('valuesssssss', values);
+    console.log('booking data', bookingData);
     const initialValues = {
       listing,
       bookingData,
@@ -142,6 +143,8 @@ export class ListingPageComponent extends Component {
       },
       confirmPaymentError: null,
     };
+
+    console.log("in",initialValues);
 
     const routes = routeConfiguration();
     // Customize checkout page state with current listing and selected bookingDates
