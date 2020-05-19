@@ -98,6 +98,20 @@ export class ListingPageComponent extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.onContactUser = this.onContactUser.bind(this);
     this.onSubmitEnquiry = this.onSubmitEnquiry.bind(this);
+
+
+
+  }
+  componentDidMount(){
+    if ( global.window.screen.width <= 500) { // 768px portrait
+      global.window.intercomSettings = {
+        app_id: 'ixgsu3hl',
+        alignment: 'right',
+        horizontal_padding: 20,
+        vertical_padding: 100,
+      };
+      global.window.Intercom("update");
+    }
   }
 
   componentWillUnmount() {
@@ -393,40 +407,40 @@ export class ListingPageComponent extends Component {
       </NamedLink>
     );
 
-    function WidthChange(mq) {
-      if (mq.matches) {
-// window width is at least 500px
-        console.log("matched");
-      } else {
-// window width is less than 500px
-        console.log("not matched");
-          window.intercomSettings = {
-            app_id: 'ixgsu3hl',
-            alignment: 'right',
-            horizontal_padding: 20,
-            vertical_padding: 100,
-          };
-        global.window.Intercom("update");
-      }
+//     function WidthChange(mq) {
+//       if (mq.matches) {
+// // window width is at least 500px
+//         console.log("matched");
+//       } else {
+// // window width is less than 500px
+//         console.log("not matched");
+//         global.window.intercomSettings = {
+//             app_id: 'ixgsu3hl',
+//             alignment: 'right',
+//             horizontal_padding: 20,
+//             vertical_padding: 100,
+//           };
+//         global.window.Intercom("update");
+//       }
+//
+//     }
 
-    }
-
-    const changePosition = () => {
-      if (matchMedia) {
-        const mq = window.matchMedia("(min-width: 500px)");
-        mq.addListener(WidthChange);
-        WidthChange(mq);
-      }
-      // if (mq.matches) {
-      //   window.intercomSettings = {
-      //     app_id: 'ixgsu3hl',
-      //     alignment: 'right',
-      //     horizontal_padding: 20,
-      //     vertical_padding: 100,
-      //   };
-      // }
-    };
-    changePosition();
+    // const changePosition = () => {
+    //   if (matchMedia) {
+    //     const mq = global.window.matchMedia("(min-width: 500px)");
+    //     mq.addListener(WidthChange);
+    //     WidthChange(mq);
+    //   }
+    //   // if (mq.matches) {
+    //   //   window.intercomSettings = {
+    //   //     app_id: 'ixgsu3hl',
+    //   //     alignment: 'right',
+    //   //     horizontal_padding: 20,
+    //   //     vertical_padding: 100,
+    //   //   };
+    //   // }
+    // };
+    // changePosition();
 
 
     const handleSubmitBooking = values => {
