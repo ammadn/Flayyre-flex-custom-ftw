@@ -17,7 +17,7 @@ import { formatCurrencyMajorUnit, formatMoney } from '../../util/currency';
 import { OnChange } from 'react-final-form-listeners';
 import FieldTextInput from '../../components/FieldTextInput/FieldTextInput';
 import * as validators from '../../util/validators';
-
+import { required, bookingDatesRequired, composeValidators } from '../../util/validators';
 const identity = v => v;
 
 export class BookingDatesFormComponent extends Component {
@@ -331,6 +331,9 @@ console.log("values",publicData.values)
                 className={css.phone}
                 name="dates"
                 id='dates'
+                validate={composeValidators(
+                  required(requiredMessage)
+                )}
                 label='How many days do you need this in?'
                 placeholder='Days'
               />
