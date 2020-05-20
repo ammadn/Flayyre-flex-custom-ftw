@@ -457,7 +457,7 @@ export class ListingPageComponent extends Component {
 
       console.log('neww offer values', values.paymentType);
       // if ( values['IG Post Promo'] || values['IG Story Promo'] || values['Twitter Promo'] || values['FB Promo'] || values['Youtube Promo'] || values['TikTok Promo'] || values['Twitch Promo'] || values['Others']) {
-      if (values.paymentType === 'offer'||values['Brand SponsorshipOffer']||values['IG Post Promo'] || values['IG Story Promo'] || values['Twitter Promo'] || values['FB Promo'] || values['Youtube Promo'] || values['TikTok Promo'] || values['Twitch Promo'] || values['Others'] ) {
+      if (values.paymentType!= 'direct'&&(values.paymentType === 'offer'||values['Brand SponsorshipOffer']||values['IG Post Promo'] || values['IG Story Promo'] || values['Twitter Promo'] || values['FB Promo'] || values['Youtube Promo'] || values['TikTok Promo'] || values['Twitch Promo'] || values['Others'] )) {
         var value2 = JSON.parse(JSON.stringify(values));
         delete value2.paymentType;
         // delete value2.values['IG Post Promo'];
