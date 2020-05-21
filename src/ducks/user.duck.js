@@ -295,11 +295,13 @@ export const fetchCurrentUserNotifications = () => (dispatch, getState, sdk) => 
     page: 1,
     per_page: NOTIFICATION_PAGE_SIZE,
   };
-
+console.log("api quary params",apiQueryParams);
+  // apiQueryParams.last_transitions=["transition/asking-for-revision"];
   sdk.transactions
     .query(apiQueryParams)
     .then(response => {
       const transactions = response.data.data;
+      console.log("notifications",transactions);
       dispatch(fetchCurrentUserNotificationsSuccess(transactions));
     })
     .catch(e => dispatch(fetchCurrentUserNotificationsError(storableError(e))));

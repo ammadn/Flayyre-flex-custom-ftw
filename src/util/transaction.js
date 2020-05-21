@@ -151,7 +151,7 @@ const stateDescription = {
   // id is defined only to support Xstate format.
   // However if you have multiple transaction processes defined,
   // it is best to keep them in sync with transaction process aliases.
-  id: 'preauth-with-nightly-booking/release-1',
+  id: 'sca-preauth-nightly-booking/release-1',
 
   // This 'initial' state is a starting point for new transaction
   initial: STATE_INITIAL,
@@ -225,8 +225,6 @@ const stateDescription = {
       },
     },
 
-
-
     [STATE_CANCELED]: {},
     [STATE_DELIVARY_ACCEPT_BY_CUSTOMER]: {
       on: {
@@ -292,8 +290,11 @@ const getTransitionsToState = getTransitionsToStateFn(stateDescription);
 
 // This is needed to fetch transactions that need response from provider.
 // I.e. transactions which provider needs to accept or decline
-export const transitionsToRequested = getTransitionsToState(STATE_PREAUTHORIZED);
+const arr1= getTransitionsToState(STATE_REVISION);
+const arr2= getTransitionsToState(STATE_PREAUTHORIZED);
+export const transitionsToRequested = arr1.concat(arr2);
 
+console.log("requested",transitionsToRequested);
 /**
  * Helper functions to figure out if transaction is in a specific state.
  * State is based on lastTransition given by transaction object and state description.

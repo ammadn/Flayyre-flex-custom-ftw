@@ -106,7 +106,7 @@ export const loadData = (params, search) => (dispatch, getState, sdk) => {
     page,
     per_page: INBOX_PAGE_SIZE,
   };
-
+  console.log("last",apiQueryParams);
   return sdk.transactions
     .query(apiQueryParams)
     .then(response => {
