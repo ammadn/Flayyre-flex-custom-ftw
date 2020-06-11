@@ -114,7 +114,7 @@ export const EditListingPricingFormComponent = props => (
                   <option value="IG Story">
                     IG Story Promo
                   </option>
-                  <option value="IG Post44">
+                  <option value="IG Post">
                     IG Post Promo
                   </option>
                   <option value="Twitter">

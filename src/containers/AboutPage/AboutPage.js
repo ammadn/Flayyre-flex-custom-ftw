@@ -60,8 +60,7 @@ const AboutPage = () => {
             <p className={css.paragraphJust}>
             At Flayyre, we aim to create simplicity within the Influencer community. We do this by introducing products
               to the market that simplifies talent monetization. In order to create simplistic methods for Influencer monetization,
-              we eliminated fees when using our platform and only charge Influencers 10% after a business has purchased their services. Businesses have a
-              5% fee.
+              we eliminated fees when using our platform and only charge Influencers 15% after a business has purchased their services. Businesses have a 0% fee.
             </p>
           </div>
         </LayoutWrapperMain>
