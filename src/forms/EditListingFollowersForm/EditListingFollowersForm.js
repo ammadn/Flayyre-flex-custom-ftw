@@ -43,7 +43,7 @@ export const EditListingFollowersFormComponent = props => (
         Other,
         YouTube,
         TikTok,
-        Twitch
+        Twitch,
 
       } = fieldRenderProps;
 
@@ -56,6 +56,15 @@ export const EditListingFollowersFormComponent = props => (
       const mustBeNumber = (value) => {
         console.log('valllll', value);
         return (typeof value !== 'undefined' && isNaN(value)) ? 'Must be a number' : undefined;
+      };
+      const mustBeNumberOrPresentage = (value) => {
+        var patt = new RegExp(/^([0-9]|%|\\+|\\*)+$/);
+        if (typeof value !== 'undefined') {
+          console.log('valllll', patt.test(value.toString()));
+          console.log('valllll222222', value.toString());
+          console.log('aaa', isNaN(value));
+        }
+        return (typeof value !== 'undefined' && (isNaN(value) && !patt.test(value.toString()) )) ? 'Must be a number' : undefined;
       };
 
       const classes = classNames(css.root, className);
@@ -76,345 +85,345 @@ export const EditListingFollowersFormComponent = props => (
                 value="boxIG"
                 name='boxIG'
                 id='boxIG'/>
-              <h4><span><img className={css.img__follower} src={ImgInstar}  />  <label>Instagram</label></span></h4>
-              <div className={css.txtField}>
-              <div className={css.nameTag}>Followers</div>
-                  < FieldTextInput
-                    id="IG"
-                    name="IG"
-                    className={css.title}
-                    type="IG"
-                    placeholder='Enter Followers'
-                    maxLength='55'
-                    autoFocus
-                    disabled={!IG}
-                    validate={composeValidators(mustBeNumber)}
-                  />
-
-              <div className={css.nameTag}>Username</div>
-
-                  <FieldTextInput
-                    id="IGName"
-                    name="IGName"
-                    className={css.title}
-                    type="IGName"
-
-                    placeholder='Enter Username'
-                    maxLength='55'
-                    autoFocus
-                    disabled={submitDisabled || !IG}
-                  />
-
-              <div className={css.nameTag}>Engagement</div>
-                  <FieldTextInput
-                    id="IGEng"
-                    name="IGEng"
-                    className={css.title}
-                    type="IGEng"
-
-                    placeholder='Enter Engagement'
-                    maxLength='55'
-                    autoFocus
-                    disabled={ !IG}
-                    validate={composeValidators(mustBeNumber)}
-                  />
-              </div>
-            </div>
-            <div className={css.selectingCard}>
-                <FieldCheckboxForFollowers
-                  com='Twitter'
-                  change={changeState}
-                  value="boxTwitter"
-                  name='boxTwitter'
-                  id='boxTwitter'/>
-              <h4><span><img className={css.img__follower} src={ImgTwiter}  />  <label>Twitter</label></span></h4>
+              <h4><span><img className={css.img__follower} src={ImgInstar}/>  <label>Instagram</label></span></h4>
               <div className={css.txtField}>
                 <div className={css.nameTag}>Followers</div>
-                  <FieldTextInput
-                    id="Twitter"
-                    name="Twitter"
-                    className={css.title}
-                    type="Twitter"
-
-                    placeholder='Twitter Followers'
-                    maxLength='55'
-                    autoFocus
-                    disabled={!Twitter}
-                    validate={composeValidators(mustBeNumber)}
-                  />
+                < FieldTextInput
+                  id="IG"
+                  name="IG"
+                  className={css.title}
+                  type="IG"
+                  placeholder='Enter Followers'
+                  maxLength='55'
+                  autoFocus
+                  disabled={!IG}
+                  validate={composeValidators(mustBeNumber)}
+                />
 
                 <div className={css.nameTag}>Username</div>
 
-                  <FieldTextInput
-                    id="TwitterName"
-                    name="TwitterName"
-                    className={css.title}
-                    type="TwitterName"
+                <FieldTextInput
+                  id="IGName"
+                  name="IGName"
+                  className={css.title}
+                  type="IGName"
 
-                    placeholder='Twitter Username'
-                    maxLength='55'
-                    autoFocus
-                    disabled={submitDisabled || !Twitter}
-                  />
+                  placeholder='Enter Username'
+                  maxLength='55'
+                  autoFocus
+                  disabled={submitDisabled || !IG}
+                />
 
                 <div className={css.nameTag}>Engagement</div>
-                  <FieldTextInput
-                    id="TwitterEng"
-                    name="TwitterEng"
-                    className={css.title}
-                    type="TwitterEng"
+                <FieldTextInput
+                  id="IGEng"
+                  name="IGEng"
+                  className={css.title}
+                  type="IGEng"
 
-                    placeholder='Twitter Engagement'
-                    maxLength='55'
-                    autoFocus
-                    disabled={ !Twitter}
-                    validate={composeValidators(mustBeNumber)}
-                  />
+                  placeholder='Enter Engagement'
+                  maxLength='55'
+                  autoFocus
+                  disabled={!IG}
+                  validate={composeValidators(mustBeNumberOrPresentage)}
+                />
               </div>
             </div>
             <div className={css.selectingCard}>
-                <FieldCheckboxForFollowers
-                  com='Fb'
-                  change={changeState}
-                  value="boxFb"
-                  name='boxFb' id='boxFb'/>
-              <h4><span><img className={css.img__follower} src={ImgFaceBook}  />  <label>Facebook</label></span></h4>
+              <FieldCheckboxForFollowers
+                com='Twitter'
+                change={changeState}
+                value="boxTwitter"
+                name='boxTwitter'
+                id='boxTwitter'/>
+              <h4><span><img className={css.img__follower} src={ImgTwiter}/>  <label>Twitter</label></span></h4>
               <div className={css.txtField}>
                 <div className={css.nameTag}>Followers</div>
-                    <FieldTextInput
-                      id="Fb"
-                      name="Fb"
-                      className={css.title}
-                      type="Fb"
+                <FieldTextInput
+                  id="Twitter"
+                  name="Twitter"
+                  className={css.title}
+                  type="Twitter"
 
-                      placeholder='Facebook Followers'
-                      maxLength='55'
-                      autoFocus
-                      disabled={ !Fb}
-                      validate={composeValidators(mustBeNumber)}
-                    />
+                  placeholder='Twitter Followers'
+                  maxLength='55'
+                  autoFocus
+                  disabled={!Twitter}
+                  validate={composeValidators(mustBeNumber)}
+                />
 
                 <div className={css.nameTag}>Username</div>
 
-                    <FieldTextInput
-                      id="FbName"
-                      name="FbName"
-                      className={css.title}
-                      type="FbName"
+                <FieldTextInput
+                  id="TwitterName"
+                  name="TwitterName"
+                  className={css.title}
+                  type="TwitterName"
 
-                      placeholder='Facebook Username'
-                      maxLength='55'
-                      autoFocus
-                      disabled={submitDisabled || !Fb}
-                    />
+                  placeholder='Twitter Username'
+                  maxLength='55'
+                  autoFocus
+                  disabled={submitDisabled || !Twitter}
+                />
 
                 <div className={css.nameTag}>Engagement</div>
+                <FieldTextInput
+                  id="TwitterEng"
+                  name="TwitterEng"
+                  className={css.title}
+                  type="TwitterEng"
 
-                    <FieldTextInput
-                      id="FbEng"
-                      name="FbEng"
-                      className={css.title}
-                      type="FbEng"
-
-                      placeholder='FB Engagement'
-                      maxLength='55'
-                      autoFocus
-                      disabled={ !Fb}
-                      validate={composeValidators(mustBeNumber)}
-                    />
+                  placeholder='Twitter Engagement'
+                  maxLength='55'
+                  autoFocus
+                  disabled={!Twitter}
+                  validate={composeValidators(mustBeNumberOrPresentage)}
+                />
               </div>
             </div>
             <div className={css.selectingCard}>
-                  <FieldCheckboxForFollowers com='YouTube' change={changeState} value="boxYouTube" name='boxYouTube'
-                                             id='boxYouTube'/>
-              <h4><span><img className={css.img__follower} src={ImgYouTube}  />  <label>YouTube</label></span></h4>
+              <FieldCheckboxForFollowers
+                com='Fb'
+                change={changeState}
+                value="boxFb"
+                name='boxFb' id='boxFb'/>
+              <h4><span><img className={css.img__follower} src={ImgFaceBook}/>  <label>Facebook</label></span></h4>
               <div className={css.txtField}>
                 <div className={css.nameTag}>Followers</div>
-                    <FieldTextInput
-                      id="YouTube"
-                      name="YouTube"
-                      className={css.title}
-                      type="YouTube"
-                      placeholder='YouTube Followers'
-                      maxLength='55'
-                      autoFocus
-                      disabled={!YouTube}
-                      validate={composeValidators(mustBeNumber)}
-                    />
+                <FieldTextInput
+                  id="Fb"
+                  name="Fb"
+                  className={css.title}
+                  type="Fb"
+
+                  placeholder='Facebook Followers'
+                  maxLength='55'
+                  autoFocus
+                  disabled={!Fb}
+                  validate={composeValidators(mustBeNumber)}
+                />
 
                 <div className={css.nameTag}>Username</div>
 
-                    <FieldTextInput
-                      id="YouTubeName"
-                      name="YouTubeName"
-                      className={css.title}
-                      type="YouTubeName"
+                <FieldTextInput
+                  id="FbName"
+                  name="FbName"
+                  className={css.title}
+                  type="FbName"
 
-                      placeholder='YouTube Username'
-                      maxLength='55'
-                      autoFocus
-                      disabled={submitDisabled || !YouTube}
-                    />
+                  placeholder='Facebook Username'
+                  maxLength='55'
+                  autoFocus
+                  disabled={submitDisabled || !Fb}
+                />
 
                 <div className={css.nameTag}>Engagement</div>
-                    <FieldTextInput
-                      id="YouTubeEng"
-                      name="YouTubeEng"
-                      className={css.title}
-                      type="YouTubeEng"
 
-                      placeholder='YouTube Engagement'
-                      maxLength='55'
-                      autoFocus
-                      disabled={ !YouTube}
-                      validate={composeValidators(mustBeNumber)}
-                    />
+                <FieldTextInput
+                  id="FbEng"
+                  name="FbEng"
+                  className={css.title}
+                  type="FbEng"
+
+                  placeholder='FB Engagement'
+                  maxLength='55'
+                  autoFocus
+                  disabled={!Fb}
+                  validate={composeValidators(mustBeNumberOrPresentage)}
+                />
               </div>
             </div>
             <div className={css.selectingCard}>
-                  <FieldCheckboxForFollowers
-                    com='TikTok'
-                                             change={changeState} value="boxTikTok"
-                                             name='boxTikTok' id='boxTikTok'/>
-              <h4><span><img className={css.img__follower} src={ImgTikTok}  />  <label>TikTok</label></span></h4>
+              <FieldCheckboxForFollowers com='YouTube' change={changeState} value="boxYouTube" name='boxYouTube'
+                                         id='boxYouTube'/>
+              <h4><span><img className={css.img__follower} src={ImgYouTube}/>  <label>YouTube</label></span></h4>
               <div className={css.txtField}>
                 <div className={css.nameTag}>Followers</div>
-                    <FieldTextInput
-                      id="TikTok"
-                      name="TikTok"
-                      className={css.title}
-                      type="TikTok"
-                      placeholder='TikTok Followers'
-                      maxLength='55'
-                      autoFocus
-                      disabled={ !TikTok}
-                      validate={composeValidators(mustBeNumber)}
-                    />
+                <FieldTextInput
+                  id="YouTube"
+                  name="YouTube"
+                  className={css.title}
+                  type="YouTube"
+                  placeholder='YouTube Followers'
+                  maxLength='55'
+                  autoFocus
+                  disabled={!YouTube}
+                  validate={composeValidators(mustBeNumber)}
+                />
 
                 <div className={css.nameTag}>Username</div>
 
-                    <FieldTextInput
-                      id="TikTokName"
-                      name="TikTokName"
-                      className={css.title}
-                      type="TikTokName"
+                <FieldTextInput
+                  id="YouTubeName"
+                  name="YouTubeName"
+                  className={css.title}
+                  type="YouTubeName"
 
-                      placeholder='TikTok Username'
-                      maxLength='55'
-                      autoFocus
-                      disabled={submitDisabled || !TikTok}
-                    />
+                  placeholder='YouTube Username'
+                  maxLength='55'
+                  autoFocus
+                  disabled={submitDisabled || !YouTube}
+                />
 
                 <div className={css.nameTag}>Engagement</div>
-                    <FieldTextInput
-                      id="TikTokEng"
-                      name="TikTokEng"
-                      className={css.title}
-                      type="TikTokEng"
+                <FieldTextInput
+                  id="YouTubeEng"
+                  name="YouTubeEng"
+                  className={css.title}
+                  type="YouTubeEng"
 
-                      placeholder='TikTok Engagement'
-                      maxLength='55'
-                      autoFocus
-                      disabled={!TikTok}
-                      validate={composeValidators(mustBeNumber)}
-                    />
+                  placeholder='YouTube Engagement'
+                  maxLength='55'
+                  autoFocus
+                  disabled={!YouTube}
+                  validate={composeValidators(mustBeNumberOrPresentage)}
+                />
               </div>
             </div>
             <div className={css.selectingCard}>
-                  <FieldCheckboxForFollowers
-                    com='Twitch'
-                    change={changeState}
-                    value="boxTwitch"
-                    name='boxTwitch' id='boxTwitch'/>
-              <h4><span><img className={css.img__follower} src={ImgTwitch}  />  <label>Twitch</label></span></h4>
+              <FieldCheckboxForFollowers
+                com='TikTok'
+                change={changeState} value="boxTikTok"
+                name='boxTikTok' id='boxTikTok'/>
+              <h4><span><img className={css.img__follower} src={ImgTikTok}/>  <label>TikTok</label></span></h4>
               <div className={css.txtField}>
                 <div className={css.nameTag}>Followers</div>
-                    <FieldTextInput
-                      id="Twitch"
-                      name="Twitch"
-                      className={css.title}
-                      type="Twitch"
-                      placeholder='Twitch Followers'
-                      maxLength='55'
-                      autoFocus
-                      disabled={!Twitch}
-                      validate={composeValidators(mustBeNumber)}
-                    />
+                <FieldTextInput
+                  id="TikTok"
+                  name="TikTok"
+                  className={css.title}
+                  type="TikTok"
+                  placeholder='TikTok Followers'
+                  maxLength='55'
+                  autoFocus
+                  disabled={!TikTok}
+                  validate={composeValidators(mustBeNumber)}
+                />
 
                 <div className={css.nameTag}>Username</div>
 
-                    <FieldTextInput
-                      id="TwitchName"
-                      name="TwitchName"
-                      className={css.title}
-                      type="TwitchName"
+                <FieldTextInput
+                  id="TikTokName"
+                  name="TikTokName"
+                  className={css.title}
+                  type="TikTokName"
 
-                      placeholder='Twitch Username'
-                      maxLength='55'
-                      autoFocus
-                      disabled={submitDisabled || !Twitch}
-                    />
+                  placeholder='TikTok Username'
+                  maxLength='55'
+                  autoFocus
+                  disabled={submitDisabled || !TikTok}
+                />
 
                 <div className={css.nameTag}>Engagement</div>
-                    <FieldTextInput
-                      id="TwitchEng"
-                      name="TwitchEng"
-                      className={css.title}
-                      type="TwitchEng"
+                <FieldTextInput
+                  id="TikTokEng"
+                  name="TikTokEng"
+                  className={css.title}
+                  type="TikTokEng"
 
-                      placeholder='Twitch Engagement'
-                      maxLength='55'
-                      autoFocus
-                      disabled={!Twitch}
-                      validate={composeValidators(mustBeNumber)}
-                    />
+                  placeholder='TikTok Engagement'
+                  maxLength='55'
+                  autoFocus
+                  disabled={!TikTok}
+                  validate={composeValidators(mustBeNumberOrPresentage)}
+                />
               </div>
             </div>
             <div className={css.selectingCard}>
-                  <FieldCheckboxForFollowers com='Other' change={changeState} value="boxOther" name='boxOther'
-                                             id='boxOther'/>
-              <h4><span><img className={css.img__follower} src={OtherImg}  />  <label>Other</label></span></h4>
+              <FieldCheckboxForFollowers
+                com='Twitch'
+                change={changeState}
+                value="boxTwitch"
+                name='boxTwitch' id='boxTwitch'/>
+              <h4><span><img className={css.img__follower} src={ImgTwitch}/>  <label>Twitch</label></span></h4>
               <div className={css.txtField}>
                 <div className={css.nameTag}>Followers</div>
-                    <FieldTextInput
-                      id="Other"
-                      name="Other"
-                      className={css.title}
-                      type="Other"
-                      placeholder='Other Followers'
-                      maxLength='55'
-                      autoFocus
-                      disabled={!Other}
-                      validate={composeValidators(mustBeNumber)}
-                    />
+                <FieldTextInput
+                  id="Twitch"
+                  name="Twitch"
+                  className={css.title}
+                  type="Twitch"
+                  placeholder='Twitch Followers'
+                  maxLength='55'
+                  autoFocus
+                  disabled={!Twitch}
+                  validate={composeValidators(mustBeNumber)}
+                />
 
                 <div className={css.nameTag}>Username</div>
 
-                    <FieldTextInput
-                      id="OtherName"
-                      name="OtherName"
-                      className={css.title}
-                      type="OtherName"
+                <FieldTextInput
+                  id="TwitchName"
+                  name="TwitchName"
+                  className={css.title}
+                  type="TwitchName"
 
-                      placeholder='Other Username'
-                      maxLength='55'
-                      autoFocus
-                      disabled={submitDisabled || !Other}
-                    />
+                  placeholder='Twitch Username'
+                  maxLength='55'
+                  autoFocus
+                  disabled={submitDisabled || !Twitch}
+                />
 
                 <div className={css.nameTag}>Engagement</div>
-                    <FieldTextInput
-                      id="OtherEng"
-                      name="OtherEng"
-                      className={css.title}
-                      type="OtherEng"
+                <FieldTextInput
+                  id="TwitchEng"
+                  name="TwitchEng"
+                  className={css.title}
+                  type="TwitchEng"
 
-                      placeholder='Other Engagement'
-                      maxLength='55'
-                      autoFocus
-                      disabled={!Other}
-                      validate={composeValidators(mustBeNumber)}
-                    />
+                  placeholder='Twitch Engagement'
+                  maxLength='55'
+                  autoFocus
+                  disabled={!Twitch}
+                  validate={composeValidators(mustBeNumberOrPresentage)}
+                />
+              </div>
+            </div>
+            <div className={css.selectingCard}>
+              <FieldCheckboxForFollowers com='Other' change={changeState} value="boxOther" name='boxOther'
+                                         id='boxOther'/>
+              <h4><span><img className={css.img__follower} src={OtherImg}/>  <label>Other</label></span></h4>
+              <div className={css.txtField}>
+                <div className={css.nameTag}>Followers</div>
+                <FieldTextInput
+                  id="Other"
+                  name="Other"
+                  className={css.title}
+                  type="Other"
+                  placeholder='Other Followers'
+                  maxLength='55'
+                  autoFocus
+                  disabled={!Other}
+                  validate={composeValidators(mustBeNumber)}
+                />
+
+                <div className={css.nameTag}>Username</div>
+
+                <FieldTextInput
+                  id="OtherName"
+                  name="OtherName"
+                  className={css.title}
+                  type="OtherName"
+
+                  placeholder='Other Username'
+                  maxLength='55'
+                  autoFocus
+                  disabled={submitDisabled || !Other}
+                />
+
+                <div className={css.nameTag}>Engagement</div>
+                <FieldTextInput
+                  id="OtherEng"
+                  name="OtherEng"
+                  className={css.title}
+                  type="OtherEng"
+
+                  placeholder='Other Engagement'
+                  maxLength='55'
+                  autoFocus
+                  disabled={!Other}
+                  validate={composeValidators(mustBeNumberOrPresentage)}
+                />
               </div>
             </div>
             {/*IG*/}
